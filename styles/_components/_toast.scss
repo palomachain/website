@@ -1,0 +1,46 @@
+// react-toastify customize
+.Toastify__toast {
+  border-radius: 11px !important;
+}
+
+.transaction-toast-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 21px 27px;
+
+  @media screen and (max-width: 480px) {
+    padding: 11px 17px;
+  }
+
+  .transaction-toast-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .transaction-toast-text {
+  
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    margin-left: 12px;
+
+    .text {
+      color: #20253b;
+    }
+
+    .link {
+      margin-top: 7px;
+      a {
+        text-decoration: underline;
+
+        &.success {
+          color: #30B59B;
+        }
+
+        &.error {
+          color: #FF6F03;
+        }
+      }
+    }
+  }
+}

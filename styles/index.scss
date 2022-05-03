@@ -1,0 +1,49 @@
+:root {
+  --toastify-color-progress-light: #ACACAC;
+}
+
+.Toastify__toast-container--bottom-center {
+  @media screen and (max-width: 480px) {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-bottom: 10px;
+  }
+}
+
+@import "libraries/global";
+
+@import "components";
+@import "pages";
+
+@import "layout";
+
+body {
+  background-color: #20253b;
+  font-family: $font-family-default;
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.page-container {
+  padding: 30px 67px 89px;
+  width: 100vw;
+  max-width: 100%;
+
+  @media screen and (max-width: 768px) {
+    padding: 0px 33px 30px;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.ml-2 {
+  margin-left: 20px;
+}

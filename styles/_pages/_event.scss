@@ -88,7 +88,7 @@
     font-weight: 700;
     font-size: 34px;
     line-height: 36px;
-    color: #fff;
+    color: $main_text_color;
 
     @media screen and (max-width: 768px) {
       font-size: 20px;
@@ -125,11 +125,11 @@
       margin-bottom: 5px;
 
       &-title {
-        color: #b6b2ef;
+        color: $hightlighted_color;
       }
 
       &-value {
-        color: #fff;
+        color: $main_text_color;
         padding-left: 5px;
       }
     }
@@ -144,7 +144,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: $main_text_color;
     font-weight: 700;
     font-size: 24px;
 
@@ -164,11 +164,11 @@
     }
 
     .event-add-calendar {
-      background: #b6b2ef;
+      background: $button_bg_color;
       border-radius: 30px;
       font-weight: 500;
       font-size: 16px;
-      color: #20253b;
+      color: $main_text_color;
       display: flex;
       align-items: center;
       padding: 10px 20px;
@@ -183,7 +183,7 @@
   .event-image {
     flex: 1;
     margin-right: 25px;
-    border: 1px solid #b6b2ef;
+    border: 1px solid $border_color;
     border-radius: 30.9518px;
 
     @media screen and (max-width: 768px) {
@@ -200,10 +200,10 @@
   .event-about {
     flex: 1;
     margin-left: 25px;
-    color: #fff;
+    color: $main_text_color;
 
     a {
-      color: #fff;
+      color: $main_text_color;
       text-decoration: underline;
     }
 
@@ -215,7 +215,7 @@
     &-title {
       font-weight: 700;
       font-size: 24px;
-      color: #ffffff;
+      color: $main_text_color;
 
       @media screen and (max-width: 768px) {
         font-size: 13px;
@@ -225,12 +225,12 @@
 
   .event-join-community {
     width: 100%;
-    background: #b6b2ef;
+    background: $button_bg_color;
     border-radius: 30px;
     height: 45px;
     font-weight: 500;
     font-size: 24px;
-    color: #20253b !important;
+    color: $main_text_color !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -247,9 +247,9 @@
   .event-register {
     width: 166px;
     height: 45px;
-    background: #37fad3;
+    background: $button_bg_color;
     border-radius: 30px;
-    color: #20253b !important;
+    color: $main_text_color !important;
     font-weight: 500;
     font-size: 16px;
     line-height: 24px;
@@ -281,7 +281,7 @@
     font-size: 30px;
     line-height: 44px;
     text-align: center;
-    color: #ffffff;
+    color: $main_text_color;
   }
 
   .no-events-buttons {
@@ -298,12 +298,12 @@
       align-items: center;
       width: 250px;
       height: 66px;
-      border: 1px solid #b6b2ef;
+      border: 1px solid $border_color;
       border-radius: 44px;
       font-weight: 500;
       font-size: 23.4667px;
       line-height: 35px;
-      color: #B6B2EF;
+      color: $main_text_color;
 
       @media screen and (max-width: 768px) {
         margin: 15px 0px;

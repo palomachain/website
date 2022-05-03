@@ -68,5 +68,5 @@ export const addresses = {
 };
 
 export const TWITTER_LINK = "https://twitter.com/paloma_chain";
-export const TELEGRAM_LINK = "";
+export const TELEGRAM_LINK = "https://t.me/palomachain";
 export const GITHUB_LINK = "https://github.com/palomachain";

@@ -52,18 +52,18 @@
       height: 45px;
       padding: 8px 30px;
       border-radius: 830px;
-      border: 1px solid #b6b2ef;
+      border: 1px solid $border_color;
       outline: none;
       font-weight: 500;
       font-size: 20px;
       margin-right: 7px;
-      color: #b6b2ef;
+      color: $hightlighted_color;
       text-decoration: none;
       cursor: pointer;
 
       &.active {
-        background: #b6b2ef;
-        color: #20253b;
+        background: $button_bg_color;
+        color: $main_text_color;
       }
 
       @media screen and (max-width: 768px) {

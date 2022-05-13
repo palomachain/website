@@ -1,33 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import { fetchBlogs } from "utils/storyblok";
 import { convertDateString2 } from "utils/date";
 
-function Blog() {
-  const router = useRouter();
-  const { slug } = router.query;
+import { HeadSeo } from "components/Blog";
 
-  const [post, setPost] = useState(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const data = await fetchBlogs();
-
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].full_slug.includes(slug)) {
-          setPost(data[i]);
-          break;
-        }
-      }
-    };
-
-    getData();
-  }, []);
-
-  return (
+const Blog = ({ post }) => (
+  <>
+    {post !== null && post !== undefined && (
+      <HeadSeo
+        title="Paloma"
+        description="The smartest blockchain on the planet."
+        content={post.content}
+      />
+    )}
     <div className="page-container">
       {post !== null && post !== undefined && (
         <div className="blog-page-container">
@@ -79,8 +67,8 @@ function Blog() {
         </div>
       )}
     </div>
-  );
-};
+  </>
+);
 
 // This function gets called at build time
 export async function getStaticPaths() {
@@ -90,11 +78,11 @@ export async function getStaticPaths() {
   // Get the paths we want to pre-render based on posts
   const paths = posts.map((post) => ({
     params: { slug: post.slug },
-  }))
+  }));
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: false }
+  return { paths, fallback: false };
 }
 
 // This also gets called at build time
@@ -113,7 +101,7 @@ export async function getStaticProps({ params }) {
   }
 
   // Pass post data to the page via props
-  return { props: { post } }
+  return { props: { post } };
 }
 
 export default Blog;

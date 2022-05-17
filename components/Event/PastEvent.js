@@ -65,7 +65,7 @@ const PastEvent = ({ data }) => {
             className="event-join-community"
             target="_blank"
           >
-            Join Our Community
+            Join the Event
           </a>
         </div>
       </div>

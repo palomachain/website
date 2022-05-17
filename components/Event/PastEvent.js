@@ -61,7 +61,7 @@ const PastEvent = ({ data }) => {
             },
           })}
           <a
-            href={data.content.JoinCommunity.url}
+            href={data.content.JoinEvent.url}
             className="event-join-community"
             target="_blank"
           >

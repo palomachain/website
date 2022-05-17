@@ -76,7 +76,7 @@ const UpcomingEvent = ({ data }) => {
             <div className="event-row-value">{data.content.Location}</div>
           </div>
           <a
-            href={data.content.JoinCommunity.url}
+            href={data.content.JoinEvent.url}
             className="event-join-community"
             target="_blank"
           >

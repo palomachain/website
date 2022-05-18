@@ -10,6 +10,15 @@ import {
   parseDate
 } from "utils/date";
 
+const { google } = require("calendar-link");
+
+const generateEvent = (data) => ({
+  title: data.content.Title,
+  description: data.content.Description,
+  start: `${data.content.EventTime}:00 +0000`,
+  duration: [1, "hour"],
+});
+
 const UpcomingEvent = ({ data }) => {
   const [remainTime, setRemainTime] = useState(" ");
 
@@ -87,7 +96,7 @@ const UpcomingEvent = ({ data }) => {
           <span>Join us in</span>
           <div className="event-countdown">{remainTime}</div>
           <a
-            href={`https://calendar.google.com/calendar/render?action=TEMPLATE&dates=${data.content.EventTime}&location=${data.content.Location}&text=${data.content.Title}`}
+            href={google(generateEvent(data))}
             className="event-add-calendar"
             target="_blank"
           >

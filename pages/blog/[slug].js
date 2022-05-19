@@ -45,7 +45,7 @@ const Blog = ({ post }) => (
                 [NODE_IMAGE]: (children, props) => (
                   <img
                     {...props}
-                    style={{ borderRadius: "0px" }}
+                    style={{ borderRadius: "0px", maxWidth: "100%" }}
                   />
                 ),
               },

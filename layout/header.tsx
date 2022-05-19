@@ -10,9 +10,12 @@ const LayoutHeader = ({ router }) => {
 
   useEffect(() => {
     if (router.route === "/") {
-      router.push("/event");
+      router.replace("/event");
+      setCurLink("/event");
+    } else {
+      setCurLink(router.route);
     }
-    setCurLink(router.route);
+    
   }, [router.route]);
 
   return (

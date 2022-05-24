@@ -1,72 +1,58 @@
-import React from "react";
+import React, { useMemo } from "react";
 
-import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
-
-import {
-  convertDateStringWithWeekDay,
-  convertTimeString,
-} from "utils/date";
+import { convertDateStringWithWeekDay } from "utils/date";
 
 const PastEvent = ({ data }) => {
+  const eventLink = useMemo(() => {
+    const link = {
+      register: "",
+      learnMore: "",
+    };
+
+    if ("RegistrationLink" in data.content) {
+      link.register = data.content.RegistrationLink.url;
+    }
+
+    if ("LearnMore" in data.content) {
+      link.learnMore = data.content.LearnMore.url;
+    }
+
+    return link;
+  }, [data]);
+
   return (
     <div className="event-item-container">
-      <div className="event-title">{data.content.Title}</div>
+      <img src={`https:${data.content.Image}`} className="event-image" />
       <div className="event-section">
-        <div className="event-basics">
-          <div className="event-row">
-            <div className="event-row-title">Event Date:</div>
-            <div className="event-row-value">
-              {convertDateStringWithWeekDay(data.content.EventTime, true)}
-            </div>
-          </div>
-          <div className="event-row">
-            <div className="event-row-title">Event Time:</div>
-            <div className="event-row-value">
-              {convertTimeString(data.content.EventTime, true)}
-            </div>
-          </div>
-          <div className="event-row">
-            <div className="event-row-title">Location:</div>
-            <div className="event-row-value">{data.content.Location}</div>
-          </div>
+        <div className="event-date">
+          {convertDateStringWithWeekDay(data.content.EventTime, true)}
         </div>
-      </div>
-      <div className="event-section">
-        <div className="event-image">
-          <img src={`https:${data.content.Image}`} />
+        <div className="event-title">{data.content.Title}</div>
+        <div className="event-spacer"></div>
+        <div className="event-location">
+          <img src="/assets/events/placeholder.png" />
+          <span>{data.content.Location}</span>
         </div>
-        <div className="event-about">
-          <div className="event-about-title">About the event</div>
-          {render(data.content.Description, {
-            nodeResolvers: {
-              [NODE_IMAGE]: (children, props) => (
-                <img
-                  {...props}
-                  style={{ borderRadius: "0px", width: "100%" }}
-                />
-              ),
-            },
-            blokResolvers: {
-              ["YouTube-blogpost"]: (props) => (
-                <div className="embed-responsive embed-responsive-16by9">
-                  <iframe
-                    className="embed-responsive-item"
-                    src={
-                      "https://www.youtube.com/embed/" +
-                      props.YouTube_id.replace("https://youtu.be/", "")
-                    }
-                  ></iframe>
-                </div>
-              ),
-            },
-          })}
-          <a
-            href={data.content.JoinEvent.url}
-            className="event-join-community"
-            target="_blank"
-          >
-            Join the Event
-          </a>
+        <div className="event-description">{data.content.Description}</div>
+        <div className="event-buttons">
+          {eventLink.register !== "" && (
+            <a
+              href={eventLink.register}
+              className="event-register"
+              target="_blank"
+            >
+              Register
+            </a>
+          )}
+          {eventLink.learnMore !== "" && (
+            <a
+              href={eventLink.learnMore}
+              className="event-register"
+              target="_blank"
+            >
+              Register
+            </a>
+          )}
         </div>
       </div>
     </div>

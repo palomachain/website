@@ -29,10 +29,6 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-          />
-          <link
             href="https://necolas.github.io/normalize.css/latest/normalize.css"
             rel="stylesheet"
             type="text/css"

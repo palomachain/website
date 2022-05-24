@@ -37,6 +37,6 @@ export const fetchEvents = async () => {
       }
     }
   }
-  console.log(events);
+
   return events;
 }

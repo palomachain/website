@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { BlogLatestItem } from "components/Blog";
+import RotatedHeader from "components/RotatedHeader";
 
 import { fetchBlogs } from "utils/storyblok";
 import { convertDateString2 } from "utils/date";
 
+const LATEST_BLOG_SHOW_CNT = 3;
+
 const Blog = () => {
-  const [blog, setBlog] = useState(null);
   const [latestBlogs, setLatestBlog] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-      if (data.length > 0) {
-        setBlog(data[0]);
-      }
 
       if (data.length > 1) {
         const blogs = [];
-        for (let i = 1; i < data.length; i++) {
+
+        const length =
+          data.length <= LATEST_BLOG_SHOW_CNT
+            ? data.length
+            : LATEST_BLOG_SHOW_CNT;
+
+        for (let i = 1; i < length; i++) {
           blogs.push(data[i]);
         }
         setLatestBlog(blogs);
@@ -31,35 +35,51 @@ const Blog = () => {
 
   return (
     <div className="page-container">
-      {blog !== null && (
-        <div className="blog-page-container">
-          <div className="blog-content">
-            <div className="blog-featured-image">
-              <img src={`https:${blog.content.image}`} />
-            </div>
-            <h1 className="blog-title">{blog.content.title}</h1>
-            <div className="blog-summary">
-              {blog.tag_list.map((tag, index) => (
-                <div className="blog-summary-category" key={`blog-main-tage-${index}`}>{tag}</div>
-              ))}
-              <div className="blog-summary-pubtime">Published {convertDateString2(blog.first_published_at)}</div>
-            </div>
-            <div className="blog-intro">
-              {blog.content.intro}
-            </div>
-            <Link href={`/${blog.full_slug}`}>
-              <div className="blog-readmore">Read More</div>
-            </Link>
+      <div className="blog-page-container">
+        <RotatedHeader title="Blog" rightImage="/assets/blog/blog.png" theme="light" />
+
+        <div className="blog-page-images">
+          <div className="blog-page-image">
+            <img src="/assets/blog/project-updates.png" />
+            <span>
+              PROJECT
+              <br />
+              UPDATES
+            </span>
           </div>
-          <div className="blog-divider"></div>
-          <div className="blog-latest-container">
-            <h2>Latest Articles</h2>
-            <div className="blog-latest-list">
-              {latestBlogs.map((blog, index) => <BlogLatestItem key={`latest-blog-${index}`} blog={blog} />)}
-            </div>
+          <div className="blog-page-image">
+            <img src="/assets/blog/ama.png" />
+            <span>AMAS</span>
+          </div>
+          <div className="blog-page-image">
+            <img src="/assets/blog/blockchain-culture.png" />
+            <span>
+              BLOCKCHAIN
+              <br />
+              CULTURE
+            </span>
           </div>
         </div>
-      )}
+
+        <RotatedHeader title="The Latest" leftImage="/assets/blog/latest.png" theme="light" />
+
+        <div className="blog-latest-wrapper">
+          {latestBlogs.map((blog, index) => (
+            <div className="blog-latest-item" key={`blog-latest-${index}`}>
+              <div className="blog-latest-date">
+                {convertDateString2(blog.first_published_at)}
+              </div>
+              <img
+                className="blog-latest-image"
+                src={`https:${blog.content.image}`}
+              />
+              <Link href={`/${blog.full_slug}`}>
+                <h3 className="blog-latest-title">{blog.content.title}</h3>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

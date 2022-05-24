@@ -1,5 +1,5 @@
-import EventSearchBar from "./EventSearchBar";
 import UpcomingEvent from "./UpcomingEvent";
 import PastEvent from "./PastEvent"; 
+import NoEvents from "./NoEvents";
 
-export { EventSearchBar, UpcomingEvent, PastEvent }
+export { UpcomingEvent, PastEvent, NoEvents }

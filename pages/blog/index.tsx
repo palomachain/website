@@ -36,8 +36,6 @@ const blogSubMenus = [
   },
 ];
 
-const LATEST_BLOG_SHOW_CNT = 3;
-
 const Blog = () => {
   const [latestBlogs, setLatestBlog] = useState([]);
 

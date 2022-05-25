@@ -12,16 +12,16 @@ const Footer = () => (
       </div>
       <div className="footer-view-links">
         <div className="footer-view-subtitle">USEFUL LINKS</div>
-        <Link href="/">Home</Link>
-        <Link href="/about-us">About Us</Link>
-        <Link href="/event">Evetns</Link>
+        {/* <Link href="/">Home</Link>
+        <Link href="/about-us">About Us</Link> */}
+        <Link href="/event">Events</Link>
         <Link href="/blog">Blog</Link>
       </div>
       <div className="footer-view-links">
         <div className="footer-view-subtitle">SOCIAL MEDIA</div>
-        <a href={TELEGRAM_LINK}>Telegram</a>
-        <a href={TWITTER_LINK}>Twitter</a>
-        <a href={GITHUB_LINK}>Github</a>
+        <a href={TELEGRAM_LINK} target="_blank">Telegram</a>
+        <a href={TWITTER_LINK} target="_blank">Twitter</a>
+        <a href={GITHUB_LINK} target="_blank">Github</a>
       </div>
     </div>
   </div>

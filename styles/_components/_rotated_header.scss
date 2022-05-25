@@ -1,9 +1,9 @@
 .rotated-header-container {
-  width: 102%;
+  width: calc(100vw + 30px);
   height: 200px;
   display: flex;
   align-items: center;
-  margin-left: -2%;
+  margin-left: -15px;
 
   .skew-bg {
     width: 100%;
@@ -27,6 +27,7 @@
       margin: 0px;
       width: fit-content;
       font-size: 40px;
+      font-family: $font-bold;
     }
 
     .left-image {

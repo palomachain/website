@@ -2,11 +2,39 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import RotatedHeader from "components/RotatedHeader";
+import { BlogList } from "components/Blog";
 
-import { fetchBlogs } from "utils/storyblok";
-import { convertDateString2 } from "utils/date";
+import { fetchBlogs, filterBlogs } from "utils/storyblok";
 
-const LATEST_BLOG_SHOW_CNT = 3;
+const blogSubMenus = [
+  {
+    image: "/assets/blog/project-updates.png",
+    title: (
+      <span>
+        PROJECT
+        <br />
+        UPDATES
+      </span>
+    ),
+    link: "/blog/project-updates",
+  },
+  {
+    image: "/assets/blog/ama.png",
+    title: <span>AMAS</span>,
+    link: "/blog/amas",
+  },
+  {
+    image: "/assets/blog/blockchain-culture.png",
+    title: (
+      <span>
+        BLOCKCHAIN
+        <br />
+        CULTURE
+      </span>
+    ),
+    link: "/blog/blockchain-culture",
+  },
+];
 
 const Blog = () => {
   const [latestBlogs, setLatestBlog] = useState([]);
@@ -14,20 +42,7 @@ const Blog = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-
-      if (data.length > 1) {
-        const blogs = [];
-
-        const length =
-          data.length <= LATEST_BLOG_SHOW_CNT
-            ? data.length
-            : LATEST_BLOG_SHOW_CNT;
-
-        for (let i = 1; i < length; i++) {
-          blogs.push(data[i]);
-        }
-        setLatestBlog(blogs);
-      }
+      setLatestBlog(filterBlogs(data));
     };
 
     getData();
@@ -36,48 +51,31 @@ const Blog = () => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Blog" rightImage="/assets/blog/blog.png" theme="light" />
+        <RotatedHeader
+          title="Blog"
+          rightImage="/assets/blog/blog.png"
+          theme="light"
+        />
 
         <div className="blog-page-images">
-          <div className="blog-page-image">
-            <img src="/assets/blog/project-updates.png" />
-            <span>
-              PROJECT
-              <br />
-              UPDATES
-            </span>
-          </div>
-          <div className="blog-page-image">
-            <img src="/assets/blog/ama.png" />
-            <span>AMAS</span>
-          </div>
-          <div className="blog-page-image">
-            <img src="/assets/blog/blockchain-culture.png" />
-            <span>
-              BLOCKCHAIN
-              <br />
-              CULTURE
-            </span>
-          </div>
+          {blogSubMenus.map((menu, index) => (
+            <Link href={menu.link} key={`blog-submenu-${index}`}>
+              <div className="blog-page-image">
+                <img src={menu.image} />
+                {menu.title}
+              </div>
+            </Link>
+          ))}
         </div>
 
-        <RotatedHeader title="The Latest" leftImage="/assets/blog/latest.png" theme="light" />
+        <RotatedHeader
+          title="The Latest"
+          leftImage="/assets/blog/latest.png"
+          theme="light"
+        />
 
         <div className="blog-latest-wrapper">
-          {latestBlogs.map((blog, index) => (
-            <div className="blog-latest-item" key={`blog-latest-${index}`}>
-              <div className="blog-latest-date">
-                {convertDateString2(blog.first_published_at)}
-              </div>
-              <img
-                className="blog-latest-image"
-                src={`https:${blog.content.image}`}
-              />
-              <Link href={`/${blog.full_slug}`}>
-                <h3 className="blog-latest-title">{blog.content.title}</h3>
-              </Link>
-            </div>
-          ))}
+          <BlogList data={latestBlogs} />
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@
       color: #eadede;
       font-family: $font-bold;
       padding-bottom: 88px;
+      cursor: pointer;
 
       img {
         height: 182px;
@@ -58,6 +59,7 @@
 
     .blog-latest-title {
       font-family: $font-bold;
+      color: #2C2C2C;
       font-size: 40px;
       line-height: 53px;
       cursor: pointer;
@@ -67,7 +69,7 @@
   .blog-post-view {
     width: 100%;
     max-width: 1000px;
-    margin: 200px auto 100px;
+    margin: 150px auto 100px;
 
     .blog-pubtime {
       color: #ff6666;

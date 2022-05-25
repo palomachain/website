@@ -33,7 +33,7 @@ const LayoutHeader = ({ router }) => {
         </Link>
       </div>
       <div className="layout-container__header__buttons">
-        <Link href="/">
+        {/* <Link href="/">
           <div
             className={cn("header-button", {
               active: curLink === "/",
@@ -50,7 +50,7 @@ const LayoutHeader = ({ router }) => {
           >
             About US
           </div>
-        </Link>
+        </Link> */}
         <Link href="/blog">
           <div
             className={cn("header-button", {

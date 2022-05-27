@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { isMobile } from 'react-device-detect'
 
 import LayoutHeader from './header'
-import Notice from './notice'
+import Footer from './footer'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,8 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Layout({
   children,
   router,
-  defaultNetwork,
-  walletConnectChainIds,
 }) {
   return (
     <>
@@ -31,11 +29,9 @@ export default function Layout({
         {(
           React.cloneElement(children, {
             router,
-            defaultNetwork,
-            walletConnectChainIds,
           })
         )}
-        <Notice />
+        <Footer />
       </main>
       <ToastContainer autoClose={10000} pauseOnFocusLoss={false} position={isMobile ? 'bottom-center' : 'top-right'} />
     </>

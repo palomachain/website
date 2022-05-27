@@ -1,58 +1,219 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
+import { useOutsideAlerter } from "hooks";
 import { TELEGRAM_LINK } from "utils/constants";
 
 import cn from "classnames";
 
+const HeaderMenu = ({
+  title,
+  isLink = true,
+  href = "",
+  onClick = () => {},
+  className = "",
+  active = false,
+  img = "",
+  children = null,
+  childrenRef = null,
+  childrenOpen = false,
+}) => {
+  return isLink ? (
+    <Link href={href}>
+      <div
+        className={cn(className, {
+          active,
+        })}
+      >
+        <span>{title}</span>
+        {img !== "" && active && <img src={`${img}.png`} />}
+        {img !== "" && !active && <img src={`${img}-black.png`} />}
+      </div>
+    </Link>
+  ) : (
+    <div ref={childrenRef} onClick={(e) => onClick()}>
+      <div
+        className={cn(className, {
+          active,
+        })}
+      >
+        <span>{title}</span>
+        {img !== "" && <img src={`${img}.png`} />}
+      </div>
+      {childrenOpen && children}
+    </div>
+  );
+};
+
 const LayoutHeader = ({ router }) => {
   const [curLink, setCurLink] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [eventSubMenuOpen, setEventSubMenuOpen] = useState(false);
+  const eventSubMenuRef = useRef(null);
+  useOutsideAlerter(eventSubMenuRef, () => {
+    setEventSubMenuOpen(false);
+  });
+
+  const [eventMobileSubMenuOpen, setEventMobiuleSubMenuOpen] = useState(false);
 
   useEffect(() => {
     if (router.route === "/") {
-      router.replace("/event");
-      setCurLink("/event");
+      router.replace("/blog");
+      setCurLink("/blog");
     } else {
       setCurLink(router.route);
     }
-    
+
+    if (router.route.startsWith("/event")) {
+      setEventMobiuleSubMenuOpen(true);
+    }
   }, [router.route]);
+
+  const handleClickMobileLink = (link) => {
+    setMobileMenuOpen(false);
+    router.push(link);
+  };
 
   return (
     <header className="layout-container__header">
       <div className="layout-container__header__logo">
         <Link href="/">
-          <img className="" src="/assets/logo/paloma-white.png" alt="Paloma" />
+          <img className="" src="/assets/logo/paloma-black.png" alt="Paloma" />
         </Link>
       </div>
       <div className="layout-container__header__buttons">
-        <Link href="/blog">
-          <div
-            className={cn("header-button", {
-              active: curLink.startsWith("/blog"),
-            })}
-          >
-            <span>Blog</span>
-          </div>
-        </Link>
-        <Link href="/event">
-          <div
-            className={cn("header-button", {
-              active: curLink.startsWith("/event"),
-            })}
-          >
-            <span>Events</span>
-          </div>
-        </Link>
-       <a
-          href={TELEGRAM_LINK}
+        <HeaderMenu
+          title="Home"
+          isLink={false}
+          className="disabled header-button"
+          active={curLink === "/"}
+        />
+        <HeaderMenu
+          title="About US"
+          isLink={false}
+          className="disabled header-button"
+          active={curLink.startsWith("/about-us")}
+        />
+        <HeaderMenu
+          title="Blog"
+          href="/blog"
           className="header-button"
+          active={curLink.startsWith("/blog")}
+        />
+        <HeaderMenu
+          title="Events"
+          isLink={false}
+          className="header-button"
+          active={curLink.startsWith("/event")}
+          img="/assets/arrows/arrow-down"
+          childrenRef={eventSubMenuRef}
+          childrenOpen={eventSubMenuOpen}
+          onClick={() => setEventSubMenuOpen(!eventSubMenuOpen)}
+        >
+          <div className="header-menu-sub">
+            <HeaderMenu
+              title="Upcoming Events"
+              href="/event/upcoming-events"
+              className="header-menu-sub-link"
+              active={curLink.startsWith("/event/upcoming-events")}
+            />
+            <HeaderMenu
+              title="Past Events"
+              href="/event/past-events"
+              className="header-menu-sub-link"
+              active={curLink.startsWith("/event/past-events")}
+            />
+          </div>
+        </HeaderMenu>
+        <a
+          href={TELEGRAM_LINK}
+          className="header-button community"
           target="_blank"
         >
           <span>Join our Community</span>
-          <img src="/assets/social/telegram.png" alt="Telegram" />
+          <img src="/assets/arrows/arrow-top-right.png" />
         </a>
       </div>
+      <div className="layout-container__header__hamburger">
+        <img
+          src="/assets/icons/hamburger.png"
+          onClick={(e) => setMobileMenuOpen(true)}
+        />
+      </div>
+      {mobileMenuOpen && (
+        <div className="mobile-header-menu">
+          <div className="mobile-header-menu-top">
+            <img src="/assets/logo/paloma-red.png" />
+            <img
+              src="/assets/icons/close.png"
+              onClick={(e) => setMobileMenuOpen(false)}
+            />
+          </div>
+          <div className="mobile-header-menu-menus">
+            <HeaderMenu
+              title="Home"
+              isLink={false}
+              className="disabled mobile-button"
+              active={curLink === "/"}
+            />
+            <HeaderMenu
+              title="About US"
+              isLink={false}
+              className="disabled mobile-button"
+              active={curLink.startsWith("/about-us")}
+            />
+            <HeaderMenu
+              title="Blog"
+              href="/blog"
+              isLink={false}
+              className="mobile-button"
+              active={curLink.startsWith("/blog")}
+              onClick={() => handleClickMobileLink("/blog")}
+            />
+            <HeaderMenu
+              title="Events"
+              isLink={false}
+              className="mobile-button"
+              active={curLink.startsWith("/event")}
+              img="/assets/arrows/arrow-down"
+              childrenOpen={eventMobileSubMenuOpen}
+              onClick={() =>
+                setEventMobiuleSubMenuOpen(!eventMobileSubMenuOpen)
+              }
+            >
+              <div className="mobile-menu-sub">
+                <HeaderMenu
+                  title="Upcoming Events"
+                  href="/event/upcoming-events"
+                  className="mobile-menu-sub-link"
+                  active={curLink.startsWith("/event/upcoming-events")}
+                  isLink={false}
+                  onClick={() =>
+                    handleClickMobileLink("/event/upcoming-events")
+                  }
+                />
+                <HeaderMenu
+                  title="Past Events"
+                  href="/event/past-events"
+                  className="mobile-menu-sub-link"
+                  active={curLink.startsWith("/event/past-events")}
+                  isLink={false}
+                  onClick={() => handleClickMobileLink("/event/past-events")}
+                />
+              </div>
+            </HeaderMenu>
+            <a
+              href={TELEGRAM_LINK}
+              className="mobile-button community"
+              target="_blank"
+            >
+              <span>Join our Community</span>
+              <img src="/assets/arrows/arrow-top-right.png" />
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

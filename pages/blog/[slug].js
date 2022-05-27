@@ -1,13 +1,16 @@
 import React from "react";
+import { useRouter } from 'next/router';
+
+import Link from "next/link";
 
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import { fetchBlogs } from "utils/storyblok";
-import { convertDateString2 } from "utils/date";
+// import { convertDateString2 } from "utils/date";
 
 import { HeadSeo } from "components/Blog";
 
-const Blog = ({ post }) => (
+const Blog = ({ post, router }) => (
   <>
     {post !== null && post !== undefined && (
       <HeadSeo
@@ -16,53 +19,52 @@ const Blog = ({ post }) => (
         content={post.content}
       />
     )}
+    <div className="sub-nav-bar" onClick={(e) => { router.back() }}>
+      <div className="link-back-to">
+        <img src="/assets/arrows/arrow-left.png" />
+        <span>Blog</span>
+      </div>
+    </div>
     <div className="page-container">
       {post !== null && post !== undefined && (
         <div className="blog-page-container">
-          <div className="blog-content">
-            <div className="blog-featured-image">
-              <img src={`https:${post.content.image}`} />
+          <div className="blog-post-view">
+            <div className="blog-content">
+              {/* <div className="blog-pubtime">
+                {convertDateString2(post.first_published_at)}
+              </div> */}
+              <img
+                className="blog-featured-image"
+                src={`https:${post.content.image}`}
+              />
+              <h1 className="blog-title">{post.content.title}</h1>
             </div>
-            <h1 className="blog-title">{post.content.title}</h1>
-            <div className="blog-summary">
-              {post.tag_list.map((tag, index) => (
-                <div
-                  className="blog-summary-category"
-                  key={`blog-main-tage-${index}`}
-                >
-                  {tag}
-                </div>
-              ))}
-              <div className="blog-summary-pubtime">
-                Published {convertDateString2(post.first_published_at)}
-              </div>
+            {/* <div className="blog-divider"></div> */}
+            <div className="blog-post">
+              {render(post.content.long_text, {
+                nodeResolvers: {
+                  [NODE_IMAGE]: (children, props) => (
+                    <img
+                      {...props}
+                      style={{ borderRadius: "0px", maxWidth: "100%" }}
+                    />
+                  ),
+                },
+                blokResolvers: {
+                  ["YouTube-blogpost"]: (props) => (
+                    <div className="embed-responsive embed-responsive-16by9">
+                      <iframe
+                        className="embed-responsive-item"
+                        src={
+                          "https://www.youtube.com/embed/" +
+                          props.YouTube_id.replace("https://youtu.be/", "")
+                        }
+                      ></iframe>
+                    </div>
+                  ),
+                },
+              })}
             </div>
-            <div className="blog-intro">{post.content.intro}</div>
-          </div>
-          <div className="blog-post">
-            {render(post.content.long_text, {
-              nodeResolvers: {
-                [NODE_IMAGE]: (children, props) => (
-                  <img
-                    {...props}
-                    style={{ borderRadius: "0px", maxWidth: "100%" }}
-                  />
-                ),
-              },
-              blokResolvers: {
-                ["YouTube-blogpost"]: (props) => (
-                  <div className="embed-responsive embed-responsive-16by9">
-                    <iframe
-                      className="embed-responsive-item"
-                      src={
-                        "https://www.youtube.com/embed/" +
-                        props.YouTube_id.replace("https://youtu.be/", "")
-                      }
-                    ></iframe>
-                  </div>
-                ),
-              },
-            })}
           </div>
         </div>
       )}

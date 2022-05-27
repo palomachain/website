@@ -4,9 +4,20 @@
   .blog-page-images {
     width: 100%;
     max-width: 1200px;
-    margin: 115px auto;
+    margin: 115px auto 20px;
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 1280px) {
+      max-width: 100%;
+      padding: 0px 30px;
+    }
+
+    @media screen and (max-width: 500px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      margin: 65px auto 20px;
+    }
 
     .blog-page-image {
       width: calc(33.33% - 22px);
@@ -22,9 +33,36 @@
       padding-bottom: 88px;
       cursor: pointer;
 
+      @media screen and (max-width: 768px) {
+        font-size: 20px;
+        line-height: 22px;
+        padding-bottom: 28px;
+        width: calc(33.33% - 11px);
+      }
+
+      @media screen and (max-width: 650px) {
+        font-size: 16px;
+        line-height: 17px;
+      }
+
+      @media screen and (max-width: 500px) {
+        width: 100%;
+        margin-bottom: 40px;
+      }
+
+      &:hover {
+        background: #ecc;
+        color: $main_text_color
+      }
+
       img {
         height: 182px;
         margin-top: -60px;
+
+        @media screen and (max-width: 768px) {
+          height: 90px;
+          margin-top: -30px;
+        }
       }
 
       span {
@@ -38,11 +76,36 @@
 
   .blog-latest-wrapper {
     width: 100%;
-    max-width: 1000px;
-    margin: 150px auto;
+    max-width: 1116px;
+    margin: 100px auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1280px) {
+      max-width: 100%;
+      padding: 0px 30px;
+    }
+
+    @media screen and (max-width: 600px) {
+      margin: 50px auto;
+    }
 
     .blog-latest-item {
       margin-bottom: 86px;
+      width: calc(50% - 50px);
+
+      @media screen and (max-width: 1280px) {
+        width: calc(50% - 20px);
+      }
+
+      @media screen and (max-width: 768px) {
+        margin-bottom: 40px;
+      }
+
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
 
     .blog-latest-date {
@@ -52,16 +115,18 @@
 
     .blog-latest-image {
       width: 100%;
+      height: 300px;
       border-radius: 15px;
       border: 2px solid #2c2c2c;
       margin-top: 18px;
+      object-fit: cover;
     }
 
     .blog-latest-title {
       font-family: $font-bold;
       color: #2C2C2C;
-      font-size: 40px;
-      line-height: 53px;
+      font-size: 20px;
+      line-height: 26px;
       cursor: pointer;
     }
   }
@@ -69,12 +134,11 @@
   .blog-post-view {
     width: 100%;
     max-width: 1000px;
-    margin: 150px auto 100px;
+    margin: 30px auto 70px;
 
     .blog-pubtime {
       color: #ff6666;
       font-size: 18px;
-      margin-top: 100px;
     }
 
     .blog-featured-image {
@@ -85,9 +149,9 @@
     }
 
     .blog-title {
+      font-family: $font-bold;
       font-size: 40px;
       line-height: 53px;
-      font-family: $font-bold;
       margin-top: 50px;
     }
 
@@ -100,6 +164,7 @@
 
     .blog-post {
       width: 100%;
+      font-family: 'Lora';
 
       @media screen and (max-width: 425px) {
         padding: 20px 0px;

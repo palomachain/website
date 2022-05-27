@@ -11,8 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Layout({
   children,
   router,
-  defaultNetwork,
-  walletConnectChainIds,
 }) {
   return (
     <>
@@ -31,8 +29,6 @@ export default function Layout({
         {(
           React.cloneElement(children, {
             router,
-            defaultNetwork,
-            walletConnectChainIds,
           })
         )}
         <Footer />

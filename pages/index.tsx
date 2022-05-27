@@ -1,7 +1,7 @@
 import React from "react";
 
-import EventPage from "./event";
+import BlogPage from "./blog";
 
 export default function Home({ state, router }) {
-  return <EventPage />;
+  return <BlogPage />;
 }

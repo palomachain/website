@@ -9,38 +9,45 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 78px;
+    margin-top: 40px;
     width: 100%;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 850px) {
       flex-direction: column;
-      margin-top: 24px;
-      padding: 0px 33px;
+      padding: 0px 30px;
+    }
+
+    @media screen and (max-width: 850px) {
+      flex-direction: row;
     }
 
     &__logo {
       cursor: pointer;
 
       img {
-        height: 107px;
+        height: 57px;
       }
     }
 
     &__buttons {
       display: flex;
+      justify-content: center;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 850px) {
+        margin-top: 15px;
         width: 100%;
-        justify-content: center;
-        margin-top: 30px;
-        flex-flow: row wrap;
       }
 
-      @media screen and (max-width: 500px) {
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        margin-top: 30px;
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    &__hamburger {
+      display: none;
+
+      @media screen and (max-width: 768px) {
+        display: block;
       }
     }
 
@@ -49,26 +56,35 @@
       justify-content: center;
       align-items: center;
       font-family: $font-bold;
-      font-size: 18px;
+      font-size: 14px;
       color: $main_text_color;
-      text-decoration: none;
+      text-decoration: underline;
       cursor: pointer;
       margin-left: 25px;
       text-transform: uppercase;
 
       img {
-        height: 18px;
-        margin-left: 8px;
+        height: 9px;
+        margin-left: 5px;
       }
 
       &.active {
         color: $hightlighted_color;
       }
 
+      &.disabled {
+        color: #E7C5C5;
+        text-decoration: none;
+      }
+
       &.community {
         display: flex;
         margin-left: 100px;
         text-decoration: underline;
+
+        @media screen and (max-width: 930px) {
+          margin-left: 25px;
+        }
       }
 
       @media screen and (max-width: 768px) {
@@ -86,15 +102,16 @@
 
     .header-menu-sub {
       position: absolute;
-      margin-top: 140px;
-      margin-left: 90px;
+      margin-top: 15px;
+      margin-left: 40px;
       font-size: 15px;
+      font-family: $font-bold;
       display: flex;
       flex-direction: column;
       color: $main_text_color;
 
       &-link {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
         &.active {
           color: $hightlighted_color;
@@ -103,39 +120,127 @@
     }
   }
 
-  .footer-container {
-    .footer-triangle-border {
+  .mobile-header-menu {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    max-width: 100%;
+    min-height: 100vh;
+    background: #2c2c2c;
+    z-index: 5000;
+    padding: 21px 24px;
+
+    &-top {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &-menus {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 61px;
+    }
+
+    .mobile-button {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: $font-bold;
+      font-size: 14px;
+      color: #fff;
+      text-decoration: underline;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+
+      img {
+        height: 9px;
+        margin-left: 5px;
+      }
+
+      &.active {
+        color: $hightlighted_color;
+      }
+
+      &.disabled {
+        color: #494849;
+        text-decoration: none;
+      }
+
+      &.community {
+        display: flex;
+        text-decoration: underline;
+      }
+    }
+
+    .mobile-menu-sub {
+      display: block;
+      width: 100%;
+      margin-left: 18px;
+      font-family: $font-bold;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      color: #fff;
+
+      span {
+        text-decoration: none;
+      }
+        
+      &-link {
+        margin-bottom: 13px;
+        text-decoration: none !important;
+        text-transform: uppercase;
+
+        &.active {
+          color: $hightlighted_color;
+          text-decoration: none !important;
+        }
+      }
+    }
+  }
+
+  .sub-nav-bar {
+    width: 100%;
+    padding: 0px 62px;
+    margin-top: 62px;
+  }
+
+  .footer-container {
+
+    .footer-triangle-border {
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 0 0 70px 100vw;
+      border-width: 0 0 50px 100vw;
       border-color: transparent transparent #eecccc transparent;
     }
 
     .footer-view {
       background: #eecccc;
-      padding: 100px;
+      padding: 30px 86px;
       display: flex;
+      align-items: center;
 
       @media screen and (max-width: 768px) {
-        flex-direction: column;
+        padding: 30px;
       }
 
       &-logo {
-        flex: 1;
         img {
-          width: 100%;
-          max-width: 203px;
+          height: 57px;
         }
       }
 
       &-links {
         width: 100%;
-        max-width: 180px;
         display: flex;
-        flex-direction: column;
-        margin-left: 170px;
+        flex: 1;
+        flex-flow: wrap row;
 
         @media screen and (max-width: 768px) {
           margin-left: 0px;
@@ -143,32 +248,38 @@
         }
       }
 
-      &-subtitle {
-        font-size: 18px;
-        font-weight: 600;
-      }
-
       a {
+        display: flex;
+        align-items: center;
         color: $main_text_color;
         margin-top: 13px;
+        font-family: $font-bold;
+        font-size: 14px;
+        margin-right: 70px;
+        width: 100px;
+
+        img {
+          margin-left: 4px;
+        }
       }
     }
   }
 
   .link-back-to {
-    border-radius: 10px;
-    border: 2px solid #2c2c2c;
-    width: 180px;
-    height: 60px;
-    font-size: 20px;
+    border-radius: 7px;
+    border: 1px solid #2c2c2c;
+    width: 83px;
+    height: 31px;
+    font-size: 12px;
+    line-height: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
     img {
-      height: 23px;
-      margin-right: 15px;
+      height: 10px;
+      margin-right: 4px;
     }
   }
 }

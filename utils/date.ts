@@ -32,7 +32,7 @@ const dateOptionsWithWeekDay = {
   year: "numeric",
   month: "long",
   day: "numeric",
-  weekday: "long",
+  weekday: "short",
 } as const;
 
 const timeOptions = {

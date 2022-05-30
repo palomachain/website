@@ -50,7 +50,7 @@ const UpcomingEvent = ({ data }) => {
               className="event-register"
               target="_blank"
             >
-              Register
+              Learn More
             </a>
           )}
         </div>

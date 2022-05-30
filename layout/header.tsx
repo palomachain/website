@@ -17,6 +17,7 @@ const HeaderMenu = ({
   children = null,
   childrenRef = null,
   childrenOpen = false,
+  hoverClassName = ""
 }) => {
   return isLink ? (
     <Link href={href}>
@@ -31,7 +32,7 @@ const HeaderMenu = ({
       </div>
     </Link>
   ) : (
-    <div ref={childrenRef} onClick={(e) => onClick()}>
+    <div ref={childrenRef} onClick={(e) => onClick()} className={hoverClassName}>
       <div
         className={cn(className, {
           active,
@@ -55,7 +56,7 @@ const LayoutHeader = ({ router }) => {
     setEventSubMenuOpen(false);
   });
 
-  const [eventMobileSubMenuOpen, setEventMobiuleSubMenuOpen] = useState(false);
+  const [eventMobileSubMenuOpen, setEventMobileSubMenuOpen] = useState(false);
 
   useEffect(() => {
     if (router.route === "/") {
@@ -66,7 +67,7 @@ const LayoutHeader = ({ router }) => {
     }
 
     if (router.route.startsWith("/event")) {
-      setEventMobiuleSubMenuOpen(true);
+      setEventMobileSubMenuOpen(true);
     }
   }, [router.route]);
 
@@ -83,7 +84,7 @@ const LayoutHeader = ({ router }) => {
         </Link>
       </div>
       <div className="layout-container__header__buttons">
-        <HeaderMenu
+        {/* <HeaderMenu
           title="Home"
           isLink={false}
           className="disabled header-button"
@@ -94,7 +95,7 @@ const LayoutHeader = ({ router }) => {
           isLink={false}
           className="disabled header-button"
           active={curLink.startsWith("/about-us")}
-        />
+        /> */}
         <HeaderMenu
           title="Blog"
           href="/blog"
@@ -107,9 +108,8 @@ const LayoutHeader = ({ router }) => {
           className="header-button"
           active={curLink.startsWith("/event")}
           img="/assets/arrows/arrow-down"
-          childrenRef={eventSubMenuRef}
-          childrenOpen={eventSubMenuOpen}
-          onClick={() => setEventSubMenuOpen(!eventSubMenuOpen)}
+          childrenOpen={true}
+          hoverClassName="header-parent-menu"
         >
           <div className="header-menu-sub">
             <HeaderMenu
@@ -144,14 +144,15 @@ const LayoutHeader = ({ router }) => {
       {mobileMenuOpen && (
         <div className="mobile-header-menu">
           <div className="mobile-header-menu-top">
-            <img src="/assets/logo/paloma-red.png" />
+            <img className="mobile-logo" src="/assets/logo/paloma-red.png" />
             <img
+              className="mobile-menu-close"
               src="/assets/icons/close.png"
               onClick={(e) => setMobileMenuOpen(false)}
             />
           </div>
           <div className="mobile-header-menu-menus">
-            <HeaderMenu
+            {/* <HeaderMenu
               title="Home"
               isLink={false}
               className="disabled mobile-button"
@@ -162,7 +163,7 @@ const LayoutHeader = ({ router }) => {
               isLink={false}
               className="disabled mobile-button"
               active={curLink.startsWith("/about-us")}
-            />
+            /> */}
             <HeaderMenu
               title="Blog"
               href="/blog"
@@ -179,7 +180,7 @@ const LayoutHeader = ({ router }) => {
               img="/assets/arrows/arrow-down"
               childrenOpen={eventMobileSubMenuOpen}
               onClick={() =>
-                setEventMobiuleSubMenuOpen(!eventMobileSubMenuOpen)
+                setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)
               }
             >
               <div className="mobile-menu-sub">
@@ -203,6 +204,7 @@ const LayoutHeader = ({ router }) => {
                 />
               </div>
             </HeaderMenu>
+            <div className="mobile-menu-spacer"></div>
             <a
               href={TELEGRAM_LINK}
               className="mobile-button community"

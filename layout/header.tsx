@@ -62,8 +62,8 @@ const LayoutHeader = ({ router }) => {
 
   useEffect(() => {
     if (router.route === "/") {
-      router.replace("/blog");
-      setCurLink("/blog");
+      router.replace("/event");
+      setCurLink("/event");
     } else {
       setCurLink(router.route);
     }

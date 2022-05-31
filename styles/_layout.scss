@@ -46,6 +46,10 @@
     &__hamburger {
       display: none;
 
+      img {
+        height: 13px;
+      }
+
       @media screen and (max-width: 768px) {
         display: block;
       }
@@ -102,20 +106,29 @@
 
     .header-menu-sub {
       position: absolute;
-      margin-top: 15px;
-      margin-left: 40px;
+      padding-top: 15px;
+      margin-left: 20px;
+      padding-left: 20px;
       font-size: 15px;
       font-family: $font-bold;
       display: flex;
       flex-direction: column;
       color: $main_text_color;
+      display: none;
 
       &-link {
         margin-bottom: 10px;
+        cursor: pointer;
 
         &.active {
           color: $hightlighted_color;
         }
+      }
+    }
+
+    .header-parent-menu:hover {
+      .header-menu-sub {
+        display: block;
       }
     }
   }
@@ -126,7 +139,7 @@
     top: 0px;
     width: 100vw;
     max-width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background: #2c2c2c;
     z-index: 5000;
     padding: 21px 24px;
@@ -136,6 +149,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      .mobile-logo {
+        height: 57px;
+      }
+
+      .mobile-menu-close {
+        height: 13px;
+      }
     }
 
     &-menus {
@@ -143,6 +164,11 @@
       flex-direction: column;
       align-items: flex-start;
       margin-top: 61px;
+      height: calc(100% - 21px - 57px - 61px);
+    }
+
+    .mobile-menu-spacer {
+      flex: 1;
     }
 
     .mobile-button {
@@ -208,6 +234,10 @@
     width: 100%;
     padding: 0px 62px;
     margin-top: 62px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0px 32px;
+    }
   }
 
   .footer-container {
@@ -257,9 +287,11 @@
         font-size: 14px;
         margin-right: 70px;
         width: 100px;
+        text-transform: uppercase;
 
         img {
           margin-left: 4px;
+          height: 11px;
         }
       }
     }

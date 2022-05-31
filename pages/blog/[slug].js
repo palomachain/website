@@ -1,7 +1,4 @@
 import React from "react";
-import { useRouter } from 'next/router';
-
-import Link from "next/link";
 
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 

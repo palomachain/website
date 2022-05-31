@@ -37,7 +37,12 @@ const LayoutHeader = ({ router }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setCurLink(`${router.route}/`);
+    if (router.route === "/") {
+      router.replace("/event");
+      setCurLink("/event");
+    } else {
+      setCurLink(router.route);
+    }
   }, [router.route]);
 
   return (
@@ -128,4 +133,3 @@ const LayoutHeader = ({ router }) => {
 };
 
 export default LayoutHeader;
- 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
@@ -12,7 +12,7 @@ import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const Blog = ({ post, router }) => {
-  useEffect(() => {
+   useEffect(() => {
     const res = mixpanel.track('VISIT_BLOGPOST', {
       title: post.content.title,
       slug: post.slug

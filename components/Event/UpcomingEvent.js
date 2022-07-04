@@ -6,6 +6,18 @@ import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const UpcomingEvent = ({ data }) => {
+  let regClicked = false;
+  useEffect(() => {
+    window.$ = window.jQuery = require('jquery');
+    $("#event-register").click(function() {
+      if(!regClicked) {
+        regClicked = true;
+        mixpanel.track('REGISTER_EVENT', eventLink.register_info);
+        window.location = eventLink.register;
+      }
+    });
+  })
+
   const eventLink = useMemo(() => {
     const link = {
       register: "",
@@ -51,7 +63,7 @@ const UpcomingEvent = ({ data }) => {
         <div className="event-buttons">
           {eventLink.register !== "" && (
             <a
-                onClick={(e) => openRegistration()}
+                id="event-register"
                 className="event-register"
               target="_blank"
             >

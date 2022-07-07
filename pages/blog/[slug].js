@@ -7,9 +7,6 @@ import { fetchBlogs } from "utils/storyblok";
 
 import { HeadSeo } from "components/Blog";
 
-//import mixpanel from "mixpanel-browser";
-
-//mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const Blog = ({ post, router }) => {
   useEffect(() => {

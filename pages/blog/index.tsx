@@ -5,6 +5,9 @@ import RotatedHeader from "components/RotatedHeader";
 import { BlogList } from "components/Blog";
 
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
+import mixpanel from "mixpanel-browser";
+
+mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const blogSubMenus = [
   {

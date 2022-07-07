@@ -7,18 +7,19 @@ import { fetchBlogs } from "utils/storyblok";
 
 import { HeadSeo } from "components/Blog";
 
-import mixpanel from "mixpanel-browser";
+//import mixpanel from "mixpanel-browser";
 
-mixpanel.init(process.env.MIXPANEL_API_KEY)
+//mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const Blog = ({ post, router }) => {
   useEffect(() => {
-    const res = mixpanel.track('VISIT_BLOGPOST', {
+    console.log("hello");
+     mixpanel.track('VISIT_BLOGPOST', {
       title: post.content.title,
       slug: post.slug
     });
 
-    console.log(res);
+    //console.log(res);
   }, []);
 
   return (
@@ -114,11 +115,6 @@ export async function getStaticProps({ params }) {
       break;
     }
   }
-
-  mixpanel.track('VISIT_BLOGPOST', {
-    title: post.content.title,
-    slug: post.slug
-  });
 
   // Pass post data to the page via props
   return { props: { post } };

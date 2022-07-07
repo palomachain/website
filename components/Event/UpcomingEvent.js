@@ -12,7 +12,11 @@ const UpcomingEvent = ({ data }) => {
     $("#event-register").click(function() {
       if(!regClicked) {
         regClicked = true;
-        mixpanel.track('REGISTER_EVENT', eventLink.register_info);
+        mixpanel.track('REGISTER_EVENT', {
+          title: data.content.Title,
+          url: data.content.RegistrationLink.url,
+          slug: data.slug,
+        });
         window.location = eventLink.register;
       }
     });

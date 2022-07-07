@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React, {useEffect, useMemo} from "react";
 
 import { convertDateStringWithWeekDay } from "utils/date";
 
-import mixpanel from "mixpanel-browser";
-mixpanel.init(process.env.MIXPANEL_API_KEY)
+// import mixpanel from "mixpanel-browser";
+// mixpanel.init(process.env.MIXPANEL_API_KEY)
 
 const UpcomingEvent = ({ data }) => {
   let regClicked = false;
@@ -39,12 +39,7 @@ const UpcomingEvent = ({ data }) => {
     return link;
   }, [data]);
 
-  const openRegistration = () => {
-    console.log('click');
 
-    mixpanel.track('REGISTER_EVENT', eventLink.register_info);
-    window.location = eventLink.register;
-  }
 
   return (
     <div className="event-item-container">

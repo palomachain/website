@@ -7,20 +7,20 @@ import { convertDateStringWithWeekDay } from "utils/date";
 
 const UpcomingEvent = ({ data }) => {
   let regClicked = false;
-  useEffect(() => {
-    window.$ = window.jQuery = require('jquery');
-    $("#event-register").click(function() {
-      if(!regClicked) {
-        regClicked = true;
-        mixpanel.track('REGISTER_EVENT', {
-          title: data.content.Title,
-          url: data.content.RegistrationLink.url,
-          slug: data.slug,
-        });
-        window.location = eventLink.register;
-      }
-    });
-  })
+  // useEffect(() => {
+  //   window.$ = window.jQuery = require('jquery');
+  //   $("#event-register").click(function() {
+  //     if(!regClicked) {
+  //       regClicked = true;
+  //       mixpanel.track('REGISTER_EVENT', {
+  //         title: data.content.Title,
+  //         url: data.content.RegistrationLink.url,
+  //         slug: data.slug,
+  //       });
+  //       window.location = eventLink.register;
+  //     }
+  //   });
+  // })
 
   const eventLink = useMemo(() => {
     const link = {
@@ -62,6 +62,7 @@ const UpcomingEvent = ({ data }) => {
         <div className="event-buttons">
           {eventLink.register !== "" && (
             <a
+                href={eventLink.register}
                 id="event-register"
                 className="event-register"
               target="_blank"

@@ -1,4 +1,5 @@
-import React, {useEffect, useMemo} from "react";
+import React, { useEffect, useMemo } from "react";
+import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import { convertDateStringWithWeekDay } from "utils/date";
 
@@ -44,8 +45,6 @@ const UpcomingEvent = ({ data }) => {
     return link;
   }, [data]);
 
-
-
   return (
     <div className="event-item-container">
       <img src={`https:${data.content.Image}`} className="event-image" />
@@ -58,17 +57,42 @@ const UpcomingEvent = ({ data }) => {
           <img src="/assets/events/placeholder.png" />
           <span>{data.content.Location}</span>
         </div>
+
+        <div className="event-description">
+          {render(data.content.Description, {
+            nodeResolvers: {
+              [NODE_IMAGE]: (children, props) => (
+                <img
+                  {...props}
+                  style={{ borderRadius: "0px", maxWidth: "100%" }}
+                />
+              ),
+            },
+            blokResolvers: {
+              ["YouTube-blogpost"]: (props) => (
+                <div className="embed-responsive embed-responsive-16by9">
+                  <iframe
+                    className="embed-responsive-item"
+                    src={
+                      "https://www.youtube.com/embed/" +
+                      props.YouTube_id.replace("https://youtu.be/", "")
+                    }
+                  ></iframe>
+                </div>
+              ),
+            },
+          })}
+        </div>
         <div className="event-spacer"></div>
-        <div className="event-description">{data.content.Description}</div>
         <div className="event-buttons">
           {eventLink.register !== "" && (
             <a
-                href={eventLink.register}
-                id="event-register"
-                className="event-register"
-                title={data.content.Title}
-                slug={data.slug}
-                target="_blank"
+              href={eventLink.register}
+              id="event-register"
+              className="event-register"
+              title={data.content.Title}
+              slug={data.slug}
+              target="_blank"
             >
               Register
             </a>

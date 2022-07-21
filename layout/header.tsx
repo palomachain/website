@@ -46,6 +46,8 @@ const HeaderMenu = ({
   );
 };
 
+const baseUrl = process.env.BASE_URL;
+
 const LayoutHeader = ({ router }) => {
   const [curLink, setCurLink] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -98,7 +100,7 @@ const LayoutHeader = ({ router }) => {
         /> */}
         <HeaderMenu
           title="Blog"
-          href="/blog"
+          href={`${baseUrl}/blog`}
           className="header-button"
           active={curLink.startsWith("/blog")}
         />
@@ -166,7 +168,7 @@ const LayoutHeader = ({ router }) => {
             /> */}
             <HeaderMenu
               title="Blog"
-              href="/blog"
+              href={`${baseUrl}/blog`}
               isLink={false}
               className="mobile-button"
               active={curLink.startsWith("/blog")}

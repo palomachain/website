@@ -118,12 +118,13 @@
   .event-description {
     font-size: 12px;
     color: $main_text_color;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // display: -webkit-box;
+    // -webkit-line-clamp: 3;
+    // -webkit-box-orient: vertical;
     margin-top: 12px;
+    line-height: 129%;
   }
 
   .event-spacer {

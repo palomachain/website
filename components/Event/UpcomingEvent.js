@@ -7,6 +7,7 @@ import { convertDateStringWithWeekDay } from "utils/date";
 
 const UpcomingEvent = ({ data }) => {
   let regClicked = false;
+
   useEffect(() => {
     window.$ = window.jQuery = require('jquery');
     $("#event-register").click(function() {
@@ -52,12 +53,12 @@ const UpcomingEvent = ({ data }) => {
         <div className="event-date">
           {convertDateStringWithWeekDay(data.content.EventTime, true)}
         </div>
-        <div className="event-title">{data.content.Title}</div>
-        <div className="event-spacer"></div>
+        {/* <div className="event-title">{data.content.Title}</div> */}
         <div className="event-location">
           <img src="/assets/events/placeholder.png" />
           <span>{data.content.Location}</span>
         </div>
+        <div className="event-spacer"></div>
         <div className="event-description">{data.content.Description}</div>
         <div className="event-buttons">
           {eventLink.register !== "" && (

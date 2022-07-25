@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/palomachain
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://www.palomachain.com
+  * I am palomachain (https://keybase.io/palomachain) on keybase.
+  * I have a public key ASANWMqUqOk4u5V9kQOv9LVCo76zKgZV0H9MhdGDmvoMSwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01200d58ca94a8e938bb957d9103aff4b542a3beb32a0655d07f4c85d1839afa0c4b0a",
+      "host": "keybase.io",
+      "kid": "01200d58ca94a8e938bb957d9103aff4b542a3beb32a0655d07f4c85d1839afa0c4b0a",
+      "uid": "5e61254cceec36982996a79e799d8a19",
+      "username": "palomachain"
+    },
+    "merkle_root": {
+      "ctime": 1658785052,
+      "hash": "826f60aea08f00f868a009b4d1f3606b78811506dc0a5bfe210ae0daa9067fa7f98fe121a22e7b949210c8e95378e851ab88e6131eca9492ac1b02a7c5338d63",
+      "hash_meta": "a92e5b08fc0f8378e8ef14248fb69ebd71226a6100ab2f96fdc7d56df508d035",
+      "seqno": 22910453
+    },
+    "service": {
+      "entropy": "0ZZcCPhAfBU5APDNtfJUWiGy",
+      "hostname": "www.palomachain.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.5.0"
+  },
+  "ctime": 1658785086,
+  "expire_in": 504576000,
+  "prev": "e3a92822435f4307c0ad30f726f964ea27837487a4a020bb88c3d06b81205044",
+  "seqno": 5,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgDVjKlKjpOLuVfZEDr/S1QqO+syoGVdB/TIXRg5r6DEsKp3BheWxvYWTESpcCBcQg46koIkNfQwfArTD3Jvlk6ieDdIekoCC7iMPQa4EgUETEIH6rXyLTEPYvoG39bDHB76Rrk0Y/9+zDBPCETWiH+HeCAgHCo3NpZ8RAYZSYUh4Wggg4UCTTflalfcioBFRfb3ASKF3YQsmvLmbKpk9pkvy4q4QgGRF10S8eJ2Z9XZsiTu+/0kS+KB44DahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIJtKWJF4z9XZiu0Z4bxv0W2TbM2rteynvRxEXdQ17IUho3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/palomachain
+
+==================================================================

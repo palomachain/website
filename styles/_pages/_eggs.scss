@@ -1,0 +1,144 @@
+.egg-page-container {
+  width: 100%;
+
+  .egg-list-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 17px auto 77px;
+    display: flex;
+    flex-flow: row wrap;
+    // justify-content: space-between;
+  }
+
+  .egg-container {
+    background: #fbc2c2;
+    margin-bottom: 14px;
+
+    cursor: pointer;
+    width: calc(20% - 11.2px);
+    height: 215px;
+    margin-left: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:nth-child(5n + 1) {
+      margin-left: 0px;
+    }
+
+    .egg-wrapper {
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+
+      .egg-nft-img {
+        height: 126px;
+      }
+
+      .egg-nft-id {
+        color: #2c2c2c;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 43px;
+        font-family: "RockStar-Bold";
+      }
+
+      .egg-nft-address {
+        width: 100%;
+        overflow-wrap: break-word;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+        color: #2c2c2c;
+        margin-top: 16px;
+      }
+
+      .egg-nft-opensea {
+        background: #2c2c2c;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: #eadede;
+        height: 40px;
+        margin-top: 9px;
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      .egg-normal {
+        display: none;
+      }
+
+      .egg-hovered {
+        display: flex;
+      }
+    }
+
+    .egg-normal {
+      display: flex;
+      padding: 40px;
+    }
+
+    .egg-hovered {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    .egg-empty {
+      display: flex;
+      background: #e9dada;
+      background-image: url("/assets/eggs/egg-empty.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+}
+
+.release-countdown-banner-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 77px auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2c2c2c;
+  border-radius: 5px;
+  padding: 48px 0px 31px;
+
+  img {
+    height: 128px;
+  }
+
+  .release-countdown-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .text1 {
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 42px;
+      color: #ffffff;
+    }
+
+    .text2 {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 54px;
+      color: #ffffff;
+      font-family: "RockStar-Bold";
+    }
+  }
+}

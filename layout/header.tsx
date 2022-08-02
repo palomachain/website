@@ -128,6 +128,12 @@ const LayoutHeader = ({ router }) => {
             />
           </div>
         </HeaderMenu>
+        <HeaderMenu
+          title="Paloma Eggs"
+          href={`${baseUrl}/paloma-eggs`}
+          className="header-button"
+          active={curLink.startsWith("/paloma-eggs")}
+        />
         <a
           href={TELEGRAM_LINK}
           className="header-button community"
@@ -206,6 +212,14 @@ const LayoutHeader = ({ router }) => {
                 />
               </div>
             </HeaderMenu>
+            <HeaderMenu
+              title="Paloma Eggs"
+              href={`${baseUrl}/paloma-eggs`}
+              isLink={false}
+              className="mobile-button"
+              active={curLink.startsWith("/paloma-eggs")}
+              onClick={() => handleClickMobileLink("/paloma-eggs")}
+            />
             <div className="mobile-menu-spacer"></div>
             <a
               href={TELEGRAM_LINK}

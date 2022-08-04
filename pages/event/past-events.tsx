@@ -45,11 +45,7 @@ const PastEvents = () => {
   return (
     <div className="page-container">
       <div className="event-page-container">
-        <RotatedHeader
-          title="Past Events"
-          rightImage="/assets/events/events.png"
-          theme="dark"
-        />
+        <RotatedHeader title="Past Events" theme="dark" />
 
         {filteredEvents.length > 0 && (
           <div className="event-list-wrapper">

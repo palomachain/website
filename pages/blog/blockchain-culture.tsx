@@ -5,7 +5,7 @@ import { BlogList } from "components/Blog";
 
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
 
-const BlogBlockchainCulture = ({ router  }) => {
+const BlogBlockchainCulture = ({ router }) => {
   const [latestBlogs, setLatestBlog] = useState([]);
 
   useEffect(() => {
@@ -31,11 +31,7 @@ const BlogBlockchainCulture = ({ router  }) => {
             <span>Blog</span>
           </div>
         </div>
-        <RotatedHeader
-          title="Blockchain Culture"
-          rightImage="/assets/blog/blockchain-culture.png"
-          theme="dark"
-        />
+        <RotatedHeader title="Blockchain Culture" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

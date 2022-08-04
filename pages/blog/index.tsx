@@ -7,7 +7,7 @@ import { BlogList } from "components/Blog";
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
 import mixpanel from "mixpanel-browser";
 
-mixpanel.init(process.env.MIXPANEL_API_KEY)
+mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 const blogSubMenus = [
   {
@@ -54,11 +54,7 @@ const Blog = () => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader
-          title="Blog"
-          rightImage="/assets/blog/blog.png"
-          theme="light"
-        />
+        <RotatedHeader title="Blog" theme="light" />
 
         <div className="blog-page-images">
           {blogSubMenus.map((menu, index) => (
@@ -71,11 +67,7 @@ const Blog = () => {
           ))}
         </div>
 
-        <RotatedHeader
-          title="The Latest"
-          leftImage="/assets/blog/latest.png"
-          theme="light"
-        />
+        <RotatedHeader title="The Latest" theme="light" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

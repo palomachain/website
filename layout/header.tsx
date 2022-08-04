@@ -27,8 +27,9 @@ const HeaderMenu = ({
         })}
       >
         <span>{title}</span>
-        {img !== "" && active && <img src={`${img}.png`} />}
-        {img !== "" && !active && <img src={`${img}-black.png`} />}
+        {/* {img !== "" && active && <img src={`${img}.png`} />}
+        {img !== "" && !active && <img src={`${img}-black.png`} />} */}
+        <img src={img} />
       </div>
     </Link>
   ) : (
@@ -39,7 +40,8 @@ const HeaderMenu = ({
         })}
       >
         <span>{title}</span>
-        {img !== "" && <img src={`${img}.png`} />}
+        {/* {img !== "" && <img src={`${img}.png`} />} */}
+        <img src={img} />
       </div>
       {childrenOpen && children}
     </div>
@@ -109,7 +111,7 @@ const LayoutHeader = ({ router }) => {
           isLink={false}
           className="header-button"
           active={curLink.startsWith("/event")}
-          img="/assets/arrows/arrow-down"
+          img="/assets/arrows/arrow-down-black.png"
           childrenOpen={true}
           hoverClassName="header-parent-menu"
         >
@@ -179,7 +181,7 @@ const LayoutHeader = ({ router }) => {
               isLink={false}
               className="mobile-button"
               active={curLink.startsWith("/event")}
-              img="/assets/arrows/arrow-down"
+              img="/assets/arrows/arrow-down-black.png"
               childrenOpen={eventMobileSubMenuOpen}
               onClick={() =>
                 setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)

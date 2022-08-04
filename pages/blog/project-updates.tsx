@@ -31,11 +31,7 @@ const BlogProjectUpdates = ({ router }) => {
             <span>Blog</span>
           </div>
         </div>
-        <RotatedHeader
-          title="Project Updates"
-          rightImage="/assets/blog/project-updates.png"
-          theme="dark"
-        />
+        <RotatedHeader title="Project Updates" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

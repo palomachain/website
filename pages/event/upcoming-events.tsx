@@ -44,11 +44,7 @@ const UpcomingEvents = () => {
   return (
     <div className="page-container">
       <div className="event-page-container">
-        <RotatedHeader
-          title="Upcoming Events"
-          rightImage="/assets/events/events.png"
-          theme="dark"
-        />
+        <RotatedHeader title="Upcoming Events" theme="dark" />
 
         {filteredEvents.length > 0 && (
           <div className="event-list-wrapper">

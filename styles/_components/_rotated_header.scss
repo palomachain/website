@@ -1,9 +1,9 @@
 .rotated-header-container {
   width: 100vw;
   max-width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   .skew-bg {
     width: 100%;

@@ -73,5 +73,6 @@ export const filterBlogs = (eventList, category = "") => {
     return aTime > bTime ? -1 : 1;
   });
 
-  return blogs.slice(0, LATEST_BLOG_SHOW_CNT);
+  return blogs;
+  // return blogs.slice(0, LATEST_BLOG_SHOW_CNT);
 };

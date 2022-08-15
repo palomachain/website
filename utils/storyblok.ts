@@ -24,8 +24,8 @@ export const fetchBlogs = async () => {
   }
 
   blogs.sort((a, b) => {
-    const aTimestamp = Date.parse(a.first_published_at);
-    const bTimestamp = Date.parse(b.first_published_at);
+    const aTimestamp = Date.parse(a.content.published_date);
+    const bTimestamp = Date.parse(b.content.published_date);
 
     return aTimestamp > bTimestamp ? -1 : 1;
   });
@@ -67,8 +67,8 @@ export const filterBlogs = (eventList, category = "") => {
   });
 
   blogs.sort((a, b) => {
-    const aTime = Date.parse(a.first_published_at);
-    const bTime = Date.parse(b.first_published_at);
+    const aTime = Date.parse(a.content.published_date);
+    const bTime = Date.parse(b.content.published_date);
 
     return aTime > bTime ? -1 : 1;
   });

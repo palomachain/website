@@ -8,7 +8,7 @@ const BlogList = ({ data }) => (
     {data.map((blog, index) => (
       <div className="blog-latest-item" key={`blog-latest-${index}`}>
         <div className="blog-latest-date">
-          {convertDateString2(blog.first_published_at)}
+          {convertDateString2(blog.content.published_date)}
         </div>
         <img
           className="blog-latest-image"

@@ -42,7 +42,7 @@ const Blog = ({ post, router }) => {
                 <div className="blog-post-view">
                   <div className="blog-content">
                     {/* <div className="blog-pubtime">
-                {convertDateString2(post.first_published_at)}
+                {convertDateString2(post.content.published_date)}
               </div> */}
                     <img
                         className="blog-featured-image"

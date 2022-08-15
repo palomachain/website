@@ -49,6 +49,8 @@ export const convertDateString = (dateStr) => {
 };
 
 export const convertDateString2 = (dateStr) => {
+  if (!dateStr || dateStr === "") return "";
+
   const stamp = Date.parse(dateStr);
   const date = new Date(stamp);
 

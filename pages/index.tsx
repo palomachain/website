@@ -1,21 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import RotatedHeader from "components/RotatedHeader";
+import { fetchPageValues } from "utils/storyblok";
+import { PAGE_LANDING } from "utils/constants";
 
 import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 export default function Home({ state, router }) {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getPageData = async () => {
+      const data = await fetchPageValues(PAGE_LANDING);
+      console.log(data);
+
+      setData({ ...data.content });
+    }
+
+    getPageData();
+  }, [])
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <div className="page-container">
       <div className="home-page-container">
         <div className="home-page-section">
           <div className="home-page-text">
-            <h1>The Fastest Messenger Blockchain</h1>
+            <h1>{data.heading1}</h1>
             <p>
-              Paloma is a Cosmos-SDK Blockchain for sending and receiving
-              messages from any other Blockchain with the lowest communication
-              latency possible.
+              {data.text1}
             </p>
             <a href="" className="home-page-button">
               Get Started
@@ -36,14 +55,9 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section reverse">
           <div className="home-page-text">
-            <h2>Permissionless Cross Chain</h2>
+            <h2>{data.heading2}</h2>
             <p>
-              Paloma messages are low latency and bidirectional between any
-              chains approved by governance. Paloma communications are secured
-              by the Paloma validator network-set. For example, developers may
-              write programs on any EVM chain to control contracts running on
-              any other blockchain including Solana or Polygon, or Cosmos-SDK
-              chain
+              {data.text2}
             </p>
           </div>
           <div className="home-page-image">
@@ -52,40 +66,28 @@ export default function Home({ state, router }) {
         </div>
 
         <div className="home-page-propositions">
-          <span className="subtitle">Paloma Value Propositions</span>
+          <span className="subtitle">{data.valueprop_heading}</span>
           <div className="title">send messages quickly & safely</div>
           <div className="home-proposition-list">
             <div className="home-proposition-item">
               <img src="/assets/home/fast.png" />
-              <h3>Fast</h3>
+              <h3>{data.valueprop_title1}</h3>
               <p>
-                Paloma validators known as Pigeons manage nodes on each target
-                chain with the best datacenter architecture, ensuring fast
-                consensus of any target blockchain state. All validators must be
-                fast relayers or have their stake slashed.
+                {data.valueprop_text1}
               </p>
             </div>
             <div className="home-proposition-item">
               <img src="/assets/home/secure.png" />
-              <h3>Secure</h3>
+              <h3>{data.valueprop_title2}</h3>
               <p>
-                Paloma uses the Cosmos Gravity validator set security model.
-                Messages on each target chain are secured by the signatures of
-                175 validator nodes. Paloma pigeons act as watchers across all
-                supported chains, ready to slash stake at security model
-                failures.
+                {data.valueprop_text2}
               </p>
             </div>
             <div className="home-proposition-item">
               <img src="/assets/home/gas-fee.png" />
-              <h3>Gas Fee Oracles</h3>
+              <h3>{data.valueprop_title3}</h3>
               <p>
-                Paloma gas fee management is a decentralized gas fee oracle
-                providing gas fee pricing on all target chains. Paloma
-                developers can predict and assess gas costs, on any target
-                blockchain, from within Paloma. Paloma validators are
-                compensated for gas fee management from the usage of the gas fee
-                oracle.
+                {data.valueprop_text3}
               </p>
             </div>
           </div>
@@ -150,34 +152,26 @@ export default function Home({ state, router }) {
           <div className="home-how-to-build">
             <div className="home-how-item ">
               <div className="number">1.</div>
-              <div className="title">Send your Message</div>
-              <p>
-                Send your Ethereum message payload with a simple command line
-                entry on Paloma. Pay for gas in Grains or ETH on the command
-                line. Let fly!
-              </p>
+              <div className="content">
+                {render(data.build_text1)}
+              </div>
             </div>
 
-            <div className="home-how-item second">
-              <img className="pigeon" src="/assets/home/pigeon.png" />
+            <div className="home-how-item">
               <div className="number">2.</div>
-              <div className="title">Confirm Message State</div>
-              <p>
-                Write and deploy a Cosmwasm contract on Paloma to confirm the
-                message state and release a new message with gas fees.
-              </p>
+              <div className="content">
+                {render(data.build_text2)}
+              </div>
             </div>
 
-            <div className="home-how-item third">
+            <div className="home-how-item">
               <div className="number">3.</div>
-              <div className="title">Send Another Message</div>
-              <p>
-                Use Paloma to determine when to fire the next message to the
-                pigeons. Pay gas in GRAINS or ETH.
-              </p>
+              <div className="content">
+                {render(data.build_text3)}
+              </div>
               <a href="" className="home-page-button" style={{ width: "100%" }}>
                 View Docs
-                <img src="/assets/arrows/arrow-top-right.png" />
+                <img src="/assets/arrows/arrow-top-right-white.png" />
               </a>
             </div>
           </div>

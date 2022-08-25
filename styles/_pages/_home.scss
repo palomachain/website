@@ -1,0 +1,342 @@
+.home-page-container {
+  width: 100%;
+
+  .home-page-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 80px;
+    margin-bottom: 212px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      padding: 0px 30px;
+      margin-bottom: 100px;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .home-page-image {
+    width: 45%;
+
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      margin-top: 40px;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .home-page-text {
+    width: 45%;
+    max-width: 579px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: 54px;
+      line-height: 72px;
+      text-transform: capitalize;
+      font-family: "RockStar-Bold";
+      color: #2c2c2c;
+
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        line-height: 40px;
+      }
+    }
+
+    h2 {
+      font-family: "RockStar-Bold";
+      font-size: 40px;
+      line-height: 53px;
+      color: #2c2c2c;
+      max-width: 436px;
+      display: flex;
+      align-content: center;
+      margin: 0px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 23px;
+        line-height: 28px;
+      }
+
+      img {
+        height: 48px;
+        margin-left: 8px;
+      }
+    }
+
+    span {
+      display: inline-block;
+      font-size: 20px;
+      line-height: 26px;
+      text-transform: capitalize;
+      margin-bottom: 17px;
+
+      &.pink {
+        color: #ff62c4;
+      }
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 26px;
+      color: #000;
+      max-width: 439px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .home-page-button {
+    background: #f1d1e5;
+    height: 60px;
+    width: 208px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2c2c2c;
+    font-size: 16px;
+    font-family: "RockStar-Medium";
+    max-width: 422px;
+    margin-top: 26px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+      width: 150px;
+      height: 40px;
+    }
+
+    &:hover {
+      background: #ffffff;
+    }
+
+    img {
+      height: 12px;
+      margin-left: 5px;
+
+      @media screen and (max-width: 768px) {
+        height: 8px;
+      }
+    }
+  }
+
+  .home-section-header {
+    margin: 140px 0px;
+
+    @media screen and (max-width: 768px) {
+      margin: 0px 0px;
+    }
+  }
+
+  .home-page-propositions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 80px;
+    width: 100%;
+    margin-top: 200px;
+    margin-bottom: 220px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0px 30px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+
+    .subtitle {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 26px;
+      color: #ff62c4;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+
+    .title {
+      font-family: "RockStar-Bold";
+      font-size: 58px;
+      line-height: 78px;
+      color: #2c2c2c;
+      text-transform: capitalize;
+      max-width: 800px;
+      text-align: center;
+      margin-top: 30px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 34px;
+        line-height: 48px;
+      }
+    }
+
+    .home-proposition-list {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 100px;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      .home-proposition-item {
+        background: #f0ebeb;
+        border-radius: 25px;
+        padding: 50px 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 32%;
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        img {
+          width: 97px;
+        }
+
+        h3 {
+          font-size: 28px;
+          line-height: 37px;
+          color: #2c2c2c;
+          text-align: center;
+
+          @media screen and (max-width: 768px) {
+            font-size: 20px;
+            line-height: 30px;
+          }
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 25px;
+
+          @media screen and (max-width: 768px) {
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+      }
+    }
+  }
+
+  .home-how-to-build {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .home-how-item {
+      background: #f0ebeb;
+      border-radius: 25px;
+      width: 32%;
+      padding: 67px 34px;
+      position: relative;
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 40px 20px;
+      }
+
+      &.second {
+        margin-top: 80px;
+
+        @media screen and (max-width: 768px) {
+          margin-top: 0px;
+        }
+      }
+
+      &.third {
+        margin-top: 160px;
+
+        @media screen and (max-width: 768px) {
+          margin-top: 0px;
+        }
+      }
+
+      .number {
+        font-family: "RockStar-Bold";
+        font-size: 54px;
+        line-height: 73px;
+        text-transform: capitalize;
+        color: #fd70c8;
+
+        @media screen and (max-width: 768px) {
+          font-size: 32px;
+          line-height: 48px;
+        }
+      }
+
+      .title {
+        font-family: "RockStar-Bold";
+        font-size: 20px;
+        line-height: 27px;
+        text-transform: capitalize;
+        margin-top: 46px;
+
+        @media screen and (max-width: 768px) {
+          font-size: 16px;
+          line-height: 24px;
+          margin-top: 20px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 18px;
+        color: #000000;
+
+        @media screen and (max-width: 768px) {
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+
+      .home-page-button {
+        max-width: 100%;
+      }
+
+      .pigeon {
+        position: absolute;
+        height: 244px;
+        margin-left: -150px;
+        margin-top: -250px;
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+}

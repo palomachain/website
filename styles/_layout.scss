@@ -62,10 +62,10 @@
       font-family: $font-bold;
       font-size: 14px;
       color: $main_text_color;
-      text-decoration: underline;
       cursor: pointer;
       margin-left: 25px;
       text-transform: uppercase;
+      height: 55.91px;
 
       img {
         height: 9px;
@@ -77,14 +77,24 @@
       }
 
       &.disabled {
-        color: #E7C5C5;
+        color: #e7c5c5;
         text-decoration: none;
       }
 
       &.community {
         display: flex;
         margin-left: 100px;
-        text-decoration: underline;
+        background: #eae5e5;
+        border: 1.30736px solid #2c2c2c;
+        border-radius: 6.53678px;
+        width: 276.26px;
+        
+
+        &:hover {
+          background: #eae5e5;
+          border: 1.30736px solid #ff62c4;
+          color: #ff62c4;
+        }
 
         @media screen and (max-width: 930px) {
           margin-left: 25px;
@@ -106,7 +116,7 @@
 
     .header-menu-sub {
       position: absolute;
-      padding-top: 15px;
+      // padding-top: 15px;
       margin-left: 20px;
       padding-left: 20px;
       font-size: 15px;
@@ -216,7 +226,7 @@
       span {
         text-decoration: none;
       }
-        
+
       &-link {
         margin-bottom: 13px;
         text-decoration: none !important;
@@ -241,17 +251,16 @@
   }
 
   .footer-container {
-
     .footer-triangle-border {
       width: 0;
       height: 0;
       border-style: solid;
       border-width: 0 0 50px 100vw;
-      border-color: transparent transparent #eecccc transparent;
+      border-color: transparent transparent #F1D1E5 transparent;
     }
 
     .footer-view {
-      background: #eecccc;
+      background: #F1D1E5;
       padding: 30px 86px;
       display: flex;
       align-items: center;

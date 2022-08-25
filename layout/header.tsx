@@ -63,12 +63,8 @@ const LayoutHeader = ({ router }) => {
   const [eventMobileSubMenuOpen, setEventMobileSubMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (router.route === "/") {
-      router.replace("/blog");
-      setCurLink("/blog");
-    } else {
-      setCurLink(router.route);
-    }
+
+    setCurLink(router.route);
 
     if (router.route.startsWith("/event")) {
       setEventMobileSubMenuOpen(true);
@@ -136,7 +132,6 @@ const LayoutHeader = ({ router }) => {
           target="_blank"
         >
           <span>Join our Community</span>
-          <img src="/assets/arrows/arrow-top-right.png" />
         </a>
       </div>
       <div className="layout-container__header__hamburger">

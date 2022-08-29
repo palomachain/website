@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { useOutsideAlerter } from "hooks";
-import { TELEGRAM_LINK } from "utils/constants";
+import { TELEGRAM_LINK, DISCORD_LINK } from "utils/constants";
 
 import cn from "classnames";
 
@@ -83,7 +83,7 @@ const LayoutHeader = ({ router }) => {
     <header className="layout-container__header">
       <div className="layout-container__header__logo">
         <Link href="/">
-          <img className="" src="/assets/logo/paloma-black.png" alt="Paloma" />
+          <img className="" src="/assets/logo/paloma-logotype.svg" alt="Paloma" />
         </Link>
       </div>
       <div className="layout-container__header__buttons">
@@ -243,7 +243,7 @@ const LayoutHeader = ({ router }) => {
           </div>
         </HeaderMenu>
         <a
-          href={TELEGRAM_LINK}
+          href={DISCORD_LINK}
           className="header-button community"
           target="_blank"
         >
@@ -259,7 +259,7 @@ const LayoutHeader = ({ router }) => {
       {mobileMenuOpen && (
         <div className="mobile-header-menu">
           <div className="mobile-header-menu-top">
-            <img className="mobile-logo" src="/assets/logo/paloma-red.png" />
+            <img className="mobile-logo" src="/assets/logo/paloma-logotype.svg" />
             <img
               className="mobile-menu-close"
               src="/assets/icons/close.png"
@@ -377,7 +377,7 @@ const LayoutHeader = ({ router }) => {
             </HeaderMenu>
             <div className="mobile-menu-spacer"></div>
             <a
-              href={TELEGRAM_LINK}
+              href={DISCORD_LINK}
               className="mobile-button community"
               target="_blank"
             >

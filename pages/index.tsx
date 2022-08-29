@@ -9,19 +9,17 @@ import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 export default function Home({ state, router }) {
-
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const getPageData = async () => {
       const data = await fetchPageValues(PAGE_LANDING);
-      console.log(data);
 
       setData({ ...data.content });
-    }
+    };
 
     getPageData();
-  }, [])
+  }, []);
 
   if (!data) {
     return null;
@@ -33,10 +31,12 @@ export default function Home({ state, router }) {
         <div className="home-page-section">
           <div className="home-page-text">
             <h1>{data.heading1}</h1>
-            <p>
-              {data.text1}
-            </p>
-            <a href="" className="home-page-button">
+            <p className="large">{data.text1}</p>
+            <a
+              href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+              className="home-page-button"
+              target="_blank"
+            >
               Get Started
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>
@@ -47,7 +47,7 @@ export default function Home({ state, router }) {
         </div>
 
         <RotatedHeader
-          title="We GO IN ALL DIRECTIONS!"
+          title="We go in all directions!"
           theme="dark"
           rightImage="/assets/arrows/footprint.svg"
           className="home-section-header"
@@ -56,9 +56,7 @@ export default function Home({ state, router }) {
         <div className="home-page-section reverse">
           <div className="home-page-text">
             <h2>{data.heading2}</h2>
-            <p>
-              {data.text2}
-            </p>
+            <p>{data.text2}</p>
           </div>
           <div className="home-page-image">
             <img src="/assets/home/diagram-2.png" />
@@ -66,29 +64,23 @@ export default function Home({ state, router }) {
         </div>
 
         <div className="home-page-propositions">
-          <span className="subtitle">{data.valueprop_heading}</span>
-          <div className="title">send messages quickly & safely</div>
+          <span className="subtitle">Paloma Value Propositions</span>
+          <div className="title">{data.valueprop_heading}</div>
           <div className="home-proposition-list">
             <div className="home-proposition-item">
               <img src="/assets/home/fast.png" />
               <h3>{data.valueprop_title1}</h3>
-              <p>
-                {data.valueprop_text1}
-              </p>
+              <p>{data.valueprop_text1}</p>
             </div>
             <div className="home-proposition-item">
               <img src="/assets/home/secure.png" />
               <h3>{data.valueprop_title2}</h3>
-              <p>
-                {data.valueprop_text2}
-              </p>
+              <p>{data.valueprop_text2}</p>
             </div>
             <div className="home-proposition-item">
               <img src="/assets/home/gas-fee.png" />
               <h3>{data.valueprop_title3}</h3>
-              <p>
-                {data.valueprop_text3}
-              </p>
+              <p>{data.valueprop_text3}</p>
             </div>
           </div>
         </div>
@@ -127,7 +119,7 @@ export default function Home({ state, router }) {
             <span className="pink">Mint a Paloma Egg</span>
             <h2>Build a Limit</h2>
             <h2>Order Bot</h2>
-            <p>
+            <p style={{ textTransform: "uppercase" }}>
               we deliver a GAME-CHANGER bLOCKCHAIN FOR DEVELOPERS. our protocol
               was built from developers to developers. Easy to use, easy to
               love. Get startet now!
@@ -152,26 +144,26 @@ export default function Home({ state, router }) {
           <div className="home-how-to-build">
             <div className="home-how-item ">
               <div className="number">1.</div>
-              <div className="content">
-                {render(data.build_text1)}
-              </div>
+              <div className="content">{render(data.build_text1)}</div>
             </div>
 
-            <div className="home-how-item">
+            <div className="home-how-item second">
+              <img className="pigeon" src="/assets/home/pigeon.png" />
               <div className="number">2.</div>
-              <div className="content">
-                {render(data.build_text2)}
-              </div>
+              <div className="content">{render(data.build_text2)}</div>
             </div>
 
-            <div className="home-how-item">
+            <div className="home-how-item third">
               <div className="number">3.</div>
-              <div className="content">
-                {render(data.build_text3)}
-              </div>
-              <a href="" className="home-page-button" style={{ width: "100%" }}>
+              <div className="content">{render(data.build_text3)}</div>
+              <a
+                href="https://palomachain.github.io/paloma-docs/"
+                className="home-page-button"
+                style={{ width: "100%" }}
+                target="_blank"
+              >
                 View Docs
-                <img src="/assets/arrows/arrow-top-right-white.png" />
+                <img src="/assets/arrows/arrow-top-right.png" />
               </a>
             </div>
           </div>

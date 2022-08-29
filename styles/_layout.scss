@@ -151,6 +151,8 @@
       left: 0px;
       top: 105px;
       display: none;
+      z-index: 8000;
+      box-shadow: 0px 4px 3px rgba(182, 182, 182, 0.23);
 
       &-padding {
         width: 100%;
@@ -163,7 +165,6 @@
         // background: #eadede;
         background: #eae5e5;
         padding: 55px 96px;
-        box-shadow: 95px 4px 3px rgba(182, 182, 182, 0.23);
         display: grid;
         grid-template-columns: 3fr 2fr 2fr 3fr;
         gap: 20px;
@@ -198,7 +199,7 @@
 
           &.paloma-extension {
             align-items: flex-start;
-            
+
             span {
               font-size: 14px;
               color: rgba(114, 111, 111, 1);
@@ -211,7 +212,7 @@
           flex-direction: column;
 
           &-btitle {
-            font-family: "RockStar-Bold";
+            font-family: $font-semibold;
             font-size: 28px;
             line-height: 37px;
             color: #2c2c2c;
@@ -362,25 +363,30 @@
 
     .footer-view {
       background: #f1d1e5;
-      padding: 30px 86px;
+      padding: 50px 86px 120px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      gap: 20px;
+
+      @media screen and (max-width: 768px) {
+       flex-direction: column;
+      }
 
       @media screen and (max-width: 768px) {
         padding: 30px;
       }
 
       &-logo {
+        flex: 1;
+
         img {
-          height: 80px;
+          height: 117px;
         }
       }
 
       &-links {
-        width: 100%;
         display: flex;
-        flex: 1;
-        flex-flow: wrap row;
+        flex-direction: column;
 
         @media screen and (max-width: 768px) {
           margin-left: 0px;
@@ -388,20 +394,30 @@
         }
       }
 
+      .footer-subtitle {
+        font-size: 14px;
+        line-height: 32px;
+        color: #2c2c2c;
+        text-transform: uppercase;
+        font-family: $font-bold;
+      }
+
       a {
         display: flex;
         align-items: center;
         color: $main_text_color;
         margin-top: 13px;
-        font-family: $font-bold;
         font-size: 14px;
         margin-right: 70px;
-        width: 100px;
-        text-transform: uppercase;
+        text-transform: capitalize;
 
         img {
           margin-left: 4px;
           height: 11px;
+        }
+
+        &:hover {
+          color: #FF62C4;
         }
       }
     }

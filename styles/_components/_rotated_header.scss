@@ -29,7 +29,7 @@
 
     &.dark {
       background: rgba(44, 44, 44, 1);
-      color: #EADEDE;
+      color: #FFFFFF;
     }
 
     &.light {
@@ -42,6 +42,7 @@
       width: fit-content;
       font-size: 28px;
       font-family: $font-bold;
+      text-transform: capitalize;
 
       @media screen and (max-width: 768px) {
         font-size: 24px;
@@ -68,6 +69,7 @@
     .right-image {
       height: 213px;
       transform: rotate(2.66deg);
+      margin-left: 8px;
 
       @media screen and (max-width: 768px) {
         height: 170px;

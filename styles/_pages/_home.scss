@@ -51,7 +51,7 @@
       font-size: 54px;
       line-height: 72px;
       text-transform: capitalize;
-      font-family: "RockStar-Bold";
+      font-family: $font-bold;
       color: #2c2c2c;
 
       @media screen and (max-width: 768px) {
@@ -61,7 +61,7 @@
     }
 
     h2 {
-      font-family: "RockStar-Bold";
+      font-family: $font-bold;
       font-size: 40px;
       line-height: 53px;
       color: #2c2c2c;
@@ -95,10 +95,15 @@
 
     p {
       font-weight: 400;
-      font-size: 20px;
-      line-height: 26px;
-      color: #000;
+      font-size: 14px;
+      line-height: 25px;
+      color: #2C2C2C;
       max-width: 439px;
+
+      &.large {
+        font-size: 20px;
+        line-height: 26px;
+      }
 
       @media screen and (max-width: 768px) {
         font-size: 14px;
@@ -177,12 +182,12 @@
     }
 
     .title {
-      font-family: "RockStar-Bold";
-      font-size: 58px;
-      line-height: 78px;
+      font-family: $font-bold;
+      font-size: 54px;
+      line-height: 74px;
       color: #2c2c2c;
       text-transform: capitalize;
-      max-width: 800px;
+      max-width: 760px;
       text-align: center;
       margin-top: 30px;
 
@@ -210,6 +215,10 @@
         flex-direction: column;
         align-items: center;
         width: 32%;
+        
+        &:hover {
+          background: #F6F2F2;
+        }
 
         @media screen and (max-width: 768px) {
           width: 100%;
@@ -223,6 +232,7 @@
         h3 {
           font-size: 28px;
           line-height: 37px;
+          font-family: $font-bold;
           color: #2c2c2c;
           text-align: center;
 
@@ -250,7 +260,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    // align-items: flex-start;
+    align-items: flex-start;
 
     @media screen and (max-width: 768px) {
       flex-direction: column;
@@ -260,6 +270,7 @@
       background: #f0ebeb;
       border-radius: 25px;
       width: 32%;
+      min-height: 450px;
       padding: 67px 34px;
       position: relative;
 
@@ -267,10 +278,38 @@
         width: 100%;
         margin-bottom: 20px;
         padding: 40px 20px;
+        min-height: 0px;
+      }
+
+      &.second {
+        margin-top: 80px;
+
+        @media screen and (max-width: 768px) {
+          margin-top: 0px;
+        }
+      }
+
+      &.third {
+        margin-top: 160px;
+
+        @media screen and (max-width: 768px) {
+          margin-top: 0px;
+        }
+      }
+
+      .pigeon {
+        position: absolute;
+        height: 244px;
+        margin-left: -150px;
+        margin-top: -250px;
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
       }
 
       .number {
-        font-family: "RockStar-Bold";
+        font-family: $font-bold;
         font-size: 54px;
         line-height: 73px;
         text-transform: capitalize;
@@ -287,7 +326,7 @@
       }
 
       h1 {
-        font-family: "RockStar-Bold";
+        font-family: $font-bold;
         font-size: 20px;
         line-height: 27px;
         text-transform: capitalize;
@@ -312,8 +351,8 @@
 
       .home-page-button {
         max-width: 100%;
-        background: #2C2C2C;
-        color: #FFFFFF;
+        // background: #2C2C2C;
+        // color: #FFFFFF;
       }
     }
   }

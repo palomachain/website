@@ -17,7 +17,7 @@ const HeaderMenu = ({
   children = null,
   childrenRef = null,
   childrenOpen = false,
-  hoverClassName = ""
+  hoverClassName = "",
 }) => {
   return isLink ? (
     <Link href={href}>
@@ -33,7 +33,11 @@ const HeaderMenu = ({
       </div>
     </Link>
   ) : (
-    <div ref={childrenRef} onClick={(e) => onClick()} className={hoverClassName}>
+    <div
+      ref={childrenRef}
+      onClick={(e) => onClick()}
+      className={hoverClassName}
+    >
       <div
         className={cn(className, {
           active,
@@ -60,10 +64,9 @@ const LayoutHeader = ({ router }) => {
     setEventSubMenuOpen(false);
   });
 
-  const [eventMobileSubMenuOpen, setEventMobileSubMenuOpen] = useState(false);
+  const [eventMobileSubMenuOpen, setEventMobileSubMenuOpen] = useState(true);
 
   useEffect(() => {
-
     setCurLink(router.route);
 
     if (router.route.startsWith("/event")) {
@@ -84,18 +87,131 @@ const LayoutHeader = ({ router }) => {
         </Link>
       </div>
       <div className="layout-container__header__buttons">
-        {/* <HeaderMenu
-          title="Home"
-          isLink={false}
-          className="disabled header-button"
-          active={curLink === "/"}
-        />
         <HeaderMenu
-          title="About US"
+          title="Developers"
+          className="header-button"
+          active={false}
+          img="/assets/arrows/arrow-down-black.png"
           isLink={false}
-          className="disabled header-button"
-          active={curLink.startsWith("/about-us")}
-        /> */}
+          childrenOpen={true}
+          hoverClassName="header-parent-menu"
+        >
+          <div className="header-major-submenu">
+            <div className="header-major-submenu-padding"></div>
+            <div className="header-major-submenu-content">
+              <div className="submenu-section">
+                <div className="submenu-section-btitle">Developers</div>
+                <p>
+                  Find here all the useful links to start building on Paloma.
+                </p>
+              </div>
+              <div className="submenu-section">
+                <div className="submenu-section-title">Get Started</div>
+                <a
+                  className="link"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+                  target="_blank"
+                >
+                  Quick Start
+                </a>
+                <a
+                  className="link"
+                  href="https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html"
+                  target="_blank"
+                >
+                  Governance
+                </a>
+              </div>
+              <div className="submenu-section">
+                <div className="submenu-section-title">Guides</div>
+                <a
+                  className="link"
+                  href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"
+                  target="_blank"
+                >
+                  Running a node
+                </a>
+                <a
+                  className="link"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message"
+                  target="_blank"
+                >
+                  Mint An Egg
+                </a>
+                <a
+                  className="link"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/lob.html"
+                  target="_blank"
+                >
+                  set up a limit order bot
+                </a>
+              </div>
+              <div className="submenu-section">
+                <div className="submenu-section-title">Github</div>
+                <a
+                  className="link"
+                  href="https://github.com/palomachain/paloma"
+                  target="_blank"
+                >
+                  Read me
+                </a>
+              </div>
+            </div>
+          </div>
+        </HeaderMenu>
+        <HeaderMenu
+          title="Applications "
+          className="header-button"
+          active={false}
+          img="/assets/arrows/arrow-down-black.png"
+          isLink={false}
+          childrenOpen={true}
+          hoverClassName="header-parent-menu"
+        >
+          <div className="header-major-submenu">
+            <div className="header-major-submenu-padding"></div>
+            <div className="header-major-submenu-content">
+              <div className="submenu-section">
+                <div className="submenu-section-btitle">Applications</div>
+                <p>
+                  Discover the ecosystem of Paloma Products and Applications.
+                </p>
+              </div>
+              <div className="submenu-section">
+                <a
+                  className="submenu-section-title link"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html"
+                  target="_blank"
+                >
+                  pyth Price Feed
+                </a>
+              </div>
+              <div className="submenu-section">
+                <a
+                  className="submenu-section-title link"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html"
+                  target="_blank"
+                >
+                  Compass EVM
+                </a>
+              </div>
+              <div className="submenu-section">
+                <a
+                  className="submenu-section-title link paloma-extension"
+                  href=""
+                  target="_blank"
+                >
+                  <img src="/assets/home/egg.png" />
+                  <div>
+                    Paloma Nest
+                    <br />
+                    <span>(Chrome Extension)</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </HeaderMenu>
         <HeaderMenu
           title="Blog"
           href={`${baseUrl}/blog`}
@@ -151,18 +267,76 @@ const LayoutHeader = ({ router }) => {
             />
           </div>
           <div className="mobile-header-menu-menus">
-            {/* <HeaderMenu
-              title="Home"
-              isLink={false}
-              className="disabled mobile-button"
-              active={curLink === "/"}
-            />
             <HeaderMenu
-              title="About US"
+              title="Developers"
               isLink={false}
-              className="disabled mobile-button"
-              active={curLink.startsWith("/about-us")}
-            /> */}
+              className="mobile-button"
+              img="/assets/arrows/arrow-down-black.png"
+              childrenOpen={eventMobileSubMenuOpen}
+              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
+            >
+              <div className="mobile-menu-sub">
+                <HeaderMenu
+                  title="Quick Start"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="Governance"
+                  href="https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="Running a node"
+                  href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="Mint An Egg"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="set up a limit order bot"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/lob.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="Read me"
+                  href="https://github.com/palomachain/paloma"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+              </div>
+            </HeaderMenu>
+            <HeaderMenu
+              title="Applications"
+              isLink={false}
+              className="mobile-button"
+              img="/assets/arrows/arrow-down-black.png"
+              childrenOpen={eventMobileSubMenuOpen}
+              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
+            >
+              <div className="mobile-menu-sub">
+                <HeaderMenu
+                  title="pyth Price Feed"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+                <HeaderMenu
+                  title="Compass EVM"
+                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html"
+                  className="mobile-menu-sub-link"
+                  isLink={true}
+                />
+              </div>
+            </HeaderMenu>
             <HeaderMenu
               title="Blog"
               href={`${baseUrl}/blog`}
@@ -178,9 +352,7 @@ const LayoutHeader = ({ router }) => {
               active={curLink.startsWith("/event")}
               img="/assets/arrows/arrow-down-black.png"
               childrenOpen={eventMobileSubMenuOpen}
-              onClick={() =>
-                setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)
-              }
+              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
             >
               <div className="mobile-menu-sub">
                 <HeaderMenu

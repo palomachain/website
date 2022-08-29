@@ -88,7 +88,6 @@
         border: 1.30736px solid #2c2c2c;
         border-radius: 6.53678px;
         width: 276.26px;
-        
 
         &:hover {
           background: #eae5e5;
@@ -139,6 +138,108 @@
     .header-parent-menu:hover {
       .header-menu-sub {
         display: block;
+      }
+
+      .header-major-submenu {
+        display: block;
+      }
+    }
+
+    .header-major-submenu {
+      position: fixed;
+      width: 100%;
+      left: 0px;
+      top: 105px;
+      display: none;
+
+      &-padding {
+        width: 100%;
+        height: 20px;
+      }
+
+      &-content {
+        width: 100%;
+        border-top: 1px solid #2c2c2c;
+        // background: #eadede;
+        background: #eae5e5;
+        padding: 55px 96px;
+        box-shadow: 95px 4px 3px rgba(182, 182, 182, 0.23);
+        display: grid;
+        grid-template-columns: 3fr 2fr 2fr 3fr;
+        gap: 20px;
+
+        .link {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: 400;
+          font-size: 14px;
+          color: #2c2c2c;
+          margin-top: 19px;
+          width: fit-content;
+          height: 25px;
+          text-transform: capitalize;
+
+          background-image: url("/assets/arrows/arrow-top-right.png");
+          background-repeat: no-repeat;
+          background-position: center right;
+          padding-right: 15px;
+          background-size: 10px;
+
+          &:hover {
+            color: #ff62c4;
+            background-image: url("/assets/arrows/arrow-top-right-pink.png");
+          }
+
+          img {
+            height: 38px;
+            margin-right: 8px;
+          }
+
+          &.paloma-extension {
+            align-items: flex-start;
+            
+            span {
+              font-size: 14px;
+              color: rgba(114, 111, 111, 1);
+            }
+          }
+        }
+
+        .submenu-section {
+          display: flex;
+          flex-direction: column;
+
+          &-btitle {
+            font-family: "RockStar-Bold";
+            font-size: 28px;
+            line-height: 37px;
+            color: #2c2c2c;
+            text-transform: capitalize;
+          }
+
+          &-title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 27px;
+            color: #2c2c2c;
+            text-transform: capitalize;
+
+            &.link {
+              margin-top: 0px;
+              background-size: 15px;
+              padding-right: 25px;
+            }
+          }
+
+          p {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 25px;
+            color: #000000;
+            max-width: 275px;
+          }
+        }
       }
     }
   }
@@ -256,11 +357,11 @@
       height: 0;
       border-style: solid;
       border-width: 0 0 50px 100vw;
-      border-color: transparent transparent #F1D1E5 transparent;
+      border-color: transparent transparent #f1d1e5 transparent;
     }
 
     .footer-view {
-      background: #F1D1E5;
+      background: #f1d1e5;
       padding: 30px 86px;
       display: flex;
       align-items: center;

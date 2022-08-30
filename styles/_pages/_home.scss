@@ -149,6 +149,10 @@
   .home-section-header {
     margin: 140px 0px;
 
+    .header-title {
+      text-transform: unset;
+    }
+
     @media screen and (max-width: 768px) {
       margin: 0px 0px;
     }

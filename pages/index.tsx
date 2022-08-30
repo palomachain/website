@@ -47,7 +47,7 @@ export default function Home({ state, router }) {
         </div>
 
         <RotatedHeader
-          title="We GO IN ALL DIRECTIONS!"
+          title="We go in all directions!"
           theme="dark"
           rightImage="/assets/arrows/footprint.svg"
           className="home-section-header"

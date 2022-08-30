@@ -47,7 +47,7 @@ export default function Home({ state, router }) {
         </div>
 
         <RotatedHeader
-          title="We go in all directions!"
+          title="We GO IN ALL DIRECTIONS!"
           theme="dark"
           rightImage="/assets/arrows/footprint.svg"
           className="home-section-header"
@@ -93,7 +93,7 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section">
           <div className="home-page-text">
-            <span className="pink">Send Cross Chain Messages</span>
+            <span className="pink">Ethereum NFTs</span>
             <h2>Mint a </h2>
             <h2>
               {" "}
@@ -104,7 +104,7 @@ export default function Home({ state, router }) {
               Mint one of our 100 limited Edition Developer Eggs NFTs by sending
               a message on Ethereum.
             </p>
-            <a href="" className="home-page-button" style={{ width: "100%" }}>
+            <a href="https://palomachain.github.io/paloma-docs/" className="home-page-button" style={{ width: "100%" }}>
               View Docs
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>
@@ -116,7 +116,7 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section">
           <div className="home-page-text">
-            <span className="pink">Mint a Paloma Egg</span>
+            <span className="pink">Uniswap v3 Position</span>
             <h2>Build a Limit</h2>
             <h2>Order Bot</h2>
             <p style={{ textTransform: "uppercase" }}>
@@ -124,7 +124,7 @@ export default function Home({ state, router }) {
               was built from developers to developers. Easy to use, easy to
               love. Get startet now!
             </p>
-            <a href="" className="home-page-button" style={{ width: "100%" }}>
+            <a href="https://palomachain.github.io/paloma-docs/" className="home-page-button" style={{ width: "100%" }}>
               View Docs
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>

@@ -67,16 +67,16 @@
     }
 
     .right-image {
-      height: 213px;
+      height: 125px;
       transform: rotate(2.66deg);
       margin-left: 8px;
 
       @media screen and (max-width: 768px) {
-        height: 170px;
+        height: 120px;
       }
 
       @media screen and (max-width: 500px) {
-        height: 120px;
+        height: 80px;
       }
     }
   }

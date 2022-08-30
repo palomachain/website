@@ -83,7 +83,11 @@ const LayoutHeader = ({ router }) => {
     <header className="layout-container__header">
       <div className="layout-container__header__logo">
         <Link href="/">
-          <img className="" src="/assets/logo/paloma-logotype.svg" alt="Paloma" />
+          <img
+            className=""
+            src="/assets/logo/paloma-logotype.svg"
+            alt="Paloma"
+          />
         </Link>
       </div>
       <div className="layout-container__header__buttons">
@@ -160,7 +164,7 @@ const LayoutHeader = ({ router }) => {
           </div>
         </HeaderMenu>
         <HeaderMenu
-          title="Applications "
+          title="Applications"
           className="header-button"
           active={false}
           img="/assets/arrows/arrow-down-black.png"
@@ -242,6 +246,9 @@ const LayoutHeader = ({ router }) => {
             />
           </div>
         </HeaderMenu>
+        <a href="" className="header-button" target="_blank">
+          Forum
+        </a>
         <a
           href={DISCORD_LINK}
           className="header-button community"
@@ -259,7 +266,10 @@ const LayoutHeader = ({ router }) => {
       {mobileMenuOpen && (
         <div className="mobile-header-menu">
           <div className="mobile-header-menu-top">
-            <img className="mobile-logo" src="/assets/logo/paloma-logotype.svg" />
+            <img
+              className="mobile-logo"
+              src="/assets/logo/paloma-logotype.svg"
+            />
             <img
               className="mobile-menu-close"
               src="/assets/icons/close.png"
@@ -276,42 +286,48 @@ const LayoutHeader = ({ router }) => {
               // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
             >
               <div className="mobile-menu-sub">
-                <HeaderMenu
-                  title="Quick Start"
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="Governance"
+                  target="_blank"
+                >
+                  Quick Start
+                </a>
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="Running a node"
+                  target="_blank"
+                >
+                  Governance
+                </a>
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="Mint An Egg"
+                  target="_blank"
+                >
+                  Running a node
+                </a>
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="set up a limit order bot"
+                  target="_blank"
+                >
+                  Mint An Egg
+                </a>
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/lob.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="Read me"
+                  target="_blank"
+                >
+                  set up a limit order bot
+                </a>
+                <a
                   href="https://github.com/palomachain/paloma"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
+                  target="_blank"
+                >
+                  Read me
+                </a>
               </div>
             </HeaderMenu>
             <HeaderMenu
@@ -323,18 +339,20 @@ const LayoutHeader = ({ router }) => {
               // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
             >
               <div className="mobile-menu-sub">
-                <HeaderMenu
-                  title="pyth Price Feed"
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
-                <HeaderMenu
-                  title="Compass EVM"
+                  target="_blank"
+                >
+                  pyth Price Feed
+                </a>
+                <a
                   href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html"
                   className="mobile-menu-sub-link"
-                  isLink={true}
-                />
+                  target="_blank"
+                >
+                  Compass EVM
+                </a>
               </div>
             </HeaderMenu>
             <HeaderMenu
@@ -375,6 +393,9 @@ const LayoutHeader = ({ router }) => {
                 />
               </div>
             </HeaderMenu>
+            <a href="" className="mobile-button" target="_blank">
+              Forum
+            </a>
             <div className="mobile-menu-spacer"></div>
             <a
               href={DISCORD_LINK}

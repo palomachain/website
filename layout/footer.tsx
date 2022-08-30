@@ -51,6 +51,9 @@ const Footer = () => (
         <a href="" target="_blank">
           Brand Assets
         </a>
+        <a href="" target="_blank">
+          Forum
+        </a>
       </div>
 
       <div className="footer-view-links">

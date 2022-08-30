@@ -104,7 +104,11 @@ export default function Home({ state, router }) {
               Mint one of our 100 limited Edition Developer Eggs NFTs by sending
               a message on Ethereum.
             </p>
-            <a href="https://palomachain.github.io/paloma-docs/" className="home-page-button" style={{ width: "100%" }}>
+            <a
+              href="https://palomachain.github.io/paloma-docs/"
+              className="home-page-button"
+              style={{ width: "100%" }}
+            >
               View Docs
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>
@@ -120,11 +124,15 @@ export default function Home({ state, router }) {
             <h2>Build a Limit</h2>
             <h2>Order Bot</h2>
             <p style={{ textTransform: "uppercase" }}>
-              we deliver a GAME-CHANGER bLOCKCHAIN FOR DEVELOPERS. our protocol
+              We deliver a game-changer blockchain for developers. Our protocol
               was built from developers to developers. Easy to use, easy to
-              love. Get startet now!
+              love. Get started now!
             </p>
-            <a href="https://palomachain.github.io/paloma-docs/" className="home-page-button" style={{ width: "100%" }}>
+            <a
+              href="https://palomachain.github.io/paloma-docs/"
+              className="home-page-button"
+              style={{ width: "100%" }}
+            >
               View Docs
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>

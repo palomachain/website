@@ -123,7 +123,7 @@ export default function Home({ state, router }) {
             <span className="pink">Uniswap v3 Position</span>
             <h2>Build a Limit</h2>
             <h2>Order Bot</h2>
-            <p style={{ textTransform: "uppercase" }}>
+            <p>
               We deliver a game-changer blockchain for developers. Our protocol
               was built from developers to developers. Easy to use, easy to
               love. Get started now!

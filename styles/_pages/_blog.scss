@@ -4,7 +4,7 @@
   .blog-page-images {
     width: 100%;
     max-width: 1200px;
-    margin: 115px auto 20px;
+    margin: 115px auto 100px;
     display: flex;
     justify-content: space-between;
 
@@ -24,14 +24,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: #2c2c2c;
-      border-radius: 10px;
-      font-size: 30px;
-      line-height: 40px;
-      color: #eadede;
+      background: #f6f2f2;
+      border: 1.30736px solid #2c2c2c;
+      border-radius: 6.53678px;
+      font-size: 20px;
+      line-height: 27px;
+      color: #2c2c2c;
       font-family: $font-bold;
-      padding-bottom: 88px;
+      padding-bottom: 49px;
       cursor: pointer;
+      position: relative;
 
       @media screen and (max-width: 768px) {
         font-size: 20px;
@@ -50,18 +52,44 @@
         margin-bottom: 40px;
       }
 
-      &:hover {
-        background: #ecc;
-        color: $main_text_color;
-      }
-
       img {
         height: 182px;
-        margin-top: -60px;
+        margin-top: -125px;
 
         @media screen and (max-width: 768px) {
           height: 90px;
           margin-top: -30px;
+        }
+
+        &.hovered {
+          display: none;
+        }
+      }
+
+      &:hover {
+        &:after {
+          position: absolute;
+          content: "";
+          width: calc(100%);
+          height: 30px;
+          margin-left: 15px;
+          margin-bottom: -8px;
+          bottom: 0px;
+          background: #f1d1e5;
+          border: 1.30736px solid #2c2c2c;
+          border-radius: 6.53678px;
+          z-index: -400;
+          height: 100%;
+        }
+
+        img {
+          &.normal {
+            display: none;
+          }
+
+          &.hovered {
+            display: block;
+          }
         }
       }
 
@@ -78,57 +106,93 @@
     width: 100%;
     max-width: 1116px;
     margin: 100px auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
 
     @media screen and (max-width: 1280px) {
       max-width: 100%;
       padding: 0px 30px;
     }
 
+    @media screen and (max-width: 768px) {
+      margin: 50px auto;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+
     @media screen and (max-width: 600px) {
       margin: 50px auto;
+      grid-template-columns: 1fr;
+      gap: 0px;
     }
 
     .blog-latest-item {
-      margin-bottom: 86px;
-      width: calc(50% - 50px);
+      margin-bottom: 89px;
+      background: #f6f2f2;
+      border-radius: 25px;
+      cursor: pointer;
 
-      @media screen and (max-width: 1280px) {
-        width: calc(50% - 20px);
+      &:hover {
+        background: #f0ebeb;
       }
-
-      @media screen and (max-width: 768px) {
-        margin-bottom: 40px;
-      }
-
-      @media screen and (max-width: 600px) {
-        width: 100%;
-      }
-    }
-
-    .blog-latest-date {
-      color: #2c2c2c;
-      font-size: 18px;
-      font-family: "Rockstar-SemiBold";
     }
 
     .blog-latest-image {
       width: 100%;
       height: 300px;
-      border-radius: 15px;
-      border: 2px solid #2c2c2c;
-      margin-top: 18px;
-      object-fit: cover;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+        object-fit: cover;
+      }
+    }
+
+    .blog-latest-content {
+      width: 100%;
+      padding: 26px 31px 38px;
+    }
+
+    .blog-latest-date {
+      font-size: 12px;
+      line-height: 15px;
+      text-transform: capitalize;
+      color: #2c2c2c;
     }
 
     .blog-latest-title {
-      font-family: $font-bold;
+      font-family: "RockStar-Semibold";
+      font-size: 16px;
+      line-height: 21px;
+      text-transform: capitalize;
       color: #2c2c2c;
-      font-size: 20px;
-      line-height: 26px;
-      cursor: pointer;
+    }
+
+    .blog-latest-intro {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      color: #2c2c2c;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+    }
+
+    .blog-latest-read {
+      font-family: "RockStar-Semibold";
+      font-size: 16px;
+      line-height: 21px;
+      text-decoration-line: underline;
+      text-transform: capitalize;
+      color: #2c2c2c;
+      margin-top: 23px;
     }
   }
 

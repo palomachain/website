@@ -46,7 +46,7 @@ const UpcomingEvent = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="event-item-container">
+    <div className="event-item-container upcoming">
       <img src={`https:${data.content.Image}`} className="event-image" />
       <div className="event-section">
         <div className="event-date">

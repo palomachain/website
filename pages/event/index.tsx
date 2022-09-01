@@ -13,7 +13,7 @@ const Events = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchEvents();
-
+console.log(data);
       const upcomingEvents = [];
       const pastEvents = [];
 

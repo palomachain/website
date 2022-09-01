@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
@@ -7,82 +7,85 @@ import { fetchBlogs } from "utils/storyblok";
 
 import { HeadSeo } from "components/Blog";
 
-
 const Blog = ({ post, router }) => {
   useEffect(() => {
     console.log("hello");
-     mixpanel.track('VISIT_BLOGPOST', {
+    mixpanel.track("VISIT_BLOGPOST", {
       title: post.content.title,
-      slug: post.slug
+      slug: post.slug,
     });
 
     //console.log(res);
   }, []);
 
   return (
-      <>
-        {post !== null && post !== undefined && (
-            <HeadSeo
-                title="Paloma"
-                description="The smartest blockchain on the planet."
-                content={post.content}
-            />
-        )}
-        <div className="sub-nav-bar" onClick={(e) => {
-          router.back()
-        }}>
+    <>
+      {post !== null && post !== undefined && (
+        <HeadSeo
+          title="Paloma"
+          description="The smartest blockchain on the planet."
+          content={post.content}
+        />
+      )}
+
+      <div className="page-container">
+        <div
+          className="sub-nav-bar"
+          onClick={(e) => {
+            router.back();
+          }}
+        >
           <div className="link-back-to">
-            <img src="/assets/arrows/arrow-left.png"/>
+            <img src="/assets/arrows/arrow-left.png" />
             <span>Blog</span>
           </div>
         </div>
-        <div className="page-container">
-          {post !== null && post !== undefined && (
-              <div className="blog-page-container">
-                <div className="blog-post-view">
-                  <div className="blog-content">
-                    {/* <div className="blog-pubtime">
+        {post !== null && post !== undefined && (
+          <div className="blog-page-container">
+            <div className="blog-post-view">
+              <div className="blog-content">
+                {/* <div className="blog-pubtime">
                 {convertDateString2(post.content.published_date)}
               </div> */}
-                    <img
-                        className="blog-featured-image"
-                        src={`https:${post.content.image}`}
-                    />
-                    <h1 className="blog-title">{post.content.title}</h1>
-                  </div>
-                  {/* <div className="blog-divider"></div> */}
-                  <div className="blog-post">
-                    {render(post.content.long_text, {
-                      nodeResolvers: {
-                        [NODE_IMAGE]: (children, props) => (
-                            <img
-                                {...props}
-                                style={{borderRadius: "0px", maxWidth: "100%"}}
-                            />
-                        ),
-                      },
-                      blokResolvers: {
-                        ["YouTube-blogpost"]: (props) => (
-                            <div className="embed-responsive embed-responsive-16by9">
-                              <iframe
-                                  className="embed-responsive-item"
-                                  src={
-                                    "https://www.youtube.com/embed/" +
-                                    props.YouTube_id.replace("https://youtu.be/", "")
-                                  }
-                              ></iframe>
-                            </div>
-                        ),
-                      },
-                    })}
-                  </div>
-                </div>
+                <img
+                  className="blog-featured-image"
+                  src={`https:${post.content.image}`}
+                />
+                <h1 className="blog-title">{post.content.title}</h1>
               </div>
-          )}
-        </div>
-      </>
+              {/* <div className="blog-divider"></div> */}
+              <div className="blog-post">
+                {render(post.content.long_text, {
+                  nodeResolvers: {
+                    [NODE_IMAGE]: (children, props) => (
+                      <img
+                        {...props}
+                        style={{ borderRadius: "0px", maxWidth: "100%" }}
+                      />
+                    ),
+                  },
+                  blokResolvers: {
+                    ["YouTube-blogpost"]: (props) => (
+                      <div className="embed-responsive embed-responsive-16by9">
+                        <iframe
+                          className="embed-responsive-item"
+                          src={
+                            "https://www.youtube.com/embed/" +
+                            props.YouTube_id.replace("https://youtu.be/", "")
+                          }
+                        ></iframe>
+                      </div>
+                    ),
+                  },
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
-}
+};
 // This function gets called at build time
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts

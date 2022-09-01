@@ -7,8 +7,8 @@ import { truncate } from "utils/string";
 const BlogList = ({ data }) => (
   <>
     {data.map((blog, index) => (
-      <Link href={`/${blog.full_slug}`}>
-        <div className="blog-latest-item" key={`blog-latest-${index}`}>
+      <Link href={`/${blog.full_slug}`} key={`blog-latest-${index}`}>
+        <div className="blog-latest-item">
           <div className="blog-latest-image">
             <img src={`https:${blog.content.image}`} />
           </div>

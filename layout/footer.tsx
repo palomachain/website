@@ -51,7 +51,7 @@ const Footer = () => (
         <a href="" target="_blank">
           Brand Assets
         </a>
-        <a href="" target="_blank">
+        <a href="https://forum.palomachain.com/" target="_blank">
           Forum
         </a>
       </div>

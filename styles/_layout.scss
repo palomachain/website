@@ -5,16 +5,21 @@
   max-width: 100%;
 
   &__header {
-    padding: 0px 62px;
+    padding: 40px 62px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
-    width: 100%;
+    width: 100vw;
+    max-width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+    background: #EAE5E5;
 
     @media screen and (max-width: 850px) {
       flex-direction: column;
-      padding: 0px 30px;
+      padding: 20px 30px 0px;
     }
 
     @media screen and (max-width: 850px) {
@@ -23,10 +28,6 @@
 
     &__logo {
       cursor: pointer;
-
-      img {
-        height: 80px;
-      }
     }
 
     &__buttons {
@@ -73,7 +74,7 @@
       }
 
       &.active {
-        color: $hightlighted_color;
+        color: #FF62C4;
       }
 
       &.disabled {
@@ -130,7 +131,7 @@
         cursor: pointer;
 
         &.active {
-          color: $hightlighted_color;
+          color: #FF62C4;
         }
       }
     }
@@ -303,7 +304,7 @@
       }
 
       &.active {
-        color: $hightlighted_color;
+        color: #FF62C4;
       }
 
       &.disabled {
@@ -338,7 +339,7 @@
         color: #fff;
 
         &.active {
-          color: $hightlighted_color;
+          color: #FF62C4;
           text-decoration: none !important;
         }
       }

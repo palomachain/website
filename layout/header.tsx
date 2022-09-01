@@ -68,10 +68,6 @@ const LayoutHeader = ({ router }) => {
 
   useEffect(() => {
     setCurLink(router.route);
-
-    if (router.route.startsWith("/event")) {
-      setEventMobileSubMenuOpen(true);
-    }
   }, [router.route]);
 
   const handleClickMobileLink = (link) => {
@@ -224,29 +220,11 @@ const LayoutHeader = ({ router }) => {
         />
         <HeaderMenu
           title="Events"
-          isLink={false}
+          href={`${baseUrl}/event`}
           className="header-button"
           active={curLink.startsWith("/event")}
-          img="/assets/arrows/arrow-down-black.png"
-          childrenOpen={true}
-          hoverClassName="header-parent-menu"
-        >
-          <div className="header-menu-sub">
-            <HeaderMenu
-              title="Upcoming Events"
-              href="/event/upcoming-events"
-              className="header-menu-sub-link"
-              active={curLink.startsWith("/event/upcoming-events")}
-            />
-            <HeaderMenu
-              title="Past Events"
-              href="/event/past-events"
-              className="header-menu-sub-link"
-              active={curLink.startsWith("/event/past-events")}
-            />
-          </div>
-        </HeaderMenu>
-        <a href="" className="header-button" target="_blank">
+        />
+        <a href="https://forum.palomachain.com/" className="header-button" target="_blank">
           Forum
         </a>
         <a
@@ -268,7 +246,7 @@ const LayoutHeader = ({ router }) => {
           <div className="mobile-header-menu-top">
             <img
               className="mobile-logo"
-              src="/assets/logo/paloma-logotype.svg"
+              src="/assets/logo/paloma-red.png"
             />
             <img
               className="mobile-menu-close"
@@ -365,35 +343,13 @@ const LayoutHeader = ({ router }) => {
             />
             <HeaderMenu
               title="Events"
+              href={`${baseUrl}/event`}
               isLink={false}
               className="mobile-button"
               active={curLink.startsWith("/event")}
-              img="/assets/arrows/arrow-down-black.png"
-              childrenOpen={eventMobileSubMenuOpen}
-              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
-            >
-              <div className="mobile-menu-sub">
-                <HeaderMenu
-                  title="Upcoming Events"
-                  href="/event/upcoming-events"
-                  className="mobile-menu-sub-link"
-                  active={curLink.startsWith("/event/upcoming-events")}
-                  isLink={false}
-                  onClick={() =>
-                    handleClickMobileLink("/event/upcoming-events")
-                  }
-                />
-                <HeaderMenu
-                  title="Past Events"
-                  href="/event/past-events"
-                  className="mobile-menu-sub-link"
-                  active={curLink.startsWith("/event/past-events")}
-                  isLink={false}
-                  onClick={() => handleClickMobileLink("/event/past-events")}
-                />
-              </div>
-            </HeaderMenu>
-            <a href="" className="mobile-button" target="_blank">
+              onClick={() => handleClickMobileLink("/event")}
+            />
+            <a href="https://forum.palomachain.com/" className="mobile-button" target="_blank">
               Forum
             </a>
             <div className="mobile-menu-spacer"></div>

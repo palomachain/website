@@ -3,10 +3,10 @@
 
   .event-list-wrapper {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 87px;
-    max-width: 1035px;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    max-width: 1120px;
     margin: 77px auto;
     box-sizing: border-box;
 
@@ -14,29 +14,32 @@
       width: 100%;
       max-width: 100%;
       padding: 0px 30px;
-      gap: 27px;
+      // gap: 27px;
     }
 
-    @media screen and (max-width: 850px) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-    }
+    // @media screen and (max-width: 850px) {
+    //   grid-template-columns: repeat(2, 1fr);
+    //   gap: 30px;
+    // }
 
     @media screen and (max-width: 768px) {
       padding: 30px;
       margin: 7px auto;
-      gap: 16px;
+      // gap: 16px;
     }
 
     @media screen and (max-width: 550px) {
       width: 100%;
-      grid-template-columns: 1fr;
-      gap: 0px;
+      // grid-template-columns: 1fr;
+      // gap: 0px;
     }
   }
 
   .event-item-container {
-    width: 100%;
+    // width: 100%;
+    // max-width: 336px;
+    width: 336px;
+    max-width: 100%;
     // border: 2px solid #2c2c2c;
     background: #F0EBEB;
     border-radius: 7px;
@@ -49,8 +52,6 @@
     }
 
     &.upcoming {
-      cursor: pointer;
-
       &:hover {
         background: #F6F2F2;
       }

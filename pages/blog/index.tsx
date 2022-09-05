@@ -57,8 +57,6 @@ const Blog = () => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Blog" theme="light" />
-
         <div className="blog-page-images">
           {blogSubMenus.map((menu, index) => (
             <Link href={menu.link} key={`blog-submenu-${index}`}>
@@ -71,7 +69,7 @@ const Blog = () => {
           ))}
         </div>
 
-        <RotatedHeader title="The Latest" theme="light" />
+        <RotatedHeader title="The Latest" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

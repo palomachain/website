@@ -48,9 +48,7 @@ const Footer = () => (
         <a href="https://volume.finance/careers/" target="_blank">
           Careers
         </a>
-        <a href="" target="_blank">
-          Brand Assets
-        </a>
+        <Link href="/brand-assets">Brand Assets</Link>
         <a href="https://forum.palomachain.com/" target="_blank">
           Forum
         </a>

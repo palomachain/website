@@ -1,0 +1,203 @@
+.brand-assets-page-container {
+  width: 100%;
+
+  .brand-assets-page-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 80px;
+    margin-bottom: 212px;
+    width: 100%;
+    margin-top: 193px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      padding: 0px 30px;
+      margin-top: 33px;
+      margin-bottom: 100px;
+    }
+  }
+
+  .brand-assets-page-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 768px) {
+      width: 80%;
+      margin-top: 40px;
+    }
+
+    img {
+      width: 100%;
+      max-width: 392px;
+    }
+  }
+
+  .brand-assets-page-text {
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-size: 54px;
+      line-height: 72px;
+      text-transform: capitalize;
+      font-family: $font-bold;
+      color: #2c2c2c;
+
+      @media screen and (max-width: 768px) {
+        font-size: 30px;
+        line-height: 40px;
+      }
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 25px;
+      color: #2c2c2c;
+      max-width: 439px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  .brand-assets-page-button {
+    background: #f1d1e5;
+    height: 60px;
+    width: 208px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2c2c2c;
+    font-size: 16px;
+    font-family: "RockStar-Medium";
+    margin-top: 26px;
+    position: relative;
+
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+      width: 150px;
+      height: 40px;
+    }
+
+    &:hover {
+      background: #ffffff;
+
+      &:after {
+        position: absolute;
+        content: "";
+        width: calc(100%);
+        height: 60px;
+        margin-left: 5px;
+        margin-top: 5px;
+        top: 0px;
+        left: 0px;
+        background: #f1d1e5;
+        border: 1.30736px solid #2c2c2c;
+        border-radius: 6.5px;
+        z-index: -400;
+        height: 100%;
+      }
+    }
+
+    img {
+      height: 12px;
+      margin-left: 5px;
+
+      @media screen and (max-width: 768px) {
+        height: 8px;
+      }
+    }
+  }
+
+  .brand-assets-page-propositions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 80px;
+    width: 100%;
+    margin-top: 200px;
+    margin-bottom: 220px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0px 30px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+
+    .subtitle {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 26px;
+      color: #ff62c4;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+
+    .title {
+      font-family: $font-bold;
+      font-size: 54px;
+      line-height: 74px;
+      color: #2c2c2c;
+      text-transform: capitalize;
+      max-width: 600px;
+      text-align: center;
+      margin-top: 30px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 34px;
+        line-height: 48px;
+      }
+    }
+
+    .brand-assets-color-list {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1121px;
+      margin-top: 92px;
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        margin-top: 32px;
+      }
+
+      .color-item {
+        width: 100%;
+        max-width: 345px;
+        height: 310px;
+        border-radius: 25px;
+        padding: 33px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+
+      .color-title {
+        font-size: 20px;
+        line-height: 27px;
+        margin-bottom: 15px;
+        font-family: $font-semibold;
+      }
+
+      .color-bg,
+      .color-rgb {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+}

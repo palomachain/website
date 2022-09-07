@@ -20,10 +20,16 @@
     }
 
     .blog-page-image {
-      width: calc(33.33% - 22px);
+      position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
+
+      width: calc(33.33% - 43px);
+      max-width: 320px;
+      height: 212px;
+
       background: #f6f2f2;
       border: 1.30736px solid #2c2c2c;
       border-radius: 6.53678px;
@@ -31,9 +37,7 @@
       line-height: 27px;
       color: #2c2c2c;
       font-family: $font-bold;
-      padding-bottom: 49px;
       cursor: pointer;
-      position: relative;
 
       @media screen and (max-width: 768px) {
         font-size: 20px;
@@ -53,8 +57,9 @@
       }
 
       img {
-        height: 182px;
-        margin-top: -125px;
+        height: 190px;
+        position: absolute;
+        bottom: 140px;
 
         @media screen and (max-width: 768px) {
           height: 90px;
@@ -67,14 +72,18 @@
       }
 
       &:hover {
+        margin-top: -13px;
+        margin-left: -15px;
+
         &:after {
           position: absolute;
           content: "";
           width: calc(100%);
           height: 30px;
+          top: 0px;
+          left: 0px;
           margin-left: 15px;
-          margin-bottom: -8px;
-          bottom: 0px;
+          margin-top: 13px;
           background: #f1d1e5;
           border: 1.30736px solid #2c2c2c;
           border-radius: 6.53678px;
@@ -202,6 +211,10 @@
     margin: 30px auto 70px;
     line-height: 200%;
 
+    @media screen and (max-width: 1060px) {
+      padding: 0px 32px;
+    }
+
     .blog-pubtime {
       color: #ff6666;
       font-size: 18px;
@@ -216,9 +229,14 @@
 
     .blog-title {
       font-family: $font-bold;
-      font-size: 40px;
-      line-height: 53px;
+      font-size: 28px;
+      line-height: 37px;
       margin-top: 50px;
+    }
+
+    .blog-intro {
+      font-size: 18px;
+      line-height: 31px;
     }
 
     .blog-divider {

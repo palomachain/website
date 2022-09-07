@@ -48,6 +48,7 @@ const Blog = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
+      console.log(data);
       setLatestBlog(filterBlogs(data));
     };
 
@@ -63,7 +64,7 @@ const Blog = () => {
               <div className="blog-page-image">
                 <img className="normal" src={menu.image} />
                 <img className="hovered" src={menu.imageHovered} />
-                {menu.title}
+                <span>{menu.title}</span>
               </div>
             </Link>
           ))}

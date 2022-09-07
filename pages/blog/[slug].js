@@ -48,7 +48,7 @@ const Blog = ({ post, router }) => {
                 {convertDateString2(post.content.published_date)}
               </div> */}
                 <h1 className="blog-title">{post.content.title}</h1>
-                <div className="blog-intor">{post.content.intro}</div>
+                <div className="blog-intro">{post.content.intro}</div>
                 <img
                   className="blog-featured-image"
                   src={`https:${post.content.image}`}

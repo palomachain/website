@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { convertDateString2 } from "utils/date";
+import { convertDateString } from "utils/date";
 import { truncate } from "utils/string";
 
 const BlogList = ({ data }) => (
@@ -14,7 +14,7 @@ const BlogList = ({ data }) => (
           </div>
           <div className="blog-latest-content">
             <div className="blog-latest-date">
-              {convertDateString2(blog.content.published_date)}
+              {convertDateString(blog.content.published_date)}
             </div>
             <h3 className="blog-latest-title">{blog.content.title}</h3>
             <p className="blog-latest-intro">

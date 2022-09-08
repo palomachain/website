@@ -91,6 +91,8 @@
 
     &:hover {
       background: #ffffff;
+      border: 1.3px solid #2C2C2C;
+      border-radius: 6.5px;
 
       &:after {
         position: absolute;
@@ -102,7 +104,7 @@
         top: 0px;
         left: 0px;
         background: #f1d1e5;
-        border: 1.30736px solid #2c2c2c;
+        border: 1.3px solid #2c2c2c;
         border-radius: 6.5px;
         z-index: -400;
         height: 100%;

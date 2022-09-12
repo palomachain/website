@@ -1,20 +1,12 @@
 import axios from "axios";
 
-const axiosClient = (auth = false, token = '') => {
+const axiosClient = () => {
   const client = axios.create();
 
   client.defaults.headers.common = {
     'Content-Type': 'application/json',
     "Access-Control-Allow-Origin": "*",
   };
-
-  if (auth && token) {
-    client.defaults.headers.common = {
-      'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin": "*",
-      'Authorization': `Bearer ${token}`
-    };
-  }
 
   return client;
 };
@@ -38,22 +30,21 @@ export const getMessageCount = async () => {
   return data;
 };
 
-export const getPalomaTwitterWidget = async () => {
+export const getPalomaTwitterFollowersCount = async () => {
 
-  let followers = 0;
+   let data = '';
 
   try {
-    const res = await axiosClient(true, process.env.TWITTER_API_BEARER_TOKEN).get('https://api.twitter.com/2/users/1518188063809318913?user.fields=public_metrics');
-    console.log(res);
+    const res = await axiosClient().get(
+      `${process.env.API_BASE_URL}/v1/messages/twitter-followers`
+    );
 
     if (res.status === 200) {
-      const data = res.data;
-
-      console.log(data);
+      data = res.data.followers;
     } 
   } catch(e) {
     console.log(e);
   }
 
-  return followers;
+  return data;
 }

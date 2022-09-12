@@ -4,7 +4,7 @@ import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 import RotatedHeader from "components/RotatedHeader";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
-import { getMessageCount, getPalomaTwitterWidget } from "utils/axios";
+import { getMessageCount, getPalomaTwitterFollowersCount } from "utils/axios";
 
 import cn from "classnames";
 
@@ -44,6 +44,7 @@ export default function Home({ state, router }) {
     totalMessagesCount: 0,
     todayMessageCount: 0,
   });
+  const [followers, setFollowers] = useState('')
 
   useEffect(() => {
     const getPageData = async () => {
@@ -54,7 +55,8 @@ export default function Home({ state, router }) {
       const msgs = await getMessageCount();
       setMsgs(msgs);
       
-      getPalomaTwitterWidget();
+      const followers = await getPalomaTwitterFollowersCount();
+      setFollowers(followers);
     };
 
     getPageData();
@@ -291,7 +293,7 @@ export default function Home({ state, router }) {
           <div className="subtitle">Stay Updated</div>
           <div className="title">Join the Flock</div>
           <div className="home-join-flock">
-            <div className="flock-numbers">32.7K</div>
+            <div className="flock-numbers">{followers}</div>
             <div className="pigeons">Pigeons</div>
             <a
               href="https://discord.gg/YBMrQxHp"

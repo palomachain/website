@@ -4,7 +4,7 @@ import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 import RotatedHeader from "components/RotatedHeader";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
-import { getMessageCount } from "utils/axios";
+import { getMessageCount, getPalomaTwitterWidget } from "utils/axios";
 
 import cn from "classnames";
 
@@ -51,25 +51,23 @@ export default function Home({ state, router }) {
       console.log(data);
       setData({ ...data.content });
 
-      // const msgs = await getMessageCount();
-      // if (msgs.status === 200) {
-      //   setMsgs(msgs.data);
-      // }
+      const msgs = await getMessageCount();
+      setMsgs(msgs);
+      
+      getPalomaTwitterWidget();
     };
 
     getPageData();
   }, []);
 
-  // useEffect(() => {
-  //   const interval = setInterval(async () => {
-  //     const msgs = await getMessageCount();
-  //     if (msgs.status === 200) {
-  //       setMsgs(msgs.data);
-  //     }
-  //   }, 30000);
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const msgs = await getMessageCount();
+      setMsgs(msgs);
+    }, 30000);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   if (!data) {
     return null;
@@ -223,7 +221,7 @@ export default function Home({ state, router }) {
             </div>
 
             <div className="home-how-item second">
-              <img className="pigeon" src="/assets/home/pigeon.png" />
+              {/* <img className="pigeon" src="/assets/home/pigeon.png" /> */}
               <div className="number">2.</div>
               <div className="content">{render(data.build_text2)}</div>
             </div>
@@ -244,12 +242,12 @@ export default function Home({ state, router }) {
           </div>
         </div>
 
-        <div className="home-page-next">
+        {/* <div className="home-page-next">
           <div className="title">What is coming next?</div>
           <div className="home-page-next-wrapper">
             <div className="coming-next-flows">
               {comingNext.map((item, index) => (
-                <>
+                <React.Fragment key={`coming-next-item-${index}`}>
                   {index > 0 && <div className="coming-next-line" />}
                   <div className="coming-next-item">
                     <div className="number-wrapper">
@@ -280,14 +278,14 @@ export default function Home({ state, router }) {
                       <div className="desc">{item.desc}</div>
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </div>
             <div className="home-page-next-image">
               <img src="/assets/home/diagram-3.png" />
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="home-page-propositions">
           <div className="subtitle">Stay Updated</div>
@@ -309,7 +307,7 @@ export default function Home({ state, router }) {
 
         <img
           src="/assets/home/diagram-4.png"
-          style={{ margin: "0px auto", display: "block" }}
+          style={{ margin: "0px auto", display: "block", width: 223 }}
         />
       </div>
     </div>

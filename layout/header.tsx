@@ -121,6 +121,13 @@ const LayoutHeader = ({ router }) => {
                 >
                   Governance
                 </a>
+                <a
+                  className="link"
+                  href="https://volumefi.notion.site/Build-on-Paloma-Onboarding-Board-28abc84384b54db8a5409fd67d97a457"
+                  target="_blank"
+                >
+                  Developer Grant Program
+                </a>
               </div>
               <div className="submenu-section">
                 <div className="submenu-section-title">Guides</div>
@@ -195,7 +202,7 @@ const LayoutHeader = ({ router }) => {
                   Compass EVM
                 </a>
               </div>
-              <div className="submenu-section">
+              {/* <div className="submenu-section">
                 <a
                   className="submenu-section-title link paloma-extension"
                   href=""
@@ -208,7 +215,7 @@ const LayoutHeader = ({ router }) => {
                     <span>(Chrome Extension)</span>
                   </div>
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </HeaderMenu>
@@ -277,6 +284,13 @@ const LayoutHeader = ({ router }) => {
                   target="_blank"
                 >
                   Governance
+                </a>
+                <a
+                  href="https://volumefi.notion.site/Build-on-Paloma-Onboarding-Board-28abc84384b54db8a5409fd67d97a457"
+                  className="mobile-menu-sub-link"
+                  target="_blank"
+                >
+                  Developer Grant Program
                 </a>
                 <a
                   href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"

@@ -10,14 +10,7 @@ const axiosClient = () => {
   return client;
 };
 
-const getGasPrices = () =>
-  axiosClient().get("https://bombay-fcd.terra.dev/v1/txs/gas_prices");
+const getMessageCount = () =>
+  axiosClient().get(`${process.env.API_BASE_URL}/v1/messages/count`);
 
-const getTxHistories = async (address, offset = 0, limit = 100) => {
-  const res = await fetch(`https://fcd.terra.dev/v1/txs?offset=${offset}&limit=${limit}&account=${address}`);
-  const json = await res.json();
-
-  return json;
-}
-
-export { getGasPrices, getTxHistories };
+export { getMessageCount };

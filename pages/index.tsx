@@ -4,22 +4,72 @@ import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 import RotatedHeader from "components/RotatedHeader";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
+import { getMessageCount } from "utils/axios";
+
+import cn from "classnames";
 
 import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
+const comingNext = [
+  {
+    date: "September 2022",
+    title: "Other EVM Chains",
+    desc: "Add all other EVM chains (mainnet chains)",
+    active: true,
+  },
+  {
+    date: "October 2022",
+    title: "Gas Management",
+    desc: "Pigeons get pay for all messages they deliver",
+    active: false,
+  },
+  {
+    date: "November 2022",
+    title: "Scheduling",
+    desc: "Remote messages can be scheduled in advance",
+    active: false,
+  },
+  {
+    date: "December 2022",
+    title: "Solana",
+    desc: "Add Solana Mainnet as Paloma target chain",
+    active: false,
+  },
+];
+
 export default function Home({ state, router }) {
   const [data, setData] = useState(null);
+  const [msgs, setMsgs] = useState({
+    totalMessagesCount: 0,
+    todayMessageCount: 0,
+  });
 
   useEffect(() => {
     const getPageData = async () => {
       const data = await fetchPageValues(PAGE_LANDING);
-
+      console.log(data);
       setData({ ...data.content });
+
+      // const msgs = await getMessageCount();
+      // if (msgs.status === 200) {
+      //   setMsgs(msgs.data);
+      // }
     };
 
     getPageData();
   }, []);
+
+  // useEffect(() => {
+  //   const interval = setInterval(async () => {
+  //     const msgs = await getMessageCount();
+  //     if (msgs.status === 200) {
+  //       setMsgs(msgs.data);
+  //     }
+  //   }, 30000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
 
   if (!data) {
     return null;
@@ -43,6 +93,23 @@ export default function Home({ state, router }) {
           </div>
           <div className="home-page-image">
             <img src="/assets/home/diagram-1.png" />
+          </div>
+        </div>
+
+        <div className="home-page-section">
+          <div className="home-messages-total">
+            <div className="count">
+              <div className="title">Total Messages</div>
+              <div className="number">
+                {msgs.totalMessagesCount.toLocaleString("en-US")}
+              </div>
+            </div>
+            <div className="count">
+              <div className="title">Messages per day</div>
+              <div className="number">
+                {msgs.todayMessageCount.toLocaleString("en-US")}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -118,7 +185,7 @@ export default function Home({ state, router }) {
           </div>
         </div>
 
-        <div className="home-page-section">
+        {/* <div className="home-page-section">
           <div className="home-page-text">
             <span className="pink">Uniswap v3 Position</span>
             <h2>Build a Limit</h2>
@@ -140,7 +207,7 @@ export default function Home({ state, router }) {
           <div className="home-page-image">
             <img src="/assets/home/code-2.png" />
           </div>
-        </div>
+        </div> */}
 
         <RotatedHeader
           title="How to Build on Paloma?"
@@ -176,6 +243,74 @@ export default function Home({ state, router }) {
             </div>
           </div>
         </div>
+
+        <div className="home-page-next">
+          <div className="title">What is coming next?</div>
+          <div className="home-page-next-wrapper">
+            <div className="coming-next-flows">
+              {comingNext.map((item, index) => (
+                <>
+                  {index > 0 && <div className="coming-next-line" />}
+                  <div className="coming-next-item">
+                    <div className="number-wrapper">
+                      <div
+                        className="spacer"
+                        style={{
+                          visibility: index === 0 ? "hidden" : "visible",
+                        }}
+                      />
+                      <div
+                        className={cn("circle-number", { active: item.active })}
+                      >
+                        {index + 1}.
+                      </div>
+                      <div
+                        className="spacer"
+                        style={{
+                          visibility:
+                            index < comingNext.length - 1
+                              ? "visible"
+                              : "hidden",
+                        }}
+                      />
+                    </div>
+                    <div className="content-wrapper">
+                      <div className="date">{item.date}</div>
+                      <div className="title">{item.title}</div>
+                      <div className="desc">{item.desc}</div>
+                    </div>
+                  </div>
+                </>
+              ))}
+            </div>
+            <div className="home-page-next-image">
+              <img src="/assets/home/diagram-3.png" />
+            </div>
+          </div>
+        </div>
+
+        <div className="home-page-propositions">
+          <div className="subtitle">Stay Updated</div>
+          <div className="title">Join the Flock</div>
+          <div className="home-join-flock">
+            <div className="flock-numbers">32.7K</div>
+            <div className="pigeons">Pigeons</div>
+            <a
+              href="https://discord.gg/YBMrQxHp"
+              className="home-page-button"
+              target="_blank"
+              style={{ background: "#fff" }}
+            >
+              Join The Flock
+              <img src="/assets/arrows/arrow-top-right.png" />
+            </a>
+          </div>
+        </div>
+
+        <img
+          src="/assets/home/diagram-4.png"
+          style={{ margin: "0px auto", display: "block" }}
+        />
       </div>
     </div>
   );

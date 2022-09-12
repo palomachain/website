@@ -83,7 +83,7 @@ export default function Home({ state, router }) {
             <h1>{data.heading1}</h1>
             <p className="large">{data.text1}</p>
             <a
-              href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+              href="https://guaya23l1on.typeform.com/to/r0NYlO5S"
               className="home-page-button"
               target="_blank"
             >

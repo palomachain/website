@@ -20,17 +20,6 @@ const BlogProjectUpdates = ({ router }) => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <div
-          className="sub-nav-bar"
-          onClick={(e) => {
-            router.back();
-          }}
-        >
-          <div className="link-back-to">
-            <img src="/assets/arrows/arrow-left.png" />
-            <span>Blog</span>
-          </div>
-        </div>
         <RotatedHeader title="Project Updates" theme="dark" />
 
         <div className="blog-latest-wrapper">

@@ -12,27 +12,30 @@ mixpanel.init(process.env.MIXPANEL_API_KEY);
 const blogSubMenus = [
   {
     image: "/assets/blog/project-updates.png",
+    imageHovered: "/assets/blog/project-updates-selected.png",
     title: (
       <span>
-        PROJECT
+        Project
         <br />
-        UPDATES
+        Updates
       </span>
     ),
     link: "/blog/project-updates",
   },
   {
     image: "/assets/blog/ama.png",
+    imageHovered: "/assets/blog/ama-selected.png",
     title: <span>AMAS</span>,
     link: "/blog/amas",
   },
   {
     image: "/assets/blog/blockchain-culture.png",
+    imageHovered: "/assets/blog/blockchain-culture-selected.png",
     title: (
       <span>
-        BLOCKCHAIN
+        Blockchain
         <br />
-        CULTURE
+        Culture 
       </span>
     ),
     link: "/blog/blockchain-culture",
@@ -45,6 +48,7 @@ const Blog = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
+      console.log(data);
       setLatestBlog(filterBlogs(data));
     };
 
@@ -54,20 +58,19 @@ const Blog = () => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Blog" theme="light" />
-
         <div className="blog-page-images">
           {blogSubMenus.map((menu, index) => (
             <Link href={menu.link} key={`blog-submenu-${index}`}>
               <div className="blog-page-image">
-                <img src={menu.image} />
-                {menu.title}
+                <img className="normal" src={menu.image} />
+                <img className="hovered" src={menu.imageHovered} />
+                <span>{menu.title}</span>
               </div>
             </Link>
           ))}
         </div>
 
-        <RotatedHeader title="The Latest" theme="light" />
+        <RotatedHeader title="The Latest" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

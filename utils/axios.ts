@@ -4,20 +4,47 @@ const axiosClient = () => {
   const client = axios.create();
 
   client.defaults.headers.common = {
+    'Content-Type': 'application/json',
     "Access-Control-Allow-Origin": "*",
   };
 
   return client;
 };
 
-const getGasPrices = () =>
-  axiosClient().get("https://bombay-fcd.terra.dev/v1/txs/gas_prices");
+export const getMessageCount = async () => {
+  const data = { totalMessagesCount: 0, todayMessageCount: 0 };
 
-const getTxHistories = async (address, offset = 0, limit = 100) => {
-  const res = await fetch(`https://fcd.terra.dev/v1/txs?offset=${offset}&limit=${limit}&account=${address}`);
-  const json = await res.json();
+  try {
+    const res = await axiosClient().get(
+      `${process.env.API_BASE_URL}/v1/messages/count`
+    );
 
-  return json;
+    if (res.status === 200) {
+      data.totalMessagesCount = res.data.totalMessagesCount;
+      data.todayMessageCount = res.data.todayMessageCount;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  return data;
+};
+
+export const getPalomaTwitterFollowersCount = async () => {
+
+   let data = '';
+
+  try {
+    const res = await axiosClient().get(
+      `${process.env.API_BASE_URL}/v1/messages/twitter-followers`
+    );
+
+    if (res.status === 200) {
+      data = res.data.followers;
+    } 
+  } catch(e) {
+    console.log(e);
+  }
+
+  return data;
 }
-
-export { getGasPrices, getTxHistories };

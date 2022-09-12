@@ -76,3 +76,15 @@ export const filterBlogs = (eventList, category = "") => {
   return blogs;
   // return blogs.slice(0, LATEST_BLOG_SHOW_CNT);
 };
+
+export const fetchPageValues = async (param) => {
+  var response = await Storyblok.get("cdn/stories/", {
+    "starts_with": param,
+  });
+
+  if (response.data.stories.length > 0) {
+    return response.data.stories[0];
+  }
+
+  return null;
+};

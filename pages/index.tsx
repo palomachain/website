@@ -114,7 +114,7 @@ export default function Home({ state, router }) {
         </div>
 
         <RotatedHeader
-          title="We go in all directions!"
+          title="We message in all directions!"
           theme="dark"
           rightImage="/assets/arrows/footprint.svg"
           className="home-section-header"
@@ -145,7 +145,7 @@ export default function Home({ state, router }) {
               <p>{data.valueprop_text2}</p>
             </div>
             <div className="home-proposition-item">
-              <img src="/assets/home/gas-fee.png" />
+              <img src="/assets/home/scalable.png" />
               <h3>{data.valueprop_title3}</h3>
               <p>{data.valueprop_text3}</p>
             </div>
@@ -160,13 +160,15 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section">
           <div className="home-page-text">
-            <span className="pink">Ethereum NFTs</span>
-            <h2>Mint a </h2>
+            <span className="pink">Cross Chain NFTs</span>
+            <h2>Mint an Egg </h2>
             <h2>
               {" "}
-              Paloma Egg
-              <img src="/assets/home/egg.png" />{" "}
+              on Ethereum
             </h2>
+              <h2>
+              {" "}
+              From The Cosmos </h2>
             <p>
               Mint one of our 100 limited Edition Developer Eggs NFTs by sending
               a message on Ethereum.
@@ -306,11 +308,6 @@ export default function Home({ state, router }) {
             </a>
           </div>
         </div>
-
-        <img
-          src="/assets/home/diagram-4.png"
-          style={{ margin: "0px auto", display: "block", width: 223 }}
-        />
       </div>
     </div>
   );

@@ -145,13 +145,6 @@ const LayoutHeader = ({ router }) => {
                 >
                   Mint An Egg
                 </a>
-                <a
-                  className="link"
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/lob.html"
-                  target="_blank"
-                >
-                  set up a limit order bot
-                </a>
               </div>
               <div className="submenu-section">
                 <div className="submenu-section-title">Github</div>

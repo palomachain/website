@@ -6,16 +6,18 @@ import { fetchBlogs } from "utils/storyblok";
 // import { convertDateString2 } from "utils/date";
 
 import { HeadSeo } from "components/Blog";
+import { getCookie } from 'cookies-next';
 
 const Blog = ({ post, router }) => {
   useEffect(() => {
-    console.log("hello");
-    mixpanel.track("VISIT_BLOGPOST", {
-      title: post.content.title,
-      slug: post.slug,
-    });
+    const ignore = getCookie('ignore');
 
-    //console.log(res);
+    if(!ignore) {
+        mixpanel.track('VISIT_BLOGPOST', {
+            title: post.content.title,
+            slug: post.slug
+        });
+    }
   }, []);
 
   return (
@@ -53,7 +55,7 @@ const Blog = ({ post, router }) => {
                   className="blog-featured-image"
                   src={`https:${post.content.image}`}
                 />
-               
+
               </div>
               {/* <div className="blog-divider"></div> */}
               <div className="blog-post">

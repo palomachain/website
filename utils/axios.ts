@@ -26,8 +26,8 @@ export const getMessageCount = async () => {
   const startTime = new Date(yyyy, mm, dd, 0, 0 ,0);
   const endTime = new Date(yyyy, mm, dd, 23, 59, 59);
 
-  const startTimeUTC = startTime.getTime() + 3600 * hourOffset * 1000;
-  const endTimeUTC = endTime.getTime() + 3600 * hourOffset * 1000;
+  const startTimeUTC = startTime.getTime() - 3600 * hourOffset * 1000;
+  const endTimeUTC = endTime.getTime() - 3600 * hourOffset * 1000;
 
   // console.log(hourOffset);
   // console.log('local', startTime.getTime(), endTime.getTime())

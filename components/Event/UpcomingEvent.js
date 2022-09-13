@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import { convertDateStringWithWeekDay } from "utils/date";
+import {getCookie} from "cookies-next";
 
 // import mixpanel from "mixpanel-browser";
 // mixpanel.init(process.env.MIXPANEL_API_KEY)
@@ -14,11 +15,15 @@ const UpcomingEvent = ({ data }) => {
     $("#event-register").click(function() {
       if(!regClicked) {
         regClicked = true;
-        mixpanel.track('REGISTER_EVENT', {
-          title: $(this).attr('title'),
-          url: $(this).attr('href'),
-          slug: $(this).attr('slug'),
-        });
+        const ignore = getCookie('ignore');
+
+        if(!ignore) {
+          mixpanel.track('REGISTER_EVENT', {
+            title: $(this).attr('title'),
+            url: $(this).attr('href'),
+            slug: $(this).attr('slug'),
+          });
+        }
         window.location = $(this).attr('href');
       }
     });

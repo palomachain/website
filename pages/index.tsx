@@ -9,7 +9,10 @@ import { getMessageCount, getPalomaTwitterFollowersCount } from "utils/axios";
 import cn from "classnames";
 
 import mixpanel from "mixpanel-browser";
+import {getCookie} from "cookies-next";
+import { setCookie } from 'cookies-next';
 mixpanel.init(process.env.MIXPANEL_API_KEY);
+
 
 const comingNext = [
   {
@@ -54,7 +57,7 @@ export default function Home({ state, router }) {
 
       const msgs = await getMessageCount();
       setMsgs(msgs);
-      
+
       const followers = await getPalomaTwitterFollowersCount();
       setFollowers(followers);
     };
@@ -69,6 +72,15 @@ export default function Home({ state, router }) {
     }, 30000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const ignore = getCookie('ignore');
+
+    if(ignore) {
+      // extend the time the user is ignored
+      setCookie('ignore', 'true', { maxAge: 60 * 60 * 24 * 7 * 10000 });
+    }
   }, []);
 
   if (!data) {

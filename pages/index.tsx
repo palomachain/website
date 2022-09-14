@@ -186,7 +186,7 @@ export default function Home({ state, router }) {
               a message on Ethereum.
             </p>
             <a
-              href="https://palomachain.github.io/paloma-docs/"
+              href="https://palomachain.com/docs/"
               className="home-page-button"
               style={{ width: "100%" }}
             >
@@ -210,7 +210,7 @@ export default function Home({ state, router }) {
               love. Get started now!
             </p>
             <a
-              href="https://palomachain.github.io/paloma-docs/"
+              href="https://palomachain.com/docs/"
               className="home-page-button"
               style={{ width: "100%" }}
             >
@@ -246,7 +246,7 @@ export default function Home({ state, router }) {
               <div className="number">3.</div>
               <div className="content">{render(data.build_text3)}</div>
               <a
-                href="https://palomachain.github.io/paloma-docs/"
+                href="https://palomachain.com/docs/"
                 className="home-page-button"
                 style={{ width: "100%" }}
                 target="_blank"

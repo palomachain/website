@@ -36,7 +36,6 @@ const Blog = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-      console.log(data);
       setLatestBlog(filterBlogs(data));
     };
 

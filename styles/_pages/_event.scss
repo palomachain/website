@@ -8,7 +8,7 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: max(15px, calc(50% - 504px));
+    gap: 0px max(15px, calc(50% - 504px));
 
     @media screen and (max-width: 1120px) {
       width: 100%;
@@ -18,11 +18,11 @@
 
     @media screen and (max-width: 1100px) {
       grid-template-columns: repeat(2, 336px);
-      gap: 56px;
+      gap: 0px 56px;
     }
 
     @media screen and (max-width: 791px) {
-      gap: 30px;
+      gap: 0px 30px;
     }
 
     @media screen and (max-width: 768px) {
@@ -42,7 +42,7 @@
     width: 336px;
     max-width: 100%;
     background: #F0EBEB;
-    border-radius: 7px;
+    border-radius: 25px;
     margin-bottom: 85px;
     // margin-left: max(15px, calc(50% - 504px));
 
@@ -80,8 +80,8 @@
     height: 200px;
     object-fit: cover;
     object-position: center center;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 
     @media screen and (max-width: 768px) {
       margin-bottom: 26px;
@@ -107,7 +107,7 @@
     margin-top: 12px;
     font-family: $font-bold;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     color: $main_text_color;
   }
 
@@ -129,7 +129,7 @@
   }
 
   .event-description {
-    font-size: 14px;
+    font-size: 12px;
     color: $main_text_color;
     line-height: 24px;
     // text-overflow: ellipsis;
@@ -137,7 +137,7 @@
     // display: -webkit-box;
     // -webkit-line-clamp: 3;
     // -webkit-box-orient: vertical;
-    margin-top: 12px;
+    // margin-top: 12px;
     // line-height: 129%;
 
     h1, h2, h3, h4, h5, h6 {
@@ -164,7 +164,7 @@
       border-radius: 6px;
       width: 135px;
       height: 40px;
-      font-size: 12px;
+      font-size: 14px;
       color: $main_text_color;
     }
   }

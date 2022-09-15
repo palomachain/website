@@ -57,11 +57,11 @@ const UpcomingEvent = ({ data }) => {
         <div className="event-date">
           {convertDateStringWithWeekDay(data.content.EventTime, true)}
         </div>
-        {/* <div className="event-title">{data.content.Title}</div> */}
-        <div className="event-location">
+        <div className="event-title">{data.content.Title}</div>
+        {/* <div className="event-location">
           <img src="/assets/events/placeholder.png" />
           <span>{data.content.Location}</span>
-        </div>
+        </div> */}
 
         <div className="event-description">
           {render(data.content.Description, {

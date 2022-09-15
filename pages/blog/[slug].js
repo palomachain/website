@@ -31,7 +31,7 @@ const Blog = ({ post, router }) => {
       )}
 
       <div className="page-container">
-        <div
+        {/* <div
           className="sub-nav-bar"
           onClick={(e) => {
             router.back();
@@ -41,7 +41,7 @@ const Blog = ({ post, router }) => {
             <img src="/assets/arrows/arrow-left.png" />
             <span>Blog</span>
           </div>
-        </div>
+        </div> */}
         {post !== null && post !== undefined && (
           <div className="blog-page-container">
             <div className="blog-post-view">

@@ -5,13 +5,13 @@ import { BlogList } from "components/Blog";
 
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
 
-const BlogAmas = ({ router }) => {
+const BlogAnnouncements = ({ router }) => {
   const [latestBlogs, setLatestBlog] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-      setLatestBlog(filterBlogs(data, "amas"));
+      setLatestBlog(filterBlogs(data, "announcements"));
     };
 
     getData();
@@ -20,7 +20,7 @@ const BlogAmas = ({ router }) => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="AMAS" theme="dark" />
+        <RotatedHeader title="Announcements" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />
@@ -30,4 +30,4 @@ const BlogAmas = ({ router }) => {
   );
 };
 
-export default BlogAmas;
+export default BlogAnnouncements;

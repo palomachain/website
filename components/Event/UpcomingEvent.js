@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
-import { convertDateStringWithWeekDay } from "utils/date";
+import { convertDateStringWithWeekDay, convertDateString2 } from "utils/date";
 import {getCookie} from "cookies-next";
 
 // import mixpanel from "mixpanel-browser";

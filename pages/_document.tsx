@@ -71,7 +71,7 @@ console.log(ignore);
 if(!ignore) {
     mixpanel.track('PAGE_LOAD');
     
-     mixpanel.track_links("a", "LINK", {
+     mixpanel.track_links("a", "LINK_CLICK", {
         "referrer": document.referrer
     });
 } 

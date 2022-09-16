@@ -5,13 +5,13 @@ import { BlogList } from "components/Blog";
 
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
 
-const BlogBlockchainCulture = ({ router }) => {
+const BlogEvents = ({ router }) => {
   const [latestBlogs, setLatestBlog] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-      setLatestBlog(filterBlogs(data, "blockchain_culture"));
+      setLatestBlog(filterBlogs(data, "events"));
     };
 
     getData();
@@ -20,7 +20,7 @@ const BlogBlockchainCulture = ({ router }) => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Blockchain Culture" theme="dark" />
+        <RotatedHeader title="Events" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />
@@ -30,4 +30,4 @@ const BlogBlockchainCulture = ({ router }) => {
   );
 };
 
-export default BlogBlockchainCulture;
+export default BlogEvents;

@@ -63,7 +63,7 @@ export const convertDateStringWithWeekDay = (dateStr, toLocal = false) => {
     : parseDate(dateStr).getTime();
   const date = new Date(stamp);
 
-  return date.toLocaleDateString("en-US", dateOptionsWithWeekDay);
+  return date.toLocaleDateString("en-US", dateOptions);
 };
 
 export const convertTimeString = (dateStr, toLocal = false) => {

@@ -13,32 +13,20 @@ const blogSubMenus = [
   {
     image: "/assets/blog/project-updates.png",
     imageHovered: "/assets/blog/project-updates-selected.png",
-    title: (
-      <span>
-        Project
-        <br />
-        Updates
-      </span>
-    ),
+    title: <span>Project Updates</span>,
     link: "/blog/project-updates",
+  },
+  {
+    image: "/assets/blog/announcement.png",
+    imageHovered: "/assets/blog/announcement-selected.png",
+    title: <span>Announcements</span>,
+    link: "/blog/announcements",
   },
   {
     image: "/assets/blog/ama.png",
     imageHovered: "/assets/blog/ama-selected.png",
-    title: <span>AMAS</span>,
-    link: "/blog/amas",
-  },
-  {
-    image: "/assets/blog/blockchain-culture.png",
-    imageHovered: "/assets/blog/blockchain-culture-selected.png",
-    title: (
-      <span>
-        Blockchain
-        <br />
-        Culture 
-      </span>
-    ),
-    link: "/blog/blockchain-culture",
+    title: <span>Events</span>,
+    link: "/blog/events",
   },
 ];
 
@@ -48,7 +36,6 @@ const Blog = () => {
   useEffect(() => {
     const getData = async () => {
       const data = await fetchBlogs();
-      console.log(data);
       setLatestBlog(filterBlogs(data));
     };
 

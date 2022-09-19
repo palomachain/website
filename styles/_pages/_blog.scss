@@ -13,10 +13,11 @@
       padding: 0px 30px;
     }
 
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 768px) {
       flex-direction: column;
       justify-content: flex-start;
-      margin: 65px auto 20px;
+      align-items: center;
+      margin: 95px auto 20px;
     }
 
     .blog-page-image {
@@ -39,21 +40,16 @@
       font-family: $font-bold;
       cursor: pointer;
 
+      @media screen and (max-width: 1024px) {
+        width: calc(33.33% - 23px);
+      }
+
       @media screen and (max-width: 768px) {
-        font-size: 20px;
-        line-height: 22px;
-        padding-bottom: 28px;
-        width: calc(33.33% - 11px);
-      }
-
-      @media screen and (max-width: 650px) {
-        font-size: 16px;
-        line-height: 17px;
-      }
-
-      @media screen and (max-width: 500px) {
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 120px;
+        height: 154px;
+        padding-bottom: 0px;
+        padding-top: 40px;
       }
 
       img {
@@ -61,9 +57,14 @@
         position: absolute;
         bottom: 140px;
 
+        @media screen and (max-width: 1024px) {
+          height: 162px;
+          bottom: 130px;
+        }
+
         @media screen and (max-width: 768px) {
-          height: 90px;
-          margin-top: -30px;
+          height: 142px;
+          bottom: 100px;
         }
 
         &.hovered {
@@ -139,10 +140,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 37px auto;
     }
 
     @media screen and (max-width: 550px) {
       width: 100%;
+      margin: 0px auto;
     }
 
     .blog-latest-item {

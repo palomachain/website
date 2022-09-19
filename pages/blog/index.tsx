@@ -10,22 +10,23 @@ import mixpanel from "mixpanel-browser";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 const blogSubMenus = [
-  {
-    image: "/assets/blog/project-updates.png",
-    imageHovered: "/assets/blog/project-updates-selected.png",
-    title: <span>Project Updates</span>,
-    link: "/blog/project-updates",
-  },
+  
   {
     image: "/assets/blog/announcement.png",
     imageHovered: "/assets/blog/announcement-selected.png",
-    title: <span>Announcements</span>,
+    title: <span>News and <br/>Announcements</span>,
     link: "/blog/announcements",
+  },
+  {
+    image: "/assets/blog/project-updates.png",
+    imageHovered: "/assets/blog/project-updates-selected.png",
+    title: <span>Project<br/>Developments</span>,
+    link: "/blog/project-updates",
   },
   {
     image: "/assets/blog/ama.png",
     imageHovered: "/assets/blog/ama-selected.png",
-    title: <span>Events</span>,
+    title: <span>Events<br/>Recaps</span>,
     link: "/blog/events",
   },
 ];

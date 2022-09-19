@@ -20,7 +20,7 @@ const BlogAnnouncements = ({ router }) => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Announcements" theme="dark" />
+        <RotatedHeader title="News and Announcements" theme="dark" />
 
         <div className="blog-latest-wrapper">
           <BlogList data={latestBlogs} />

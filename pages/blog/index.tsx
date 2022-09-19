@@ -26,7 +26,7 @@ const blogSubMenus = [
   {
     image: "/assets/blog/ama.png",
     imageHovered: "/assets/blog/ama-selected.png",
-    title: <span>Events<br/>Recaps</span>,
+    title: <span>Event<br/>Recaps</span>,
     link: "/blog/events",
   },
 ];

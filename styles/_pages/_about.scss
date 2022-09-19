@@ -1,7 +1,7 @@
-.brand-assets-page-container {
+.about-page-container {
   width: 100%;
 
-  .brand-assets-page-section {
+  .about-page-section {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,7 +19,7 @@
     }
   }
 
-  .brand-assets-page-image {
+  .about-page-image {
     flex: 1;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@
     }
   }
 
-  .brand-assets-page-text {
+  .about-page-text {
     @media screen and (max-width: 768px) {
       width: 100%;
       max-width: 100%;
@@ -58,7 +58,7 @@
     p {
       font-weight: 400;
       font-size: 20px;
-      line-height: 26px;
+      line-height: 32px;
       color: #2c2c2c;
       max-width: 439px;
 
@@ -69,7 +69,7 @@
     }
   }
 
-  .brand-assets-page-button {
+  .about-page-button {
     background: #f1d1e5;
     height: 60px;
     width: 208px;
@@ -121,7 +121,7 @@
     }
   }
 
-  .brand-assets-page-propositions {
+  .about-page-volume {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -153,7 +153,6 @@
       font-size: 54px;
       line-height: 74px;
       color: #2c2c2c;
-      text-transform: capitalize;
       max-width: 600px;
       text-align: center;
       margin-top: 30px;
@@ -164,42 +163,20 @@
       }
     }
 
-    .brand-assets-color-list {
-      display: flex;
-      justify-content: space-between;
+    .volume-logo {
       width: 100%;
-      max-width: 1121px;
-      margin-top: 92px;
+      max-width: 386px;
+    }
 
-      @media screen and (max-width: 768px) {
-        flex-direction: column;
-        margin-top: 32px;
-      }
-
-      .color-item {
-        width: 100%;
-        max-width: 345px;
-        height: 310px;
-        border-radius: 25px;
-        padding: 33px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        margin-bottom: 20px;
-      }
-
-      .color-title {
-        font-size: 20px;
-        line-height: 27px;
-        margin-bottom: 15px;
-        font-family: $font-semibold;
-      }
-
-      .color-bg,
-      .color-rgb {
-        font-size: 14px;
-        line-height: 18px;
-      }
+    .description {
+      display: block;
+      width: 100%;
+      max-width: 467px;
+      font-size: 20px;
+      line-height: 32px;
+      color: #000000;
+      text-align: center;
+      margin-top: 34px;
     }
   }
 }

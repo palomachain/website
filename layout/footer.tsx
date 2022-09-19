@@ -45,13 +45,11 @@ const Footer = () => (
 
       <div className="footer-view-links">
         <h3 className="footer-subtitle">Company</h3>
+        <Link href="/about">About</Link>
         <a href="https://volume.finance/careers/" target="_blank">
           Careers
         </a>
         <Link href="/brand-assets">Brand Assets</Link>
-        <a href="https://forum.palomachain.com/" target="_blank">
-          Forum
-        </a>
       </div>
 
       <div className="footer-view-links">
@@ -67,6 +65,9 @@ const Footer = () => (
         </a>
         <a href={GITHUB_LINK} target="_blank">
           Github
+        </a>
+        <a href="https://forum.palomachain.com/" target="_blank">
+          Forum
         </a>
       </div>
     </div>

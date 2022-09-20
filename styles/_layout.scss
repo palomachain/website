@@ -274,12 +274,21 @@
       align-items: flex-start;
       gap: 20px;
 
-      @media screen and (max-width: 768px) {
-       flex-direction: column;
+      &.mobile {
+        display: none;
       }
 
       @media screen and (max-width: 768px) {
+        flex-direction: column;
         padding: 30px;
+
+        &.desktop {
+          display: none;
+        }
+
+        &.mobile {
+          display: block;
+        }
       }
 
       &-logo {

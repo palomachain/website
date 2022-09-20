@@ -1,3 +1,10 @@
+import {
+  TELEGRAM_LINK,
+  TWITTER_LINK,
+  GITHUB_LINK,
+  DISCORD_LINK,
+} from "utils/constants";
+
 const baseUrl = process.env.BASE_URL;
 
 const navMenu = [
@@ -99,4 +106,115 @@ const navMenu = [
   },
 ];
 
-export { navMenu };
+const footerMenu = [
+  {
+    title: "Features",
+    hasLink: false,
+    submenus: [
+      {
+        title: "pigeon",
+        hasLink: true,
+        link: "https://palomachain.github.io/paloma-docs/guide/maintain/relayer/pigeon.html",
+        external: true,
+      },
+      {
+        title: "SDKs",
+        hasLink: true,
+        link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/resources.html#sdks",
+        external: true,
+      },
+      {
+        title: "Compass-EVM",
+        hasLink: true,
+        link: "https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html#model",
+        external: true,
+      },
+      {
+        title: "Gas Management",
+        hasLink: true,
+        link: "https://palomachain.github.io/paloma-docs/guide/develop/module-specifications/spec-auth.html#parameters",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Examples",
+    hasLink: false,
+    submenus: [
+      {
+        title: "Mint an Egg",
+        hasLink: true,
+        link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html",
+        external: true,
+      },
+      // {
+      //   title: "Limit Order Bot",
+      //   hasLink: true,
+      //   link: "",
+      //   external: true,
+      // },
+    ],
+  },
+  {
+    title: "Company",
+    hasLink: false,
+    submenus: [
+      {
+        title: "About",
+        hasLink: true,
+        link: `${baseUrl}/about`,
+        external: false,
+      },
+      {
+        title: "Careers",
+        hasLink: true,
+        link: "https://volume.finance/careers/",
+        external: true,
+      },
+      {
+        title: "Brand Assets",
+        hasLink: true,
+        link: `${baseUrl}/brand-assets`,
+        external: false,
+      },
+    ],
+  },
+  {
+    title: "Social Media",
+    hasLink: false,
+    submenus: [
+      {
+        title: "Discord",
+        hasLink: true,
+        link: DISCORD_LINK,
+        external: true,
+      },
+      {
+        title: "Telegram",
+        hasLink: true,
+        link: TELEGRAM_LINK,
+        external: true,
+      },
+      {
+        title: "Twitter",
+        hasLink: true,
+        link: TWITTER_LINK,
+        external: true,
+      },
+      {
+        title: "Github",
+        hasLink: true,
+        link: GITHUB_LINK,
+        external: true,
+      },
+      {
+        title: "Forum",
+        hasLink: true,
+        link: "https://forum.palomachain.com/",
+        external: true,
+      },
+    ],
+  },
+];
+
+export { navMenu, footerMenu };

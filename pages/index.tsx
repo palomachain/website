@@ -52,7 +52,6 @@ export default function Home({ state, router }) {
   useEffect(() => {
     const getPageData = async () => {
       const data = await fetchPageValues(PAGE_LANDING);
-      console.log(data);
       setData({ ...data.content });
 
       const msgs = await getMessageCount();

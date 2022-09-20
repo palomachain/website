@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 import { useOutsideAlerter } from "hooks";
-import { TELEGRAM_LINK, DISCORD_LINK } from "utils/constants";
+import { DISCORD_LINK } from "utils/constants";
+
+import MobileMenu from "./menu/MobileMenu";
 
 import cn from "classnames";
 
@@ -64,16 +66,9 @@ const LayoutHeader = ({ router }) => {
     setEventSubMenuOpen(false);
   });
 
-  const [eventMobileSubMenuOpen, setEventMobileSubMenuOpen] = useState(true);
-
   useEffect(() => {
     setCurLink(router.route);
   }, [router.route]);
-
-  const handleClickMobileLink = (link) => {
-    setMobileMenuOpen(false);
-    router.push(link);
-  };
 
   return (
     <header className="layout-container__header">
@@ -241,136 +236,8 @@ const LayoutHeader = ({ router }) => {
           onClick={(e) => setMobileMenuOpen(true)}
         />
       </div>
-      {mobileMenuOpen && (
-        <div className="mobile-header-menu">
-          <div className="mobile-header-menu-top">
-            <img
-              className="mobile-logo"
-              src="/assets/logo/paloma-red.png"
-            />
-            <img
-              className="mobile-menu-close"
-              src="/assets/icons/close.png"
-              onClick={(e) => setMobileMenuOpen(false)}
-            />
-          </div>
-          <div className="mobile-header-menu-menus">
-            <HeaderMenu
-              title="Developers"
-              isLink={false}
-              className="mobile-button"
-              img="/assets/arrows/arrow-down-black.png"
-              childrenOpen={eventMobileSubMenuOpen}
-              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
-            >
-              <div className="mobile-menu-sub">
-                <a
-                  href="https://docs.palomachain.com/guide/develop/quick-start/quick-start.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Quick Start
-                </a>
-                <a
-                  href="https://docs.palomachain.com/guide/maintain/governance/governance.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Governance
-                </a>
-                <a
-                  href="https://volumefi.notion.site/Build-on-Paloma-Onboarding-Board-28abc84384b54db8a5409fd67d97a457"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Developer Grant Program
-                </a>
-                <a
-                  href="https://docs.palomachain.com/guide/maintain/node/set-up-production.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Running a node
-                </a>
-                <a
-                  href="https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html#send-a-message"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Mint An Egg
-                </a>
-                <a
-                  href="https://docs.palomachain.com/guide/develop/quick-start/lob.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  set up a limit order bot
-                </a>
-                <a
-                  href="https://github.com/palomachain/paloma"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Read me
-                </a>
-              </div>
-            </HeaderMenu>
-            <HeaderMenu
-              title="Applications"
-              isLink={false}
-              className="mobile-button"
-              img="/assets/arrows/arrow-down-black.png"
-              childrenOpen={eventMobileSubMenuOpen}
-              // onClick={() => setEventMobileSubMenuOpen(!eventMobileSubMenuOpen)}
-            >
-              <div className="mobile-menu-sub">
-                <a
-                  href="https://docs.palomachain.com/guide/develop/applications/pyth/pyth-price-feeds.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  pyth Price Feed
-                </a>
-                <a
-                  href="https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html"
-                  className="mobile-menu-sub-link"
-                  target="_blank"
-                >
-                  Compass EVM
-                </a>
-              </div>
-            </HeaderMenu>
-            <HeaderMenu
-              title="Blog"
-              href={`${baseUrl}/blog`}
-              isLink={false}
-              className="mobile-button"
-              active={curLink.startsWith("/blog")}
-              onClick={() => handleClickMobileLink("/blog")}
-            />
-            <HeaderMenu
-              title="Events"
-              href={`${baseUrl}/event`}
-              isLink={false}
-              className="mobile-button"
-              active={curLink.startsWith("/event")}
-              onClick={() => handleClickMobileLink("/event")}
-            />
-            <a href="https://forum.palomachain.com/" className="mobile-button" target="_blank">
-              Forum
-            </a>
-            <div className="mobile-menu-spacer"></div>
-            <a
-              href={DISCORD_LINK}
-              className="mobile-button community"
-              target="_blank"
-            >
-              <span>Join our Community</span>
-              <img src="/assets/arrows/arrow-top-right.png" />
-            </a>
-          </div>
-        </div>
-      )}
+
+      {mobileMenuOpen && <MobileMenu onClose={() => { setMobileMenuOpen(false) }}/>}
     </header>
   );
 };

@@ -415,6 +415,11 @@
       font-family: $font-bold;
       font-size: 100px;
       line-height: 173px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 54px;
+        line-height: 123px;
+      }        
     }
 
     .pigeons {

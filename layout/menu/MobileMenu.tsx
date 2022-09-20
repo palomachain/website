@@ -100,7 +100,8 @@ const MobileMenu = ({ onClose }) => {
                           <div className="menu" onClick={(e) => onClickMenu(item_2.title)}>
                             {item_2.title}
                           </div>
-                          <img  className="image" src="/assets/arrows/arrow-down-black.png" />
+                          {openMenu.includes(item_2.title) && <img className="image" src="/assets/arrows/arrow-up-black.png" />}
+                          {!openMenu.includes(item_2.title) && <img className="image" src="/assets/arrows/arrow-down-black.png" />}
                         </>
                       )}
                     </div>

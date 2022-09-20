@@ -5,5 +5,5 @@ cd paloma-docs/docs
 yarn install
 yarn add -D vuepress
 yarn build
-cp -r src/.vuepress/dist ../../public/docs
+cp -r src/.vuepress/dist ../../public/paloma-docs
 cd ../../

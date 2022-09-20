@@ -109,14 +109,14 @@ const LayoutHeader = ({ router }) => {
                 <div className="submenu-section-title">Get Started</div>
                 <a
                   className="link"
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+                  href="https://docs.palomachain.com/guide/develop/quick-start/quick-start.html"
                   target="_blank"
                 >
                   Quick Start
                 </a>
                 <a
                   className="link"
-                  href="https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html"
+                  href="https://docs.palomachain.com/guide/maintain/governance/governance.html"
                   target="_blank"
                 >
                   Governance
@@ -133,14 +133,14 @@ const LayoutHeader = ({ router }) => {
                 <div className="submenu-section-title">Guides</div>
                 <a
                   className="link"
-                  href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"
+                  href="https://docs.palomachain.com/guide/maintain/node/set-up-production.html"
                   target="_blank"
                 >
                   Running a node
                 </a>
                 <a
                   className="link"
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message"
+                  href="https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html#send-a-message"
                   target="_blank"
                 >
                   Mint An Egg
@@ -180,7 +180,7 @@ const LayoutHeader = ({ router }) => {
               <div className="submenu-section">
                 <a
                   className="submenu-section-title link"
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html"
+                  href="https://docs.palomachain.com/guide/develop/applications/pyth/pyth-price-feeds.html"
                   target="_blank"
                 >
                   pyth Price Feed
@@ -189,7 +189,7 @@ const LayoutHeader = ({ router }) => {
               <div className="submenu-section">
                 <a
                   className="submenu-section-title link"
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html"
+                  href="https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html"
                   target="_blank"
                 >
                   Compass EVM
@@ -265,14 +265,14 @@ const LayoutHeader = ({ router }) => {
             >
               <div className="mobile-menu-sub">
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html"
+                  href="https://docs.palomachain.com/guide/develop/quick-start/quick-start.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
                   Quick Start
                 </a>
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html"
+                  href="https://docs.palomachain.com/guide/maintain/governance/governance.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
@@ -286,21 +286,21 @@ const LayoutHeader = ({ router }) => {
                   Developer Grant Program
                 </a>
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html"
+                  href="https://docs.palomachain.com/guide/maintain/node/set-up-production.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
                   Running a node
                 </a>
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message"
+                  href="https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html#send-a-message"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
                   Mint An Egg
                 </a>
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/lob.html"
+                  href="https://docs.palomachain.com/guide/develop/quick-start/lob.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
@@ -325,14 +325,14 @@ const LayoutHeader = ({ router }) => {
             >
               <div className="mobile-menu-sub">
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html"
+                  href="https://docs.palomachain.com/guide/develop/applications/pyth/pyth-price-feeds.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >
                   pyth Price Feed
                 </a>
                 <a
-                  href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html"
+                  href="https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html"
                   className="mobile-menu-sub-link"
                   target="_blank"
                 >

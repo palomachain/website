@@ -19,23 +19,23 @@ const Footer = () => (
 
       <div className="footer-view-links">
         <h3 className="footer-subtitle">Features</h3>
-        <a href="https://palomachain.github.io/paloma-docs/guide/maintain/relayer/pigeon.html" target="_blank">
+        <a href="https://docs.palomachain.com/guide/maintain/relayer/pigeon.html" target="_blank">
           pigeon
         </a>
-        <a href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/resources.html#sdks" target="_blank">
+        <a href="https://docs.palomachain.com/guide/develop/quick-start/resources.html#sdks" target="_blank">
           SDKs
         </a>
-        <a href="https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html#model" target="_blank">
+        <a href="https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html#model" target="_blank">
           Compass-EVM
         </a>
-        <a href="https://palomachain.github.io/paloma-docs/guide/develop/module-specifications/spec-auth.html#parameters" target="_blank">
+        <a href="https://docs.palomachain.com/guide/develop/module-specifications/spec-auth.html#parameters" target="_blank">
           Gas Management
         </a>
       </div>
 
       <div className="footer-view-links">
         <h3 className="footer-subtitle">Examples</h3>
-        <a href="https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html" target="_blank">
+        <a href="https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html" target="_blank">
           Mint an Egg
         </a>
         <a href="" target="_blank">

@@ -88,7 +88,6 @@ const UpcomingEvent = ({ data }) => {
             },
           })}
         </div>
-        <div className="event-spacer"></div>
         <div className="event-buttons">
           {eventLink.register !== "" && (
             <a
@@ -112,6 +111,7 @@ const UpcomingEvent = ({ data }) => {
             </a>
           )}
         </div>
+        <div className="event-spacer"></div>
       </div>
     </div>
   );

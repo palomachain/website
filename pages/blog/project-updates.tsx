@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import RotatedHeader from "components/RotatedHeader";
-import { BlogList } from "components/Blog";
+import { BlogList, BlogPageWrapper } from "components/Blog";
 
 import { fetchBlogs, filterBlogs } from "utils/storyblok";
 
@@ -20,11 +19,11 @@ const BlogProjectUpdates = ({ router }) => {
   return (
     <div className="page-container">
       <div className="blog-page-container">
-        <RotatedHeader title="Project Developments" theme="dark" />
-
-        <div className="blog-latest-wrapper">
-          <BlogList data={latestBlogs} />
-        </div>
+        <BlogPageWrapper title="Project Developments">
+          <div className="blog-latest-wrapper">
+            <BlogList data={latestBlogs} />
+          </div>
+        </BlogPageWrapper>
       </div>
     </div>
   );

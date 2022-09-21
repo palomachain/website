@@ -266,12 +266,22 @@
       line-height: 37px;
       margin-top: 50px;
       color: #2c2c2c;
+
+      @media screen and (max-width: 768px) {
+        font-size: 20px;
+        line-height: 27px;
+      }
     }
 
     .blog-intro {
       font-size: 18px;
       line-height: 31px;
       color: #2c2c2c;
+
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 24px;
+      }
     }
 
     .blog-divider {
@@ -286,9 +296,24 @@
       // font-family: "Lora";
       color: #2c2c2c;
 
+      @media screen and (max-width: 768px) {
+
+        h2 {
+          font-size: 14px !important;
+          line-height: 24px;
+        }
+
+        p {
+          font-size: 12px !important;
+          line-height: 20px;
+          word-wrap: break-word;
+        }
+      }
+
       @media screen and (max-width: 425px) {
         padding: 20px 0px;
       }
+
       a {
         color: $main_text_color;
         text-decoration: underline;

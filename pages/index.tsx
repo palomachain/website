@@ -52,7 +52,6 @@ export default function Home({ state, router }) {
   useEffect(() => {
     const getPageData = async () => {
       const data = await fetchPageValues(PAGE_LANDING);
-      console.log(data);
       setData({ ...data.content });
 
       const msgs = await getMessageCount();
@@ -181,7 +180,7 @@ export default function Home({ state, router }) {
               <h2>
               {" "}
               From The Cosmos </h2>
-            <p>
+            <p style={{ textAlign: 'left'}}>
               Mint one of our 100 limited Edition Developer Eggs NFTs by sending
               a message on Ethereum.
             </p>

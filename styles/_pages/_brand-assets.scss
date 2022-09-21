@@ -9,7 +9,7 @@
     padding: 0px 80px;
     margin-bottom: 212px;
     width: 100%;
-    margin-top: 193px;
+    margin-top: 63px;
 
     @media screen and (max-width: 768px) {
       flex-direction: column;
@@ -57,8 +57,8 @@
 
     p {
       font-weight: 400;
-      font-size: 14px;
-      line-height: 25px;
+      font-size: 20px;
+      line-height: 26px;
       color: #2c2c2c;
       max-width: 439px;
 
@@ -91,7 +91,7 @@
 
     &:hover {
       background: #ffffff;
-      border: 1.3px solid #2C2C2C;
+      border: 1.3px solid #2c2c2c;
       border-radius: 6.5px;
 
       &:after {

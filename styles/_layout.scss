@@ -248,104 +248,6 @@
     }
   }
 
-  .mobile-header-menu {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100vw;
-    max-width: 100%;
-    height: 100vh;
-    background: #2c2c2c;
-    z-index: 5000;
-    padding: 21px 24px;
-
-    &-top {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .mobile-logo {
-        height: 80px;
-      }
-
-      .mobile-menu-close {
-        height: 13px;
-      }
-    }
-
-    &-menus {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 61px;
-      height: calc(100% - 21px - 57px - 61px);
-    }
-
-    .mobile-menu-spacer {
-      flex: 1;
-    }
-
-    .mobile-button {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      align-items: center;
-      font-family: $font-semibold;
-      font-size: 14px;
-      color: #fff;
-      text-decoration: underline;
-      text-transform: uppercase;
-      margin-bottom: 13px;
-
-      img {
-        height: 9px;
-        margin-left: 5px;
-      }
-
-      &.active {
-        color: #FF62C4;
-      }
-
-      &.disabled {
-        color: #494849;
-        text-decoration: none;
-      }
-
-      &.community {
-        display: flex;
-        text-decoration: underline;
-      }
-    }
-
-    .mobile-menu-sub {
-      display: block;
-      width: 100%;
-      margin-left: 18px;
-      font-family: $font-semibold;
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      color: #fff;
-
-      span {
-        text-decoration: none;
-      }
-
-      &-link {
-        margin-bottom: 13px;
-        text-decoration: none !important;
-        text-transform: uppercase;
-        color: #fff;
-
-        &.active {
-          color: #FF62C4;
-          text-decoration: none !important;
-        }
-      }
-    }
-  }
-
   .sub-nav-bar {
     width: 100%;
     padding: 0px 62px;
@@ -372,12 +274,21 @@
       align-items: flex-start;
       gap: 20px;
 
-      @media screen and (max-width: 768px) {
-       flex-direction: column;
+      &.mobile {
+        display: none;
       }
 
       @media screen and (max-width: 768px) {
+        flex-direction: column;
         padding: 30px;
+
+        &.desktop {
+          display: none;
+        }
+
+        &.mobile {
+          display: block;
+        }
       }
 
       &-logo {

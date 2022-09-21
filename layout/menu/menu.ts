@@ -11,6 +11,7 @@ const navMenu = [
   {
     title: "Developers",
     hasLink: false,
+    description: "Find here all the useful links to start building on Paloma.",
     submenus: [
       {
         title: "Get Started",
@@ -19,13 +20,13 @@ const navMenu = [
           {
             title: "Quick Start",
             hasLink: true,
-            link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/quick-start.html",
+            link: "https://docs.palomachain.com/guide/develop/quick-start/quick-start.html",
             external: true,
           },
           {
             title: "Governance",
             hasLink: true,
-            link: "https://palomachain.github.io/paloma-docs/guide/maintain/governance/governance.html",
+            link: "https://docs.palomachain.com/guide/maintain/governance/governance.html",
             external: true,
           },
           {
@@ -43,13 +44,13 @@ const navMenu = [
           {
             title: "Running a node",
             hasLink: true,
-            link: "https://palomachain.github.io/paloma-docs/guide/maintain/node/set-up-production.html",
+            link: "https://docs.palomachain.com/guide/maintain/node/set-up-production.html",
             external: true,
           },
           {
             title: "Mint An Egg",
             hasLink: true,
-            link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html#send-a-message",
+            link: "https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html#send-a-message",
             external: true,
           },
         ],
@@ -71,17 +72,18 @@ const navMenu = [
   {
     title: "Applications",
     hasLink: false,
+    description: "Discover the ecosystem of Paloma Products and Applications.",
     submenus: [
       {
         title: "pyth Price Feed",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/applications/pyth/pyth-price-feeds.html",
+        link: "https://docs.palomachain.com/guide/develop/applications/pyth/pyth-price-feeds.html",
         external: true,
       },
       {
         title: "Compass EVM",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html",
+        link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html",
         external: true,
       },
     ],
@@ -114,25 +116,25 @@ const footerMenu = [
       {
         title: "pigeon",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/maintain/relayer/pigeon.html",
+        link: "https://docs.palomachain.com/guide/maintain/relayer/pigeon.html",
         external: true,
       },
       {
         title: "SDKs",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/resources.html#sdks",
+        link: "https://docs.palomachain.com/guide/develop/quick-start/resources.html#sdks",
         external: true,
       },
       {
         title: "Compass-EVM",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/applications/compass-evm/overview.html#model",
+        link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html#model",
         external: true,
       },
       {
         title: "Gas Management",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/module-specifications/spec-auth.html#parameters",
+        link: "https://docs.palomachain.com/guide/develop/module-specifications/spec-auth.html#parameters",
         external: true,
       },
     ],
@@ -144,7 +146,7 @@ const footerMenu = [
       {
         title: "Mint an Egg",
         hasLink: true,
-        link: "https://palomachain.github.io/paloma-docs/guide/develop/quick-start/mint-egg.html",
+        link: "https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html",
         external: true,
       },
       // {

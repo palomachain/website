@@ -30,7 +30,7 @@ const MobileFooter = () => {
     <div className="mobile-header-menu footer">
       <div className="mobile-header-menu-wrapper">
         {footerMenu.map((item_1) => (
-          <React.Fragment key={`menu-1-${item_1.title}`}>
+          <React.Fragment key={`m-menu-1-${item_1.title}`}>
             <div className={cn("mobile_menu_1", { active: openMenu.includes(item_1.title) })}>
               <div className="menu" onClick={(e) => onClickMenu(item_1.title)}>
                 {item_1.title}
@@ -42,7 +42,7 @@ const MobileFooter = () => {
             {"submenus" in item_1 && (
               <div className={cn("mobile-submenu", { show: openMenu.includes(item_1.title) })}>
                 {item_1.submenus.map((item_2) => (
-                  <div className="mobile_menu_2" key={`menu-2-${item_2.title}`}>
+                  <div className="mobile_menu_2" key={`m-menu-2-${item_2.title}`}>
                     {item_2.hasLink && item_2.external === false && (
                       <Link href={item_2.link}>
                         <div className="menu footer">{item_2.title}</div>

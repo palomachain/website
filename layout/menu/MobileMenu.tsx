@@ -57,7 +57,7 @@ const MobileMenu = ({ onClose }) => {
       </div>
       <div className="mobile-header-menu-wrapper">
         {navMenu.map((item_1) => (
-          <React.Fragment key={`menu-1-${item_1.title}`}>
+          <React.Fragment key={`m-menu-1-${item_1.title}`}>
             <div className={cn("mobile_menu_1", { active: openMenu.includes(item_1.title) })}>
               {item_1.hasLink && item_1.external === false && (
                 <Link href={item_1.link}>
@@ -83,7 +83,7 @@ const MobileMenu = ({ onClose }) => {
             {"submenus" in item_1 && (
               <div className={cn("mobile-submenu", { show: openMenu.includes(item_1.title) })}>
                 {item_1.submenus.map((item_2) => (
-                  <React.Fragment key={`menu-2-${item_2.title}`}>
+                  <React.Fragment key={`m-menu-2-${item_2.title}`}>
                     <div className="mobile_menu_2">
                       {item_2.hasLink && item_2.external === false && (
                         <Link href={item_2.link}>
@@ -108,7 +108,7 @@ const MobileMenu = ({ onClose }) => {
                     {"submenus" in item_2 && (
                       <div className={cn("mobile-submenu", { show: openMenu.includes(item_2.title) })}>
                         {item_2.submenus.map((item_3) => (
-                          <div className="mobile_menu_3" key={`menu-3-${item_3.title}`}>
+                          <div className="mobile_menu_3" key={`m-menu-3-${item_3.title}`}>
                             {item_3.hasLink && item_3.external === false && (
                               <Link href={item_3.link}>
                                 <div onClick={(e) => onClickLink()} className="menu">{item_3.title}</div>

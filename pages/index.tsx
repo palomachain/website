@@ -4,7 +4,7 @@ import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 import RotatedHeader from "components/RotatedHeader";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
-import { getMessageCount, getPalomaTwitterFollowersCount } from "utils/axios";
+import { getMessageCount, getFollowersCount } from "utils/axios";
 
 import cn from "classnames";
 
@@ -57,7 +57,7 @@ export default function Home({ state, router }) {
       const msgs = await getMessageCount();
       setMsgs(msgs);
 
-      const followers = await getPalomaTwitterFollowersCount();
+      const followers = await getFollowersCount();
       setFollowers(followers);
     };
 
@@ -88,7 +88,7 @@ export default function Home({ state, router }) {
 
   return (
     <div className="page-container">
-      <div className="home-page-container">
+      <div className="home-page-container" style={{ marginTop: 79 }}>
         <div className="home-page-section">
           <div className="home-page-text">
             <h1>{data.heading1}</h1>

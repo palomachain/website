@@ -7,12 +7,37 @@ import MobileMenu from "./menu/MobileMenu";
 
 import cn from "classnames";
 
+const NaveMenuItem = ({menu, curLink = ''}) => (
+  <React.Fragment>
+    {menu.hasLink && menu.external && (
+      <a href={menu.link} className="header-button" target="_blank">
+        <span>{menu.title}</span>
+        {("submenus" in menu) && (<img src="/assets/arrows/arrow-down-black.png" />)}
+      </a>
+    )}
+    {menu.hasLink && !menu.external && (
+      <Link href={menu.link}>
+        <div className={cn("header-button", { active: curLink.includes(menu.link) })}>
+          <span>{menu.title}</span>
+          {("submenus" in menu) && (<img src="/assets/arrows/arrow-down-black.png" />)}
+        </div>
+      </Link>
+    )}
+    {!menu.hasLink && (
+      <div className="header-button">
+        <span>{menu.title}</span>
+        {("submenus" in menu) && (<img src="/assets/arrows/arrow-down-black.png" />)}
+      </div>
+    )}
+  </React.Fragment>
+)
+
 const LayoutHeader = ({ router }) => {
   const [curLink, setCurLink] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setCurLink(router.route);
+    setCurLink(`${router.route}/`);
   }, [router.route]);
 
   return (
@@ -29,22 +54,12 @@ const LayoutHeader = ({ router }) => {
       <div className="layout-container__header__buttons">
         {navMenu.map((item_1) => (
           <React.Fragment key={`menu-1-${item_1.title}`}>
-            {item_1.hasLink && item_1.external && (
-              <a href={item_1.link} className="header-button" target="_blank">{item_1.title}</a>
+            {!("submenus" in item_1) && (
+              <NaveMenuItem menu={item_1} curLink={curLink} />
             )}
-            {item_1.hasLink && !item_1.external && (
-              <Link href={item_1.link}>
-                <div className={cn("header-button", { active: curLink.includes(item_1.link) })}>
-                  <span>{item_1.title}</span>
-                </div>
-              </Link>
-            )}
-            {!item_1.hasLink && (
+            {("submenus" in item_1) && (
               <div className="header-parent-menu">
-                <div className="header-button">
-                  <span>{item_1.title}</span>
-                  <img src="/assets/arrows/arrow-down-black.png" />
-                </div>
+                <NaveMenuItem menu={item_1} curLink={curLink} />
                 {"submenus" in item_1 && (
                   <div className="header-major-submenu">
                     <div className="header-major-submenu-padding" />
@@ -56,8 +71,11 @@ const LayoutHeader = ({ router }) => {
                       {item_1.submenus.map((item_2) => (
                         <div className="submenu-section" key={`menu-2-${item_2.title}`}>
                           {!item_2.hasLink && (<div className="submenu-section-title">{item_2.title}</div>)}
-                          {item_2.hasLink && (
+                          {item_2.hasLink && item_2.external && (
                             <a className="submenu-section-title link" href={item_2.link} target="_blank">{item_2.title}</a>
+                          )}
+                          {item_2.hasLink && !item_2.external && (
+                            <Link href={item_2.link}><div className="submenu-section-title link">{item_2.title}</div></Link>
                           )}
                           {"submenus" in item_2 && item_2.submenus.map((item_3) => (
                             <React.Fragment key={`menu-3-${item_3.title}`}>

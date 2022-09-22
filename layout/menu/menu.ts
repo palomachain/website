@@ -93,11 +93,32 @@ const navMenu = [
     hasLink: true,
     link: `${baseUrl}/blog`,
     external: false,
+    description: "Stay up to date with the depevopments, news and announcements in Paloma.",
+    submenus: [
+      {
+        title: "news and announcements",
+        hasLink: true,
+        link: `${baseUrl}/blog/announcements`,
+        external: false,
+      },
+      {
+        title: "Project Developments",
+        hasLink: true,
+        link: `${baseUrl}/blog/project-updates`,
+        external: false,
+      },
+      {
+        title: "event Recaps",
+        hasLink: true,
+        link: `${baseUrl}/blog/events`,
+        external: false,
+      },
+    ]
   },
   {
     title: "Events",
     hasLink: true,
-    link: `${baseUrl}/event`,
+    link: `${baseUrl}/event/`,
     external: false,
   },
   {

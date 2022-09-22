@@ -1,12 +1,13 @@
 import axios from "axios";
 
 import { getHourOffsetLocalTimezone } from "./date";
+import { intToString } from "./number";
 
 const axiosClient = () => {
   const client = axios.create();
 
   client.defaults.headers.common = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   };
 
@@ -23,7 +24,7 @@ export const getMessageCount = async () => {
   const mm = today.getMonth();
   const yyyy = today.getFullYear();
 
-  const startTime = new Date(yyyy, mm, dd, 0, 0 ,0);
+  const startTime = new Date(yyyy, mm, dd, 0, 0, 0);
   const endTime = new Date(yyyy, mm, dd, 23, 59, 59);
 
   const startTimeUTC = startTime.getTime() - 3600 * hourOffset * 1000;
@@ -50,8 +51,7 @@ export const getMessageCount = async () => {
 };
 
 export const getPalomaTwitterFollowersCount = async () => {
-
-   let data = '';
+  let data = "";
 
   try {
     const res = await axiosClient().get(
@@ -60,10 +60,26 @@ export const getPalomaTwitterFollowersCount = async () => {
 
     if (res.status === 200) {
       data = res.data.followers;
-    } 
-  } catch(e) {
+    }
+  } catch (e) {
     console.log(e);
   }
 
   return data;
-}
+};
+
+export const getFollowersCount = async () => {
+  let data = "";
+
+  try {
+    const response = await fetch("https://count.palomachain.com/");
+    const res = await response.json();
+
+    const { twitter, discord, telegram } = res;
+    data = twitter + discord + telegram;
+  } catch (e) {
+    console.log(e);
+  }
+
+  return intToString(data);
+};

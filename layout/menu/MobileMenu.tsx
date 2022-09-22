@@ -59,23 +59,51 @@ const MobileMenu = ({ onClose }) => {
         {navMenu.map((item_1) => (
           <React.Fragment key={`m-menu-1-${item_1.title}`}>
             <div className={cn("mobile_menu_1", { active: openMenu.includes(item_1.title) })}>
-              {item_1.hasLink && item_1.external === false && (
-                <Link href={item_1.link}>
-                  <div onClick={(e) => onClickLink()} className="menu">{item_1.title}</div>
-                </Link>
+              {item_1.hasLink && !item_1.external && (
+                <>
+                  <Link href={item_1.link}>
+                    <div 
+                      onClick={(e) => {
+                        if ("submenus" in item_1) onClickMenu(item_1.title);
+                        if (!("submenus" in item_1)) onClickLink();
+                      }}
+                      className="menu"
+                    >
+                      <span>{item_1.title}</span>
+                    </div>
+                  </Link>
+                  {"submenus" in item_1 && (
+                    openMenu.includes(item_1.title) ?
+                    <img className="image" src="/assets/arrows/arrow-up-pink.png" />
+                    :
+                    <img className="image" src="/assets/arrows/arrow-down-black.png" />
+                  )}
+                </>
               )}
               {item_1.hasLink && item_1.external && (
-                <a  className="menu" href={item_1.link} target="_blank">
-                  {item_1.title}
-                </a>
+                <>
+                  <a className="menu" href={item_1.link} target="_blank">
+                    <span>{item_1.title}</span>
+                  </a>
+                  {"submenus" in item_1 && (
+                    openMenu.includes(item_1.title) ?
+                    <img className="image" src="/assets/arrows/arrow-up-pink.png" />
+                    :
+                    <img className="image" src="/assets/arrows/arrow-down-black.png" />
+                  )}
+                </>
               )}
-              {!item_1.hasLink && "submenus" in item_1 && (
+              {!item_1.hasLink && (
                 <>
                   <div className="menu" onClick={(e) => onClickMenu(item_1.title)}>
-                    {item_1.title}
+                    <span>{item_1.title}</span>
                   </div>
-                  {openMenu.includes(item_1.title) && <img className="image" src="/assets/arrows/arrow-up-pink.png" />}
-                  {!openMenu.includes(item_1.title) && <img className="image" src="/assets/arrows/arrow-down-black.png" />}
+                  {"submenus" in item_1 && (
+                    openMenu.includes(item_1.title) ?
+                    <img className="image" src="/assets/arrows/arrow-up-pink.png" />
+                    :
+                    <img className="image" src="/assets/arrows/arrow-down-black.png" />
+                  )}
                 </>
               )}
             </div>

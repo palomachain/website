@@ -150,14 +150,15 @@
       position: fixed;
       width: 100%;
       left: 0px;
-      top: 105px;
+      top: 113px;
       display: none;
       z-index: 8000;
       box-shadow: 0px 4px 3px rgba(182, 182, 182, 0.23);
 
       &-padding {
         width: 100%;
-        height: 40px;
+        height: 30px;
+        background: #eae5e5;
       }
 
       &-content {
@@ -218,6 +219,10 @@
             line-height: 37px;
             color: #2c2c2c;
             text-transform: capitalize;
+
+            &.link {
+              cursor: pointer;
+            }
           }
 
           &-title {
@@ -233,6 +238,7 @@
               background-size: 15px;
               padding-right: 25px;
               background-image: none;
+              cursor: pointer;
             }
           }
 

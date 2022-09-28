@@ -27,6 +27,7 @@
     "react-copy-to-clipboard": "^5.0.3",
     "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.1",
+    "react-is": "^18.2.0",
     "react-toastify": "^8.2.0",
     "react-tooltip": "^4.2.21",
     "sass": "^1.32.12",

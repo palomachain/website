@@ -112,13 +112,13 @@ export default function Home({ state, router }) {
             <div className="count">
               <div className="title">Total Messages</div>
               <div className="number">
-                {msgs.totalMessagesCount.toLocaleString("en-US")}
+                {msgs.totalMessagesCount}
               </div>
             </div>
             <div className="count">
               <div className="title">Messages per day</div>
               <div className="number">
-                {msgs.todayMessageCount.toLocaleString("en-US")}
+                {msgs.todayMessageCount}
               </div>
             </div>
           </div>

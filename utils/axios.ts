@@ -21,8 +21,8 @@ export const getMessageCount = async () => {
     const response = await fetch("https://count.palomachain.com/");
     const res = await response.json();
 
-    data.totalMessagesCount = res.eth;
-    data.todayMessageCount = res.eth_day;
+    data.totalMessagesCount = res.eth + res.bnb;
+    data.todayMessageCount = res.eth_day + res.bnb_day;
   } catch (e) {
     console.log(e);
   }

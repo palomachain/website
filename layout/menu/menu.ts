@@ -29,12 +29,6 @@ const navMenu = [
             link: "https://docs.palomachain.com/guide/maintain/governance/governance.html",
             external: true,
           },
-          {
-            title: "Developer Grant Program",
-            hasLink: true,
-            link: "https://volumefi.notion.site/Build-on-Paloma-Onboarding-Board-28abc84384b54db8a5409fd67d97a457",
-            external: true,
-          },
         ],
       },
       {

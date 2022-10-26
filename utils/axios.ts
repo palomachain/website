@@ -15,14 +15,14 @@ const axiosClient = () => {
 };
 
 export const getMessageCount = async () => {
-  const data = { totalMessagesCount: 0, todayMessageCount: 0 };
+  let data = { totalMessagesCount: 3633, todayMessageCount: 122 };
 
   try {
     const response = await fetch("https://count.palomachain.com/");
     const res = await response.json();
 
-    data.totalMessagesCount = res.eth + res.bnb;
-    data.todayMessageCount = res.eth_day + res.bnb_day;
+    if(res.eth + res.bnb > data.totalMessagesCount) { data.totalMessagesCount = res.eth + res.bnb; }
+    if(res.eth_day + res.bnb_day > data.todayMessageCount) { data.totalMessagesCount = res.eth_day + res.bnb_day; }
   } catch (e) {
     console.log(e);
   }

@@ -309,7 +309,7 @@ export default function Home({ state, router }) {
             <div className="flock-numbers">{followers}</div>
             <div className="pigeons">Pigeons</div>
             <a
-              href="https://discord.gg/YBMrQxHp"
+              href="https://discord.gg/tNqkNHvVNc"
               className="home-page-button"
               target="_blank"
               style={{ background: "#fff" }}

@@ -31,7 +31,7 @@ export const getMessageCount = async () => {
 };
 
 export const getFollowersCount = async () => {
-  let data = "";
+  let data = 46700;
 
   try {
     const response = await fetch("https://count.palomachain.com/");

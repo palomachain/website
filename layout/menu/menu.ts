@@ -26,7 +26,7 @@ const navMenu = [
           {
             title: "Governance",
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/maintain/governance/governance.html",
+            link: "https://docs.palomachain.com/guide/resources/governance.html",
             external: true,
           },
         ],
@@ -38,7 +38,7 @@ const navMenu = [
           {
             title: "Running a node",
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/maintain/node/set-up-production.html",
+            link: "https://docs.palomachain.com/guide/maintain/node/requirements.html",
             external: true,
           },
           {
@@ -131,7 +131,7 @@ const footerMenu = [
       {
         title: "pigeon",
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/maintain/relayer/pigeon.html",
+        link: "https://docs.palomachain.com/guide/maintain/node/install-pigeon.html",
         external: true,
       },
       {
@@ -144,12 +144,6 @@ const footerMenu = [
         title: "Compass-EVM",
         hasLink: true,
         link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html#model",
-        external: true,
-      },
-      {
-        title: "Gas Management",
-        hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/module-specifications/spec-auth.html#parameters",
         external: true,
       },
     ],

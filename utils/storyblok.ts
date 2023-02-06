@@ -6,11 +6,21 @@ const Storyblok = new StoryblokClient({
   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
 });
 
-export const fetchBlogs = async () => {
+export const fetchBlogs = async (params = {}) => {
+  const filterQuery = {};
+  for (let i = 0; i < Object.keys(params).length; i++) {
+    const key = Object.keys(params)[i];
+    const value = params[key];
+    filterQuery[key] = {
+      like: value
+    }
+  }
+
   const blogs = [];
   var response = await Storyblok.get("cdn/stories/", {
     starts_with: "blog/",
     per_page: 100,
+    filter_query: filterQuery
   });
 
   for (const story of response.data.stories) {

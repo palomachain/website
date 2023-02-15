@@ -17,19 +17,28 @@ export const fetchBlogs = async (params = {}) => {
   }
 
   const blogs = [];
-  var response = await Storyblok.get("cdn/stories/", {
-    starts_with: "blog/",
-    per_page: 100,
-    filter_query: filterQuery
-  });
+  let moreData =  true;
+  let currentPage = 1;
 
-  for (const story of response.data.stories) {
-    if (story.published_at != null) {
-      if (
-        story.full_slug.startsWith("blog/") &&
-        !story.full_slug.endsWith("blog/")
-      ) {
-        blogs.push(story);
+  while(moreData) {
+    let response = await Storyblok.get("cdn/stories/", {
+      starts_with: "blog/",
+      page: currentPage,
+      per_page: 100,
+      filter_query: filterQuery
+    });
+
+    moreData = response.data.stories.length == 100;
+    currentPage = currentPage + 1;
+
+    for (const story of response.data.stories) {
+      if (story.published_at != null) {
+        if (
+            story.full_slug.startsWith("blog/") &&
+            !story.full_slug.endsWith("blog/")
+        ) {
+          blogs.push(story);
+        }
       }
     }
   }

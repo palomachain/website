@@ -42,9 +42,9 @@ const navMenu = [
             external: true,
           },
           {
-            title: "Mint An Egg",
+            title: "Execute an EVM contract",
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html#send-a-message",
+            link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
             external: true,
           },
         ],
@@ -153,9 +153,9 @@ const footerMenu = [
     hasLink: false,
     submenus: [
       {
-        title: "Mint an Egg",
+        title: "Execute an EVM contract",
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/quick-start/mint-egg.html",
+        link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
         external: true,
       },
       // {

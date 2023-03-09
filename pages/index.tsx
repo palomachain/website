@@ -1,45 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
+import { render } from "storyblok-rich-text-react-renderer";
 
 import RotatedHeader from "components/RotatedHeader";
+import GrainDropSection from "elements/home/GrainDropSection";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
 import { getMessageCount, getFollowersCount } from "utils/axios";
 
-import cn from "classnames";
-
 import mixpanel from "mixpanel-browser";
-import {getCookie} from "cookies-next";
-import { setCookie } from 'cookies-next';
+import { getCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
-
-
-const comingNext = [
-  {
-    date: "September 2022",
-    title: "Other EVM Chains",
-    desc: "Add all other EVM chains (mainnet chains)",
-    active: true,
-  },
-  {
-    date: "October 2022",
-    title: "Gas Management",
-    desc: "Pigeons get pay for all messages they deliver",
-    active: false,
-  },
-  {
-    date: "November 2022",
-    title: "Scheduling",
-    desc: "Remote messages can be scheduled in advance",
-    active: false,
-  },
-  {
-    date: "December 2022",
-    title: "Solana",
-    desc: "Add Solana Mainnet as Paloma target chain",
-    active: false,
-  },
-];
 
 export default function Home({ state, router }) {
   const [data, setData] = useState(null);
@@ -47,7 +18,7 @@ export default function Home({ state, router }) {
     totalMessagesCount: 0,
     todayMessageCount: 0,
   });
-  const [followers, setFollowers] = useState('')
+  const [followers, setFollowers] = useState("");
 
   useEffect(() => {
     const getPageData = async () => {
@@ -74,11 +45,11 @@ export default function Home({ state, router }) {
   }, []);
 
   useEffect(() => {
-    const ignore = getCookie('ignore');
+    const ignore = getCookie("ignore");
 
-    if(ignore) {
+    if (ignore) {
       // extend the time the user is ignored
-      setCookie('ignore', 'true', { maxAge: 60 * 60 * 24 * 7 * 10000 });
+      setCookie("ignore", "true", { maxAge: 60 * 60 * 24 * 7 * 10000 });
     }
   }, []);
 
@@ -89,6 +60,7 @@ export default function Home({ state, router }) {
   return (
     <div className="page-container">
       <div className="home-page-container" style={{ marginTop: 79 }}>
+        <GrainDropSection />
         <div className="home-page-section">
           <div className="home-page-text">
             <h1>{data.heading1}</h1>
@@ -111,15 +83,11 @@ export default function Home({ state, router }) {
           <div className="home-messages-total">
             <div className="count">
               <div className="title">Total Messages</div>
-              <div className="number">
-                {msgs.totalMessagesCount}
-              </div>
+              <div className="number">{msgs.totalMessagesCount}</div>
             </div>
             <div className="count">
               <div className="title">Messages per day</div>
-              <div className="number">
-                {msgs.todayMessageCount}
-              </div>
+              <div className="number">{msgs.todayMessageCount}</div>
             </div>
           </div>
         </div>
@@ -173,14 +141,9 @@ export default function Home({ state, router }) {
           <div className="home-page-text">
             <span className="pink">Cross Chain NFTs</span>
             <h2>Mint an Egg </h2>
-            <h2>
-              {" "}
-              on Ethereum
-            </h2>
-              <h2>
-              {" "}
-              From The Cosmos </h2>
-            <p style={{ textAlign: 'left'}}>
+            <h2> on Ethereum</h2>
+            <h2> From The Cosmos </h2>
+            <p style={{ textAlign: "left" }}>
               Mint one of our 100 limited Edition Developer Eggs NFTs by sending
               a message on Ethereum.
             </p>
@@ -256,51 +219,6 @@ export default function Home({ state, router }) {
             </div>
           </div>
         </div>
-
-        {/* <div className="home-page-next">
-          <div className="title">What is coming next?</div>
-          <div className="home-page-next-wrapper">
-            <div className="coming-next-flows">
-              {comingNext.map((item, index) => (
-                <React.Fragment key={`coming-next-item-${index}`}>
-                  {index > 0 && <div className="coming-next-line" />}
-                  <div className="coming-next-item">
-                    <div className="number-wrapper">
-                      <div
-                        className="spacer"
-                        style={{
-                          visibility: index === 0 ? "hidden" : "visible",
-                        }}
-                      />
-                      <div
-                        className={cn("circle-number", { active: item.active })}
-                      >
-                        {index + 1}.
-                      </div>
-                      <div
-                        className="spacer"
-                        style={{
-                          visibility:
-                            index < comingNext.length - 1
-                              ? "visible"
-                              : "hidden",
-                        }}
-                      />
-                    </div>
-                    <div className="content-wrapper">
-                      <div className="date">{item.date}</div>
-                      <div className="title">{item.title}</div>
-                      <div className="desc">{item.desc}</div>
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
-            <div className="home-page-next-image">
-              <img src="/assets/home/diagram-3.png" />
-            </div>
-          </div>
-        </div> */}
 
         <div className="home-page-propositions">
           <div className="subtitle">Stay Updated</div>

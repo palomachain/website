@@ -41,15 +41,15 @@ const GrainDropSection = () => (
           <div className="number">2.</div>
           <div className="title">swap on your favorite DEX</div>
           <div className="link">
-            Paloma Swap allows you to Swap on a wide variety of EVM DEXes,
-            select one and swap.
+            Select your favorite DEX and tokens and swap with private
+            transactions.
           </div>
         </div>
         <div className="item">
           <div className="number">3.</div>
           <div className="title">Earn tokenback GRAINs</div>
           <div className="link">
-            Each and every swap gives you GRAIN tokenback rewards.
+            Each and every swap pays you GRAINs and more tokenback rewards.
           </div>
         </div>
       </div>

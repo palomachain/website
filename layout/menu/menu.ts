@@ -80,6 +80,12 @@ const navMenu = [
         link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html",
         external: true,
       },
+      {
+        title: "Palomaswap",
+        hasLink: true,
+        link: "https://www.palomaswap.com/",
+        external: true,
+      },
     ],
   },
   {
@@ -156,6 +162,12 @@ const footerMenu = [
         title: "Execute an EVM contract",
         hasLink: true,
         link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
+        external: true,
+      },
+      {
+        title: "Palomaswap",
+        hasLink: true,
+        link: "https://www.palomaswap.com/",
         external: true,
       },
       // {

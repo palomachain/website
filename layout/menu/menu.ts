@@ -3,6 +3,7 @@ import {
   TWITTER_LINK,
   GITHUB_LINK,
   DISCORD_LINK,
+  PALOMABOT_WEBSITE_LINK,
 } from "utils/constants";
 
 const baseUrl = process.env.BASE_URL;
@@ -51,6 +52,18 @@ const navMenu = [
       },
       {
         title: "Github",
+        hasLink: false,
+        submenus: [
+          {
+            title: "Read me",
+            hasLink: true,
+            link: "https://github.com/palomachain/paloma",
+            external: true,
+          },
+        ],
+      },
+      {
+        title: "Security",
         hasLink: false,
         submenus: [
           {
@@ -158,36 +171,30 @@ const footerMenu = [
     title: "Examples",
     hasLink: false,
     submenus: [
-      {
-        title: "Execute an EVM contract",
-        hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
-        external: true,
-      },
-      {
-        title: "Palomaswap",
-        hasLink: true,
-        link: "https://www.palomaswap.com/",
-        external: true,
-      },
       // {
-      //   title: "Limit Order Bot",
+      //   title: "Execute an EVM contract",
       //   hasLink: true,
-      //   link: "",
+      //   link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
       //   external: true,
       // },
+      // {
+      //   title: "Palomaswap",
+      //   hasLink: true,
+      //   link: "https://www.palomaswap.com/",
+      //   external: true,
+      // },
+      {
+        title: "Limit Order Bot",
+        hasLink: true,
+        link: PALOMABOT_WEBSITE_LINK,
+        external: true,
+      },
     ],
   },
   {
     title: "Company",
     hasLink: false,
     submenus: [
-      {
-        title: "About",
-        hasLink: true,
-        link: `${baseUrl}/about`,
-        external: false,
-      },
       {
         title: "Careers",
         hasLink: true,
@@ -199,6 +206,24 @@ const footerMenu = [
         hasLink: true,
         link: `${baseUrl}/brand-assets`,
         external: false,
+      },
+      // {
+      //   title: "About",
+      //   hasLink: true,
+      //   link: `${baseUrl}/about`,
+      //   external: false,
+      // },
+      {
+        title: "Forum",
+        hasLink: true,
+        link: "https://forum.palomachain.com/",
+        external: true,
+      },
+      {
+        title: "Security",
+        hasLink: true,
+        link: "",
+        external: true,
       },
     ],
   },
@@ -230,12 +255,7 @@ const footerMenu = [
         link: GITHUB_LINK,
         external: true,
       },
-      {
-        title: "Forum",
-        hasLink: true,
-        link: "https://forum.palomachain.com/",
-        external: true,
-      },
+     
     ],
   },
 ];

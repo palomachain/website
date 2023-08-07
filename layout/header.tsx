@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-import { DISCORD_LINK } from "utils/constants";
+import { PALOMABOT_WEBSITE_LINK } from "utils/constants";
 import { navMenu } from './menu/menu';
 import MobileMenu from "./menu/MobileMenu";
 
@@ -93,8 +93,8 @@ const LayoutHeader = ({ router }) => {
             )}
           </React.Fragment>
         ))}
-        <a href={DISCORD_LINK} className="header-button community" target="_blank">
-          <span>Join our Community</span>
+        <a href={PALOMABOT_WEBSITE_LINK} className="header-button community" target="_blank">
+          <span>Create a Bot</span>
         </a>
       </div>
 

@@ -5,18 +5,23 @@ import RotatedHeader from "components/RotatedHeader";
 import GrainDropSection from "elements/home/GrainDropSection";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
-import { getMessageCount, getFollowersCount } from "utils/axios";
+import {
+  getMessageCount,
+  getFollowersCount,
+  getPalomaBotStats,
+} from "utils/axios";
 
 import mixpanel from "mixpanel-browser";
 import { getCookie } from "cookies-next";
 import { setCookie } from "cookies-next";
+import PalomaBotIntro from "elements/home/PalomaBotIntro";
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 export default function Home({ state, router }) {
   const [data, setData] = useState(null);
   const [msgs, setMsgs] = useState({
-    totalMessagesCount: 0,
-    todayMessageCount: 0,
+    totalBotMessages: 0,
+    totalBotsCount: 0,
   });
   const [followers, setFollowers] = useState("");
 
@@ -25,7 +30,7 @@ export default function Home({ state, router }) {
       const data = await fetchPageValues(PAGE_LANDING);
       setData({ ...data.content });
 
-      const msgs = await getMessageCount();
+      const msgs = await getPalomaBotStats();
       setMsgs(msgs);
 
       const followers = await getFollowersCount();
@@ -37,7 +42,7 @@ export default function Home({ state, router }) {
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const msgs = await getMessageCount();
+      const msgs = await getPalomaBotStats();
       setMsgs(msgs);
     }, 30000);
 
@@ -60,40 +65,23 @@ export default function Home({ state, router }) {
   return (
     <div className="page-container">
       <div className="home-page-container" style={{ marginTop: 79 }}>
-        <GrainDropSection />
-        <div className="home-page-section">
-          <div className="home-page-text">
-            <h1>{data.heading1}</h1>
-            <p className="large">{data.text1}</p>
-            <a
-              href="https://docs.palomachain.com/guide/develop/quick-start/quick-start.html"
-              className="home-page-button"
-              target="_blank"
-            >
-              Get Started
-              <img src="/assets/arrows/arrow-top-right.png" />
-            </a>
-          </div>
-          <div className="home-page-image">
-            <img src="/assets/home/diagram-1.png" />
-          </div>
-        </div>
+        <PalomaBotIntro />
 
         <div className="home-page-section">
           <div className="home-messages-total">
             <div className="count">
-              <div className="title">Total Messages</div>
-              <div className="number">{msgs.totalMessagesCount}</div>
+              <div className="title">Total Bot Messages</div>
+              <div className="number">{msgs.totalBotMessages}</div>
             </div>
             <div className="count">
-              <div className="title">Messages per day</div>
-              <div className="number">{msgs.todayMessageCount}</div>
+              <div className="title">Total Bots</div>
+              <div className="number">{msgs.totalBotsCount}</div>
             </div>
           </div>
         </div>
 
         <RotatedHeader
-          title="We message in all directions!"
+          title="We go in all directions!"
           theme="dark"
           rightImage="/assets/arrows/footprint.svg"
           className="home-section-header"
@@ -101,8 +89,15 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section reverse">
           <div className="home-page-text">
-            <h2>{data.heading2}</h2>
-            <p>{data.text2}</p>
+            <h2>Permissionless Bots</h2>
+            <p>
+              Paloma's bots are low-latency and bidirectional smart contracts
+              that are managed by the Paloma blockchain. Paloma validators act
+              as custodians to monitor and execute state change instructions
+              sent by developers and by users on target blockchains including
+              Ethereum, BSC Chain, Polygon, Ethereum L2s, and any Cosmos-SDK
+              Chain
+            </p>
           </div>
           <div className="home-page-image">
             <img src="/assets/home/diagram-2.png" />
@@ -139,13 +134,13 @@ export default function Home({ state, router }) {
 
         <div className="home-page-section">
           <div className="home-page-text">
-            <span className="pink">Cross Chain NFTs</span>
-            <h2>Mint an Egg </h2>
-            <h2> on Ethereum</h2>
-            <h2> From The Cosmos </h2>
+            <span className="pink">Uniswap V2 Position</span>
+            <h2>Build a Limit</h2>
+            <h2>Order Bot</h2>
             <p style={{ textAlign: "left" }}>
-              Mint one of our 100 limited Edition Developer Eggs NFTs by sending
-              a message on Ethereum.
+              We deliver a game-changer blockchain for developers. our protocol
+              was built from developers to developers. Easy to use, easy to
+              love. Get started now!
             </p>
             <a
               href="https://docs.palomachain.com/"
@@ -195,18 +190,27 @@ export default function Home({ state, router }) {
           <div className="home-how-to-build">
             <div className="home-how-item ">
               <div className="number">1.</div>
-              <div className="content">{render(data.build_text1)}</div>
+              <div className="content">
+                <h1>Create a Bot</h1>
+                <p>Create your bot with a simple command-line entry on Paloma. Pay for your bot's gas in GRAINS or ETH at the command line. Let fly!</p>
+              </div>
             </div>
 
             <div className="home-how-item second">
               {/* <img className="pigeon" src="/assets/home/pigeon.png" /> */}
               <div className="number">2.</div>
-              <div className="content">{render(data.build_text2)}</div>
+              <div className="content">
+                <h1>Deploy Your Bot</h1>
+                <p>Use Paloma's Python or JavaScript SDK to send a transaction or command to your bot on Paloma and your desired target chain. Watch your bot interact with other contracts.</p>
+              </div>
             </div>
 
             <div className="home-how-item third">
               <div className="number">3.</div>
-              <div className="content">{render(data.build_text3)}</div>
+              <div className="content">
+                <h1>Create Another Bot</h1>
+                <p>Use Paloma to determine when to fire the next bot message to the pigeons. Pay gas in GRAINS or ETH.</p>
+              </div>
               <a
                 href="https://docs.palomachain.com/"
                 className="home-page-button"

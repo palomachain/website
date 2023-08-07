@@ -85,13 +85,11 @@
       &.community {
         display: flex;
         margin-left: 100px;
-        background: #eae5e5;
-        border: 1.30736px solid #2c2c2c;
-        border-radius: 6.53678px;
+        border-radius: 6.537px;
+        background: #F1D1E5;
         width: 276.26px;
 
         &:hover {
-          background: #eae5e5;
           border: 1.30736px solid #ff62c4;
           color: #ff62c4;
         }
@@ -168,7 +166,7 @@
         background: #eae5e5;
         padding: 55px 96px;
         display: grid;
-        grid-template-columns: 3fr 2fr 2fr 3fr;
+        grid-template-columns: 3fr 2fr 2fr 2fr 2fr;
         gap: 20px;
 
         .link {

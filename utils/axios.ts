@@ -30,6 +30,26 @@ export const getMessageCount = async () => {
   return data;
 };
 
+
+export const getPalomaBotStats = async () => {
+  let data = { totalBotMessages: 0, totalBotsCount: 0 };
+
+  try {
+    const response = await fetch("https://service.palomabot.ai/stats");
+    const res = await response.json();
+
+    data.totalBotMessages = res.bots_total;
+
+    const bots = res.bots;
+    Object.values(bots).forEach((item) => data.totalBotsCount += Number(item ?? 0));
+
+  } catch (e) {
+    console.log(e);
+  }
+
+  return data;
+};
+
 export const getFollowersCount = async () => {
   let data = 46700;
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { render } from "storyblok-rich-text-react-renderer";
 
 import RotatedHeader from "components/RotatedHeader";
-import GrainDropSection from "elements/home/GrainDropSection";
 import { fetchPageValues } from "utils/storyblok";
 import { PAGE_LANDING } from "utils/constants";
 import {
@@ -19,9 +17,13 @@ mixpanel.init(process.env.MIXPANEL_API_KEY);
 
 export default function Home({ state, router }) {
   const [data, setData] = useState(null);
-  const [msgs, setMsgs] = useState({
-    totalBotMessages: 0,
-    totalBotsCount: 0,
+  const [botStats, setBotStats] = useState({
+    totalBots: 0,
+    sumBotNumbers: 0,
+  });
+  const [palomaMsgs, setPalomaMsgs] = useState({
+    totalMessagesCount: 0,
+    todayMessageCount: 0,
   });
   const [followers, setFollowers] = useState("");
 
@@ -30,8 +32,11 @@ export default function Home({ state, router }) {
       const data = await fetchPageValues(PAGE_LANDING);
       setData({ ...data.content });
 
-      const msgs = await getPalomaBotStats();
-      setMsgs(msgs);
+      const msgs = await getMessageCount();
+      setPalomaMsgs(msgs);
+
+      const stats = await getPalomaBotStats();
+      setBotStats(stats);
 
       const followers = await getFollowersCount();
       setFollowers(followers);
@@ -42,8 +47,11 @@ export default function Home({ state, router }) {
 
   useEffect(() => {
     const interval = setInterval(async () => {
-      const msgs = await getPalomaBotStats();
-      setMsgs(msgs);
+      const stats = await getPalomaBotStats();
+      setBotStats(stats);
+
+      const msgs = await getMessageCount();
+      setPalomaMsgs(msgs);
     }, 30000);
 
     return () => clearInterval(interval);
@@ -64,18 +72,18 @@ export default function Home({ state, router }) {
 
   return (
     <div className="page-container">
-      <div className="home-page-container" style={{ marginTop: 79 }}>
+      <div className="home-page-container">
         <PalomaBotIntro />
 
         <div className="home-page-section">
           <div className="home-messages-total">
             <div className="count">
               <div className="title">Total Bot Messages</div>
-              <div className="number">{msgs.totalBotMessages}</div>
+              <div className="number">{palomaMsgs.totalMessagesCount}</div>
             </div>
             <div className="count">
               <div className="title">Total Bots</div>
-              <div className="number">{msgs.totalBotsCount}</div>
+              <div className="number">{botStats.totalBots}</div>
             </div>
           </div>
         </div>
@@ -192,7 +200,11 @@ export default function Home({ state, router }) {
               <div className="number">1.</div>
               <div className="content">
                 <h1>Create a Bot</h1>
-                <p>Create your bot with a simple command-line entry on Paloma. Pay for your bot's gas in GRAINS or ETH at the command line. Let fly!</p>
+                <p>
+                  Create your bot with a simple command-line entry on Paloma.
+                  Pay for your bot's gas in GRAINS or ETH at the command line.
+                  Let fly!
+                </p>
               </div>
             </div>
 
@@ -201,7 +213,11 @@ export default function Home({ state, router }) {
               <div className="number">2.</div>
               <div className="content">
                 <h1>Deploy Your Bot</h1>
-                <p>Use Paloma's Python or JavaScript SDK to send a transaction or command to your bot on Paloma and your desired target chain. Watch your bot interact with other contracts.</p>
+                <p>
+                  Use Paloma's Python or JavaScript SDK to send a transaction or
+                  command to your bot on Paloma and your desired target chain.
+                  Watch your bot interact with other contracts.
+                </p>
               </div>
             </div>
 
@@ -209,7 +225,10 @@ export default function Home({ state, router }) {
               <div className="number">3.</div>
               <div className="content">
                 <h1>Create Another Bot</h1>
-                <p>Use Paloma to determine when to fire the next bot message to the pigeons. Pay gas in GRAINS or ETH.</p>
+                <p>
+                  Use Paloma to determine when to fire the next bot message to
+                  the pigeons. Pay gas in GRAINS or ETH.
+                </p>
               </div>
               <a
                 href="https://docs.palomachain.com/"

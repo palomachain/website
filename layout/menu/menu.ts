@@ -43,9 +43,9 @@ const navMenu = [
             external: true,
           },
           {
-            title: "Execute an EVM contract",
+            title: "Set up a limit order bot",
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/develop/quick-start/generic-message.html",
+            link: PALOMABOT_WEBSITE_LINK,
             external: true,
           },
         ],
@@ -69,7 +69,7 @@ const navMenu = [
           {
             title: "Read me",
             hasLink: true,
-            link: "https://github.com/palomachain/paloma",
+            link: "https://docs.palomachain.com/guide/security/security.html",
             external: true,
           },
         ],
@@ -82,21 +82,15 @@ const navMenu = [
     description: "Discover the ecosystem of Paloma Products and Applications.",
     submenus: [
       {
-        title: "pyth Price Feed",
-        hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/applications/pyth/pyth-price-feeds.html",
-        external: true,
-      },
-      {
         title: "Compass EVM",
         hasLink: true,
         link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html",
         external: true,
       },
       {
-        title: "Palomaswap",
+        title: "Palomabot",
         hasLink: true,
-        link: "https://www.palomaswap.com/",
+        link: PALOMABOT_WEBSITE_LINK,
         external: true,
       },
     ],
@@ -222,7 +216,7 @@ const footerMenu = [
       {
         title: "Security",
         hasLink: true,
-        link: "",
+        link: "https://docs.palomachain.com/guide/security/security.html",
         external: true,
       },
     ],

@@ -21,7 +21,8 @@ export const getMessageCount = async () => {
     const response = await fetch("https://count.palomachain.com/");
     const res = await response.json();
 
-    data.totalMessagesCount = data.totalMessagesCount + res.eth + res.bnb + res.poly;
+    data.totalMessagesCount =
+      data.totalMessagesCount + res.eth + res.bnb + res.poly;
     data.todayMessageCount = data.todayMessageCount + res.eth_day + res.bnb_day;
   } catch (e) {
     console.log(e);
@@ -30,19 +31,19 @@ export const getMessageCount = async () => {
   return data;
 };
 
-
 export const getPalomaBotStats = async () => {
-  let data = { totalBotMessages: 0, totalBotsCount: 0 };
+  let data = { totalBots: 0, sumBotNumbers: 0 };
 
   try {
     const response = await fetch("https://service.palomabot.ai/stats");
     const res = await response.json();
 
-    data.totalBotMessages = res.bots_total;
+    data.totalBots = res.bots_total;
 
     const bots = res.bots;
-    Object.values(bots).forEach((item) => data.totalBotsCount += Number(item ?? 0));
-
+    Object.values(bots).forEach(
+      (item) => (data.sumBotNumbers += Number(item ?? 0))
+    );
   } catch (e) {
     console.log(e);
   }

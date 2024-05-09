@@ -18,11 +18,11 @@ mixpanel.init(process.env.MIXPANEL_API_KEY);
 export default function Home({ state, router }) {
   const [data, setData] = useState(null);
   const [botStats, setBotStats] = useState({
-    totalBots: 0,
+    totalBots: 483,
     sumBotNumbers: 0,
   });
   const [palomaMsgs, setPalomaMsgs] = useState({
-    totalMessagesCount: 0,
+    totalMessagesCount: 19673,
     todayMessageCount: 0,
   });
   const [followers, setFollowers] = useState("");

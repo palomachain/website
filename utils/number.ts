@@ -1,32 +1,29 @@
 import BigNumber from "bignumber.js";
 
-const abbreviateNumberFactory = (symbols) => (
-  number,
-  minDigits,
-  maxDigits,
-  decimals = 18
-) => {
-  if (number === 0) return number;
-  if (number < 1) return new BigNumber(number).dp(maxDigits, 1).toString();
+const abbreviateNumberFactory =
+  (symbols) =>
+  (number, minDigits, maxDigits, decimals = 18) => {
+    if (number === 0) return number;
+    if (number < 1) return new BigNumber(number).dp(maxDigits, 1).toString();
 
-  // determines SI symbol
-  const tier = Math.floor(Math.log10(Math.abs(number)) / 3);
+    // determines SI symbol
+    const tier = Math.floor(Math.log10(Math.abs(number)) / 3);
 
-  // get suffix and determine scale
-  const suffix = symbols[tier] === undefined ? `e${tier * 3}` : symbols[tier];
-  const scale = 10 ** (tier * 3);
+    // get suffix and determine scale
+    const suffix = symbols[tier] === undefined ? `e${tier * 3}` : symbols[tier];
+    const scale = 10 ** (tier * 3);
 
-  // scale the number
-  const scaled = number / scale;
+    // scale the number
+    const scaled = number / scale;
 
-  // format number and add suffix
-  return (
-    scaled.toLocaleString(undefined, {
-      minimumFractionDigits: minDigits,
-      maximumFractionDigits: maxDigits,
-    }) + suffix
-  );
-};
+    // format number and add suffix
+    return (
+      scaled.toLocaleString(undefined, {
+        minimumFractionDigits: minDigits,
+        maximumFractionDigits: maxDigits,
+      }) + suffix
+    );
+  };
 
 const SI_SYMBOLS = ["", "k", "M", "G", "T", "P", "E"];
 
@@ -38,9 +35,7 @@ export const toFixed = (number, decimals, string = false) => {
 };
 
 export const toShow = (num, decimals) => {
-  return new BigNumber(num).isGreaterThan(10 ** 9)
-    ? "∞"
-    : toFixed(num, decimals, true).toString();
+  return new BigNumber(num).isGreaterThan(10 ** 9) ? "∞" : toFixed(num, decimals, true).toString();
 };
 
 export const getOnlyDigitalValue = (val: number) => {
@@ -81,14 +76,25 @@ export const allowOnlyNumber = (value) => {
 };
 
 export const intToString = (value) => {
-  const suffixes = ["", "K", "M", "B","T"];
+  const suffixes = ["", "K", "M", "B", "T"];
 
   const suffixNum = Math.floor(("" + value).length / 3);
-  let shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision());
+  let shortValue = parseFloat(
+    (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision()
+  );
 
   if (shortValue % 1 != 0) {
-      shortValue = Number(shortValue.toFixed(1));
+    shortValue = Number(shortValue.toFixed(1));
   }
 
   return shortValue + suffixes[suffixNum];
+};
+
+export function formatNumber(value: string | number, minPrecision = 2, maxPrecision = 2) {
+  const options = {
+    minimumFractionDigits: minPrecision,
+    maximumFractionDigits: maxPrecision,
+  };
+
+  return Number(value).toLocaleString("en-US", options);
 }

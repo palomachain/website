@@ -8,3 +8,15 @@ export const PALOMABOT_WEBSITE_LINK = "https://palomabot.ai";
 export const LATEST_BLOG_SHOW_CNT = 3;
 
 export const PAGE_LANDING = "landing-page";
+
+export const TotalNodes = 20000;
+export const NodeSlot1 = 1000;
+export const ChangeR = 0.9596080047;
+export const StartingPrice = 50;
+export const EndingPrice = 50000;
+export const Exponent = 2.5;
+export const NSlots = 40;
+export const GrainsPerNode = 50000;
+export const TotalGrains = 5000000000;
+
+export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;

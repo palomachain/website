@@ -3,7 +3,7 @@ export const SupportChains = ["eth", "binance", "arbitrum", "base", "op", "b", "
 export const JoinFlow = [
   "To join the flock, you will need to purchase a Paloma LightNode.",
   "Download the client and register your program.",
-  "Run it Daily. Successful work will generate grainS to your Light Node account on your computer.",
+  "Run it Daily. Successful work will generate Grains to your Light Node account on your computer.",
   "Your Light Node will secure the Paloma network of relay pigeons that sends messages between blockchains.",
 ];
 
@@ -36,13 +36,13 @@ export const LightNodeFeatures = [
   },
   {
     img: "feature-2.png",
-    title: "Delegate GRAINS",
+    title: "Delegate GRAINs ",
     describe: "Automatically delegate your GRAINs to active validators and relayers.",
   },
   {
     img: "feature-3.png",
     title: "Remove Inactive Validators",
-    describe: "Automatically remove your GRAINS from inactive validators.",
+    describe: "Automatically remove your GRAINs from inactive validators.",
   },
   {
     img: "feature-4.png",
@@ -51,7 +51,7 @@ export const LightNodeFeatures = [
   },
   {
     img: "feature-5.png",
-    title: "Auto-Chaim and Re-Delegate GRAINS",
+    title: "Auto-Chaim and Re-Delegate GRAINs",
     describe: "Automatically claim reward GRAINs and re-delegate them to new validators",
   },
   {
@@ -103,8 +103,12 @@ export const EcosystemData = [
     backgroundImg: "gmx-shadow.png",
     items: [
       {
-        name: "Short Funding Bots",
-        text: "The PalomaBot Short Funding bots allow anyone to take advantage of rising bitcoin and ethereum prices.  This bot from Palomabot runs a strategy that is delta neutral to ETH / BTC, and collects short funding rate from a short perpetual position on GMX.",
+        name: "Short Funding Strategy Bots",
+        text: "The PalomaBot Short Funding bots allow anyone to take advantage of rising bitcoin and ethereum prices.",
+      },
+      {
+        name: "Delta Neutral Returns",
+        text: "This bot from Palomabot runs a strategy that is delta neutral to ETH / BTC, and collects short funding rate from a short perpetual position on GMX.",
       },
     ],
   },
@@ -138,12 +142,16 @@ export const EcosystemData = [
     icon: "ezeth.png",
     title: "Renzo EzETH bots",
     describe:
-      "Liquid Restaking Protocol Renzo’s EzETH token enjoys multiples on points with leverage. renzo is a strategy manager and liquid restaking token provider for both EigenLayer and Symbiotic.",
+      "Liquid restaking protocol Renzo’s EzETH token enjoys multiples on points with leverage. Renzo is a strategy manager and liquid restaking token provider for both eigenLayer and symbiotic.",
     backgroundImg: "ezeth-shadow.png",
     items: [
       {
-        name: "Llamalend Squeeze Bot with up to 8x Leverage",
+        name: "Leverage On Renzo LRTs",
         text: "Llamalend Squeeze Bot with up to 9x Leverage allows users to take up automated leverage and squeeze positions with Renzo’s EzETH token.",
+      },
+      {
+        name: "Generate More Points",
+        text: "Collect Up To 3X EzPoints With Leverage.",
       },
     ],
   },
@@ -171,6 +179,27 @@ export const EcosystemData = [
       },
       {
         name: "Threshold Bitcoin Squeeze Bots",
+      },
+    ],
+  },
+  {
+    icon: "compound.svg",
+    title: "Compound Multichain Migration Bots",
+    describe:
+      "Compound users can now migrate their ETH and USDC position liquidity via Paloma’s Compound Multichain Migration bots. All liquidity is secured by the Paloma blockchain with fast execution across all Compound’s ETH and USDC lending chains.",
+    backgroundImg: "compound-shadow.svg",
+    items: [
+      {
+        name: "1-Click Cross-Chain Liquidity",
+        text: "Execute Compound Lending Markets Liquidity Migration Across Multiple Chains with just One-Click.",
+      },
+      {
+        name: "Paloma Validator Custody",
+        text: "Paloma Validator Set Provides Custody and Security Across USDC Native Bridges.",
+      },
+      {
+        name: "Low Cost Per Play",
+        text: "Automatation-Enabled Decentralized Applications in the Ethereum Ecosystem.",
       },
     ],
   },

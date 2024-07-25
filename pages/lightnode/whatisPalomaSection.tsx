@@ -16,7 +16,7 @@ const whatisPalomaSection = () => (
           require that state changes, and the accompanying computation of new logic, be sent to the
           smart contract from another state.
         </p>
-        <button className="purchase-button mt-80">Purchase your LightNode</button>
+        <button className="purchase-button mt-40">Purchase your LightNode</button>
       </div>
       <img src="/assets/home/pigeons-fly-2.png" />
     </div>
@@ -25,7 +25,7 @@ const whatisPalomaSection = () => (
         <h2 className="h-white">
           the problem:<br></br>Centralization and<br></br>Resource Limits
         </h2>
-        <span className="p-white mt-20">
+        <span className="p-white-50 mt-20">
           Today these state changes are commonly run by centralized, custom-designed, closed-source
           programs, human-multisignature key arrangements, or low-end, multi-party computation
           circuits. The complexity and richness of these approaches is limited by the lack of
@@ -61,7 +61,7 @@ const whatisPalomaSection = () => (
     <div className="describe-card">
       <div>
         <h2 className="h-white">the validator set</h2>
-        <span className="p-white mt-20">
+        <span className="p-white-50 mt-20">
           Since every active validator is also an active Pigeon, all messages are secured through
           consensus and the validators' stake. Validators must run nodes on every Paloma target
           chain and have the infrastructure and available funds to send messages on every chain.

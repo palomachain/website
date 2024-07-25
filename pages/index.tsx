@@ -202,7 +202,7 @@ export default function Home({ state, router }) {
                 <h1>Create a Bot</h1>
                 <p>
                   Create your bot with a simple command-line entry on Paloma.
-                  Pay for your bot's gas in GRAINS or ETH at the command line.
+                  Pay for your bot's gas in GRAINs or ETH at the command line.
                   Let fly!
                 </p>
               </div>
@@ -227,7 +227,7 @@ export default function Home({ state, router }) {
                 <h1>Create Another Bot</h1>
                 <p>
                   Use Paloma to determine when to fire the next bot message to
-                  the pigeons. Pay gas in GRAINS or ETH.
+                  the pigeons. Pay gas in GRAINs or ETH.
                 </p>
               </div>
               <a

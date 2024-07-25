@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Countdown from "react-countdown";
+import { NodeSaleStartDate } from "utils/constants";
 import { SupportChains } from "utils/data";
 
 const nodesaleSection = () => {
-  const [remainStartDate, setRemainStartDate] = useState(Date.now() + 1000000);
+  const [remainStartDate, setRemainStartDate] = useState(NodeSaleStartDate);
+
   const CompleteTime = () => <span>-- Started --</span>;
   // Table style
   const rendererTime = ({ days, hours, minutes, seconds, completed }) => {

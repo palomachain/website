@@ -6,109 +6,109 @@
   span {
     margin: 0px;
   }
-}
 
-.purchase-button {
-  background: #2c2c2c;
-  height: 47px;
-  padding: 0px 20px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  color: #f1d1e5;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-}
-.purchase-button-white {
-  background: #fff;
-  color: #2c2c2c;
-}
-.purchase-button-pink {
-  background: #f1d1e5;
-  color: #2c2c2c;
-}
+  .purchase-button {
+    background: #2c2c2c;
+    height: 47px;
+    padding: 0px 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #f1d1e5;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  .purchase-button-white {
+    background: #fff;
+    color: #2c2c2c;
+  }
+  .purchase-button-pink {
+    background: #f1d1e5;
+    color: #2c2c2c;
+  }
 
-.row-10 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.flex-row-wrap {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 768px) {
+  .row-10 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .flex-col {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-}
-.gap-8 {
-  gap: 8px;
-}
-.gap-16 {
-  gap: 16px;
-}
-.gap-36 {
-  gap: 16px;
-}
-.h-white {
-  color: #fff;
-}
-.h-pink {
-  color: #f1d1e5;
-}
-.h-black-50 {
-  color: #444343 !important;
-}
-.p-white {
-  color: #b0aeae;
-}
-.mt-20 {
-  margin-top: 20px !important;
-}
-.mt-40 {
-  margin-top: 40px;
-  @media screen and (max-width: 768px) {
-    margin-top: 20px;
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
-}
+  .flex-row-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+  .gap-8 {
+    gap: 8px;
+  }
+  .gap-16 {
+    gap: 16px;
+  }
+  .gap-36 {
+    gap: 16px;
+  }
+  .h-white {
+    color: #fff;
+  }
+  .h-pink {
+    color: #f1d1e5;
+  }
+  .h-black-50 {
+    color: #444343 !important;
+  }
+  .p-white {
+    color: #b0aeae;
+  }
+  .mt-20 {
+    margin-top: 20px !important;
+  }
+  .mt-40 {
+    margin-top: 40px;
+    @media screen and (max-width: 768px) {
+      margin-top: 20px;
+    }
+  }
 
-h1 {
-  color: #2c2c2c;
-  font-family: "RockStar-Semibold";
-  font-size: 40px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-h2 {
-  color: #2c2c2c;
-  font-family: "RockStar-Semibold";
-  font-size: 30px;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-p {
-  color: #444333;
-  font-family: "RockStar-Semibold";
-  font-size: 16px;
-  font-weight: 500;
+  h1 {
+    color: #2c2c2c;
+    font-family: "RockStar-Semibold";
+    font-size: 40px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  h2 {
+    color: #2c2c2c;
+    font-family: "RockStar-Semibold";
+    font-size: 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  p {
+    color: #444333;
+    font-family: "RockStar-Semibold";
+    font-size: 16px;
+    font-weight: 500;
+  }
 }
 
 .nodesale-section {
@@ -195,11 +195,6 @@ p {
     }
     h2 {
       font-size: 20px;
-      font-weight: 400;
-      font-family: "RockStar-Semibold";
-    }
-    p {
-      font-size: 14px;
       font-weight: 400;
       font-family: "RockStar-Semibold";
     }
@@ -487,9 +482,6 @@ p {
       p {
         margin-top: 12px;
         color: #b0aeae;
-        font-size: 14px;
-        font-weight: 500;
-        font-family: "RockStar-Semibold";
       }
     }
   }
@@ -542,11 +534,6 @@ p {
           font-weight: 600;
           margin-bottom: 8px;
           font-family: "RockStar-Semibold";
-        }
-        p {
-          font-size: 14px;
-          font-weight: 500;
-          font-family: "RockStar-Regular";
         }
       }
     }
@@ -678,9 +665,7 @@ p {
           font-size: 20px;
         }
         p {
-          font-size: 14px;
           color: #fff;
-          font-family: "RockStar-Regular";
         }
       }
       .ecosystem-body {
@@ -724,7 +709,6 @@ p {
             text-transform: capitalize;
           }
           p {
-            font-size: 14px;
             text-align: start;
           }
         }

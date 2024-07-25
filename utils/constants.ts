@@ -20,3 +20,5 @@ export const GrainsPerNode = 50000;
 export const TotalGrains = 5000000000;
 
 export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
+
+export const NodeSaleStartDate = 1723028400 * 1000; // 11:00 AM, August 7, 2024 Coordinated Universal Time (UTC)

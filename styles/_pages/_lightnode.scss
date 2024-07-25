@@ -15,8 +15,8 @@
     border: none;
     outline: none;
     cursor: pointer;
-    color: #f1d1e5;
-    font-size: 14px;
+    color: #fff;
+    font-size: 16px;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -77,7 +77,10 @@
     color: #444343 !important;
   }
   .p-white {
-    color: #b0aeae;
+    color: #b0aeae !important;
+  }
+  .p-white-50 {
+    color: #dcdada !important;
   }
   .mt-20 {
     margin-top: 20px !important;
@@ -273,7 +276,7 @@
   span {
     color: #444333;
     font-family: "RockStar-Semibold";
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
   }
 
@@ -322,7 +325,7 @@
       margin-bottom: 20px;
     }
     span {
-      color: #b0aeae;
+      color: #333;
     }
     .img1 {
       position: absolute;
@@ -628,7 +631,7 @@
     color: #fff;
   }
   p {
-    color: #b0aeae;
+    color: #fff;
     max-width: 588px;
     width: 100%;
     text-align: center;
@@ -637,6 +640,7 @@
   .ecosystem-cards {
     width: 100%;
     position: relative;
+    margin-top: 70px;
     .ecosystem-card {
       background: #393939;
       width: 100%;
@@ -653,6 +657,7 @@
 
       .ecosystem-head {
         max-width: 415px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -709,6 +714,7 @@
             text-transform: capitalize;
           }
           p {
+            // color: #fff;
             text-align: start;
           }
         }
@@ -930,5 +936,122 @@
     .subscription-table-row2 {
       background: #4f4e4e;
     }
+  }
+}
+
+.relay-rewards-section {
+  background: #f7f3f3;
+  display: flex;
+  flex-direction: column;
+  padding: 85px 88px;
+  gap: 40px;
+  @media screen and (max-width: 768px) {
+    padding: 85px 16px;
+  }
+
+  span {
+    color: #444333;
+    font-family: "RockStar-Semibold";
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .what-is {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .what-is-paloma {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: start;
+      max-width: 573px;
+      width: 100%;
+
+      .mt-80 {
+        margin-top: 80px !important;
+      }
+
+      h1 {
+        margin-bottom: 14px;
+      }
+    }
+  }
+
+  .describe-card {
+    background: #f1d1e5;
+    border-radius: 6px;
+    padding: 105px 76px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    gap: 40px;
+    @media screen and (max-width: 768px) {
+      padding: 56px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+    span {
+      color: #2c2c2c;
+    }
+    .img1 {
+      position: absolute;
+      right: 56px;
+      bottom: 0;
+    }
+
+    .small-img {
+      width: 140px;
+      height: 135px;
+      position: absolute;
+      margin-left: 220px;
+      margin-top: -120px;
+    }
+    .small-img-right {
+      margin-left: 0px;
+      margin-right: 220px;
+    }
+    .big-img {
+      position: absolute;
+    }
+    .btns {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .describe-card > div {
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .img1,
+    .small-img,
+    .big-img {
+      z-index: 10;
+      display: none;
+    }
+  }
+
+  .describe-card-white {
+    background: #eae5e5;
   }
 }

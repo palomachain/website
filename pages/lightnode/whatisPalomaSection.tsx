@@ -8,7 +8,7 @@ const whatisPalomaSection = () => (
           WHAT IS<br></br>PALOMA?
         </h1>
         <p>
-          Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart- contract
+          Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart-contract
           messages fast and securely, between any other public blockchain with an active RPC
           endpoint. Paloma is designed for developers who wish to manage multi-directional messages
           between multiple chains in a scalable and secure manner. Blockchain smart contracts cannot

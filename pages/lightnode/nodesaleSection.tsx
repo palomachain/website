@@ -40,11 +40,11 @@ const nodesaleSection = () => {
     <section className="nodesale-section">
       <div className="nodesale-describe">
         <h3>JOIN THE FLOCK</h3>
-        <h1>PALOMA LIGHT NODES</h1>
+        <h1>PALOMA LIGHTNODES</h1>
         <p>
-          Introducing a new way to work and a participate in a global community: The Paloma Flock.
-          Paloma is a new blockchain network that is secured by community of global pigeons that
-          deliver transaction messages to any blockchain.
+          Introducing a new way to earn revenues and participate in a global community: The Paloma Flock.
+          Paloma is a new blockchain network that is secured by a global community of pigeons that
+          deliver transaction messages to any blockchain's smart contract Virtual Machine (VM).
         </p>
         <button className="purchase-button">Purchase your LightNode</button>
       </div>

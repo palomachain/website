@@ -6,17 +6,18 @@ import HowToRelayRewardsSection from "./howToRelayRewardsSection";
 import HowToWorkSection from "./howToWorkSection";
 import InvestorSection from "./investorSection";
 import LightNodeSection from "./lightnodeSection";
+import NodeSaleLinksSection from "./nodeSaleLinksSection";
 import NodeSaleSection from "./nodesaleSection";
+import RewardCalculatorSection from "./rewardCalculatorSection";
 import SubscriptionSection from "./subscriptionSection";
 import TeamsSection from "./teamsSection";
+import TokenomicsSection from "./tokenomicsSection";
 import TopicSection1 from "./topic1Section";
 import TopicSection2 from "./topic2Section";
 import TopicSection3 from "./topic3Section";
 import TopicSection4 from "./topic4Section";
 import VolumesSection from "./volumesSection";
 import WhatIsPalomaSection from "./whatisPalomaSection";
-import TokenomicsSection from "./tokenomicsSection";
-import RewardCalculatorSection from "./rewardCalculatorSection";
 
 const lightnode = () => (
   <div className="page-container lightnode-container">
@@ -39,6 +40,7 @@ const lightnode = () => (
     <TopicSection4 />
     <SubscriptionSection />
     {/* <RewardCalculatorSection /> */}
+    <NodeSaleLinksSection />
   </div>
 );
 

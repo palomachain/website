@@ -1,15 +1,11 @@
 import RangeSlider from "components/RangeSlider";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  ChangeR,
   CommunityFee,
-  Exponent,
   GrainsPerNode,
-  Increment,
   Inflation,
-  NodeSlot1,
-  NSlots,
-  StartingPrice,
+  PigeonGasFee,
+  RelayRewardFee,
   TotalGrains,
   ValidatorFee,
 } from "utils/constants";
@@ -20,18 +16,39 @@ const rewardCalculatorSection = () => {
   const [grainPrice, setGrainPrice] = useState(0.0784);
   const [nodePurchasePrice, setNodePurchasePrice] = useState(25000);
 
-  const [staking, setStaking] = useState();
+  const [staking, setStaking] = useState<number>(); // Year
+  const [stakingPrice, setStakingPrice] = useState<number>(); // Year
+  const [relayFeeReward, setRelayFeeReward] = useState<number>(); // Year
+  const [relayFeeRewardPrice, setRelayFeeRewardPrice] = useState<number>(); // Year
 
-  // (NSlots *
-  //   nodePurchasePrice *
-  //   (TotalGrains * Inflation -
-  //     TotalGrains * Inflation * CommunityFee -
-  //     TotalGrains * Inflation * ValidatorFee)) /
-  //   (nodeNumber * nodePurchasePrice + 1596008000);
+  const grainsStaked = 1596008000;
+  const nodesSold = 5000;
+  const gasPrice = 16; // Gwei
+  const txCost = 1000000; // Gas
+  const ethPrice = 3500; // $3500
 
   useEffect(() => {
-    
-  }, [nodeNumber, nodePurchasePrice, grainPrice])
+    {
+      (nodeNumber *
+        GrainsPerNode *
+        ((TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) / 100 / 100)) /
+        (1596008000 + GrainsPerNode * 5000);
+    }
+    const netStakeFlation =
+      (TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) / 100 / 100;
+    const totalStaked = grainsStaked + nodesSold * GrainsPerNode;
+
+    const stakingAmount = (nodeNumber * GrainsPerNode * netStakeFlation) / totalStaked;
+    setStaking(stakingAmount);
+    setStakingPrice(stakingAmount * grainPrice);
+
+    const pigeonFees = ((gasPrice * txCost * ethPrice) / 1000000000) * (PigeonGasFee / 100);
+    const txPerYear = nodePurchasePrice * 365;
+    const feeCut = ((txPerYear * pigeonFees * (RelayRewardFee / 100)) / nodesSold) * nodeNumber;
+    setRelayFeeRewardPrice(feeCut);
+    setRelayFeeReward(feeCut / grainPrice);
+  }, [nodeNumber, nodePurchasePrice, grainPrice]);
+
   return (
     <section className="reward-calculator-section flex-col">
       <h1>
@@ -85,24 +102,76 @@ const rewardCalculatorSection = () => {
         <tbody>
           <tr className="table-body">
             <td>Staking</td>
-            C8 * C20 * (100 - C22 - C24) / 100
-            <td className="table-gray-bg">
-              {/* {nodeNumber *
-                GrainsPerNode *
-                (TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee) / 100 / 100) / (1596008000 + )} */}
+            <td className="value-td">
+              {formatNumber(staking, 0, 0)} GRAINS
+              <span>(${formatNumber(stakingPrice, 0, 0)})</span>
             </td>
-            <td className="table-gray-bg"></td>
-            <td className="table-gray-bg"></td>
+            <td className="value-td">
+              {formatNumber(staking / 12, 0, 0)} GRAINS
+              <span>
+                ($
+                {formatNumber(
+                  stakingPrice / 12,
+                  stakingPrice > 100 ? 0 : 2,
+                  stakingPrice > 100 ? 0 : 2
+                )}
+                )
+              </span>
+            </td>
+            <td className="value-td">
+              {formatNumber(staking / 365, 0, 0)} GRAINS
+              <span>
+                ($
+                {formatNumber(
+                  stakingPrice / 365,
+                  stakingPrice > 100 ? 0 : 2,
+                  stakingPrice > 100 ? 0 : 2
+                )}
+                )
+              </span>
+            </td>
           </tr>
           <tr className="table-body">
             <td>Relay Fee</td>
-            <td className="table-gray-bg"></td>
-            <td className="table-gray-bg"></td>
-            <td className="table-gray-bg"></td>
+            <td className="value-td">
+              {formatNumber(relayFeeReward, 0, 0)} GRAINS
+              <span>(${formatNumber(relayFeeRewardPrice, 0, 0)})</span>
+            </td>
+            <td className="value-td">
+              {formatNumber(relayFeeReward / 12, 0, 0)} GRAINS
+              <span>
+                ($
+                {formatNumber(
+                  relayFeeRewardPrice / 12,
+                  relayFeeRewardPrice > 100 ? 0 : 2,
+                  relayFeeRewardPrice > 100 ? 0 : 2
+                )}
+                )
+              </span>
+            </td>
+            <td className="value-td">
+              {formatNumber(relayFeeReward / 365, 0, 0)} GRAINS
+              <span>
+                ($
+                {formatNumber(
+                  relayFeeRewardPrice / 365,
+                  relayFeeRewardPrice > 100 ? 0 : 2,
+                  relayFeeRewardPrice > 100 ? 0 : 2
+                )}
+                )
+              </span>
+            </td>
           </tr>
           <tr className="table-body">
             <td>APY</td>
-            <td className="table-pink-bg"></td>
+            <td className="value-td table-pink-bg">
+              {formatNumber(
+                ((stakingPrice + relayFeeRewardPrice) / (nodePurchasePrice * nodeNumber)) * 100,
+                2,
+                2
+              )}
+              %
+            </td>
             <td className="table-black-bg"></td>
             <td className="table-black-bg"></td>
           </tr>
@@ -111,4 +180,5 @@ const rewardCalculatorSection = () => {
     </section>
   );
 };
+
 export default rewardCalculatorSection;

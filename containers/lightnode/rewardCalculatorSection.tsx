@@ -12,9 +12,9 @@ import {
 import { formatNumber } from "utils/number";
 
 const rewardCalculatorSection = () => {
-  const [nodeNumber, setNodeNumber] = useState(250);
+  const [nodeNumber, setNodeNumber] = useState(1);
   const [grainPrice, setGrainPrice] = useState(0.0784);
-  const [nodePurchasePrice, setNodePurchasePrice] = useState(25000);
+  const [nodePurchasePrice, setNodePurchasePrice] = useState(40);
 
   const [staking, setStaking] = useState<number>(); // Year
   const [stakingPrice, setStakingPrice] = useState<number>(); // Year
@@ -81,10 +81,10 @@ const rewardCalculatorSection = () => {
         <RangeSlider
           title="Node Purchase Price"
           describe="This number represents the price per node purchased."
-          min={50}
-          max={50000}
-          mid={25000}
-          step={10}
+          min={40}
+          max={15000}
+          mid={7520}
+          step={1}
           prefix="$"
           value={nodePurchasePrice}
           setValue={setNodePurchasePrice}

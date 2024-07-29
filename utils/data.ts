@@ -32,7 +32,8 @@ export const LightNodeFeatures = [
   {
     img: "feature-0.svg",
     title: "Mine GRAINs Every Block",
-    describe: "Mine GRAINs every block, while your Paloma LightNode is running on your computer during your two year subscription.",
+    describe:
+      "Mine GRAINs every block, while your Paloma LightNode is running on your computer during your two year subscription.",
   },
   {
     img: "feature-1.png",
@@ -309,3 +310,78 @@ export const Investors = [
   "investor5.png",
   "investor6.png",
 ];
+
+export const NodeSaleLinks = {
+  "Paloma LightNode Sale": [
+    {
+      title: "Paloma LightNode Purchase Page",
+      link: "https://www.palomachain.com/",
+    },
+    {
+      title: "Paloma LightNode Registration",
+      link: "https://www.palomachain.com/register",
+    },
+  ],
+  "Official Pages": [
+    {
+      title: "Paloma's Website",
+      link: "https://www.palomachain.com",
+    },
+    {
+      title: "Paloma's Official Documentation",
+      link: "https://docs.palomachain.com",
+    },
+    {
+      title: "Paloma's Governance Forum",
+      link: "https://forum.palomachain.com/",
+    },
+    {
+      title: "Paloma Explorer",
+      link: "https://paloma.explorers.guru/",
+    },
+  ],
+  "Official Social Media": [
+    {
+      title: "Paloma's Twitter",
+      link: "https://x.com/paloma_chain",
+      icon: "/assets/social/twitter.svg",
+    },
+    {
+      title: "Paloma's Discord",
+      link: "https://discord.gg/YbjCJvXBuu",
+      icon: "/assets/social/discord.svg",
+    },
+    {
+      title: "Paloma's Official Telegram",
+      link: "https://t.me/palomachain",
+      icon: "/assets/social/telegram.svg",
+    },
+    {
+      title: "Paloma's Youtube Channel",
+      link: "https://www.youtube.com/channel/UC_ssI5Y8KGZOaaZmqQB44xQ",
+      icon: "/assets/social/youtube.svg",
+    },
+  ],
+  "Paloma Decentralized Apps": [
+    {
+      title: "PalomaBot",
+      link: "https://palomabot.ai",
+    },
+    {
+      title: "PalomaBot Youtube Channel",
+      link: "https://www.youtube.com/channel/UC1Tws6CWO1iRRdpiffH3CWA",
+    },
+    {
+      title: "T(ai)lored AI",
+      link: "https://www.tailoredai.me/",
+    },
+    {
+      title: "Curvebot",
+      link: "https://curvebot.fi",
+    },
+    {
+      title: "PalomaSwap",
+      link: "https://palomaswap.com",
+    },
+  ],
+};

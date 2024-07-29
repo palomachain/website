@@ -1181,3 +1181,79 @@
     }
   }
 }
+
+.node-sale-links-section {
+  padding: 106px 16px;
+  background: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    color: #fff;
+    margin-bottom: 78px;
+    text-align: center;
+  }
+  .node-sale-links {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 484px;
+    position: relative;
+
+    h3 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .node-sale-links-items {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .node-sale-item {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        gap: 12px;
+        .node-sale-item-icon {
+          min-width: 54px;
+          min-height: 54px;
+          max-width: 54px;
+          min-height: 54px;
+          border-radius: 8px;
+          background: #393939;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .node-sale-links-item {
+        height: 54px;
+        border-radius: 8px;
+        background: #393939;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 0 22px;
+        width: 100%;
+        cursor: pointer;
+        a {
+          color: #fff;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+      .node-sale-links-item-pink {
+        background: #f1d1e5 !important;
+        a {
+          color: #2c2c2c !important;
+        }
+      }
+    }
+  }
+}

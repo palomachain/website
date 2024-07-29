@@ -1,19 +1,19 @@
 const topic2Section = () => (
   <section className="topic-section">
+    <div className="topic-photo">
+      <img src="/assets/topic/topic2.png" alt="topic-2" />
+    </div>
     <div className="topic">
       <p>
-        “At Tokensoft, we're pleased to support new distribution mechanisms. Paloma's LightNode sale
-        converts the delegator work into an application that can aid distribution, without
-        sacrificing compliance or adding new regulatory risk. We're excited to support Paloma and
-        launch new node sales in the future.”
+        "I have processed over $30MM worth of volume myself through Paloma's many bots in just a few
+        months. I am impressed with the team's continuous improvements since Paloma’s mainnet and
+        look forward to their Curvebots growing more Curve volume and product offerings for the
+        Curve community!”
       </p>
       <div className="flex-col gap-8">
-        <h3>Mason Borda</h3>
-        <h3 className="h-black-50">Founder & CEO, TokenSoft</h3>
+        <h3>Michael Egorov</h3>
+        <h3 className="h-black-50">Founder, Curve</h3>
       </div>
-    </div>
-    <div className="topic-photo">
-      <img src="/assets/topic/topic2.svg" alt="topic-2" />
     </div>
   </section>
 );

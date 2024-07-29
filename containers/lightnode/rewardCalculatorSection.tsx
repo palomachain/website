@@ -13,7 +13,7 @@ import { formatNumber } from "utils/number";
 
 const rewardCalculatorSection = () => {
   const [nodeNumber, setNodeNumber] = useState(1);
-  const [grainPrice, setGrainPrice] = useState(0.0784);
+  const [grainPrice, setGrainPrice] = useState(0.0069);
   const [nodePurchasePrice, setNodePurchasePrice] = useState(40);
 
   const [staking, setStaking] = useState<number>(); // Year
@@ -132,7 +132,7 @@ const rewardCalculatorSection = () => {
             </td>
           </tr>
           <tr className="table-body">
-            <td>Relay Fee</td>
+            <td>Relay Fees</td>
             <td className="value-td">
               {formatNumber(relayFeeReward, 0, 0)} GRAINS
               <span>(${formatNumber(relayFeeRewardPrice, 0, 0)})</span>

@@ -1055,3 +1055,129 @@
     background: #eae5e5;
   }
 }
+
+.tokenomics-section {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 97px 100px;
+  @media screen and (max-width: 768px) {
+    padding: 97px 16px;
+  }
+
+  .tokenomics {
+    margin-bottom: 81px;
+    h1 {
+      margin-bottom: 14px;
+    }
+  }
+
+  .tokenomics-photo {
+    position: relative;
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    img {
+      z-index: 10;
+      width: 100%;
+      max-width: 1350px;
+    }
+
+    .tokenomics-grains {
+      position: absolute;
+      bottom: 50px;
+      left: 0;
+      text-align: center;
+      max-width: 291px;
+      @media screen and (max-width: 768px) {
+        position: relative;
+        bottom: 0;
+      }
+
+      h1 {
+        color: #2c2c2c;
+        font-size: 79.651px;
+        font-weight: 400;
+      }
+      h2 {
+        color: #2c2c2c;
+        font-size: 26.55px;
+        font-weight: 400;
+      }
+      h3 {
+        color: #737171;
+        font-size: 21.24px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+      p {
+        color: #2c2c2c;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: capitalize;
+        margin-top: 32px;
+      }
+    }
+  }
+}
+
+.reward-calculator-section {
+  background: #2c2c2c;
+  padding: 72px 181px;
+  color: #fff;
+  @media screen and (max-width: 768px) {
+    padding: 72px 16px;
+  }
+  h1 {
+    color: #fff;
+    text-align: center;
+  }
+  .reward-calculator-diagrams {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+    margin-top: 82px;
+  }
+  .reward-calculator-table {
+    width: 100%;
+    margin-top: 65px;
+    border-spacing: unset;
+    .table-head,
+    .table-body {
+      display: grid;
+      grid-template-columns: 1fr repeat(3, 2fr);
+      background: #393939;
+      height: 66px;
+      align-items: center;
+      text-align: start;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .table-body {
+      padding-left: 33px;
+    }
+    .table-gray-bg {
+      background: #4f4e4e;
+      width: 100%;
+      height: 100%;
+    }
+    .table-pink-bg {
+      background: #f1d1e5;
+      color: #2c2c2c;
+      font-size: 30px;
+      font-weight: 800;
+      width: 100%;
+      height: 100%;
+    }
+    .table-black-bg {
+      background: #2c2c2c;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

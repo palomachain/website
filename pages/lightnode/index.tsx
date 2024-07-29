@@ -9,11 +9,14 @@ import LightNodeSection from "./lightnodeSection";
 import NodeSaleSection from "./nodesaleSection";
 import SubscriptionSection from "./subscriptionSection";
 import TeamsSection from "./teamsSection";
-import TopicSection1 from "./topicSection";
+import TopicSection1 from "./topic1Section";
 import TopicSection2 from "./topic2Section";
 import TopicSection3 from "./topic3Section";
+import TopicSection4 from "./topic4Section";
 import VolumesSection from "./volumesSection";
 import WhatIsPalomaSection from "./whatisPalomaSection";
+import TokenomicsSection from "./tokenomicsSection";
+import RewardCalculatorSection from "./rewardCalculatorSection";
 
 const lightnode = () => (
   <div className="page-container lightnode-container">
@@ -25,14 +28,17 @@ const lightnode = () => (
     <HowToRelayRewardsSection />
     <FeaturesSection />
     <VolumesSection />
-    <EcosystemSection />
     <TopicSection1 />
-    <InvestorSection />
+    <EcosystemSection />
     <TopicSection2 />
+    <TokenomicsSection />
+    <InvestorSection />
+    <TopicSection3 />
     <GrainTokenSection />
     <TeamsSection />
-    <TopicSection3 />
+    <TopicSection4 />
     <SubscriptionSection />
+    {/* <RewardCalculatorSection /> */}
   </div>
 );
 

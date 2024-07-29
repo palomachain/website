@@ -1,20 +1,19 @@
 const topic3Section = () => (
   <section className="topic-section">
-    <div className="topic-photo">
-      <img src="/assets/topic/topic3.svg" alt="topic-3" />
-    </div>
     <div className="topic">
       <p>
-        “The Threshold Protocol network and community is excited to work with Paloma We look to
-        Paloma network to automate application execution on decentralized networks for Bitcoin like
-        the Threshold Network. The Threshold Bitcoin leverage bots from Paloma are just the start.
-        Paloma can unlock autoamted lending and leverage for Bitcoin holders on the Threshold
-        network and that's an exciting opportunity for the entire ecosystem.”
+        “At Tokensoft, we're pleased to support new distribution mechanisms. Paloma's LightNode sale
+        converts the delegator work into an application that can aid distribution, without
+        sacrificing compliance or adding new regulatory risk. We're excited to support Paloma and
+        launch new node sales in the future.”
       </p>
       <div className="flex-col gap-8">
-        <h3>MacLane Wilkison</h3>
-        <h3 className="h-black-50">Founder & CEO, NuCypher</h3>
+        <h3>Mason Borda</h3>
+        <h3 className="h-black-50">Founder & CEO, TokenSoft</h3>
       </div>
+    </div>
+    <div className="topic-photo">
+      <img src="/assets/topic/topic3.svg" alt="topic-3" />
     </div>
   </section>
 );

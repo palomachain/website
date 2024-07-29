@@ -30,6 +30,11 @@ export const WorkFlow = [
 
 export const LightNodeFeatures = [
   {
+    img: "feature-0.svg",
+    title: "Mine GRAINs Every Block",
+    describe: "Mine GRAINs every block, while your Paloma LightNode is running on your computer during your two year subscription.",
+  },
+  {
     img: "feature-1.png",
     title: "Collect Relay Fee Rewards",
     describe: "Automatically collect relay fee GRAIN rewards from the Pigeon Network.",

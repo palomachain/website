@@ -1161,18 +1161,30 @@
     .table-body {
       padding-left: 33px;
     }
-    .table-gray-bg {
-      background: #4f4e4e;
+    .value-td {
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: #4f4e4e;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+
+      span {
+        color: #a09e9e;
+        font-weight: 500;
+      }
     }
     .table-pink-bg {
       background: #f1d1e5;
       color: #2c2c2c;
       font-size: 30px;
       font-weight: 800;
-      width: 100%;
-      height: 100%;
     }
     .table-black-bg {
       background: #2c2c2c;

@@ -39,7 +39,7 @@ const lightnode = () => (
     <TeamsSection />
     <TopicSection4 />
     <SubscriptionSection />
-    {/* <RewardCalculatorSection /> */}
+    <RewardCalculatorSection />
     <NodeSaleLinksSection />
   </div>
 );

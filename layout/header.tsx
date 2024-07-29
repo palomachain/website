@@ -48,6 +48,7 @@ const LayoutHeader = ({ router }) => {
             className=""
             src="/assets/logo/paloma-logotype.svg"
             alt="Paloma"
+            width={112}
           />
         </Link>
       </div>

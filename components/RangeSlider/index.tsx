@@ -1,4 +1,5 @@
 import React from "react";
+import { formatNumber } from "utils/number";
 
 interface IRangeSliderWrapper {
   title?: string;
@@ -37,7 +38,7 @@ const RangeSlider = ({
           style={{ marginLeft: `calc(${bubble}% - ${valueWidth / 2}px)`, width: `${valueWidth}px` }}
           className="slider-range-value"
         >
-          {value}
+          {step >= 1 ? formatNumber(value, 0, 0) : value}
         </div>
         <input
           type="range"
@@ -50,9 +51,18 @@ const RangeSlider = ({
           className="slider"
         />
         <div className="slider-range-values">
-          <div>{prefix + min}</div>
-          <div className="slider-range-mid-value">{prefix + mid}</div>
-          <div>{prefix + max}</div>
+          <div>
+            {prefix}
+            {step >= 1 ? formatNumber(min, 0, 0) : min}
+          </div>
+          <div className="slider-range-mid-value">
+            {prefix}
+            {step >= 1 ? formatNumber(mid, 0, 0) : mid}
+          </div>
+          <div>
+            {prefix}
+            {step >= 1 ? formatNumber(max, 0, 0) : max}
+          </div>
         </div>
       </div>
     </div>

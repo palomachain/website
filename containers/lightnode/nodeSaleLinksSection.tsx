@@ -14,7 +14,7 @@ const nodeSaleLinksSection = () => (
           <h3>{sale}</h3>
           <div className="node-sale-links-items">
             {NodeSaleLinks[sale].map((item, key) => (
-              <div className="node-sale-item">
+              <div className="node-sale-item" key={key}>
                 {item.icon && (
                   <div className="node-sale-item-icon">
                     <img src={item.icon} alt={`item-${index}-${key}`} />

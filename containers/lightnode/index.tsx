@@ -16,6 +16,7 @@ import TopicSection1 from "./topic1Section";
 import TopicSection2 from "./topic2Section";
 import TopicSection3 from "./topic3Section";
 import TopicSection4 from "./topic4Section";
+import TopicSection5 from "./topic5Section";
 import VolumesSection from "./volumesSection";
 import WhatIsPalomaSection from "./whatisPalomaSection";
 
@@ -26,6 +27,7 @@ const lightnode = () => (
     <WhatIsPalomaSection />
     <HowToJoinSection />
     <HowToWorkSection />
+    <TopicSection5 />
     <HowToRelayRewardsSection />
     <FeaturesSection />
     <VolumesSection />

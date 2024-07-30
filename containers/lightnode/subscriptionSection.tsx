@@ -68,7 +68,7 @@ const subscriptionSection = () => {
             <th>Total Nodes for Sale</th>
             <th>Node Price</th>
             <th>Implied FDV</th>
-            <th>Grains Sold</th>
+            <th>Grains Minted</th>
             <th>% of Network</th>
           </tr>
         </thead>

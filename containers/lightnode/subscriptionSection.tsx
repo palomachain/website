@@ -83,7 +83,7 @@ const subscriptionSection = () => {
               >
                 <td>{index + 1}</td>
                 <td>{formatNumber(nodeSaleData[index].totalNodeSale, 0, 0)}</td>
-                <td>{nodeSaleData[index].nodePrice}</td>
+                <td>${nodeSaleData[index].nodePrice}</td>
                 <td>${formatNumber(nodeSaleData[index].fdv, 0, 0)}</td>
                 <td>{formatNumber(nodeSaleData[index].grainsSold, 0, 0)}</td>
                 <td>{formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%</td>

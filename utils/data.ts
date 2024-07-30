@@ -57,8 +57,8 @@ export const LightNodeFeatures = [
   },
   {
     img: "feature-5.png",
-    title: "Auto-Chaim and Re-Delegate GRAINs",
-    describe: "Automatically claim reward GRAINs and re-delegate them to new validators",
+    title: "Automatically claim and re-Delegate minted GRAINs",
+    describe: "Automatically claim minted GRAINs and re-delegate them to new validators",
   },
   {
     img: "feature-6.png",

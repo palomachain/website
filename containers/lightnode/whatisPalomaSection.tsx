@@ -8,13 +8,13 @@ const whatisPalomaSection = () => (
           WHAT IS<br></br>PALOMA?
         </h1>
         <p>
-          Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart-contract
-          messages fast and securely, between any other public blockchain with an active RPC
-          endpoint. Paloma is designed for developers who wish to manage multi-directional messages
-          between multiple chains in a scalable and secure manner. Blockchain smart contracts cannot
-          self-execute state change on the blockchains on which they are deployed. As such, they
-          require that state changes, and the accompanying computation of new logic, be sent to the
-          smart contract from another state.
+          Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart-contract messages
+          fast and securely, between any other public blockchain with an active RPC endpoint. Paloma
+          is designed for developers who wish to manage multi-directional messages between multiple
+          chains in a scalable and secure manner. Blockchain smart contracts cannot self-execute
+          state change on the blockchains on which they are deployed. As such, they require that
+          state changes, and the accompanying computation of new logic, be sent to the smart
+          contract from another state.
         </p>
         <button className="purchase-button mt-40">Purchase your LightNode</button>
       </div>
@@ -49,11 +49,21 @@ const whatisPalomaSection = () => (
       <div>
         <h2>Paloma chain</h2>
         <span className="mt-20">
-          Today these state changes are commonly run by centralized, custom-designed, closed-source
-          programs, human-multisignature key arrangements, or low-end, multi-party computation
-          circuits. The complexity and richness of these approaches is limited by the lack of
-          engineering resources and developer-friendly environments that encourage sophisticated
-          state and logic-call development.
+          To solve this problem, Paloma aims to bring multichain, gas-optimized, MEV-Protected, and
+          scheduled, messages managed by a permissionless validator set that manages both chain
+          security and message security.
+          <br />
+          <br />
+          In the Paloma protocol, validators fulfill two crucial roles. They secure the network
+          through the Proof of Stake mechanism and also act as Pigeons (Relayers) who relay
+          multi-directional, scheduled messages between Paloma and any other supported blockchain.
+          <br />
+          <br />
+          In Paloma, validators are not able to opt-out of message-relay work, without exiting the
+          active-set.
+          <br />
+          To be a validator on Paloma is to secure fast relay execution on all chains approved by
+          governance.
         </span>
         <button className="purchase-button mt-40">Purchase your LightNode</button>
       </div>

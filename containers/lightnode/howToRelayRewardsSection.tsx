@@ -44,9 +44,9 @@ const howToRelayRewardsSection = () => (
       <div>
         <h2>“Paloma LightNodes Delegate Vesting GRAINs to Optimal Validators...”</h2>
         <span className="mt-20">
-          Paloma LightNodes do the work of delegating their vesting GRAINs to the best validators
-          and new validators that need stake to establish their nodes on the network. Validators
-          that are unable to maintain uptime or have moved on will lose take quickly and
+          Paloma LightNodes do the work of delegating their minted GRAINs to the validators with highest uptime
+          and to new validators that need stake to establish their nodes on the network. Validators
+          that are unable to maintain uptime or have moved on will lose stake quickly and
           automatically.
         </span>
         <button className="purchase-button mt-40">Purchase your LightNode</button>
@@ -61,7 +61,7 @@ const howToRelayRewardsSection = () => (
           the Paloma network. These are capped by governance and the amount of stake delegated on
           the network. However, the cross-chain relay-fee rewards are uncapped and unlimited fee
           rewards collected by Paloma validators for all applications executing message relay
-          commands on the Paloma network. The cross-chain relay fee rewars are a percentage of the
+          commands on the Paloma network. The cross-chain relay fee rewards are a percentage of the
           individual validator’s fee rewards.
         </span>
       </div>

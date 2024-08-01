@@ -21,7 +21,7 @@ import VolumesSection from "./volumesSection";
 import WhatIsPalomaSection from "./whatisPalomaSection";
 
 const lightnode = () => (
-  <div className="page-container lightnode-container">
+  <div className="page-container light-node-sale lightnode-container">
     <NodeSaleSection />
     <LightNodeSection />
     <WhatIsPalomaSection />

@@ -1,3 +1,4 @@
+import AdvisorsSection from "./advisorsSection";
 import EcosystemSection from "./ecosystemSection";
 import FeaturesSection from "./featuresSection";
 import GrainTokenSection from "./grainTokenSection";
@@ -17,6 +18,7 @@ import TopicSection2 from "./topic2Section";
 import TopicSection3 from "./topic3Section";
 import TopicSection4 from "./topic4Section";
 import TopicSection5 from "./topic5Section";
+import TopicSection6 from "./topic6Section";
 import VolumesSection from "./volumesSection";
 import WhatIsPalomaSection from "./whatisPalomaSection";
 
@@ -37,10 +39,12 @@ const lightnode = () => (
     <TokenomicsSection />
     <InvestorSection />
     <TopicSection3 />
+    <AdvisorsSection />
     <GrainTokenSection />
     <TeamsSection />
     <TopicSection4 />
     <SubscriptionSection />
+    <TopicSection6 />
     <RewardCalculatorSection />
     <NodeSaleLinksSection />
   </div>

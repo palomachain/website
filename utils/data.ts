@@ -385,3 +385,30 @@ export const NodeSaleLinks = {
     },
   ],
 };
+
+export const Advisors = [
+  {
+    name: 'Anatoly Yakovenko',
+    company: 'Solana',
+    img: '/assets/advisors/1.svg',
+    logo: '/assets/ecosystem/solana.svg'
+  },
+  {
+    name: 'Marko Baricevic',
+    company: 'Cosmos',
+    img: '/assets/advisors/2.png',
+    logo: '/assets/ecosystem/cosmos.svg'
+  },
+  {
+    name: 'Erik Mayo',
+    company: 'Patache Digital',
+    img: '/assets/advisors/3.svg',
+    logo: '/assets/ecosystem/patache.svg'
+  },
+  {
+    name: 'Lok Lee',
+    company: 'Tuesday VC',
+    img: '/assets/advisors/4.svg',
+    logo: '/assets/ecosystem/tuesday-vc.svg'
+  },
+]

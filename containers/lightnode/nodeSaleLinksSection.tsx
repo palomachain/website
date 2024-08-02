@@ -30,7 +30,7 @@ const nodeSaleLinksSection = () => (
                     {item.title}
                   </a>
                   <img
-                    src={`/assets/icons/${index === 0 ? "arrow.svg" : "arrow-white.svg"}`}
+                    src={`/assets/arrows/${index === 0 ? "arrow.svg" : "arrow-white.svg"}`}
                     alt={`arrow-${sale}-${key}`}
                   />
                 </div>

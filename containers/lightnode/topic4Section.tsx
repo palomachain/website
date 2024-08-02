@@ -8,7 +8,7 @@ const topic4Section = () => (
         “The Threshold Protocol network and community is excited to work with Paloma We look to
         Paloma network to automate application execution on decentralized networks for Bitcoin like
         the Threshold Network. The Threshold Bitcoin leverage bots from Paloma are just the start.
-        Paloma can unlock autoamted lending and leverage for Bitcoin holders on the Threshold
+        Paloma can unlock automated lending and leverage for Bitcoin holders on the Threshold
         network and that's an exciting opportunity for the entire ecosystem.”
       </p>
       <div className="flex-col gap-8">

@@ -106,6 +106,24 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
+
+      &__range {
+        width: 100%;
+        -webkit-transition: .2s;
+      }
+      
+    }
+    .purchase-subscription__range::-webkit-slider-thumb {
+      width: 0px;
+      appearance: none;
+      height: 0px;
+    }
+    .purchase-subscription__range::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #04AA6D;
+      cursor: pointer;
     }
     .purchase-sale-set {
       width: 100%;

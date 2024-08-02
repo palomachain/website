@@ -38,6 +38,7 @@ const PurchaseFlow = () => {
       <div className="purchase-subscription">
         <h3>Paloma LightNode Subscription Sale</h3>
         <p>Slot 1 Remaining Nodes</p>
+        <input type="range" min={1} max={TotalNodes} value={saledNodes} className="purchase-subscription__range"/>
         <p>
           {saledNodes}/{TotalNodes}
         </p>

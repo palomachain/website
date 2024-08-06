@@ -1135,6 +1135,17 @@
   img {
     width: 100%;
   }
+  .tokenomics-engine-img-mobile {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .tokenomics-engine-img-pc {
+      display: none;
+    }
+    .tokenomics-engine-img-mobile {
+      display: block;
+    }
+  }
 }
 
 .reward-calculator-section {

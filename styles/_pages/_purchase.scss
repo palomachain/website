@@ -108,23 +108,19 @@
       gap: 10px;
 
       &__range {
+        accent-color: #ff62c4;
+        background: #f1d1e5;
         width: 100%;
-        -webkit-transition: .2s;
+        -webkit-transition: 0.2s;
       }
-      
     }
-    .purchase-subscription__range::-webkit-slider-thumb {
-      width: 0px;
-      appearance: none;
-      height: 0px;
-    }
-    .purchase-subscription__range::-moz-range-thumb {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      background: #04AA6D;
-      cursor: pointer;
-    }
+    // .purchase-subscription__range::-webkit-slider-runnable-track {
+    //   background: #F1D1E5;
+    // }
+    // .purchase-subscription__range::-moz-range-track {
+    //   background: #F1D1E5;
+    //   cursor: pointer;
+    // }
     .purchase-sale-set {
       width: 100%;
       display: grid;
@@ -145,14 +141,6 @@
         letter-spacing: -0.42px;
       }
       &__price {
-        span {
-          color: #2c2c2c;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 150%;
-          letter-spacing: -0.42px;
-        }
-
         &__value {
           justify-content: space-between !important;
           width: 100%;
@@ -213,6 +201,7 @@
         border: none;
         outline: none;
         margin-left: 18px;
+        width: 100%;
       }
       .purchase-promo-apply {
         width: 173px;
@@ -226,6 +215,7 @@
         font-weight: 600;
         line-height: 150%; /* 24px */
         letter-spacing: -0.48px;
+        border-radius: 0px 8px 8px 0px;
       }
       .purchase-sale-pay {
         border-radius: 8px;
@@ -254,6 +244,31 @@
         .pay-total-value {
           font-size: 18px;
           font-weight: 700;
+        }
+
+        &__supports {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          p {
+            color: #2c2c2c;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 116%; /* 18.56px */
+            text-align: center;
+          }
+          span {
+            color: #2c2c2c;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 116%;
+          }
+        }
+        &__supports-effects {
+          display: flex;
+          flex-direction: column;
+          margin-left: 28px;
         }
       }
     }

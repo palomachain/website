@@ -388,27 +388,46 @@ export const NodeSaleLinks = {
 
 export const Advisors = [
   {
-    name: 'Anatoly Yakovenko',
-    company: 'Solana',
-    img: '/assets/advisors/1.svg',
-    logo: '/assets/ecosystem/solana.svg'
+    name: "Anatoly Yakovenko",
+    company: "Solana",
+    img: "/assets/advisors/1.svg",
+    logo: "/assets/ecosystem/solana.svg",
   },
   {
-    name: 'Marko Baricevic',
-    company: 'Cosmos',
-    img: '/assets/advisors/2.png',
-    logo: '/assets/ecosystem/cosmos.svg'
+    name: "Marko Baricevic",
+    company: "Cosmos",
+    img: "/assets/advisors/2.png",
+    logo: "/assets/ecosystem/cosmos.svg",
   },
   {
-    name: 'Erik Mayo',
-    company: 'Patache Digital',
-    img: '/assets/advisors/3.svg',
-    logo: '/assets/ecosystem/patache.svg'
+    name: "Erik Mayo",
+    company: "Patache Digital",
+    img: "/assets/advisors/3.svg",
+    logo: "/assets/ecosystem/patache.svg",
   },
   {
-    name: 'Lok Lee',
-    company: 'Tuesday VC',
-    img: '/assets/advisors/4.svg',
-    logo: '/assets/ecosystem/tuesday-vc.svg'
+    name: "Lok Lee",
+    company: "Tuesday VC",
+    img: "/assets/advisors/4.svg",
+    logo: "/assets/ecosystem/tuesday-vc.svg",
   },
-]
+];
+
+export const CustomerSupport = [
+  {
+    label: "Enhanced Support",
+    price: 50,
+    effects: ["24/7 availability", "Multiple modes of contact", "Allows up to 8 tickets per month"],
+    month: 24,
+  },
+  {
+    label: "Standard Support",
+    price: 0,
+    effects: [
+      "Web-based only",
+      "Limited to 2 tickets per month",
+      "Target response time of 3 business days (no guarantee)",
+    ],
+    month: 0,
+  },
+];

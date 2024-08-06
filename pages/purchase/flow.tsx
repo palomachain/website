@@ -1,12 +1,22 @@
-import { useState } from "react";
+import CheckBox from "components/CheckBox";
+import { useMemo, useState } from "react";
 import Countdown from "react-countdown";
 import { NodeSaleStartDate, TotalNodes } from "utils/constants";
+import { CustomerSupport } from "utils/data";
+import { formatNumber } from "utils/number";
 
 const PurchaseFlow = () => {
   const [endDate, setEndDate] = useState(NodeSaleStartDate); // Set the End date of node sale
   const [saledNodes, setSaledNodes] = useState(102); // Set Saled Nodes Count
   const [quantity, setQuantity] = useState(1);
   const [promoCode, setPromoCode] = useState<string>();
+  const [selectedSupport, setSupport] = useState<number>(CustomerSupport.length - 1);
+  const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
+  const [agreeAck, setAgreeAck] = useState<boolean>(false);
+
+  const totalSupportPrice = useMemo(() => {
+    return CustomerSupport[selectedSupport].price * CustomerSupport[selectedSupport].month;
+  }, [selectedSupport]);
 
   const CompleteTime = () => <span>Sale ended</span>;
   // Table style
@@ -38,7 +48,13 @@ const PurchaseFlow = () => {
       <div className="purchase-subscription">
         <h3>Paloma LightNode Subscription Sale</h3>
         <p>Slot 1 Remaining Nodes</p>
-        <input type="range" min={1} max={TotalNodes} value={saledNodes} className="purchase-subscription__range"/>
+        <input
+          type="range"
+          min={1}
+          max={TotalNodes}
+          value={saledNodes}
+          className="purchase-subscription__range"
+        />
         <p>
           {saledNodes}/{TotalNodes}
         </p>
@@ -93,6 +109,38 @@ const PurchaseFlow = () => {
       </div>
       <div className="purchase-sale-set purchase-sale-promo">
         <div className="purchase-sale-set__price purchase-sale-set__flex">
+          <p>Customer Support</p>
+          <div className="purchase-sale-pay">
+            {CustomerSupport.map((support, index) => (
+              <div key={index}>
+                <div className="purchase-sale-pay__supports">
+                  <CheckBox
+                    label={support.label}
+                    checked={index === selectedSupport}
+                    onChange={() => setSupport(index)}
+                  />
+                  {support.price > 0 ? (
+                    <p>
+                      ${support.price} USD
+                      <br />
+                      <span>per month</span>
+                    </p>
+                  ) : (
+                    <p>Free</p>
+                  )}
+                </div>
+                <div className="purchase-sale-pay__supports-effects">
+                  {support.effects.map((effect, key) => (
+                    <CheckBox disabled label={effect} key={key} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="purchase-sale-set purchase-sale-promo">
+        <div className="purchase-sale-set__price purchase-sale-set__flex">
           <p>You Pay</p>
           <div className="purchase-sale-pay">
             <div className="purchase-sale-pay__item flex-row">
@@ -103,23 +151,39 @@ const PurchaseFlow = () => {
               <p>Purchase Processing Fee</p>
               <p className="pay-value">5 USD</p>
             </div>
+            {totalSupportPrice > 0 && (
+              <div className="purchase-sale-pay__item flex-row">
+                <p>Enhanced Customer Support</p>
+                <p className="pay-value">{formatNumber(totalSupportPrice, 0, 0)} USD</p>
+              </div>
+            )}
             <div className="purchase-sale-pay__item flex-row">
               <p className="pay-total">Total</p>
-              <p className="pay-total-value">55 USD</p>
+              <p className="pay-total-value">
+                {formatNumber(50 + 5 + totalSupportPrice, 0, 0)} USD
+              </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex-row purchase-sale-agree">
-        <input type="checkbox" />
-        <p>
-          I agree with the <a>Paloma LightNode Sale Terms and Conditions.</a>
-        </p>
-      </div>
-      <div className="flex-row purchase-sale-agree">
-        <input type="checkbox" />
-        <p>I acknowledge that all sales are final and non-refundable.</p>
-      </div>
+      <CheckBox
+        label={
+          <>
+            I agree with the{" "}
+            <a href="" target="_blank">
+              Paloma LightNode Sale Terms and Conditions.
+            </a>
+          </>
+        }
+        checked={agreeTerms}
+        onChange={() => setAgreeTerms(!agreeTerms)}
+      />
+      <CheckBox
+        label="I acknowledge that all sales are final and non-refundable."
+        checked={agreeAck}
+        onChange={() => setAgreeAck(!agreeAck)}
+      />
+      
     </div>
   );
 };

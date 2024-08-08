@@ -77,9 +77,9 @@ const whatisPalomaSection = () => (
           chain and have the infrastructure and available funds to send messages on every chain.
           <br />
           <br />
-          If these requirements are not met, validators will be jailed and their stake unbonded.
-          Builders on Paloma can rest assured that their messages are secure and will always arrive
-          on schedule to the target chains.
+          If these requirements are not met, validators will be jailed and their stake unbonded. 
+          This aligns validators interest with builders: to secure messages and deliver them on 
+          time on target chains.
         </span>
         <button className="purchase-button purchase-button-white mt-40">
           Purchase your LightNode

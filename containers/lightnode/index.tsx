@@ -1,7 +1,5 @@
-import AdvisorsSection from "./advisorsSection";
 import EcosystemSection from "./ecosystemSection";
 import FeaturesSection from "./featuresSection";
-import GrainTokenSection from "./grainTokenSection";
 import HowToJoinSection from "./howToJoinSection";
 import HowToRelayRewardsSection from "./howToRelayRewardsSection";
 import HowToWorkSection from "./howToWorkSection";
@@ -41,8 +39,6 @@ const lightnode = () => (
     <TokenomicsEngineSection />
     <InvestorSection />
     <TopicSection3 />
-    <AdvisorsSection />
-    <GrainTokenSection />
     <TeamsSection />
     <TopicSection4 />
     <SubscriptionSection />

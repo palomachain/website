@@ -1,9 +1,9 @@
+import AdvisorsSection from "./advisorsSection";
 import EcosystemSection from "./ecosystemSection";
 import FeaturesSection from "./featuresSection";
 import HowToJoinSection from "./howToJoinSection";
 import HowToRelayRewardsSection from "./howToRelayRewardsSection";
 import HowToWorkSection from "./howToWorkSection";
-import InvestorSection from "./investorSection";
 import LightNodeSection from "./lightnodeSection";
 import NodeSaleLinksSection from "./nodeSaleLinksSection";
 import NodeSaleSection from "./nodesaleSection";
@@ -37,8 +37,8 @@ const lightnode = () => (
     <TopicSection2 />
     <TokenomicsSection />
     <TokenomicsEngineSection />
-    <InvestorSection />
     <TopicSection3 />
+    <AdvisorsSection />
     <TeamsSection />
     <TopicSection4 />
     <SubscriptionSection />

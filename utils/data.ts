@@ -3,7 +3,7 @@ export const SupportChains = ["eth", "binance", "arbitrum", "base", "op", "b", "
 export const JoinFlow = [
   "To join the flock, you will need to purchase a Paloma LightNode.",
   "Download the client and register your program.",
-  "Run it Daily. Successful work will generate Grains to your Light Node account on your computer.",
+  "Run it Daily. Successful work will generate GRAINs to your Light Node account on your computer.",
   "Your Light Node will secure the Paloma network of relay pigeons that sends messages between blockchains.",
 ];
 

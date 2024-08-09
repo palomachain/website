@@ -57,12 +57,12 @@ const howToRelayRewardsSection = () => (
         <h2>“LightNodes Earn Staked GRAIN and Cross-Chain Relay Fee Rewards...”</h2>
         <span className="mt-20">
           LightNodes are rewarded with staked GRAIN rewards as well as cross-chain relay fee
-          rewards. Staked GRAIN rewards are the 3% - 7% emissions that are produced every block on
-          the Paloma network. These are capped by governance and the amount of stake delegated on
-          the network. However, the cross-chain relay-fee rewards are uncapped and unlimited fee
-          rewards collected by Paloma validators for all applications executing message relay
-          commands on the Paloma network. The cross-chain relay fee rewards are a percentage of the
-          individual validator’s fee rewards.
+          rewards. Staked GRAIN rewards are determined by governance and the amount of stake 
+          delegated on the network. Currently (as of August 9, 2024), Paloma produces 3% - 7% 
+          emissions on every block on the Paloma network. However, the cross-chain relay-fee 
+          rewards are uncapped and unlimited fee rewards collected by Paloma validators for all 
+          applications executing message relay commands on the Paloma network. The cross-chain 
+          relay fee rewards are a percentage of the individual validator’s fee rewards.
         </span>
       </div>
       <div className="flex-col">

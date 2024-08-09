@@ -25,4 +25,4 @@ export const RelayRewardFee = 30; // 30%
 export const PigeonGasFee = 10; // 10%
 export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
 
-export const NodeSaleStartDate = 1724238000 * 1000; // 11:00 AM, August 21, 2024 Coordinated Universal Time (UTC)
+export const NodeSaleStartDate = 1725454800 * 1000; // 11:00 AM, September 4, 2024 Coordinated Universal Time (UTC)

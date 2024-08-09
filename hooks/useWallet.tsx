@@ -1,447 +1,386 @@
-// import { useEffect, useState, useCallback, createContext, useContext } from 'react';
-// import Cookies from 'universal-cookie';
-// import { useAccount, useNetwork } from 'wagmi';
-// import { switchNetwork, disconnect } from '@wagmi/core';
-// import WalletSelectModal from 'containers/wallet/WalletSelectModal';
-// import { NetworkIds, Provider, Wallet } from 'interfaces/network';
-// import { WalletConnectViewTypes } from 'configs/wallet';
-// import { useWeb3Modal } from '@web3modal/wagmi/react';
-// import { AddEthereumChain } from '@/configs/constants';
-// import { supportedNetworks } from '@/configs/networks';
-// import stringTool from '@/tools/string';
-// import {
-//   useAddress,
-//   useChainId,
-//   useConnectionStatus,
-//   useDisconnect,
-//   useSwitchChain,
-//   useFrameWallet,
-// } from '@thirdweb-dev/react';
-// import { Ethereum } from '@thirdweb-dev/chains';
+import { useEffect, useState, useCallback, createContext, useContext } from 'react';
+import Cookies from 'universal-cookie';
+import { useAccount, useNetwork } from 'wagmi';
+import { switchNetwork, disconnect } from '@wagmi/core';
+import WalletSelectModal from 'containers/wallet/WalletSelectModal';
+import { NetworkIds, Provider, Wallet } from 'interfaces/network';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
+import { AddNetwork } from 'configs/constants';
+import { supportedNetworks } from 'configs/networks';
+import {
+  useDisconnect,
+  useSwitchChain,
+  useFrameWallet,
+} from '@thirdweb-dev/react';
+import { Ethereum } from '@thirdweb-dev/chains';
+import { parseDexString, parseIntString } from 'utils/string';
 
-// const cookies = new Cookies();
+const cookies = new Cookies();
 
-// type WalletContextType = {
-//   ethereum?: any;
-//   wallet: Wallet;
-//   connectMetaMask: (e: string) => Promise<boolean>;
-//   connectWalletConnect: () => Promise<void>;
-//   disconnectWallet: () => void;
-//   openConnectionModal: () => void;
-//   requestSwitchNetwork: (chainId: number | string) => Promise<boolean>;
-//   requestAddNetwork: (chainId: number | string) => void;
-//   networkSelect: (defaultChain: number | string, supportChains: object) => Promise<boolean>;
-//   error: Error | null;
-//   availableProviders: { [providerName in Provider]: boolean };
-// };
+type WalletContextType = {
+  ethereum?: any;
+  wallet: Wallet;
+  connectMetaMask: (e: string) => Promise<boolean>;
+  connectWalletConnect: () => Promise<void>;
+  disconnectWallet: () => void;
+  openConnectionModal: () => void;
+  requestSwitchNetwork: (chainId: number | string) => Promise<boolean>;
+  requestAddNetwork: (chainId: number | string) => void;
+  networkSelect: (defaultChain: number | string, supportChains: object) => Promise<boolean>;
+  error: Error | null;
+  availableProviders: { [providerName in Provider]: boolean };
+};
 
-// const initialWallet = {
-//   ethereum: null,
-//   wallet: {
-//     account: null,
-//     provider: null,
-//     providerName: null,
-//     network: null,
-//   },
-//   error: null,
-// };
-// export const WalletContext = createContext<Partial<WalletContextType>>(initialWallet);
+const initialWallet = {
+  ethereum: null,
+  wallet: {
+    account: null,
+    provider: null,
+    providerName: null,
+    network: null,
+  },
+  error: null,
+};
+export const WalletContext = createContext<Partial<WalletContextType>>(initialWallet);
 
-// const initialWalletState: Wallet = {
-//   account: null,
-//   provider: null,
-//   providerName: null,
-//   network: null,
-// };
+const initialWalletState: Wallet = {
+  account: null,
+  provider: null,
+  providerName: null,
+  network: null,
+};
 
-// export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
-//   const ethereum = (window as any).ethereum;
-//   const { address, isConnected } = useAccount();
+export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
+  const ethereum = (window as any).ethereum;
+  const { address, isConnected } = useAccount();
 
-//   const { open } = useWeb3Modal();
-//   const { chain } = useNetwork();
+  const { open } = useWeb3Modal();
+  const { chain } = useNetwork();
 
-//   const frameAddress = useAddress();
-//   const frameStatus = useConnectionStatus();
-//   const frameChainId = useChainId();
-//   const frameSwitchChain = useSwitchChain();
-//   const frameDisconnect = useDisconnect();
-//   const connectWithFrameWallet = useFrameWallet();
+  const frameSwitchChain = useSwitchChain();
+  const frameDisconnect = useDisconnect();
+  const connectWithFrameWallet = useFrameWallet();
 
-//   const [web3ModalLoading, setWeb3ModalLoading] = useState(false);
-//   const [frameLoading, setFrameLoading] = useState(false);
+  const [web3ModalLoading, setWeb3ModalLoading] = useState(false);
 
-//   useEffect(() => {
-//     frameStatus && setFrameLoading(frameStatus === 'connecting');
-//   }, [frameStatus]);
+  const availableProviders = {
+    metamask: ethereum?.isMetaMask,
+    walletconnect: true,
+    frame: ethereum?.isFrame,
+  };
 
-//   const availableProviders = {
-//     metamask: ethereum?.isMetaMask,
-//     walletconnect: true,
-//     frame: ethereum?.isFrame,
-//   };
+  const [wallet, setWallet] = useState<Wallet>(initialWalletState);
 
-//   const [wallet, setWallet] = useState<Wallet>(initialWalletState);
-//   const [step, setStep] = useState<WalletConnectViewTypes>(WalletConnectViewTypes.None);
+  const setMetamaskWallet = async () => {
+    const walletFromCookie: Partial<Wallet> = await cookies.get('current_wallet');
+    const accounts: [] = ethereum ? await ethereum.request({ method: 'eth_accounts' }) : [];
 
-//   const setMetamaskWallet = async () => {
-//     const walletFromCookie: Partial<Wallet> = await cookies.get('current_wallet');
-//     const accounts: [] = ethereum ? await ethereum.request({ method: 'eth_accounts' }) : [];
+    if (walletFromCookie && walletFromCookie.account && walletFromCookie.providerName && accounts.length > 0) {
+      if (walletFromCookie.providerName === 'metamask') {
+        const provider = (window as any).ethereum;
+        const network = (await ethereum.request({ method: 'net_version' })) || '1';
+        setWallet({ ...walletFromCookie, network, provider } as Wallet);
+      } else if (walletFromCookie.providerName === 'walletconnect' || walletFromCookie.providerName === 'frame') {
+        const provider = (window as any).ethereum;
+        const network = walletFromCookie.network;
+        setWallet({ ...walletFromCookie, network, provider } as Wallet);
+      } else {
+        setWallet({
+          account: null,
+          providerName: null,
+          provider: null,
+          network: null,
+        });
+      }
+    } else {
+      setWallet({
+        account: null,
+        providerName: null,
+        provider: null,
+        network: null,
+      });
+    }
+  };
 
-//     if (walletFromCookie && walletFromCookie.account && walletFromCookie.providerName && accounts.length > 0) {
-//       if (walletFromCookie.providerName === 'metamask') {
-//         const provider = (window as any).ethereum;
-//         const network = (await ethereum.request({ method: 'net_version' })) || '1';
-//         setWallet({ ...walletFromCookie, network, provider } as Wallet);
-//       } else if (walletFromCookie.providerName === 'walletconnect' || walletFromCookie.providerName === 'frame') {
-//         const provider = (window as any).ethereum;
-//         const network = walletFromCookie.network;
-//         setWallet({ ...walletFromCookie, network, provider } as Wallet);
-//       } else {
-//         setWallet({
-//           account: null,
-//           providerName: null,
-//           provider: null,
-//           network: null,
-//         });
-//       }
-//     } else {
-//       setWallet({
-//         account: null,
-//         providerName: null,
-//         provider: null,
-//         network: null,
-//       });
-//     }
-//   };
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      setMetamaskWallet();
+    }, 300); // set 0.3s delay
+    return () => clearTimeout(delayDebounceFn);
+  }, [ethereum]);
 
-//   useEffect(() => {
-//     const delayDebounceFn = setTimeout(() => {
-//       setMetamaskWallet();
-//     }, 300); // set 0.3s delay
-//     return () => clearTimeout(delayDebounceFn);
-//   }, [ethereum]);
+  const [error, setError] = useState<Error | null>(null);
 
-//   const [error, setError] = useState<Error | null>(null);
+  const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
+  const [showConnecting, setShowConnecting] = useState<boolean>(false);
 
-//   const [showChooseWalletModal, setShowChooseWalletModal] = useState(false);
-//   const [showConnecting, setShowConnecting] = useState<boolean>(false);
+  const disconnectWallet = useCallback(async () => {
+    // disconnect from walletconnect
+    await disconnect();
+    // disconnect from frame
+    await frameDisconnect();
 
-//   const disconnectWallet = useCallback(async () => {
-//     // disconnect from walletconnect
-//     await disconnect();
-//     // disconnect from frame
-//     await frameDisconnect();
+    cookies.remove('current_wallet', { path: '/' });
+    setWallet({
+      account: null,
+      providerName: null,
+      provider: null,
+      network: null,
+    });
+  }, [wallet.account, wallet.providerName]);
 
-//     cookies.remove('current_wallet', { path: '/' });
-//     setWallet({
-//       account: null,
-//       providerName: null,
-//       provider: null,
-//       network: null,
-//     });
-//   }, [wallet.account, wallet.providerName]);
+  // Subscribe to updates (do this before calling connection in case we load from cookies)
+  useEffect(() => {
+    if (ethereum) {
+      const handleNetworkChange = (networkId: NetworkIds) => {
+        if (wallet?.providerName !== 'metamask') return;
 
-//   // Subscribe to updates (do this before calling connection in case we load from cookies)
-//   useEffect(() => {
-//     if (ethereum) {
-//       const handleNetworkChange = (networkId: NetworkIds) => {
-//         if (wallet?.providerName !== 'metamask') return;
+        setWallet({ ...wallet, network: networkId });
+      };
 
-//         setWallet({ ...wallet, network: networkId });
-//       };
+      const handleAccountChange = async (accounts: `0x${string}`[]) => {
+        // If we are not currently connected with metamask, then no-op
+        if (wallet.providerName !== 'metamask') return;
 
-//       const handleAccountChange = async (accounts: `0x${string}`[]) => {
-//         // If we are not currently connected with metamask, then no-op
-//         if (wallet.providerName !== 'metamask') return;
+        const [account] = accounts;
+        if (account) {
+          const walletObj: Wallet = {
+            account,
+            providerName: 'metamask',
+            provider: (window as any).ethereum,
+            network: parseIntString(await ethereum.request({ method: 'net_version' })) || '1',
+          };
 
-//         const [account] = accounts;
-//         if (account) {
-//           const walletObj: Wallet = {
-//             account,
-//             providerName: 'metamask',
-//             provider: (window as any).ethereum,
-//             network: stringTool.parseIntString(await ethereum.request({ method: 'net_version' })) || '1',
-//           };
+          setWallet(walletObj);
+        } else {
+          disconnectWallet();
+        }
+      };
+      ethereum.on('accountsChanged', handleAccountChange);
 
-//           setWallet(walletObj);
-//         } else {
-//           disconnectWallet();
-//         }
-//       };
-//       ethereum.on('accountsChanged', handleAccountChange);
+      ethereum.on('chainChanged', handleNetworkChange);
 
-//       ethereum.on('chainChanged', handleNetworkChange);
+      return () => {
+        ethereum.removeListener('accountsChanged', handleAccountChange);
+        ethereum.removeListener('chainChanged', handleNetworkChange);
+      };
+    }
+  }, [disconnectWallet, ethereum, wallet]);
 
-//       return () => {
-//         ethereum.removeListener('accountsChanged', handleAccountChange);
-//         ethereum.removeListener('chainChanged', handleNetworkChange);
-//       };
-//     }
-//   }, [disconnectWallet, ethereum, wallet]);
+  const connectMetaMask = async (network = '1') => {
+    if (!ethereum) return;
 
-//   const connectMetaMask = async (network = '1') => {
-//     if (!ethereum) return;
+    try {
+      const accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-//     try {
-//       const accounts = await ethereum.request({
-//         method: 'eth_requestAccounts',
-//       });
+      const [account] = accounts;
+      const walletObj: Wallet = {
+        account,
+        providerName: 'metamask',
+        provider: (window as any).ethereum,
+        network: parseIntString(network),
+      };
 
-//       const [account] = accounts;
-//       const walletObj: Wallet = {
-//         account,
-//         providerName: 'metamask',
-//         provider: (window as any).ethereum,
-//         network: stringTool.parseIntString(network),
-//       };
+      cookies.set(
+        'current_wallet',
+        {
+          account,
+          providerName: walletObj.providerName,
+          network: walletObj.network,
+        },
+        {
+          expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+          path: '/',
+        },
+      );
+      setWallet(walletObj);
 
-//       cookies.set(
-//         'current_wallet',
-//         {
-//           account,
-//           providerName: walletObj.providerName,
-//           network: walletObj.network,
-//         },
-//         {
-//           expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-//           path: '/',
-//         },
-//       );
-//       setWallet(walletObj);
+      setShowChooseWalletModal(false);
+      return true;
+    } catch (error) {
+      console.log('error', error);
+      setShowConnecting(false);
+      return false;
+    }
+  };
 
-//       setShowChooseWalletModal(false);
-//       return true;
-//     } catch (error) {
-//       console.log('error', error);
-//       setShowConnecting(false);
-//       return false;
-//     }
-//   };
+  //re-set cookie when wallet state changes
+  useEffect(() => {
+    try {
+      if (wallet && wallet?.account) {
+        cookies.remove('current_wallet', { path: '/' });
+        const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
+        if (
+          !walletFromCookie ||
+          (walletFromCookie.account !== wallet.account && walletFromCookie.network !== wallet.network)
+        ) {
+          cookies.set(
+            'current_wallet',
+            {
+              account: wallet.account,
+              providerName: wallet.providerName,
+              network: parseIntString(wallet.network),
+            },
+            {
+              expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+              path: '/',
+            },
+          );
+        }
+      }
+    } catch (e) {
+      setError(e);
+    }
+  }, [wallet]);
 
-//   //re-set cookie when wallet state changes
-//   useEffect(() => {
-//     try {
-//       if (wallet && wallet?.account) {
-//         cookies.remove('current_wallet', { path: '/' });
-//         const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
-//         if (
-//           !walletFromCookie ||
-//           (walletFromCookie.account !== wallet.account && walletFromCookie.network !== wallet.network)
-//         ) {
-//           cookies.set(
-//             'current_wallet',
-//             {
-//               account: wallet.account,
-//               providerName: wallet.providerName,
-//               network: stringTool.parseIntString(wallet.network),
-//             },
-//             {
-//               expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-//               path: '/',
-//             },
-//           );
-//         }
-//       }
-//     } catch (e) {
-//       setError(e);
-//     }
-//   }, [wallet]);
+  const handleConnectMetamask = async () => {
+    const network = await ethereum.request({ method: 'net_version' });
+    await connectMetaMask(network);
+  };
 
-//   const handleConnectMetamask = async () => {
-//     const network = await ethereum.request({ method: 'net_version' });
-//     await connectMetaMask(network);
-//   };
+  const handleConnectWalletConnect = async () => {
+    await disconnect();
+    setWeb3ModalLoading(true);
 
-//   const handleConnectFrame = async () => {
-//     try {
-//       await connectWithFrameWallet({ chainId: Ethereum.chainId });
-//     } catch (error) {
-//       console.log('error', error);
-//     }
-//   };
+    await open();
 
-//   const handleConnectWalletConnect = async () => {
-//     await disconnect();
-//     setWeb3ModalLoading(true);
+    setWeb3ModalLoading(false);
+  };
 
-//     await open();
+  useEffect(() => {
+    if (address && isConnected && chain) {
+      const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
 
-//     setWeb3ModalLoading(false);
-//   };
+      if (walletFromCookie)
+        setWallet({
+          ...walletFromCookie,
+          account: address,
+          providerName: walletFromCookie.providerName,
+          provider: (window as any).ethereum,
+          network: String(chain.id),
+        });
+      else
+        setWallet({
+          account: address,
+          providerName: 'walletconnect',
+          provider: (window as any).ethereum,
+          network: String(chain.id),
+        });
 
-//   // connect frame wallet
-//   useEffect(() => {
-//     if (frameAddress && frameChainId && frameStatus === 'connected') {
-//       cookies.set(
-//         'current_wallet',
-//         {
-//           frameAddress,
-//           providerName: 'frame',
-//           network: String(frameChainId),
-//         },
-//         {
-//           expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-//           path: '/',
-//         },
-//       );
+      setShowChooseWalletModal(false);
+    }
+  }, [address, chain]);
 
-//       setWallet({
-//         account: stringTool.parseOxString(frameAddress),
-//         providerName: 'frame',
-//         provider: (window as any).ethereum,
-//         network: String(frameChainId),
-//       });
+  const openConnectionModal = () => {
+    if (!wallet || !wallet.account) {
+      setShowChooseWalletModal(true);
+    }
+  };
 
-//       setShowChooseWalletModal(false);
-//     }
-//   }, [frameAddress, frameChainId, frameStatus]);
+  const requestSwitchNetwork = async (chainId: string) => {
+    if (wallet.providerName === 'metamask') {
+      const hex = parseDexString(chainId);
+      try {
+        await ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [
+            {
+              chainId: hex,
+            },
+          ],
+        });
+      } catch (error) {
+        // This error code indicates that the chain has not been added to MetaMask
+        console.log('error', error);
+        if (error.code === 4902) {
+          await ethereum.request({
+            method: 'wallet_AddNetwork',
+            params: [
+              {
+                chainId: hex,
+                ...AddNetwork[chainId],
+              },
+            ],
+          });
+        }
+        return false;
+      }
+    } else if (wallet.providerName === 'walletconnect') {
+      try {
+        if (chainId !== wallet.network) {
+          const network = await switchNetwork({ chainId: Number(chainId) });
+          if (String(network.id) === chainId) {
+            setWallet({ ...wallet, network: chainId });
+          }
+        }
+      } catch (error) {
+        console.log('error', error);
+        return false;
+      }
+    }
 
-//   useEffect(() => {
-//     if (address && isConnected && chain) {
-//       const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
+    return true;
+  };
 
-//       if (walletFromCookie)
-//         setWallet({
-//           ...walletFromCookie,
-//           account: address,
-//           providerName: walletFromCookie.providerName,
-//           provider: (window as any).ethereum,
-//           network: String(chain.id),
-//         });
-//       else
-//         setWallet({
-//           account: address,
-//           providerName: 'walletconnect',
-//           provider: (window as any).ethereum,
-//           network: String(chain.id),
-//         });
+  const requestAddNetwork = async (chainId: string) => {
+    // TODO: disable custom rpc endpoints to user's wallet
+    // const network = supportedNetworks[chainId];
+    // await ethereum.request({
+    //   method: 'wallet_AddNetwork',
+    //   params: [network],
+    // });
+  };
 
-//       setShowChooseWalletModal(false);
-//     }
-//   }, [address, chain]);
+  const networkSelect = async (defaultChain: string, supportChains: object = supportedNetworks) => {
+    if (!wallet || !wallet.network) {
+      const result = await connectMetaMask(defaultChain);
+      if (result) return true;
+      return false;
+    }
 
-//   const openConnectionModal = () => {
-//     if (!wallet || !wallet.account) {
-//       setShowChooseWalletModal(true);
-//     }
-//   };
+    const connectNetwork = parseIntString(wallet.network);
+    if (connectNetwork in supportChains) {
+      return true;
+    } else {
+      const result = await requestSwitchNetwork(defaultChain);
+      if (result) return true;
+    }
 
-//   const requestSwitchNetwork = async (chainId: string) => {
-//     if (wallet.providerName === 'metamask') {
-//       const hex = stringTool.parseDexString(chainId);
-//       try {
-//         await ethereum.request({
-//           method: 'wallet_switchEthereumChain',
-//           params: [
-//             {
-//               chainId: hex,
-//             },
-//           ],
-//         });
-//       } catch (error) {
-//         // This error code indicates that the chain has not been added to MetaMask
-//         console.log('error', error);
-//         if (error.code === 4902) {
-//           await ethereum.request({
-//             method: 'wallet_addEthereumChain',
-//             params: [
-//               {
-//                 chainId: hex,
-//                 ...AddEthereumChain[chainId],
-//               },
-//             ],
-//           });
-//         }
-//         return false;
-//       }
-//     } else if (wallet.providerName === 'walletconnect') {
-//       try {
-//         if (chainId !== wallet.network) {
-//           const network = await switchNetwork({ chainId: Number(chainId) });
-//           if (String(network.id) === chainId) {
-//             setWallet({ ...wallet, network: chainId });
-//           }
-//         }
-//       } catch (error) {
-//         console.log('error', error);
-//         return false;
-//       }
-//     } else if (wallet.providerName === 'frame') {
-//       try {
-//         if (chainId !== wallet.network) {
-//           const data = await frameSwitchChain(Number(stringTool.parseIntString(chainId)));
-//           console.log('data', data);
-//         }
-//       } catch (error) {
-//         console.log('error', error);
-//         return false;
-//       }
-//     }
+    return false;
+  };
 
-//     return true;
-//   };
+  return (
+    <WalletContext.Provider
+      value={{
+        ethereum,
+        wallet,
+        connectMetaMask,
+        disconnectWallet,
+        openConnectionModal,
+        requestSwitchNetwork,
+        requestAddNetwork,
+        networkSelect,
+        availableProviders,
+        error,
+      }}
+    >
+      {children}
+      {showChooseWalletModal && (
+        <WalletSelectModal
+          onClose={() => setShowChooseWalletModal(false)}
+          onChooseMetamask={() => handleConnectMetamask()}
+          onChooseWalletConnect={() => handleConnectWalletConnect()}
+          showConnecting={showConnecting}
+          setShowConnecting={setShowConnecting}
+          web3ModalLoading={web3ModalLoading}
+        />
+      )}
+    </WalletContext.Provider>
+  );
+};
 
-//   const requestAddNetwork = async (chainId: string) => {
-//     // TODO: disable custom rpc endpoints to user's wallet
-//     // const network = supportedNetworks[chainId];
-//     // await ethereum.request({
-//     //   method: 'wallet_addEthereumChain',
-//     //   params: [network],
-//     // });
-//   };
-
-//   const networkSelect = async (defaultChain: string, supportChains: object = supportedNetworks) => {
-//     if (!wallet || !wallet.network) {
-//       const result = await connectMetaMask(defaultChain);
-//       if (result) return true;
-//       return false;
-//     }
-
-//     const connectNetwork = stringTool.parseIntString(wallet.network);
-//     if (connectNetwork in supportChains) {
-//       return true;
-//     } else {
-//       const result = await requestSwitchNetwork(defaultChain);
-//       if (result) return true;
-//     }
-
-//     return false;
-//   };
-
-//   return (
-//     <WalletContext.Provider
-//       value={{
-//         ethereum,
-//         wallet,
-//         connectMetaMask,
-//         disconnectWallet,
-//         openConnectionModal,
-//         requestSwitchNetwork,
-//         requestAddNetwork,
-//         networkSelect,
-//         availableProviders,
-//         error,
-//       }}
-//     >
-//       {children}
-//       {showChooseWalletModal && (
-//         <WalletSelectModal
-//           step={step}
-//           onClose={() => setShowChooseWalletModal(false)}
-//           onChooseMetamask={() => handleConnectMetamask()}
-//           onChooseFrame={() => handleConnectFrame()}
-//           onChooseWalletConnect={() => handleConnectWalletConnect()}
-//           showConnecting={showConnecting}
-//           setShowConnecting={setShowConnecting}
-//           web3ModalLoading={web3ModalLoading}
-//           frameLoading={frameLoading}
-//         />
-//       )}
-//     </WalletContext.Provider>
-//   );
-// };
-
-// export const useWallet = (): WalletContextType => {
-//   return useContext(WalletContext) as WalletContextType;
-// };
+export const useWallet = (): WalletContextType => {
+  return useContext(WalletContext) as WalletContextType;
+};

@@ -1,0 +1,189 @@
+.wizardView {
+  display: flex;
+  flex-direction: column;
+
+  .stepWizard {
+    margin-top: 38px;
+  }
+
+  .wizardBar {
+    display: flex;
+    align-items: center;
+    max-width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .step {
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: #5e5e5f;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999797;
+      padding-top: 2px;
+
+      &.active {
+        background: #80a4ff;
+        color: #f2f2f2;
+      }
+    }
+
+    .line {
+      flex: 1;
+      height: 1px;
+      background: #5e5e5f;
+
+      &.active {
+        background: #80a4ff;
+      }
+    }
+
+    .ethereum {
+      margin-left: 40px;
+    }
+
+    .paloma {
+      margin-right: 35px;
+    }
+  }
+
+  .captionBar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 270px;
+
+    .caption {
+      font-weight: 600;
+      font-size: 10px;
+      line-height: 13px;
+      color: #5e5e5f;
+
+      &.active {
+        color: #80a4ff;
+      }
+    }
+  }
+
+  .describeBar {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    color: #f2f2f2;
+    padding: 42px 42px 31px;
+    text-align: start;
+
+    @media screen and (max-width: 768px) {
+      padding: 42px 8px 31px;
+    }
+  }
+  .chooseWallet {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: #f2f2f2;
+    text-align: start;
+    margin-bottom: 12px;
+  }
+}
+
+.text {
+  padding: 16px 0px 38px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #565865;
+}
+
+.subtitle {
+  margin-bottom: 13px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #1f1f22;
+}
+
+.nestWalletBtn {
+  padding-left: 0px !important;
+  justify-content: center !important;
+}
+
+.connectWalletBtn {
+  background: #29292b;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: -0.413572px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  height: 64px;
+  padding-left: 64px;
+  color: #5d5d5e;
+}
+.connectWalletBtn:hover {
+  outline: 1px solid #f8f9fb;
+  color: #fff;
+}
+.frameWallet {
+  position: absolute !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  opacity: 0 !important;
+  width: calc(100% - 128px - 10px) !important;
+  height: 64px !important;
+  margin-left: -64px !important;
+}
+
+.installPalomaWallet {
+  text-decoration: underline;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  justify-content: flex-start;
+  width: fit-content;
+  margin-top: 24px;
+}
+
+.questionWrapper {
+  margin-bottom: 16px;
+  text-align: right;
+  padding-right: 65px;
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.tryAgainWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  position: absolute;
+  bottom: 44px;
+  right: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.skipBtn {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  padding: 22px 0;
+  justify-content: center;
+}

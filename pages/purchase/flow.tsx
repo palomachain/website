@@ -1,11 +1,19 @@
 import CheckBox from "components/CheckBox";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Countdown from "react-countdown";
 import { NodeSaleStartDate, TotalNodes } from "utils/constants";
 import { CustomerSupport } from "utils/data";
 import { formatNumber } from "utils/number";
+import PurchaseButton from "./PurchaseButton";
+import { useWallet } from "hooks/useWallet";
+import useProvider from "hooks/useProvider";
+import { parseIntString } from "utils/string";
+import { supportedNetworks } from "configs/networks";
 
 const PurchaseFlow = () => {
+  const { wallet, requestAddNetwork, requestSwitchNetwork, openConnectionModal } = useWallet();
+  const provider = useProvider(wallet);
+
   const [endDate, setEndDate] = useState(NodeSaleStartDate); // Set the End date of node sale
   const [saledNodes, setSaledNodes] = useState(102); // Set Saled Nodes Count
   const [quantity, setQuantity] = useState(1);
@@ -13,6 +21,10 @@ const PurchaseFlow = () => {
   const [selectedSupport, setSupport] = useState<number>(CustomerSupport.length - 1);
   const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
   const [agreeAck, setAgreeAck] = useState<boolean>(false);
+
+  const [selectedChain, setSelectedChain] = useState<string>();
+
+  const [step, setStep] = useState(1);
 
   const totalSupportPrice = useMemo(() => {
     return CustomerSupport[selectedSupport].price * CustomerSupport[selectedSupport].month;
@@ -39,6 +51,22 @@ const PurchaseFlow = () => {
   const setQuantityValue = (isPlus = false) => {
     setQuantity(isPlus ? quantity + 1 : quantity - 1);
   };
+
+  useEffect(() => {
+    if (wallet.network) {
+      const chainId = parseIntString(wallet.network);
+      if (chainId in supportedNetworks) setSelectedChain(chainId);
+      else setSelectedChain("");
+    } else setSelectedChain("");
+  }, [wallet.network]);
+
+  const handleStart = () => {
+    if (step === 1) {
+      setStep(2);
+    } else {
+      
+    }
+  }
 
   return (
     <div className="purchase-flow">
@@ -183,7 +211,17 @@ const PurchaseFlow = () => {
         checked={agreeAck}
         onChange={() => setAgreeAck(!agreeAck)}
       />
-      
+      <PurchaseButton
+        chainId={wallet ? wallet.network : null}
+        botChain={selectedChain}
+        full
+        onClickStart={() => handleStart()}
+        isValidTokenAmount={isValidTokenAmount}
+        isAmountInputLoading={fetchingPriceLoading}
+        isTxLoading={isTxLoading}
+        className={style.swapButton}
+        buttonText="Buy Now"
+      />
     </div>
   );
 };

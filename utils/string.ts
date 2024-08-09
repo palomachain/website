@@ -8,5 +8,25 @@ export function prevZero(val, fill = "0", len = 3) {
   return val.toString().padStart(len, fill);
 }
 
+export function parseOxString(address: string): `0x${string}` {
+  return `0x${address.substring(2)}`;
+}
+
+export function parseIntString(val: string, hex = 16) {
+  if (val?.includes("0x")) {
+    return parseInt(val, hex).toString();
+  } else {
+    return val;
+  }
+}
+
+export function parseDexString(val: string, hex = 16) {
+  if (val?.includes("0x")) {
+    return val;
+  } else {
+    return `0x${Number(val).toString(hex)}`;
+  }
+}
+
 export const truncate = (str, n) =>
   str ? (str.length > n ? str.substr(0, n - 1) + "...." : str) : "";

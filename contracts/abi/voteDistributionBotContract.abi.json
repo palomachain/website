@@ -1,0 +1,100 @@
+[
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "router", "type": "address" },
+      { "name": "owner", "type": "address" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "swap_lock",
+    "inputs": [
+      { "name": "path", "type": "address[]" },
+      { "name": "amount0", "type": "uint256" },
+      { "name": "min_amount1", "type": "uint256" },
+      { "name": "unlock_time", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "set_claim_path",
+    "inputs": [{ "name": "_path", "type": "address[]" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "vote",
+    "inputs": [
+      { "name": "_gauge_addr", "type": "address[]" },
+      { "name": "_user_weight", "type": "uint256[]" },
+      { "name": "_refund_wallet", "type": "address" },
+      { "name": "_fee", "type": "uint256" },
+      { "name": "_min_amount", "type": "uint256" },
+      { "name": "_max_amount", "type": "uint256" }
+    ],
+    "outputs": [
+      { "name": "", "type": "address" },
+      { "name": "", "type": "uint256" },
+      { "name": "", "type": "uint256" }
+    ]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "withdraw",
+    "inputs": [
+      { "name": "path", "type": "address[]" },
+      { "name": "_min_amount", "type": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "FACTORY",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "locked_amount",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "unlock_time",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "gauge_addr",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "user_weight",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "claim_path",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  }
+]

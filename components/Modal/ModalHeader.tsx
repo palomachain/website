@@ -23,7 +23,7 @@ const ModalHeader = ({ title, onBack, onClose }: ModalHeaderProps) => (
         className={cn(style.actionBtn, style.close)}
         onClick={(e) => onClose()}
       >
-        <img src="/assets/images/X.svg" alt="" />
+        <img src="/assets/icons/close-black.png" alt="" width={13} height={13}/>
       </div>
     )}
     <h2 className={style.title}>{title}</h2>

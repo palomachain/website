@@ -38,18 +38,17 @@ const WalletSelectModal = ({
           <>
             <section className={style.stepWizard}>
               <p className={style.describeBar}>
-                To complete your purchase, please connect your EVM Wallet.
+                To Complete Your Purchase, Please Connect Your EVM Wallet.
               </p>
             </section>
-            <p className={style.chooseWallet}>Choose a wallet</p>
+            <p className={style.chooseWallet}>Choose a Wallet</p>
 
             <Button
               className={style.connectWalletBtn}
               type="grey"
               onClick={() => handleChooseMetamask()}
             >
-              <img src="/assets/wallets/MetaMask.svg" alt="" width={32} height={32} />
-              <span>MetaMask</span>
+              <img src="/assets/wallets/metamask.svg" alt="" />
             </Button>
             <Button
               className={cn(style.connectWalletBtn, style.walletConnect)}
@@ -68,8 +67,7 @@ const WalletSelectModal = ({
                 </>
               ) : (
                 <>
-                  <img src="/assets/wallets/WalletConnect.png" alt="" height="24px" width={32} />
-                  <span>WalletConnect</span>
+                  <img src="/assets/wallets/walletconnect.svg" alt="" />
                 </>
               )}
             </Button>

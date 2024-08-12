@@ -3,7 +3,7 @@
   flex-direction: column;
 
   .stepWizard {
-    margin-top: 38px;
+    margin: 36px 0px;
   }
 
   .wizardBar {
@@ -76,9 +76,10 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
-    color: #f2f2f2;
-    padding: 42px 42px 31px;
+    color: #2c2c2c;
     text-align: start;
+    margin: unset;
+    text-align: center;
 
     @media screen and (max-width: 768px) {
       padding: 42px 8px 31px;
@@ -87,10 +88,9 @@
   .chooseWallet {
     font-weight: 500;
     font-size: 14px;
-    line-height: 18px;
-    color: #f2f2f2;
+    color: #2c2c2c;
     text-align: start;
-    margin-bottom: 12px;
+    margin: 12px 0;
   }
 }
 
@@ -116,7 +116,7 @@
 }
 
 .connectWalletBtn {
-  background: #29292b;
+  background: #F1D1E5 !important;
   border: none;
   border-radius: 8px;
   font-size: 18px;
@@ -126,11 +126,14 @@
   gap: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 10px;
   height: 64px;
-  padding-left: 64px;
   color: #5d5d5e;
+}
+.walletConnect {
+  border: 1px solid #ECEAEA;
+  background: #ECEAEA !important;
 }
 .connectWalletBtn:hover {
   outline: 1px solid #f8f9fb;

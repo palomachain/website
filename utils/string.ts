@@ -1,3 +1,5 @@
+import { VETH_ADDRESS } from "contracts/addresses";
+
 export function shorten(val, len = 18) {
   const prior = Math.floor(len * 0.7);
   const suffix = len - prior;
@@ -26,6 +28,10 @@ export function parseDexString(val: string, hex = 16) {
   } else {
     return `0x${Number(val).toString(hex)}`;
   }
+}
+
+export function isSameContract(a: string | `0x${string}`, b: string | `0x${string}` = VETH_ADDRESS) {
+  return a.toLowerCase() === b.toLowerCase();
 }
 
 export const truncate = (str, n) =>

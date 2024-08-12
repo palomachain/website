@@ -1,9 +1,9 @@
-import cn from 'classnames';
-import Button from 'components/Button';
-import { useWallet } from 'hooks/useWallet';
-import React, { useMemo } from 'react';
+import cn from "classnames";
+import Button from "components/Button";
+import { useWallet } from "hooks/useWallet";
+import React, { useMemo } from "react";
 
-import styles from './PurchaseButton.module.scss';
+import styles from "./PurchaseButton.module.scss";
 
 interface PurchaseButtonProps {
   chainId: string;
@@ -12,6 +12,10 @@ interface PurchaseButtonProps {
   isValidTokenAmount: boolean;
   isAmountInputLoading?: boolean;
   isTxLoading: boolean;
+  isAllAgree?: boolean;
+  support?: number;
+  promoCode?: string;
+  step: number;
   className?: string;
   onClickStart: () => void;
   buttonText: string;
@@ -24,9 +28,13 @@ const PurchaseButton = ({
   isValidTokenAmount,
   isAmountInputLoading,
   isTxLoading,
+  isAllAgree,
+  support,
+  promoCode,
+  step,
   className,
   onClickStart,
-  buttonText = 'Start Bot',
+  buttonText = "Start Bot",
 }: PurchaseButtonProps) => {
   const { openConnectionModal, requestSwitchNetwork } = useWallet();
 
@@ -34,8 +42,8 @@ const PurchaseButton = ({
     if (!chainId) {
       return {
         disabled: false,
-        text: 'Connect Wallet',
-        style: '',
+        text: "Connect Wallet",
+        style: "",
         onClick: () => {
           openConnectionModal();
         },
@@ -45,7 +53,7 @@ const PurchaseButton = ({
     if (isAmountInputLoading) {
       return {
         disabled: true,
-        text: 'Fetching Prices',
+        text: "Fetching Prices",
         style: styles.disabled,
         isLoading: true,
         onClick: () => {},
@@ -55,7 +63,7 @@ const PurchaseButton = ({
     if (!isValidTokenAmount) {
       return {
         disabled: true,
-        text: 'Input Deposit Token Amount',
+        text: "Input Deposit Token Amount",
         style: styles.disabled,
         onClick: () => {},
       };
@@ -64,9 +72,18 @@ const PurchaseButton = ({
     if (isTxLoading) {
       return {
         disabled: true,
-        text: 'Loading...',
+        text: "Loading...",
         style: styles.disabled,
         isLoading: true,
+        onClick: () => {},
+      };
+    }
+
+    if (!isAllAgree) {
+      return {
+        disabled: true,
+        text: buttonText,
+        style: styles.disabled,
         onClick: () => {},
       };
     }
@@ -81,18 +98,22 @@ const PurchaseButton = ({
     isValidTokenAmount,
     isAmountInputLoading,
     isTxLoading,
+    isAllAgree,
+    support,
+    promoCode,
+    step,
     chainId,
     botChain,
   ]);
 
   return (
     <Button
-      type="blue"
+      type="dark"
       className={cn(
         styles.container,
         className,
         buttonStatus.style,
-        !buttonStatus.disabled ? styles.cursor : undefined,
+        !buttonStatus.disabled ? styles.cursor : undefined
       )}
       full={full}
       onClick={() => buttonStatus.onClick()}
@@ -105,10 +126,10 @@ const PurchaseButton = ({
             alt="loading"
             width={40}
             height={36}
-            style={{ marginTop: '6px' }}
+            style={{ marginTop: "6px" }}
           />
         )}
-        <span>{buttonStatus.text}</span>
+        {buttonStatus.text}
       </>
     </Button>
   );

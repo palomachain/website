@@ -1,3 +1,9 @@
+const envParam = {
+  palomaNestServiceAPIBaseUrl: process.env.PALOMA_NEST_SERVICE_API_BASE_URL || '',
+  onramperApiKey: process.env.ONRAMPER_API_KEY || '',
+  palomaExtensionId: process.env.PALOMA_EXTENSION_ID || 'cjmmdephaciiailjnoikekdebkcbcfmi',
+};
+
 const Networks = {
   "1": "Ethereum",
   "10": "Optimism",
@@ -50,5 +56,14 @@ const DEFAULT_MAIN_CHAINS = [
   "eip155:42220",
 ];
 
-export { AddNetwork, DEFAULT_MAIN_CHAINS, Networks };
+const SLIPPAGE_DOMINATOR = 1000;
+const SLIPPAGE_PERCENTAGE = 1; // default slippage is 1%
 
+export {
+  envParam,
+  AddNetwork,
+  DEFAULT_MAIN_CHAINS,
+  Networks,
+  SLIPPAGE_DOMINATOR,
+  SLIPPAGE_PERCENTAGE,
+};

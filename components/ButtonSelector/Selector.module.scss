@@ -1,0 +1,36 @@
+.selectList {
+  position: absolute;
+  margin-top: 87px;
+  background: #29292B;
+  box-shadow: 2px 2px 5px #1b1b1e;
+  border-radius: 7px;
+  padding: 10px 20px;
+  width: calc(50% - 4px);
+  z-index: 20;
+}
+.selectOption {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.32px;
+}
+.selectOption:not(:last-child) {
+  margin-bottom: 12px;
+}
+.selectNetwork {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.32px;
+}
+.disabled {
+  color: #807e7e;
+  font-weight: 500;
+  img {
+    opacity: 0.5;
+  }
+}

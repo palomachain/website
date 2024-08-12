@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { Client, HydrationProvider } from 'react-hydration-provider';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
+import { store } from 'store';
 import { WagmiConfig } from 'wagmi';
 
 import "../styles/index.scss";
@@ -36,7 +37,7 @@ const App = ({ Component, router, pageProps }: AppProps) => {
     <HydrationProvider>
       <QueryClientProvider client={queryClient}>
         <Client>
-          <Provider store={''}>
+          <Provider store={store}>
             <ThirdwebProvider
               supportedWallets={[frameWallet()]}
               supportedChains={[Ethereum, Polygon, Binance, Arbitrum, Optimism]}

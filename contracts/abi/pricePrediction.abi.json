@@ -1,0 +1,422 @@
+[
+  {
+    "name": "Bid",
+    "inputs": [
+      { "name": "epoch_id", "type": "uint256", "indexed": false },
+      { "name": "bidder", "type": "address", "indexed": false },
+      { "name": "prediction_val", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "RewardSent",
+    "inputs": [
+      { "name": "epoch_id", "type": "uint256", "indexed": false },
+      { "name": "sender", "type": "address", "indexed": false },
+      { "name": "reward_token", "type": "address", "indexed": false },
+      { "name": "amount", "type": "uint256", "indexed": false },
+      { "name": "competition_start", "type": "uint256", "indexed": false },
+      { "name": "competition_end", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetPaloma",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetWinnerPrice",
+    "inputs": [
+      { "name": "epoch_id", "type": "uint256", "indexed": false },
+      { "name": "price", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateCompass",
+    "inputs": [
+      { "name": "old_compass", "type": "address", "indexed": false },
+      { "name": "new_compass", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateAdmin",
+    "inputs": [
+      { "name": "old_admin", "type": "address", "indexed": false },
+      { "name": "new_admin", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateInvestor",
+    "inputs": [
+      { "name": "old_investor", "type": "address", "indexed": false },
+      { "name": "new_investor", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateSpamFeeWallet",
+    "inputs": [
+      { "name": "old_spam_fee_wallet", "type": "address", "indexed": false },
+      { "name": "new_spam_fee_wallet", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateSpamFee",
+    "inputs": [
+      { "name": "old_spam_fee", "type": "uint256", "indexed": false },
+      { "name": "new_spam_fee", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetWinner",
+    "inputs": [
+      { "name": "epoch_id", "type": "uint256", "indexed": false },
+      { "name": "winner", "type": "address", "indexed": false },
+      { "name": "claimable_amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "RollOverReward",
+    "inputs": [
+      { "name": "epoch_id", "type": "uint256", "indexed": false },
+      { "name": "rollover_amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "Claimed",
+    "inputs": [
+      { "name": "sender", "type": "address", "indexed": false },
+      { "name": "claimed_amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "EmergencyWithdraw",
+    "inputs": [
+      { "name": "emergency", "type": "address", "indexed": false },
+      { "name": "amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "_compass", "type": "address" },
+      { "name": "_reward_token", "type": "address" },
+      { "name": "_factory", "type": "address" },
+      { "name": "_admin", "type": "address" },
+      { "name": "_investor", "type": "address" },
+      { "name": "_spam_fee_wallet", "type": "address" },
+      { "name": "_spam_fee", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_compass",
+    "inputs": [{ "name": "_new_compass", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_admin",
+    "inputs": [{ "name": "_new_admin", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_investor",
+    "inputs": [{ "name": "_new_investor", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_spam_fee_wallet",
+    "inputs": [{ "name": "_new_spam_fee_wallet", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_spam_fee",
+    "inputs": [{ "name": "_new_spam_fee", "type": "uint256" }],
+    "outputs": []
+  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "set_paloma", "inputs": [], "outputs": [] },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "emergency_withdraw",
+    "inputs": [{ "name": "_amount", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "send_reward_with_specs",
+    "inputs": [
+      { "name": "_daily_amount", "type": "uint256" },
+      { "name": "_competition_start", "type": "uint256" },
+      { "name": "_competition_end", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "send_reward",
+    "inputs": [
+      { "name": "_daily_amount", "type": "uint256" },
+      { "name": "_days", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "bid",
+    "inputs": [{ "name": "_price_prediction_val", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "set_winner_price",
+    "inputs": [
+      { "name": "_epoch_id", "type": "uint256" },
+      { "name": "_price", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "set_winner_list",
+    "inputs": [
+      {
+        "name": "_winner_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "winner", "type": "address" },
+          { "name": "claimable_amount", "type": "uint256" }
+        ]
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "create_bot",
+    "inputs": [
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      },
+      { "name": "collateral", "type": "address" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "N", "type": "uint256" },
+      { "name": "callbacker", "type": "address" },
+      { "name": "callback_args", "type": "uint256[]" },
+      { "name": "callback_bytes", "type": "bytes" },
+      { "name": "is_new_market", "type": "bool" },
+      { "name": "leverage", "type": "uint256" },
+      { "name": "deleverage_percentage", "type": "uint256" },
+      { "name": "health_threshold", "type": "uint256" },
+      { "name": "expire", "type": "uint256" },
+      { "name": "number_trades", "type": "uint256" },
+      { "name": "interval", "type": "uint256" },
+      { "name": "controller_idx", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  { "stateMutability": "payable", "type": "fallback" },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "FACTORY",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "REWARD_TOKEN",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "DECIMALS",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "paloma",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bytes32" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "compass",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "admin",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "investor",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "spam_fee_wallet",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "spam_fee",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "epoch_cnt",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "active_epoch_num",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "epoch_info",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "components": [
+          { "name": "competition_start", "type": "uint256" },
+          { "name": "competition_end", "type": "uint256" },
+          { "name": "entry_cnt", "type": "uint256" },
+          { "name": "prize_amount", "type": "uint256" }
+        ]
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "bid_info",
+    "inputs": [
+      { "name": "arg0", "type": "uint256" },
+      { "name": "arg1", "type": "uint256" }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "components": [
+          { "name": "sender", "type": "address" },
+          { "name": "price_prediction_val", "type": "uint256" }
+        ]
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "my_info",
+    "inputs": [
+      { "name": "arg0", "type": "uint256" },
+      { "name": "arg1", "type": "address" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "latest_bid",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "winner_info",
+    "inputs": [
+      { "name": "arg0", "type": "uint256" },
+      { "name": "arg1", "type": "address" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "winner_price",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "claimable_amount",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  }
+]

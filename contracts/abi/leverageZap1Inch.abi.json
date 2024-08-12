@@ -1,0 +1,119 @@
+[
+  {
+    "name": "Deposit",
+    "inputs": [
+      { "name": "user", "type": "address", "indexed": true },
+      { "name": "user_collateral", "type": "uint256", "indexed": false },
+      { "name": "user_borrowed", "type": "uint256", "indexed": false },
+      { "name": "user_collateral_from_borrowed", "type": "uint256", "indexed": false },
+      { "name": "debt", "type": "uint256", "indexed": false },
+      { "name": "leverage_collateral", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "Repay",
+    "inputs": [
+      { "name": "user", "type": "address", "indexed": true },
+      { "name": "state_collateral_used", "type": "uint256", "indexed": false },
+      { "name": "borrowed_from_state_collateral", "type": "uint256", "indexed": false },
+      { "name": "user_collateral", "type": "uint256", "indexed": false },
+      { "name": "user_collateral_used", "type": "uint256", "indexed": false },
+      { "name": "borrowed_from_user_collateral", "type": "uint256", "indexed": false },
+      { "name": "user_borrowed", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "_router_1inch", "type": "address" },
+      { "name": "_factories", "type": "address[]" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "max_borrowable",
+    "inputs": [
+      { "name": "controller", "type": "address" },
+      { "name": "_user_collateral", "type": "uint256" },
+      { "name": "_leverage_collateral", "type": "uint256" },
+      { "name": "N", "type": "uint256" },
+      { "name": "p_avg", "type": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "callback_deposit",
+    "inputs": [
+      { "name": "user", "type": "address" },
+      { "name": "stablecoins", "type": "uint256" },
+      { "name": "user_collateral", "type": "uint256" },
+      { "name": "d_debt", "type": "uint256" },
+      { "name": "callback_args", "type": "uint256[]" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256[2]" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "callback_deposit",
+    "inputs": [
+      { "name": "user", "type": "address" },
+      { "name": "stablecoins", "type": "uint256" },
+      { "name": "user_collateral", "type": "uint256" },
+      { "name": "d_debt", "type": "uint256" },
+      { "name": "callback_args", "type": "uint256[]" },
+      { "name": "callback_bytes", "type": "bytes" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256[2]" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "callback_repay",
+    "inputs": [
+      { "name": "user", "type": "address" },
+      { "name": "stablecoins", "type": "uint256" },
+      { "name": "collateral", "type": "uint256" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "callback_args", "type": "uint256[]" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256[2]" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "callback_repay",
+    "inputs": [
+      { "name": "user", "type": "address" },
+      { "name": "stablecoins", "type": "uint256" },
+      { "name": "collateral", "type": "uint256" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "callback_args", "type": "uint256[]" },
+      { "name": "callback_bytes", "type": "bytes" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256[2]" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "ROUTER_1INCH",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "FACTORIES",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  }
+]

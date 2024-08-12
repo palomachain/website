@@ -1,0 +1,149 @@
+[
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "controller_factory", "type": "address" },
+      { "name": "weth", "type": "address" },
+      { "name": "crv_usd", "type": "address" },
+      { "name": "owner", "type": "address" },
+      { "name": "router", "type": "address" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "create_loan",
+    "inputs": [
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      },
+      { "name": "collateral", "type": "address" },
+      { "name": "additional_tokens", "type": "address[]" },
+      { "name": "additional_amounts", "type": "uint256[]" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "withdraw_amount", "type": "uint256" },
+      { "name": "N", "type": "uint256" },
+      { "name": "health_threshold", "type": "int256" },
+      { "name": "expire", "type": "uint256" },
+      { "name": "repayable", "type": "bool" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "add_collateral",
+    "inputs": [
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      },
+      { "name": "collateral", "type": "address" },
+      { "name": "lend_amount", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "remove_collateral",
+    "inputs": [
+      { "name": "collateral", "type": "address" },
+      { "name": "collateral_amount", "type": "uint256" },
+      { "name": "withdraw_amount", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "borrow_more",
+    "inputs": [
+      { "name": "collateral", "type": "address" },
+      { "name": "collateral_amount", "type": "uint256" },
+      { "name": "lend_amount", "type": "uint256" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "withdraw_amount", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "repay",
+    "inputs": [
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      },
+      { "name": "collateral", "type": "address" },
+      { "name": "repay_amount", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "withdraw_crvusd",
+    "inputs": [{ "name": "amount", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "bot_restart",
+    "inputs": [
+      { "name": "collateral", "type": "address" },
+      { "name": "health_threshold", "type": "int256" },
+      { "name": "expire", "type": "uint256" },
+      { "name": "repayable", "type": "bool" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "health",
+    "inputs": [{ "name": "collateral", "type": "address" }],
+    "outputs": [{ "name": "", "type": "int256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "loan_exists",
+    "inputs": [{ "name": "collateral", "type": "address" }],
+    "outputs": [{ "name": "", "type": "bool" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "state",
+    "inputs": [{ "name": "collateral", "type": "address" }],
+    "outputs": [{ "name": "", "type": "uint256[4]" }]
+  },
+  { "stateMutability": "payable", "type": "fallback" }
+]

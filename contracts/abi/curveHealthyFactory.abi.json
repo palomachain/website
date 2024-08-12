@@ -1,0 +1,347 @@
+[
+  {
+    "name": "BotStarted",
+    "inputs": [
+      { "name": "deposit_id", "type": "uint256", "indexed": false },
+      { "name": "owner", "type": "address", "indexed": false },
+      { "name": "bot", "type": "address", "indexed": false },
+      { "name": "collateral", "type": "address", "indexed": false },
+      { "name": "collateral_amount", "type": "uint256", "indexed": false },
+      { "name": "settlement", "type": "address", "indexed": false },
+      { "name": "debt", "type": "uint256", "indexed": false },
+      { "name": "N", "type": "uint256", "indexed": false },
+      { "name": "leverage", "type": "uint256", "indexed": false },
+      { "name": "deleverage_percentage", "type": "uint256", "indexed": false },
+      { "name": "health_threshold", "type": "uint256", "indexed": false },
+      { "name": "profit_taking", "type": "uint256", "indexed": false },
+      { "name": "expire", "type": "uint256", "indexed": false },
+      { "name": "callbacker", "type": "address", "indexed": false },
+      { "name": "callback_args", "type": "uint256[]", "indexed": false },
+      { "name": "remaining_count", "type": "uint256", "indexed": false },
+      { "name": "interval", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "BotRepayed",
+    "inputs": [
+      { "name": "owner", "type": "address", "indexed": false },
+      { "name": "bot", "type": "address", "indexed": false },
+      { "name": "return_amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateBlueprint",
+    "inputs": [
+      { "name": "old_blueprint", "type": "address", "indexed": false },
+      { "name": "new_blueprint", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateCompass",
+    "inputs": [
+      { "name": "old_compass", "type": "address", "indexed": false },
+      { "name": "new_compass", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateRefundWallet",
+    "inputs": [
+      { "name": "old_refund_wallet", "type": "address", "indexed": false },
+      { "name": "new_refund_wallet", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetPaloma",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateGasFee",
+    "inputs": [
+      { "name": "old_gas_fee", "type": "uint256", "indexed": false },
+      { "name": "new_gas_fee", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateServiceFeeCollector",
+    "inputs": [
+      { "name": "old_service_fee_collector", "type": "address", "indexed": false },
+      { "name": "new_service_fee_collector", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateServiceFee",
+    "inputs": [
+      { "name": "old_service_fee", "type": "uint256", "indexed": false },
+      { "name": "new_service_fee", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "_blueprint", "type": "address" },
+      { "name": "_compass", "type": "address" },
+      { "name": "controller_factory", "type": "address" },
+      { "name": "router", "type": "address" },
+      { "name": "_refund_wallet", "type": "address" },
+      { "name": "_gas_fee", "type": "uint256" },
+      { "name": "_service_fee_collector", "type": "address" },
+      { "name": "_service_fee", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "create_bot",
+    "inputs": [
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      },
+      { "name": "collateral", "type": "address" },
+      { "name": "settlement", "type": "address" },
+      { "name": "debt", "type": "uint256" },
+      { "name": "N", "type": "uint256" },
+      { "name": "callbacker", "type": "address" },
+      { "name": "callback_args", "type": "uint256[]" },
+      { "name": "leverage", "type": "uint256" },
+      { "name": "deleverage_percentage", "type": "uint256" },
+      { "name": "health_threshold", "type": "uint256" },
+      { "name": "profit_taking", "type": "uint256" },
+      { "name": "expire", "type": "uint256" },
+      { "name": "number_trades", "type": "uint256" },
+      { "name": "interval", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "create_next_bot",
+    "inputs": [
+      { "name": "deposit_id", "type": "uint256" },
+      { "name": "callbacker", "type": "address" },
+      { "name": "callback_args", "type": "uint256[]" },
+      { "name": "remaining_count", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "repay_bot_expected_view",
+    "inputs": [
+      { "name": "bots", "type": "address[]" },
+      { "name": "callbackers", "type": "address[]" },
+      { "name": "callback_args", "type": "uint256[][]" },
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      }
+    ],
+    "outputs": [{ "name": "", "type": "uint256[]" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "repay_bot",
+    "inputs": [
+      { "name": "bots", "type": "address[]" },
+      { "name": "callbackers", "type": "address[]" },
+      { "name": "callback_args", "type": "uint256[][]" },
+      {
+        "name": "swap_infos",
+        "type": "tuple[]",
+        "components": [
+          { "name": "route", "type": "address[11]" },
+          { "name": "swap_params", "type": "uint256[5][5]" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "expected", "type": "uint256" },
+          { "name": "pools", "type": "address[5]" }
+        ]
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "state",
+    "inputs": [{ "name": "bot", "type": "address" }],
+    "outputs": [{ "name": "", "type": "uint256[4]" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "health",
+    "inputs": [{ "name": "bot", "type": "address" }],
+    "outputs": [{ "name": "", "type": "int256" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_compass",
+    "inputs": [{ "name": "new_compass", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_blueprint",
+    "inputs": [{ "name": "new_blueprint", "type": "address" }],
+    "outputs": []
+  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "set_paloma", "inputs": [], "outputs": [] },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_refund_wallet",
+    "inputs": [{ "name": "new_refund_wallet", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_gas_fee",
+    "inputs": [{ "name": "new_gas_fee", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_service_fee_collector",
+    "inputs": [{ "name": "new_service_fee_collector", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_service_fee",
+    "inputs": [{ "name": "new_service_fee", "type": "uint256" }],
+    "outputs": []
+  },
+  { "stateMutability": "payable", "type": "fallback" },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "blueprint",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "compass",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "bot_to_owner",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "refund_wallet",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "gas_fee",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "service_fee_collector",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "service_fee",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "paloma",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bytes32" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "bot_info",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "components": [
+          { "name": "depositor", "type": "address" },
+          { "name": "collateral", "type": "address" },
+          { "name": "amount", "type": "uint256" },
+          { "name": "settlement", "type": "address" },
+          { "name": "debt", "type": "uint256" },
+          { "name": "N", "type": "uint256" },
+          { "name": "leverage", "type": "uint256" },
+          { "name": "deleverage_percentage", "type": "uint256" },
+          { "name": "health_threshold", "type": "uint256" },
+          { "name": "profit_taking", "type": "uint256" },
+          { "name": "expire", "type": "uint256" },
+          { "name": "remaining_count", "type": "uint256" },
+          { "name": "interval", "type": "uint256" }
+        ]
+      }
+    ]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "last_deposit_id",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  }
+]

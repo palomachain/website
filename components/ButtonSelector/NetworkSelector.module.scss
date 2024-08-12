@@ -1,0 +1,39 @@
+.selectList {
+  position: absolute;
+  margin-top: 6px;
+  width: 160px;
+  right: auto;
+  background: #1f1f22;
+  box-shadow: 2px 2px 5px #1b1b1e;
+  border-radius: 7px;
+  padding: 18px 21px;
+  @media screen and (max-width: 768px) {
+    width: 192px;
+    box-shadow: none;
+  }
+}
+.selectOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.32px;
+}
+.selectOption:not(:last-child) {
+  margin-bottom: 22px;
+}
+.selectNetwork {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.32px;
+}
+.disabled {
+  color: #807e7e;
+  img {
+    opacity: 0.5;
+  }
+}

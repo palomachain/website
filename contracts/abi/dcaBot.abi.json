@@ -1,0 +1,159 @@
+[
+  {
+    "name": "Deposited",
+    "inputs": [
+      { "name": "swap_id", "type": "uint256", "indexed": false },
+      { "name": "token0", "type": "address", "indexed": false },
+      { "name": "token1", "type": "address", "indexed": false },
+      { "name": "input_amount", "type": "uint256", "indexed": false },
+      { "name": "number_trades", "type": "uint256", "indexed": false },
+      { "name": "interval", "type": "uint256", "indexed": false },
+      { "name": "starting_time", "type": "uint256", "indexed": false },
+      { "name": "depositor", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "Swapped",
+    "inputs": [
+      { "name": "swap_id", "type": "uint256", "indexed": false },
+      { "name": "remaining_counts", "type": "uint256", "indexed": false },
+      { "name": "amount", "type": "uint256", "indexed": false },
+      { "name": "out_amount", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateCompass",
+    "inputs": [
+      { "name": "old_compass", "type": "address", "indexed": false },
+      { "name": "new_compass", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateRefundWallet",
+    "inputs": [
+      { "name": "old_refund_wallet", "type": "address", "indexed": false },
+      { "name": "new_refund_wallet", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateFee",
+    "inputs": [
+      { "name": "old_fee", "type": "uint256", "indexed": false },
+      { "name": "new_fee", "type": "uint256", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetPaloma",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "_compass_evm", "type": "address" },
+      { "name": "router", "type": "address" },
+      { "name": "_refund_wallet", "type": "address" },
+      { "name": "_fee", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "payable",
+    "type": "function",
+    "name": "deposit",
+    "inputs": [
+      { "name": "path", "type": "address[]" },
+      { "name": "input_amount", "type": "uint256" },
+      { "name": "number_trades", "type": "uint256" },
+      { "name": "interval", "type": "uint256" },
+      { "name": "starting_time", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "swap",
+    "inputs": [
+      { "name": "swap_id", "type": "uint256" },
+      { "name": "amount_out_min", "type": "uint256" }
+    ],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_compass",
+    "inputs": [{ "name": "new_compass", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_refund_wallet",
+    "inputs": [{ "name": "new_refund_wallet", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_fee",
+    "inputs": [{ "name": "new_fee", "type": "uint256" }],
+    "outputs": []
+  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "set_paloma", "inputs": [], "outputs": [] },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "compass_evm",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "admin",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "next_deposit",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "refund_wallet",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "fee",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "paloma",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bytes32" }]
+  }
+]

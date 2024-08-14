@@ -4,8 +4,8 @@ const envParam = {
   onramperApiKey: process.env.ONRAMPER_API_KEY || "",
   palomaExtensionId:
     process.env.PALOMA_EXTENSION_ID || "cjmmdephaciiailjnoikekdebkcbcfmi",
-  REACT_APP_MORALIS_SERVICE_API:
-    process.env.REACT_APP_MORALIS_SERVICE_API || "",
+  MORALIS_SERVICE_API_KEY:
+    process.env.MORALIS_SERVICE_API_KEY || "",
   nodeSale_eth: process.env.NODESALE_CONTRACT_ETH || "",
   nodeSale_bnb: process.env.NODESALE_CONTRACT_BNB || "",
   nodeSale_base: process.env.NODESALE_CONTRACT_BASE || "",

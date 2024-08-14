@@ -39,7 +39,7 @@ export function isSameContract(
 }
 
 export function truncate(str, n) {
-  str ? (str.length > n ? str.substr(0, n - 1) + "...." : str) : "";
+  return str ? (str.length > n ? str.substr(0, n - 1) + "...." : str) : "";
 }
 
 export function stringToHex(val: string) {

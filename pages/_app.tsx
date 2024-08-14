@@ -25,7 +25,7 @@ import { envParam } from "configs/constants";
 import "../styles/index.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-const apiKey = envParam.REACT_APP_MORALIS_SERVICE_API;
+const apiKey = envParam.MORALIS_SERVICE_API_KEY;
 Moralis.start({
   apiKey: apiKey,
 });

@@ -22,7 +22,7 @@ import { useGetUniswapTokenListQuery } from 'services/api/tokens';
 import { selectCurrentUsdPrice } from 'services/selectors/price';
 import { selectListedSwapTokensByChainId } from 'services/selectors/tokens';
 import balanceTool from 'utils/balance';
-import { NodeSaleStartDate, StartingPrice, TotalNodes } from 'utils/constants';
+import { NodeSaleEndDate, StartingPrice, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
 import { formatNumber } from 'utils/number';
@@ -58,7 +58,7 @@ const PurchaseFlow = () => {
     wallet,
   });
 
-  const [endDate, setEndDate] = useState(NodeSaleStartDate); // Set the End date of node sale
+  const [endDate, setEndDate] = useState(NodeSaleEndDate); // Set the End date of node sale
   const [totalPurchased, setTotalPurchased] = useState(0); // Set Saled Nodes Count
   const [quantity, setQuantity] = useState(1);
   const [promoCode, setPromoCode] = useState<string>();

@@ -1,3 +1,4 @@
+import Purchase from "components/Button/purchase";
 import React, { useState } from "react";
 import Countdown from "react-countdown";
 import { NodeSaleStartDate } from "utils/constants";
@@ -47,7 +48,7 @@ const nodesaleSection = () => {
           by a global community of pigeons that deliver transaction messages to
           any blockchain's smart contract Virtual Machine (VM).
         </p>
-        <button className="purchase-button">Purchase your LightNode</button>
+        <Purchase />
       </div>
       <div className="nodesale-center" />
       <div className="nodesale-start flex-col">

@@ -1,9 +1,11 @@
 import classNames from "classnames";
 import Button from "components/Button";
+import { ZERO_ADDRESS_PALOMA } from "contracts/addresses";
 import useNodeSale from "hooks/useNodeSale";
 import useProvider from "hooks/useProvider";
 import { useWallet } from "hooks/useWallet";
 import { useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 import {
   hexToStringWithBech,
   parseIntString,
@@ -12,25 +14,17 @@ import {
 } from "utils/string";
 
 import style from "./activate.module.scss";
-import { ZERO_ADDRESS_PALOMA } from "contracts/addresses";
-import { toast } from "react-toastify";
 
 const mainChain = "42161"; // Arbitrum
 
 const Activate = () => {
-  const {
-    connectMetaMask,
-    connectWalletConnect,
-    requestSwitchNetwork,
-    disconnectWallet,
-    wallet,
-  } = useWallet();
+  const { connectMetaMask, connectWalletConnect, requestSwitchNetwork, disconnectWallet, wallet } =
+    useWallet();
   const provider = useProvider(wallet);
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
   const [confirmedWallet, setConfirmedWallet] = useState(false);
   const [activated, setActivated] = useState(false);
-  const [activatedPalomaAddress, setActivatedPalomaAddress] =
-    useState<string>();
+  const [activatedPalomaAddress, setActivatedPalomaAddress] = useState<string>();
 
   const [loadingMetamask, setLoadingMetamask] = useState(false);
   const [loadingWalletconnect, setLoadingWalletconnect] = useState(false);
@@ -61,8 +55,7 @@ const Activate = () => {
         const activateAddress: string = await getActivate();
         const isActivated = activateAddress !== ZERO_ADDRESS_PALOMA;
         setActivated(isActivated);
-        isActivated &&
-          setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
+        isActivated && setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
 
         setConfirmedWallet(true);
       };
@@ -112,9 +105,9 @@ const Activate = () => {
           <>
             <h1 className={style.title}>Activate your Paloma LightNode</h1>
             <p>
-              After downloading the Paloma LightNode client, activate your
-              Paloma address to start minting GRAINs. To complete activation,
-              connect your EVM wallet used to purchase your LightNodes.
+              After downloading the Paloma LightNode client, activate your Paloma address to start
+              minting GRAINs. To complete activation, connect your EVM wallet used to purchase your
+              LightNodes.
             </p>
             <div className={style.walletBtns}>
               <p className={style.chooseWallet}>Choose a Wallet</p>
@@ -152,16 +145,11 @@ const Activate = () => {
           </>
         ) : activated ? (
           <>
-            <img
-              className={style.loadingImage}
-              src="/assets/icons/success.svg"
-              alt="success"
-            />
+            <img className={style.loadingImage} src="/assets/icons/success.svg" alt="success" />
             <h1>Your Paloma LightNode Was Successfully Activated</h1>
             <p>
-              Your LightNode transaction has been successfully processed. Please
-              register your nodes for software support before downloading the
-              Paloma LightNode Client.
+              Your LightNode transaction has been successfully processed. Please register your nodes
+              for software support before downloading the Paloma LightNode Client.
             </p>
             <div className={style.activeWallets}>
               <div className={style.walletItem}>
@@ -193,9 +181,9 @@ const Activate = () => {
             </div>
             <h1 className="mt-">Activate your Paloma LightNode</h1>
             <p>
-              To finalize activation, simply copy and paste the Paloma Address
-              created in the Paloma LightNode client here. This will link your
-              EVM Wallet to your Paloma Address and your purchased Nodes.
+              To finalize activation, simply copy and paste the Paloma Address created in the Paloma
+              LightNode client here. This will link your EVM Wallet to your Paloma Address and your
+              purchased Nodes.
             </p>
             <h3 className={style.palomaAddress}>Paloma Address</h3>
             <input

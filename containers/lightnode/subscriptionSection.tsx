@@ -1,3 +1,4 @@
+import Purchase from "components/Button/purchase";
 import { useEffect, useState } from "react";
 import {
   ChangeR,
@@ -61,9 +62,7 @@ const subscriptionSection = () => {
         Paloma secures an increasing number of trading applications, ensuring
         reliable and efficient performance as the platform continues to grow.
       </p>
-      <button className="purchase-button purchase-button-white mt-40">
-        Purchase your LightNode
-      </button>
+      <Purchase className="purchase-button-white mt-40" />
       <table className="subscription-table">
         <thead>
           <tr className="table-head">

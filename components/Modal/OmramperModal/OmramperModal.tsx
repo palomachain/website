@@ -1,8 +1,8 @@
-import Modal from "components/Modal";
-import { envParam } from "configs/constants";
-import React from "react";
+import Modal from 'components/Modal';
+import { envParam } from 'configs/constants';
+import React from 'react';
 
-import style from "./OmramperModal.module.scss";
+import style from './OmramperModal.module.scss';
 
 interface OmramperModalProps {
   show?: boolean;

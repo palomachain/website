@@ -1,5 +1,5 @@
-import React from "react";
-import { NodeSaleLinks } from "utils/data";
+import React from 'react';
+import { NodeSaleLinks } from 'utils/data';
 
 const nodeSaleLinksSection = () => (
   <section className="node-sale-links-section">
@@ -20,19 +20,12 @@ const nodeSaleLinksSection = () => (
                     <img src={item.icon} alt={`item-${index}-${key}`} />
                   </div>
                 )}
-                <div
-                  key={key}
-                  className={`node-sale-links-item ${
-                    index === 0 ? "node-sale-links-item-pink" : ""
-                  }`}
-                >
+                <div key={key} className={`node-sale-links-item ${index === 0 ? 'node-sale-links-item-pink' : ''}`}>
                   <a href={item.link} target="_blank">
                     {item.title}
                   </a>
                   <img
-                    src={`/assets/arrows/${
-                      index === 0 ? "arrow.svg" : "arrow-white.svg"
-                    }`}
+                    src={`/assets/arrows/${index === 0 ? 'arrow.svg' : 'arrow-white.svg'}`}
                     alt={`arrow-${sale}-${key}`}
                   />
                 </div>

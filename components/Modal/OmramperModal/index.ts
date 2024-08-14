@@ -1,3 +1,3 @@
-import OmramperModal from "./OmramperModal";
+import OmramperModal from './OmramperModal';
 
 export default OmramperModal;

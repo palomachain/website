@@ -1,25 +1,14 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
-import { SLIPPAGE_DOMINATOR, SLIPPAGE_PERCENTAGE } from "configs/constants";
+import { SLIPPAGE_DOMINATOR, SLIPPAGE_PERCENTAGE } from 'configs/constants';
 
-const convertFromWei = (
-  val: BigNumber | number | string,
-  fixed: number = 4,
-  decimals: number = 18
-): string => {
-  const result = new BigNumber(val)
-    .dividedBy(10 ** decimals)
-    .toFixed(fixed, BigNumber.ROUND_DOWN);
+const convertFromWei = (val: BigNumber | number | string, fixed: number = 4, decimals: number = 18): string => {
+  const result = new BigNumber(val).dividedBy(10 ** decimals).toFixed(fixed, BigNumber.ROUND_DOWN);
   return result;
 };
 
-const convertToWei = (
-  val: number | string,
-  decimals: number = 18
-): BigNumber => {
-  const result = new BigNumber(val)
-    .multipliedBy(10 ** decimals)
-    .decimalPlaces(0, BigNumber.ROUND_FLOOR);
+const convertToWei = (val: number | string, decimals: number = 18): BigNumber => {
+  const result = new BigNumber(val).multipliedBy(10 ** decimals).decimalPlaces(0, BigNumber.ROUND_FLOOR);
   return result;
 };
 
@@ -27,17 +16,11 @@ const convertBigNumber = (val: any): BigNumber => {
   return new BigNumber(val.toString());
 };
 
-const convertToDollar = (
-  balance: string | number,
-  exchangeRate: number | BigNumber,
-  fixed: number = 4
-): string => {
+const convertToDollar = (balance: string | number, exchangeRate: number | BigNumber, fixed: number = 4): string => {
   let amount = new BigNumber(balance);
   if (amount.isNaN()) amount = new BigNumber(0);
 
-  const result = parseFloat(
-    amount.multipliedBy(exchangeRate).toFixed(fixed, BigNumber.ROUND_CEIL)
-  );
+  const result = parseFloat(amount.multipliedBy(exchangeRate).toFixed(fixed, BigNumber.ROUND_CEIL));
   return result.toString();
 };
 
@@ -68,13 +51,13 @@ const formatCurrency = ({
   formatOption?: Intl.NumberFormatOptions;
 }) => {
   if (!locale) {
-    locale = "en-US";
+    locale = 'en-US';
   }
 
   if (!formatOption) {
     formatOption = {
-      style: "currency",
-      currency: "USD",
+      style: 'currency',
+      currency: 'USD',
       maximumFractionDigits: 2,
     };
   }

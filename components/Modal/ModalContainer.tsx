@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
-import cn from "classnames";
+import React, { ReactElement } from 'react';
+import cn from 'classnames';
 
-import style from "components/Modal/ModalContainer.module.scss";
+import style from 'components/Modal/ModalContainer.module.scss';
 
 interface ModalContainerProps {
   className?: string;

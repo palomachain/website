@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { convertDateString } from "utils/date";
-import { truncate } from "utils/string";
+import { convertDateString } from 'utils/date';
+import { truncate } from 'utils/string';
 
 const BlogList = ({ data }) => (
   <>
@@ -13,13 +13,9 @@ const BlogList = ({ data }) => (
             <img src={`https:${blog.content.image}`} />
           </div>
           <div className="blog-latest-content">
-            <div className="blog-latest-date">
-              {convertDateString(blog.content.published_date)}
-            </div>
+            <div className="blog-latest-date">{convertDateString(blog.content.published_date)}</div>
             <h3 className="blog-latest-title">{blog.content.title}</h3>
-            <p className="blog-latest-intro">
-              {truncate(blog.content.intro, 190)}
-            </p>
+            <p className="blog-latest-intro">{truncate(blog.content.intro, 190)}</p>
             <div className="blog-latest-read">Read More...</div>
           </div>
         </div>

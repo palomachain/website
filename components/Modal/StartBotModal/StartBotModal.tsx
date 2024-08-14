@@ -1,10 +1,10 @@
-import Button from "components/Button";
-import Modal from "components/Modal";
-import { ITokenBalance } from "interfaces/swap";
-import React from "react";
-import TokenAmountView from "./TokenAmountView";
+import Button from 'components/Button';
+import Modal from 'components/Modal';
+import { ITokenBalance } from 'interfaces/swap';
+import React from 'react';
+import TokenAmountView from './TokenAmountView';
 
-import style from "./StartBotModal.module.scss";
+import style from './StartBotModal.module.scss';
 
 interface StartBotModalProps {
   show?: boolean;
@@ -30,11 +30,7 @@ const StartBotUniswapModal = ({
   if (!show) return null;
 
   return (
-    <Modal
-      title="Confirm Start a Bot"
-      onClose={onClose}
-      className={style.container}
-    >
+    <Modal title="Confirm Start a Bot" onClose={onClose} className={style.container}>
       <section className={style.container}>
         <TokenAmountView className={style.token} token={fromToken} />
         <div className={style.label}>
@@ -48,12 +44,7 @@ const StartBotUniswapModal = ({
         </div>
         <TokenAmountView className={style.token} token={maxToToken} />
 
-        <Button
-          type="pink"
-          className={style.swapButton}
-          full
-          onClick={onConfirmStartBot}
-        >
+        <Button type="pink" className={style.swapButton} full onClick={onConfirmStartBot}>
           <span>Confirm Start a Bot</span>
         </Button>
       </section>

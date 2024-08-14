@@ -1,4 +1,4 @@
-import { api } from "services";
+import { api } from 'services';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -11,8 +11,7 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
-export type GetGasPricesApiResponse =
-  /** status 200 Success */ GasPricesResultData;
+export type GetGasPricesApiResponse = /** status 200 Success */ GasPricesResultData;
 export type GetGasPricesApiArg = {};
 export type GasPricesResultData = {
   fastest: number;
@@ -21,5 +20,4 @@ export type GasPricesResultData = {
   low: number;
 };
 
-export const { useGetGasPricesQuery, useLazyGetGasPricesQuery } =
-  injectedRtkApi;
+export const { useGetGasPricesQuery, useLazyGetGasPricesQuery } = injectedRtkApi;

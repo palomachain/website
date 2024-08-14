@@ -1,12 +1,10 @@
-import Purchase from "components/Button/purchase";
-import { LightNodeFeatures } from "utils/data";
+import Purchase from 'components/Button/purchase';
+import { LightNodeFeatures } from 'utils/data';
 
 const featuresSection = () => (
   <section className="features-section">
     <h1>LightNode Features</h1>
-    <p className="mt-20">
-      Your Paloma LightNode Application runs the following commands automatically:
-    </p>
+    <p className="mt-20">Your Paloma LightNode Application runs the following commands automatically:</p>
     <Purchase className="mt-40" />
     <div className="features-cards">
       {LightNodeFeatures.map((feature, index) => (

@@ -1,18 +1,18 @@
-import BigNumber from "bignumber.js";
-import { NO_CHAIN_SELECTED } from "configs/chains";
-import { EVMChain } from "interfaces/network";
-import { IBalance, ISelectToken, IToken } from "interfaces/swap";
+import BigNumber from 'bignumber.js';
+import { NO_CHAIN_SELECTED } from 'configs/chains';
+import { EVMChain } from 'interfaces/network';
+import { IBalance, ISelectToken, IToken } from 'interfaces/swap';
 
 const emptyTokenBalance = (): IBalance => ({
   raw: new BigNumber(0),
-  format: "",
+  format: '',
 });
 
 const getEmptyToken = (): IToken => ({
-  address: "",
-  symbol: "",
-  displayName: "",
-  icon: "",
+  address: '',
+  symbol: '',
+  displayName: '',
+  icon: '',
   decimals: 0,
 });
 
@@ -30,16 +30,16 @@ const getEmptySelectToken = (): ISelectToken => ({
 });
 
 const getMockChain = (): EVMChain => ({
-  icon: "",
-  chainName: "SELECT CHAIN",
+  icon: '',
+  chainName: 'SELECT CHAIN',
   chainId: NO_CHAIN_SELECTED,
-  rpc: "",
-  blockExplorerUrl: "",
+  rpc: '',
+  blockExplorerUrl: '',
 });
 
 const getMockSwapContracts = () => ({
-  swapRouterAddress: "",
-  swapFactoryAddress: "",
+  swapRouterAddress: '',
+  swapFactoryAddress: '',
 });
 
 const getEmptySelectedToken = (): ISelectToken => ({

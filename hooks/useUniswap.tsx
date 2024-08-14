@@ -1,55 +1,39 @@
-import { Protocol } from "@uniswap/router-sdk";
-import {
-  Currency,
-  CurrencyAmount,
-  NativeCurrency,
-  Percent,
-  Token,
-  TradeType,
-} from "@uniswap/sdk-core";
+import { Protocol } from '@uniswap/router-sdk';
+import { Currency, CurrencyAmount, NativeCurrency, Percent, Token, TradeType } from '@uniswap/sdk-core';
 import {
   AlphaRouter,
   AlphaRouterConfig,
   SwapOptionsSwapRouter02,
   SwapRoute,
   SwapType,
-} from "@uniswap/smart-order-router";
-import BigNumber from "bignumber.js";
-import { ChainID, allChains } from "configs/chains";
-import uniswapV3FactoryAbi from "contracts/abi/uniswapV3Factory.abi.json";
-import pairAbi from "contracts/abi/uniswapV3Pair.abi.json";
-import { Addresses, VETH_ADDRESS } from "contracts/addresses";
-import { ethers } from "ethers";
-import { IBalance, IToken } from "interfaces/swap";
-import balanceTool from "utils/balance";
-import { convertAddressSlice, parseByte } from "utils/string";
+} from '@uniswap/smart-order-router';
+import BigNumber from 'bignumber.js';
+import { ChainID, allChains } from 'configs/chains';
+import uniswapV3FactoryAbi from 'contracts/abi/uniswapV3Factory.abi.json';
+import pairAbi from 'contracts/abi/uniswapV3Pair.abi.json';
+import { Addresses, VETH_ADDRESS } from 'contracts/addresses';
+import { ethers } from 'ethers';
+import { IBalance, IToken } from 'interfaces/swap';
+import balanceTool from 'utils/balance';
+import { convertAddressSlice, parseByte } from 'utils/string';
 
 /**
  * Not able to use Ether from `@uniswap/sdk-core`, it doesn't support Polygon, Bsc ....
  */
 class Ether extends NativeCurrency {
   protected constructor(chainId: number) {
-    super(chainId, 18, "ETH", "Ether");
+    super(chainId, 18, 'ETH', 'Ether');
   }
 
   public get wrapped(): Token {
-    const weth9 = new Token(
-      this.chainId,
-      Addresses[this.chainId].weth,
-      18,
-      "WETH",
-      "Wrapped Ether"
-    );
+    const weth9 = new Token(this.chainId, Addresses[this.chainId].weth, 18, 'WETH', 'Wrapped Ether');
     return weth9;
   }
 
   private static _etherCache: { [chainId: number]: Ether } = {};
 
   public static onChain(chainId: number): Ether {
-    return (
-      this._etherCache[chainId] ??
-      (this._etherCache[chainId] = new Ether(chainId))
-    );
+    return this._etherCache[chainId] ?? (this._etherCache[chainId] = new Ether(chainId));
   }
 
   public equals(other: Currency): boolean {
@@ -67,10 +51,10 @@ const useUniswap = ({ provider, wallet }) => {
     slippage: number,
     deadline: number,
     chainId: string,
-    routerConfig?: Partial<AlphaRouterConfig> | null
+    routerConfig?: Partial<AlphaRouterConfig> | null,
   ) => {
     const provider = new ethers.providers.JsonRpcProvider(
-      chainId ? allChains[chainId].rpc : allChains[ChainID.ETHEREUM_MAIN].rpc
+      chainId ? allChains[chainId].rpc : allChains[ChainID.ETHEREUM_MAIN].rpc,
     );
 
     const router = new AlphaRouter({
@@ -87,21 +71,17 @@ const useUniswap = ({ provider, wallet }) => {
 
     const tokenIn = new Token(
       Number(chainId),
-      fromToken.address === VETH_ADDRESS
-        ? Addresses[chainId].weth
-        : fromToken.address,
+      fromToken.address === VETH_ADDRESS ? Addresses[chainId].weth : fromToken.address,
       fromToken.decimals,
       fromToken.symbol,
-      fromToken.displayName
+      fromToken.displayName,
     );
     const tokenOut = new Token(
       Number(chainId),
-      toToken.address === VETH_ADDRESS
-        ? Addresses[chainId].weth
-        : toToken.address,
+      toToken.address === VETH_ADDRESS ? Addresses[chainId].weth : toToken.address,
       toToken.decimals,
       toToken.symbol,
-      toToken.displayName
+      toToken.displayName,
     );
 
     const currencyIn = Ether.onChain(Number(chainId));
@@ -111,21 +91,21 @@ const useUniswap = ({ provider, wallet }) => {
       ? await router.route(
           CurrencyAmount.fromRawAmount(
             fromToken.address === VETH_ADDRESS ? currencyIn : tokenIn,
-            fromTokenBalance.raw.toString()
+            fromTokenBalance.raw.toString(),
           ),
           toToken.address === VETH_ADDRESS ? currencyOut : tokenOut,
           TradeType.EXACT_OUTPUT,
           options,
-          routerConfig
+          routerConfig,
         )
       : await router.route(
           CurrencyAmount.fromRawAmount(
             fromToken.address === VETH_ADDRESS ? currencyIn : tokenIn,
-            fromTokenBalance.raw.toString()
+            fromTokenBalance.raw.toString(),
           ),
           toToken.address === VETH_ADDRESS ? currencyOut : tokenOut,
           TradeType.EXACT_OUTPUT,
-          options
+          options,
         );
 
     return route;
@@ -140,11 +120,7 @@ const useUniswap = ({ provider, wallet }) => {
    * @returns
    */
   const getPool = async (token0, token1, fee) => {
-    const contract = new ethers.Contract(
-      Addresses[wallet.network].uniswapV3Factory,
-      uniswapV3FactoryAbi,
-      provider
-    );
+    const contract = new ethers.Contract(Addresses[wallet.network].uniswapV3Factory, uniswapV3FactoryAbi, provider);
 
     const pool = await contract.getPool(token0, token1, fee);
 
@@ -167,44 +143,21 @@ const useUniswap = ({ provider, wallet }) => {
     deadline: number,
     chainId: string | number,
     useV2Only?: boolean,
-    useV3Only?: boolean
+    useV3Only?: boolean,
   ) => {
     if (!provider) return null;
 
     try {
       const swapRoute =
         useV2Only === true
-          ? await generateRoute(
-              fromToken,
-              tokenInAmount,
-              toToken,
-              slippage,
-              deadline,
-              chainId.toString(),
-              {
-                protocols: [Protocol.V2],
-              }
-            )
+          ? await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+              protocols: [Protocol.V2],
+            })
           : useV3Only === true
-          ? await generateRoute(
-              fromToken,
-              tokenInAmount,
-              toToken,
-              slippage,
-              deadline,
-              chainId.toString(),
-              {
-                protocols: [Protocol.V3],
-              }
-            )
-          : await generateRoute(
-              fromToken,
-              tokenInAmount,
-              toToken,
-              slippage,
-              deadline,
-              chainId.toString()
-            );
+          ? await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+              protocols: [Protocol.V3],
+            })
+          : await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString());
 
       return swapRoute;
     } catch (e) {
@@ -219,7 +172,7 @@ const useUniswap = ({ provider, wallet }) => {
     slippage: number,
     deadline: number,
     chainId: string | number,
-    useV2Only?: boolean
+    useV2Only?: boolean,
   ) => {
     if (!provider) return null;
 
@@ -234,32 +187,16 @@ const useUniswap = ({ provider, wallet }) => {
 
             const swapRoute =
               useV2Only === true
-                ? await generateRoute(
-                    token,
-                    tokenInAmount,
-                    toToken,
-                    slippage,
-                    deadline,
-                    chainId.toString(),
-                    {
-                      protocols: [Protocol.V2],
-                    }
-                  )
-                : await generateRoute(
-                    token,
-                    tokenInAmount,
-                    toToken,
-                    slippage,
-                    deadline,
-                    chainId.toString(),
-                    {
-                      protocols: [Protocol.V3],
-                    }
-                  );
+                ? await generateRoute(token, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+                    protocols: [Protocol.V2],
+                  })
+                : await generateRoute(token, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+                    protocols: [Protocol.V3],
+                  });
 
             return { swapRoute, token };
           }
-        })
+        }),
       );
 
       return swapRoutes;
@@ -284,16 +221,12 @@ const useUniswap = ({ provider, wallet }) => {
     token: IToken;
   }
 
-  const getQuoteAmounts = async (
-    swapRoutes: ISwapPaths[],
-    decimals: number,
-    isV2Only: boolean = true
-  ) => {
+  const getQuoteAmounts = async (swapRoutes: ISwapPaths[], decimals: number, isV2Only: boolean = true) => {
     const res = {
       routes: [],
       amount: {
         raw: new BigNumber(0),
-        format: "",
+        format: '',
       },
     };
 
@@ -304,12 +237,9 @@ const useUniswap = ({ provider, wallet }) => {
         swapRoutes.map(async (route) => {
           if (route.swapRoute === null) return null;
           return route.swapRoute.quote;
-        })
+        }),
       );
-      const totalAmount = quotes.reduce(
-        (acc, quote) => acc + Number(quote.toFixed(6)),
-        0
-      );
+      const totalAmount = quotes.reduce((acc, quote) => acc + Number(quote.toFixed(6)), 0);
 
       const swapPaths = swapRoutes.map((uniswapPath) => {
         const swapRoutePath = uniswapPath?.swapRoute?.trade?.routes[0]?.path;
@@ -317,22 +247,19 @@ const useUniswap = ({ provider, wallet }) => {
         if (isV2Only) {
           path = new Array(swapRoutePath.length);
           for (let i = 0; i < swapRoutePath.length; i++) {
-            path[i] = swapRoutePath[i]["address"];
+            path[i] = swapRoutePath[i]['address'];
           }
-          if (uniswapPath.token.address === VETH_ADDRESS)
-            path[0] = VETH_ADDRESS;
+          if (uniswapPath.token.address === VETH_ADDRESS) path[0] = VETH_ADDRESS;
         } else {
-          path = "";
-          if (uniswapPath.token.address === VETH_ADDRESS)
-            path += convertAddressSlice(VETH_ADDRESS);
+          path = '';
+          if (uniswapPath.token.address === VETH_ADDRESS) path += convertAddressSlice(VETH_ADDRESS);
           const pools = uniswapPath?.swapRoute?.trade?.routes[0]?.pools;
           for (let i = 0; i < swapRoutePath.length; i++) {
-            path += convertAddressSlice(swapRoutePath[i]["address"]);
-            if (pools[i] && pools[i]["fee"]) path += parseByte(pools[i]["fee"]);
+            path += convertAddressSlice(swapRoutePath[i]['address']);
+            if (pools[i] && pools[i]['fee']) path += parseByte(pools[i]['fee']);
           }
-          if (uniswapPath?.swapRoute?.trade?.routes[0]?.output.isNative)
-            path += convertAddressSlice(VETH_ADDRESS);
-          path = "0x" + path;
+          if (uniswapPath?.swapRoute?.trade?.routes[0]?.output.isNative) path += convertAddressSlice(VETH_ADDRESS);
+          path = '0x' + path;
         }
 
         return {
@@ -356,17 +283,17 @@ const useUniswap = ({ provider, wallet }) => {
 
   const getSwapPathForV3 = (swapRoute: SwapRoute | null, token: IToken) => {
     try {
-      let path = "";
+      let path = '';
 
       const swapRoutePath = swapRoute?.trade?.routes[0]?.path;
       const pools = swapRoute?.trade?.routes[0]?.pools;
 
       // For path
       for (let i = 0; i < swapRoutePath.length; i++) {
-        path += convertAddressSlice(swapRoutePath[i]["address"]);
-        if (pools[i] && pools[i]["fee"]) path += parseByte(pools[i]["fee"]);
+        path += convertAddressSlice(swapRoutePath[i]['address']);
+        if (pools[i] && pools[i]['fee']) path += parseByte(pools[i]['fee']);
       }
-      path = "0x" + path;
+      path = '0x' + path;
 
       return path;
     } catch (error) {
@@ -384,20 +311,13 @@ const useUniswap = ({ provider, wallet }) => {
    * @param toTokenAmont
    * @returns
    */
-  const getPriceImpact = async (
-    poolAddress: string,
-    fromToken: IToken,
-    fromTokenAmount: IBalance
-  ) => {
+  const getPriceImpact = async (poolAddress: string, fromToken: IToken, fromTokenAmount: IBalance) => {
     if (!provider) return;
 
     let priceImpact = new BigNumber(0);
 
     try {
-      const tokenIn =
-        fromToken.address === VETH_ADDRESS
-          ? Addresses[wallet.network].weth
-          : fromToken.address;
+      const tokenIn = fromToken.address === VETH_ADDRESS ? Addresses[wallet.network].weth : fromToken.address;
 
       const pairContract = new ethers.Contract(poolAddress, pairAbi, provider);
       const reserves = await pairContract.getReserves();
@@ -419,12 +339,9 @@ const useUniswap = ({ provider, wallet }) => {
       const newFromTokenAmount = fromTokenAmount.raw.plus(reserveA);
       const newToTokenAmount = constantProduct.dividedBy(newFromTokenAmount);
       const addedToTokenAmount = reserveB.minus(newToTokenAmount);
-      const pricePaidPerToToken =
-        fromTokenAmount.raw.dividedBy(addedToTokenAmount);
+      const pricePaidPerToToken = fromTokenAmount.raw.dividedBy(addedToTokenAmount);
 
-      priceImpact = new BigNumber(1).minus(
-        marketPrice.dividedBy(pricePaidPerToToken)
-      );
+      priceImpact = new BigNumber(1).minus(marketPrice.dividedBy(pricePaidPerToToken));
     } catch (e) {
     } finally {
       return priceImpact;

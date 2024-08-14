@@ -1,6 +1,6 @@
-import { api } from "services";
+import { api } from 'services';
 
-const nodesaleApiUrl = "https://nodesale.palomachain.com/api/v1";
+const nodesaleApiUrl = 'https://nodesale.palomachain.com/api/v1';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -30,5 +30,9 @@ export type GetNodeSaleApiArg = {
 
 export type PriceResultData = any;
 
-export const { useGetNodeSalePriceQuery, useLazyGetNodeSalePriceQuery, useGetTotalPurchasedQuery, useLazyGetTotalPurchasedQuery } =
-  injectedRtkApi;
+export const {
+  useGetNodeSalePriceQuery,
+  useLazyGetNodeSalePriceQuery,
+  useGetTotalPurchasedQuery,
+  useLazyGetTotalPurchasedQuery,
+} = injectedRtkApi;

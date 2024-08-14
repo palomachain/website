@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { formatNumber } from "utils/number";
+import React, { useEffect, useState } from 'react';
+import { formatNumber } from 'utils/number';
 
 const volumesSection = () => {
   const [data, setData] = useState({
-    bots_total: "200", // default value
+    bots_total: '200', // default value
     volume_total: 0, // default value
   });
 
   useEffect(() => {
     // Fetch data from the URL when the component mounts
-    fetch("https://service.palomabot.ai/stats")
+    fetch('https://service.palomabot.ai/stats')
       .then(async (response) => response.json())
       .then((bot) => {
         // Update the state with the new data
@@ -18,7 +18,7 @@ const volumesSection = () => {
           volume_total: Math.ceil(bot.volume_total),
         });
       })
-      .catch((error) => console.error("Error fetching data: ", error));
+      .catch((error) => console.error('Error fetching data: ', error));
   }, []); // Empty dependency array means this effect runs once on mount
 
   const [cagrPercent, setCagrPercent] = useState(70);

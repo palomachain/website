@@ -23,60 +23,56 @@ export const delay = (ms) => {
 };
 
 const dateOptions = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 } as const;
 
 const dateOptionsWithWeekDay = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  weekday: "short",
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'short',
 } as const;
 
 const timeOptions = {
   hour12: true,
-  hour: "2-digit",
-  minute: "2-digit",
+  hour: '2-digit',
+  minute: '2-digit',
 } as const;
 
 export const convertDateString = (dateStr) => {
   const stamp = parseDate(dateStr).getTime();
   const date = new Date(stamp);
 
-  return date.toLocaleDateString("en-US", dateOptions);
+  return date.toLocaleDateString('en-US', dateOptions);
 };
 
 export const convertDateString2 = (dateStr) => {
-  if (!dateStr || dateStr === "") return "";
+  if (!dateStr || dateStr === '') return '';
 
   const stamp = Date.parse(dateStr);
   const date = new Date(stamp);
 
-  return date.toLocaleDateString("en-US", dateOptions);
+  return date.toLocaleDateString('en-US', dateOptions);
 };
 
 export const convertDateStringWithWeekDay = (dateStr, toLocal = false) => {
-  const stamp = toLocal
-    ? convertUTCtoLocalTime(parseDate(dateStr))
-    : parseDate(dateStr).getTime();
+  const stamp = toLocal ? convertUTCtoLocalTime(parseDate(dateStr)) : parseDate(dateStr).getTime();
   const date = new Date(stamp);
 
-  return date.toLocaleDateString("en-US", dateOptions);
+  return date.toLocaleDateString('en-US', dateOptions);
 };
 
 export const convertTimeString = (dateStr, toLocal = false) => {
-  const stamp = toLocal
-    ? convertUTCtoLocalTime(parseDate(dateStr).getTime())
-    : parseDate(dateStr).getTime();
+  const stamp = toLocal ? convertUTCtoLocalTime(parseDate(dateStr).getTime()) : parseDate(dateStr).getTime();
 
   const date = new Date(stamp);
 
   if (date === null) {
-    return "";
+    return '';
   } else {
-    return date.toLocaleDateString("en-US", timeOptions).split(",")[1].trim();
+    return date.toLocaleDateString('en-US', timeOptions).split(',')[1].trim();
   }
 };
 
@@ -92,15 +88,15 @@ export const convertUTCtoLocalTime = (utcTime) => {
 };
 
 export const parseDate = (str) => {
-  const dateStr = str.split(" ")[0];
-  const timeStr = str.split(" ")[1];
+  const dateStr = str.split(' ')[0];
+  const timeStr = str.split(' ')[1];
 
-  const year = Number(dateStr.split("-")[0]);
-  const month = Number(dateStr.split("-")[1]) - 1;
-  const day = Number(dateStr.split("-")[2]);
+  const year = Number(dateStr.split('-')[0]);
+  const month = Number(dateStr.split('-')[1]) - 1;
+  const day = Number(dateStr.split('-')[2]);
 
-  const hour = Number(timeStr.split(":")[0]);
-  const minute = Number(timeStr.split(":")[1]);
+  const hour = Number(timeStr.split(':')[0]);
+  const minute = Number(timeStr.split(':')[1]);
 
   return new Date(year, month, day, hour, minute);
 };

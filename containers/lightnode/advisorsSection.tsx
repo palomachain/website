@@ -1,4 +1,4 @@
-import { Advisors } from "utils/data";
+import { Advisors } from 'utils/data';
 
 const advisorsSection = () => (
   <section className="advisors-section">

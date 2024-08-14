@@ -1,5 +1,5 @@
-import React from "react";
-import { formatNumber } from "utils/number";
+import React from 'react';
+import { formatNumber } from 'utils/number';
 
 interface IRangeSliderWrapper {
   title?: string;
@@ -12,17 +12,7 @@ interface IRangeSliderWrapper {
   value?: number;
   setValue?: (e) => void;
 }
-const RangeSlider = ({
-  title,
-  describe,
-  min,
-  max,
-  mid,
-  step,
-  prefix = "",
-  value,
-  setValue,
-}: IRangeSliderWrapper) => {
+const RangeSlider = ({ title, describe, min, max, mid, step, prefix = '', value, setValue }: IRangeSliderWrapper) => {
   const bubble = (((value - min) * 100) / (max - min)).toFixed(2);
   const valueLength = value.toString().length;
   const valueWidth = valueLength * 13 + 16;

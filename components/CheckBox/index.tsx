@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 
-import style from "./CheckBox.module.scss";
-import classNames from "classnames";
+import style from './CheckBox.module.scss';
+import classNames from 'classnames';
 
 interface ICheckBoxWrapper {
   checked?: boolean;
@@ -10,13 +10,7 @@ interface ICheckBoxWrapper {
   onChange?: () => void;
   className?: string;
 }
-const CheckBox = ({
-  checked = false,
-  label,
-  disabled = false,
-  onChange,
-  className,
-}: ICheckBoxWrapper) => {
+const CheckBox = ({ checked = false, label, disabled = false, onChange, className }: ICheckBoxWrapper) => {
   return (
     <label className={style.container}>
       {disabled ? (
@@ -24,14 +18,7 @@ const CheckBox = ({
       ) : (
         <input type="checkbox" checked={checked} onChange={onChange} />
       )}
-      <span
-        className={classNames(
-          style.checkmark,
-          disabled ? style.disabled : undefined
-        )}
-      >
-        {label}
-      </span>
+      <span className={classNames(style.checkmark, disabled ? style.disabled : undefined)}>{label}</span>
     </label>
   );
 };

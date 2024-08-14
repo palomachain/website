@@ -1,5 +1,5 @@
-import Purchase from "components/Button/purchase";
-import { useEffect, useState } from "react";
+import Purchase from 'components/Button/purchase';
+import { useEffect, useState } from 'react';
 import {
   ChangeR,
   Exponent,
@@ -9,8 +9,8 @@ import {
   NSlots,
   StartingPrice,
   TotalGrains,
-} from "utils/constants";
-import { formatNumber } from "utils/number";
+} from 'utils/constants';
+import { formatNumber } from 'utils/number';
 
 interface INodeSaleData {
   totalNodeSale: number;
@@ -28,13 +28,10 @@ const subscriptionSection = () => {
     let tempNodeSale: INodeSaleData[] = Array(NSlots);
     for (let index = 0; index < NSlots; index++) {
       const totalNodeSale = Math.round(NodeSlot1 * ChangeR ** index);
-      const nodePrice = Math.round(
-        StartingPrice + Increment * index ** Exponent
-      );
+      const nodePrice = Math.round(StartingPrice + Increment * index ** Exponent);
       const fdv = (nodePrice * TotalGrains) / GrainsPerNode;
       const grainsSold = totalNodeSale * GrainsPerNode;
-      const prevCumeGrainsSold =
-        index > 0 ? tempNodeSale[index - 1].cumeGrainsSold : 0;
+      const prevCumeGrainsSold = index > 0 ? tempNodeSale[index - 1].cumeGrainsSold : 0;
       const cumeGrainsSold = prevCumeGrainsSold + grainsSold;
       const networkPercent = (cumeGrainsSold / TotalGrains) * 100;
 
@@ -59,8 +56,8 @@ const subscriptionSection = () => {
         Subscription Pricing
       </h1>
       <p>
-        Paloma secures an increasing number of trading applications, ensuring
-        reliable and efficient performance as the platform continues to grow.
+        Paloma secures an increasing number of trading applications, ensuring reliable and efficient performance as the
+        platform continues to grow.
       </p>
       <Purchase className="purchase-button-white mt-40" />
       <table className="subscription-table">
@@ -78,9 +75,7 @@ const subscriptionSection = () => {
           {nodeSaleData &&
             [...Array(NSlots)].map((e, index) => (
               <tr
-                className={`subscription-table-row ${
-                  index % 2 > 0 ? "subscription-table-row2" : undefined
-                } `}
+                className={`subscription-table-row ${index % 2 > 0 ? 'subscription-table-row2' : undefined} `}
                 key={index}
               >
                 <td>{index + 1}</td>
@@ -88,9 +83,7 @@ const subscriptionSection = () => {
                 <td>${nodeSaleData[index].nodePrice}</td>
                 <td>${formatNumber(nodeSaleData[index].fdv, 0, 0)}</td>
                 <td>{formatNumber(nodeSaleData[index].grainsSold, 0, 0)}</td>
-                <td>
-                  {formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%
-                </td>
+                <td>{formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%</td>
               </tr>
             ))}
         </tbody>

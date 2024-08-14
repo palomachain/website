@@ -1,9 +1,9 @@
-import React from "react";
-import cn from "classnames";
-import { IToken } from "interfaces/swap";
-import balanceTool from "utils/balance";
+import React from 'react';
+import cn from 'classnames';
+import { IToken } from 'interfaces/swap';
+import balanceTool from 'utils/balance';
 
-import style from "./TokenView.module.scss";
+import style from './TokenView.module.scss';
 
 interface TokenViewProps {
   token: IToken;
@@ -13,22 +13,13 @@ interface TokenViewProps {
   className?: string;
 }
 
-const TokenView = ({
-  token,
-  onClick,
-  isToken = false,
-  selected = false,
-  className,
-}: TokenViewProps) => (
-  <section
-    className={selected ? style.selectedToken : undefined}
-    onClick={(e) => onClick(token)}
-  >
+const TokenView = ({ token, onClick, isToken = false, selected = false, className }: TokenViewProps) => (
+  <section className={selected ? style.selectedToken : undefined} onClick={(e) => onClick(token)}>
     <div className={cn(style.container, className)}>
       <div className={style.tokenWrapper}>
         {isToken && <input type="checkbox" checked={selected} />}
         <img
-          src={token.icon ? token.icon : "/assets/images/Empty_ellipse.svg"}
+          src={token.icon ? token.icon : '/assets/images/Empty_ellipse.svg'}
           width={25}
           height={25}
           alt={token.symbol}
@@ -47,28 +38,18 @@ const TokenView = ({
       ) : (
         <div className={style.balance}>
           <span className={style.display}>
-            {token.balance
-              ? balanceTool.convertFromWei(token.balance, 4, token.decimals)
-              : ""}
+            {token.balance ? balanceTool.convertFromWei(token.balance, 4, token.decimals) : ''}
           </span>
-          <span className={style.symbol}>
-            {token.usdAmount ? "US" + token.usdAmount : ""}
-          </span>
+          <span className={style.symbol}>{token.usdAmount ? 'US' + token.usdAmount : ''}</span>
         </div>
       )}
     </div>
     {selected && (
       <div className="flex-row justify-between">
         <span className={style.selectedTokenNumber}>
-          Balance:{" "}
-          {token.balance
-            ? balanceTool.convertFromWei(token.balance, 4, token.decimals)
-            : ""}{" "}
-          {token.symbol}
+          Balance: {token.balance ? balanceTool.convertFromWei(token.balance, 4, token.decimals) : ''} {token.symbol}
         </span>
-        <span className={style.selectedTokenNumber}>
-          ≈${token.usdAmount ? token.usdAmount : ""}
-        </span>
+        <span className={style.selectedTokenNumber}>≈${token.usdAmount ? token.usdAmount : ''}</span>
       </div>
     )}
   </section>

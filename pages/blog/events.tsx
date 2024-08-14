@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { BlogList, BlogPageWrapper } from "components/Blog";
+import { BlogList, BlogPageWrapper } from 'components/Blog';
 
-import { fetchBlogs } from "utils/storyblok";
+import { fetchBlogs } from 'utils/storyblok';
 
 const BlogEvents = ({ router }) => {
   const [latestBlogs, setLatestBlog] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      const data = await fetchBlogs({ Category: "events" });
+      const data = await fetchBlogs({ Category: 'events' });
       setLatestBlog(data);
     };
 

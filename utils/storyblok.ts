@@ -1,6 +1,6 @@
-import StoryblokClient from "storyblok-js-client";
+import StoryblokClient from 'storyblok-js-client';
 
-import { LATEST_BLOG_SHOW_CNT } from "./constants";
+import { LATEST_BLOG_SHOW_CNT } from './constants';
 
 const Storyblok = new StoryblokClient({
   accessToken: process.env.STORYBLOK_ACCESS_TOKEN,
@@ -21,8 +21,8 @@ export const fetchBlogs = async (params = {}) => {
   let currentPage = 1;
 
   while (moreData) {
-    let response = await Storyblok.get("cdn/stories/", {
-      starts_with: "blog/",
+    let response = await Storyblok.get('cdn/stories/', {
+      starts_with: 'blog/',
       page: currentPage,
       per_page: 100,
       filter_query: filterQuery,
@@ -33,10 +33,7 @@ export const fetchBlogs = async (params = {}) => {
 
     for (const story of response.data.stories) {
       if (story.published_at != null) {
-        if (
-          story.full_slug.startsWith("blog/") &&
-          !story.full_slug.endsWith("blog/")
-        ) {
+        if (story.full_slug.startsWith('blog/') && !story.full_slug.endsWith('blog/')) {
           blogs.push(story);
         }
       }
@@ -55,16 +52,13 @@ export const fetchBlogs = async (params = {}) => {
 
 export const fetchEvents = async () => {
   const events = [];
-  var response = await Storyblok.get("cdn/stories/", {
-    starts_with: "events/",
+  var response = await Storyblok.get('cdn/stories/', {
+    starts_with: 'events/',
   });
 
   for (const story of response.data.stories) {
     if (story.published_at != null) {
-      if (
-        story.full_slug.startsWith("events/") &&
-        !story.full_slug.endsWith("events/")
-      ) {
+      if (story.full_slug.startsWith('events/') && !story.full_slug.endsWith('events/')) {
         events.push(story);
       }
     }
@@ -73,13 +67,13 @@ export const fetchEvents = async () => {
   return events;
 };
 
-export const filterBlogs = (eventList, category = "") => {
+export const filterBlogs = (eventList, category = '') => {
   const blogs = eventList.filter((event) => {
-    if (category === "") {
+    if (category === '') {
       return true;
     }
 
-    if ("Category" in event.content) {
+    if ('Category' in event.content) {
       return event.content.Category === category;
     }
 
@@ -98,7 +92,7 @@ export const filterBlogs = (eventList, category = "") => {
 };
 
 export const fetchPageValues = async (param) => {
-  var response = await Storyblok.get("cdn/stories/", {
+  var response = await Storyblok.get('cdn/stories/', {
     starts_with: param,
   });
 

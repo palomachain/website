@@ -1,5 +1,5 @@
-import RangeSlider from "components/RangeSlider";
-import { useEffect, useState } from "react";
+import RangeSlider from 'components/RangeSlider';
+import { useEffect, useState } from 'react';
 import {
   CommunityFee,
   GrainsPerNode,
@@ -8,8 +8,8 @@ import {
   RelayRewardFee,
   TotalGrains,
   ValidatorFee,
-} from "utils/constants";
-import { formatNumber } from "utils/number";
+} from 'utils/constants';
+import { formatNumber } from 'utils/number';
 
 const rewardCalculatorSection = () => {
   const [nodeNumber, setNodeNumber] = useState(1);
@@ -29,30 +29,19 @@ const rewardCalculatorSection = () => {
 
   useEffect(() => {
     {
-      (nodeNumber *
-        GrainsPerNode *
-        ((TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) /
-          100 /
-          100)) /
+      (nodeNumber * GrainsPerNode * ((TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) / 100 / 100)) /
         (1596008000 + GrainsPerNode * 5000);
     }
-    const netStakeFlation =
-      (TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) /
-      100 /
-      100;
+    const netStakeFlation = (TotalGrains * Inflation * (100 - CommunityFee - ValidatorFee)) / 100 / 100;
     const totalStaked = grainsStaked + nodesSold * GrainsPerNode;
 
-    const stakingAmount =
-      (nodeNumber * GrainsPerNode * netStakeFlation) / totalStaked;
+    const stakingAmount = (nodeNumber * GrainsPerNode * netStakeFlation) / totalStaked;
     setStaking(stakingAmount);
     setStakingPrice(stakingAmount * grainPrice);
 
-    const pigeonFees =
-      ((gasPrice * txCost * ethPrice) / 1000000000) * (PigeonGasFee / 100);
+    const pigeonFees = ((gasPrice * txCost * ethPrice) / 1000000000) * (PigeonGasFee / 100);
     const txPerYear = nodePurchasePrice * 365;
-    const feeCut =
-      ((txPerYear * pigeonFees * (RelayRewardFee / 100)) / nodesSold) *
-      nodeNumber;
+    const feeCut = ((txPerYear * pigeonFees * (RelayRewardFee / 100)) / nodesSold) * nodeNumber;
     setRelayFeeRewardPrice(feeCut);
     setRelayFeeReward(feeCut / grainPrice);
   }, [nodeNumber, nodePurchasePrice, grainPrice]);
@@ -118,24 +107,14 @@ const rewardCalculatorSection = () => {
               {formatNumber(staking / 12, 0, 0)} GRAINS
               <span>
                 ($
-                {formatNumber(
-                  stakingPrice / 12,
-                  stakingPrice > 100 ? 0 : 2,
-                  stakingPrice > 100 ? 0 : 2
-                )}
-                )
+                {formatNumber(stakingPrice / 12, stakingPrice > 100 ? 0 : 2, stakingPrice > 100 ? 0 : 2)})
               </span>
             </td>
             <td className="value-td">
               {formatNumber(staking / 365, 0, 0)} GRAINS
               <span>
                 ($
-                {formatNumber(
-                  stakingPrice / 365,
-                  stakingPrice > 100 ? 0 : 2,
-                  stakingPrice > 100 ? 0 : 2
-                )}
-                )
+                {formatNumber(stakingPrice / 365, stakingPrice > 100 ? 0 : 2, stakingPrice > 100 ? 0 : 2)})
               </span>
             </td>
           </tr>
@@ -152,7 +131,7 @@ const rewardCalculatorSection = () => {
                 {formatNumber(
                   relayFeeRewardPrice / 12,
                   relayFeeRewardPrice > 100 ? 0 : 2,
-                  relayFeeRewardPrice > 100 ? 0 : 2
+                  relayFeeRewardPrice > 100 ? 0 : 2,
                 )}
                 )
               </span>
@@ -164,7 +143,7 @@ const rewardCalculatorSection = () => {
                 {formatNumber(
                   relayFeeRewardPrice / 365,
                   relayFeeRewardPrice > 100 ? 0 : 2,
-                  relayFeeRewardPrice > 100 ? 0 : 2
+                  relayFeeRewardPrice > 100 ? 0 : 2,
                 )}
                 )
               </span>
@@ -173,14 +152,7 @@ const rewardCalculatorSection = () => {
           <tr className="table-body">
             <td>APY</td>
             <td className="value-td table-pink-bg">
-              {formatNumber(
-                ((stakingPrice + relayFeeRewardPrice) /
-                  (nodePurchasePrice * nodeNumber)) *
-                  100,
-                2,
-                2
-              )}
-              %
+              {formatNumber(((stakingPrice + relayFeeRewardPrice) / (nodePurchasePrice * nodeNumber)) * 100, 2, 2)}%
             </td>
             <td className="table-black-bg"></td>
             <td className="table-black-bg"></td>

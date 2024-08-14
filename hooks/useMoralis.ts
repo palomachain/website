@@ -1,4 +1,4 @@
-import Moralis from "moralis";
+import Moralis from 'moralis';
 
 const useMoralis = () => {
   const getNativeBalance = async (wallet: string, chainId: string) => {
@@ -11,7 +11,7 @@ const useMoralis = () => {
       return response?.raw?.balance;
     } catch (e) {
       console.error(e);
-      return "0";
+      return '0';
     }
   };
 

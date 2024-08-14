@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { TELEGRAM_LINK, TWITTER_LINK } from "utils/constants";
+import { TELEGRAM_LINK, TWITTER_LINK } from 'utils/constants';
 
 const NoEvents = () => (
   <div className="no-events-container">

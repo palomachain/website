@@ -1,7 +1,7 @@
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import cn from 'classnames';
 
-import style from "components/SearchInput/SearchInput.module.scss";
+import style from 'components/SearchInput/SearchInput.module.scss';
 
 interface SearchInputProps {
   value: string;
@@ -10,12 +10,7 @@ interface SearchInputProps {
   className?: string;
 }
 
-const SearchInput = ({
-  value,
-  onChange,
-  placeholder,
-  className,
-}: SearchInputProps) => (
+const SearchInput = ({ value, onChange, placeholder, className }: SearchInputProps) => (
   <section className={cn(style.container, className)}>
     <img src="/assets/icons/search.svg" alt="" width={12} height={18} />
     <input

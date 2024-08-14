@@ -1,5 +1,5 @@
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
-  .container input[type="checkbox"] {
+  .container input[type='checkbox'] {
     --active: #ff62c4;
     --active-inner: #fff;
     --focus: 2px rgba(255, 98, 196, 0.3);
@@ -50,59 +50,58 @@
       text-decoration-line: underline;
     }
   }
-  .container input[type="checkbox"]:after {
-    content: "";
+  .container input[type='checkbox']:after {
+    content: '';
     display: block;
     left: 0;
     top: 0;
     position: absolute;
-    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease),
-      opacity var(--d-o, 0.2s);
+    transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
   }
-  .container input[type="checkbox"]:checked {
+  .container input[type='checkbox']:checked {
     --b: var(--active);
     --bc: var(--active);
     --d-o: 0.3s;
     --d-t: 0.6s;
     --d-t-e: cubic-bezier(0.2, 0.85, 0.32, 1.2);
   }
-  .container input[type="checkbox"]:disabled {
+  .container input[type='checkbox']:disabled {
     --b: var(--disabled);
     cursor: not-allowed;
     opacity: 0.9;
   }
-  .container input[type="checkbox"]:disabled:checked {
+  .container input[type='checkbox']:disabled:checked {
     --b: var(--disabled-inner);
     --bc: var(--border);
   }
-  .container input[type="checkbox"]:disabled + span {
+  .container input[type='checkbox']:disabled + span {
     cursor: not-allowed;
   }
-  .container input[type="checkbox"]:hover:not(:checked):not(:disabled) {
+  .container input[type='checkbox']:hover:not(:checked):not(:disabled) {
     --bc: var(--border-hover);
   }
-  .container input[type="checkbox"]:focus {
+  .container input[type='checkbox']:focus {
     box-shadow: 0 0 0 var(--focus);
   }
-  .container input[type="checkbox"]:not(.switch) {
+  .container input[type='checkbox']:not(.switch) {
     width: 18px;
   }
-  .container input[type="checkbox"]:not(.switch):after {
+  .container input[type='checkbox']:not(.switch):after {
     opacity: var(--o, 0);
   }
-  .container input[type="checkbox"]:not(.switch):checked {
+  .container input[type='checkbox']:not(.switch):checked {
     --o: 1;
   }
-  .container input[type="checkbox"] + span {
+  .container input[type='checkbox'] + span {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
   }
 
-  .container input[type="checkbox"]:not(.switch) {
+  .container input[type='checkbox']:not(.switch) {
     border-radius: 4.6px;
   }
-  .container input[type="checkbox"]:not(.switch):after {
+  .container input[type='checkbox']:not(.switch):after {
     width: 5px;
     height: 9px;
     border: 2px solid var(--active-inner);
@@ -112,7 +111,7 @@
     top: 2px;
     transform: rotate(var(--r, 20deg));
   }
-  .container input[type="checkbox"]:not(.switch):checked {
+  .container input[type='checkbox']:not(.switch):checked {
     --r: 43deg;
   }
 }

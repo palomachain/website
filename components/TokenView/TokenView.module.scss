@@ -39,7 +39,7 @@
     flex-direction: column;
     align-items: flex-end;
   }
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     /* Add if not using autoprefixer */
     -webkit-appearance: none;
     /* Remove most all native input styles */
@@ -60,14 +60,14 @@
     display: grid;
     place-content: center;
   }
-  input[type="checkbox"]:checked {
+  input[type='checkbox']:checked {
     background-color: #80a4ff;
   }
-  input[type="checkbox"]:checked::before {
+  input[type='checkbox']:checked::before {
     transform: scale(1);
   }
-  input[type="checkbox"]::before {
-    content: "";
+  input[type='checkbox']::before {
+    content: '';
     width: 0.65em;
     height: 0.65em;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);

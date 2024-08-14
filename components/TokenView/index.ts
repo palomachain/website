@@ -1,3 +1,3 @@
-import TokenView from "./TokenView";
+import TokenView from './TokenView';
 
 export default TokenView;

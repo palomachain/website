@@ -5,7 +5,5 @@ export function toNumber(value, decimal = 12) {
 }
 
 export const getWalletAddressEllipsis = (address, head = 6, tail = 4) => {
-  return `${address.substring(0, head)}...${address.substring(
-    address.length - tail
-  )}`;
+  return `${address.substring(0, head)}...${address.substring(address.length - tail)}`;
 };

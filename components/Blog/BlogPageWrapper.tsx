@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import RotatedHeader from "components/RotatedHeader";
-import { BlogCategory } from "components/Blog";
+import RotatedHeader from 'components/RotatedHeader';
+import { BlogCategory } from 'components/Blog';
 
 const BlogPageWrapper = ({ title, children }) => (
   <React.Fragment>

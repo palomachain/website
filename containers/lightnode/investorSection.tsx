@@ -1,5 +1,5 @@
-import Purchase from "components/Button/purchase";
-import { Investors } from "utils/data";
+import Purchase from 'components/Button/purchase';
+import { Investors } from 'utils/data';
 
 const investorSection = () => (
   <section className="investor-section">

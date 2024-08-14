@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { BlogList, BlogPageWrapper } from "components/Blog";
+import { BlogList, BlogPageWrapper } from 'components/Blog';
 
-import { fetchBlogs, filterBlogs } from "utils/storyblok";
-import mixpanel from "mixpanel-browser";
+import { fetchBlogs, filterBlogs } from 'utils/storyblok';
+import mixpanel from 'mixpanel-browser';
 
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 

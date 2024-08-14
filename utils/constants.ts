@@ -1,13 +1,13 @@
-export const TWITTER_LINK = "https://twitter.com/paloma_chain";
-export const TELEGRAM_LINK = "https://t.me/palomachain";
-export const GITHUB_LINK = "https://github.com/palomachain";
-export const DISCORD_LINK = "https://discord.gg/tNqkNHvVNc";
+export const TWITTER_LINK = 'https://twitter.com/paloma_chain';
+export const TELEGRAM_LINK = 'https://t.me/palomachain';
+export const GITHUB_LINK = 'https://github.com/palomachain';
+export const DISCORD_LINK = 'https://discord.gg/tNqkNHvVNc';
 
-export const PALOMABOT_WEBSITE_LINK = "https://palomabot.ai";
+export const PALOMABOT_WEBSITE_LINK = 'https://palomabot.ai';
 
 export const LATEST_BLOG_SHOW_CNT = 3;
 
-export const PAGE_LANDING = "landing-page";
+export const PAGE_LANDING = 'landing-page';
 
 export const TotalNodes = 20000;
 export const NodeSlot1 = 1000;
@@ -23,7 +23,6 @@ export const CommunityFee = 2; // 2%
 export const ValidatorFee = 5; // 5%
 export const RelayRewardFee = 30; // 30%
 export const PigeonGasFee = 10; // 10%
-export const Increment =
-  (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
+export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
 
 export const NodeSaleStartDate = 1725447600 * 1000; // 11:00 AM, September 4, 2024 Coordinated Universal Time (UTC)

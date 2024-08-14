@@ -1,3 +1,3 @@
-import useOutsideAlerter from "./useOutsideAlerter";
+import useOutsideAlerter from './useOutsideAlerter';
 
 export { useOutsideAlerter };

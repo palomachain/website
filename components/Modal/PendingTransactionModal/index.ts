@@ -1,3 +1,3 @@
-import PendingTransactionModal from "./PendingTransactionModal";
+import PendingTransactionModal from './PendingTransactionModal';
 
 export default PendingTransactionModal;

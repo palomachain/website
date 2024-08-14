@@ -1,5 +1,5 @@
-import Describe from "./describe";
-import PurchaseFlow from "./flow";
+import Describe from './describe';
+import PurchaseFlow from './flow';
 
 const Purchase = () => {
   return (

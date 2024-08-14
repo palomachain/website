@@ -41,7 +41,7 @@
     flex-direction: column;
     width: 336px;
     max-width: 100%;
-    background: #F0EBEB;
+    background: #f0ebeb;
     border-radius: 25px;
     margin-bottom: 85px;
     // margin-left: max(15px, calc(50% - 504px));
@@ -49,7 +49,7 @@
     // &:nth-child(3n + 1) {
     //   margin-left: 0px;
     // }
-    
+
     // @media screen and (max-width: 1197px) {
     //   &:nth-child(3n + 1) {
     //     margin-left: max(15px, calc(50% - 504px));
@@ -70,7 +70,7 @@
 
     &.upcoming {
       &:hover {
-        background: #F6F2F2;
+        background: #f6f2f2;
       }
     }
   }
@@ -100,7 +100,7 @@
   .event-date {
     color: #000;
     font-size: 12px;
-    color: #2C2C2C;
+    color: #2c2c2c;
   }
 
   .event-title {
@@ -140,7 +140,12 @@
     // margin-top: 12px;
     // line-height: 129%;
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: 12px;
       font-family: $font-bold;
     }
@@ -160,7 +165,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #F1D1E5;
+      background: #f1d1e5;
       border-radius: 6px;
       width: 135px;
       height: 40px;

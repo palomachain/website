@@ -23,6 +23,7 @@ export const CommunityFee = 2; // 2%
 export const ValidatorFee = 5; // 5%
 export const RelayRewardFee = 30; // 30%
 export const PigeonGasFee = 10; // 10%
-export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
+export const Increment =
+  (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
 
 export const NodeSaleStartDate = 1725447600 * 1000; // 11:00 AM, September 4, 2024 Coordinated Universal Time (UTC)

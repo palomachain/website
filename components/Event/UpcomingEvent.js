@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { render, NODE_IMAGE } from "storyblok-rich-text-react-renderer";
 
 import { convertDateStringWithWeekDay, convertDateString2 } from "utils/date";
-import {getCookie} from "cookies-next";
+import { getCookie } from "cookies-next";
 
 // import mixpanel from "mixpanel-browser";
 // mixpanel.init(process.env.MIXPANEL_API_KEY)
@@ -11,23 +11,23 @@ const UpcomingEvent = ({ data }) => {
   let regClicked = false;
 
   useEffect(() => {
-    window.$ = window.jQuery = require('jquery');
-    $("#event-register").click(function() {
-      if(!regClicked) {
+    window.$ = window.jQuery = require("jquery");
+    $("#event-register").click(function () {
+      if (!regClicked) {
         regClicked = true;
-        const ignore = getCookie('ignore');
+        const ignore = getCookie("ignore");
 
-        if(!ignore) {
-          mixpanel.track('REGISTER_EVENT', {
-            title: $(this).attr('title'),
-            url: $(this).attr('href'),
-            slug: $(this).attr('slug'),
+        if (!ignore) {
+          mixpanel.track("REGISTER_EVENT", {
+            title: $(this).attr("title"),
+            url: $(this).attr("href"),
+            slug: $(this).attr("slug"),
           });
         }
-        window.location = $(this).attr('href');
+        window.location = $(this).attr("href");
       }
     });
-  })
+  });
 
   const eventLink = useMemo(() => {
     const link = {

@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 
 import { convertDateString2 } from "utils/date";
 
@@ -21,7 +21,9 @@ const BlogLatestItem = ({ blog }) => (
           {tag}
         </div>
       ))}
-      <div className="blog-latest-summary-pubtime">{`Published ${convertDateString2(blog.content.published_date)}`}</div>
+      <div className="blog-latest-summary-pubtime">{`Published ${convertDateString2(
+        blog.content.published_date
+      )}`}</div>
     </div>
   </div>
 );

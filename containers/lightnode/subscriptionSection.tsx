@@ -27,10 +27,13 @@ const subscriptionSection = () => {
     let tempNodeSale: INodeSaleData[] = Array(NSlots);
     for (let index = 0; index < NSlots; index++) {
       const totalNodeSale = Math.round(NodeSlot1 * ChangeR ** index);
-      const nodePrice = Math.round(StartingPrice + Increment * index ** Exponent);
+      const nodePrice = Math.round(
+        StartingPrice + Increment * index ** Exponent
+      );
       const fdv = (nodePrice * TotalGrains) / GrainsPerNode;
       const grainsSold = totalNodeSale * GrainsPerNode;
-      const prevCumeGrainsSold = index > 0 ? tempNodeSale[index - 1].cumeGrainsSold : 0;
+      const prevCumeGrainsSold =
+        index > 0 ? tempNodeSale[index - 1].cumeGrainsSold : 0;
       const cumeGrainsSold = prevCumeGrainsSold + grainsSold;
       const networkPercent = (cumeGrainsSold / TotalGrains) * 100;
 
@@ -55,8 +58,8 @@ const subscriptionSection = () => {
         Subscription Pricing
       </h1>
       <p>
-        Paloma secures an increasing number of trading applications, ensuring reliable and efficient
-        performance as the platform continues to grow.
+        Paloma secures an increasing number of trading applications, ensuring
+        reliable and efficient performance as the platform continues to grow.
       </p>
       <button className="purchase-button purchase-button-white mt-40">
         Purchase your LightNode
@@ -86,7 +89,9 @@ const subscriptionSection = () => {
                 <td>${nodeSaleData[index].nodePrice}</td>
                 <td>${formatNumber(nodeSaleData[index].fdv, 0, 0)}</td>
                 <td>{formatNumber(nodeSaleData[index].grainsSold, 0, 0)}</td>
-                <td>{formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%</td>
+                <td>
+                  {formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%
+                </td>
               </tr>
             ))}
         </tbody>

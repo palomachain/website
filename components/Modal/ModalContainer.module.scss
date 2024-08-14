@@ -1,0 +1,55 @@
+.container {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  max-width: 100%;
+  height: 100vh;
+  z-index: 5000;
+  overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+
+  .mask {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    background: rgba(44, 44, 44, 0.4);
+    backdrop-filter: blur(4px);
+  }
+
+  .content {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dialog {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    // border: 1px solid #25262c;
+    border-radius: 20px;
+    padding: 55px 72px;
+    width: 509px;
+    height: 549px;
+    max-height: 95%;
+    text-align: center;
+
+    @media screen and (max-width: 768px) {
+      max-width: 351px;
+      padding: 16px;
+    }
+  }
+}

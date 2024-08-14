@@ -9,7 +9,7 @@ const BlogEvents = ({ router }) => {
 
   useEffect(() => {
     const getData = async () => {
-      const data = await fetchBlogs({ Category: 'events'});
+      const data = await fetchBlogs({ Category: "events" });
       setLatestBlog(data);
     };
 

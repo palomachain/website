@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-gap: 10px;
+  position: relative;
+
+  .mb16 {
+    margin-bottom: 16px;
+  }
+
+  .intervalTrades {
+    position: relative;
+  }
+
+  .profitInput {
+    background: #29292b;
+    border: 1px solid #f8f9fb;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 42px;
+    padding: 0 18px;
+    cursor: pointer;
+
+    input {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 22px;
+      color: #f8f9fb;
+      width: 100%;
+    }
+  }
+
+  .selector {
+    width: 100% !important;
+  }
+  .selector2 {
+    width: 100% !important;
+    margin-top: 51px;
+  }
+}

@@ -1,4 +1,12 @@
-export const SupportChains = ["eth", "binance", "arbitrum", "base", "op", "b", "polygon"];
+export const SupportChains = [
+  "eth",
+  "binance",
+  "arbitrum",
+  "base",
+  "op",
+  "b",
+  "polygon",
+];
 
 export const JoinFlow = [
   "To join the flock, you will need to purchase a Paloma LightNode.",
@@ -38,12 +46,14 @@ export const LightNodeFeatures = [
   {
     img: "feature-1.png",
     title: "Collect Relay Fee Rewards",
-    describe: "Automatically collect relay fee GRAIN rewards from the Pigeon Network.",
+    describe:
+      "Automatically collect relay fee GRAIN rewards from the Pigeon Network.",
   },
   {
     img: "feature-2.png",
     title: "Delegate GRAINs ",
-    describe: "Automatically delegate your GRAINs to active validators and relayers.",
+    describe:
+      "Automatically delegate your GRAINs to active validators and relayers.",
   },
   {
     img: "feature-3.png",
@@ -58,7 +68,8 @@ export const LightNodeFeatures = [
   {
     img: "feature-5.png",
     title: "Automatically claim and re-Delegate minted GRAINs",
-    describe: "Automatically claim minted GRAINs and re-delegate them to new validators",
+    describe:
+      "Automatically claim minted GRAINs and re-delegate them to new validators",
   },
   {
     img: "feature-6.png",
@@ -177,7 +188,8 @@ export const EcosystemData = [
   {
     icon: "wbtc.png",
     title: "wrapped bitcoin & threshold bitcoin Bots",
-    describe: "Automatically leverage bitcoin with liquidation protection and low borrowing costs.",
+    describe:
+      "Automatically leverage bitcoin with liquidation protection and low borrowing costs.",
     backgroundImg: "wbtc-shadow.png",
     items: [
       {
@@ -212,7 +224,8 @@ export const EcosystemData = [
   {
     icon: "paloma-bot.png",
     title: "Prediction Market Bots",
-    describe: "Paloma Prediction Bots allow anyone to create and host prediction games",
+    describe:
+      "Paloma Prediction Bots allow anyone to create and host prediction games",
     backgroundImg: "paloma-bot-shadow.png",
     items: [
       {
@@ -388,27 +401,50 @@ export const NodeSaleLinks = {
 
 export const Advisors = [
   {
-    name: 'Anatoly Yakovenko',
-    company: 'Solana',
-    img: '/assets/advisors/1.svg',
-    logo: '/assets/ecosystem/solana.svg'
+    name: "Anatoly Yakovenko",
+    company: "Solana",
+    img: "/assets/advisors/1.svg",
+    logo: "/assets/ecosystem/solana.svg",
   },
   {
-    name: 'Marko Baricevic',
-    company: 'Cosmos',
-    img: '/assets/advisors/2.png',
-    logo: '/assets/ecosystem/cosmos.svg'
+    name: "Marko Baricevic",
+    company: "Cosmos",
+    img: "/assets/advisors/2.png",
+    logo: "/assets/ecosystem/cosmos.svg",
   },
   {
-    name: 'Erik Mayo',
-    company: 'Patache Digital',
-    img: '/assets/advisors/3.svg',
-    logo: '/assets/ecosystem/patache.svg'
+    name: "Erik Mayo",
+    company: "Patache Digital",
+    img: "/assets/advisors/3.svg",
+    logo: "/assets/ecosystem/patache.svg",
   },
   {
-    name: 'Lok Lee',
-    company: 'Tuesday VC',
-    img: '/assets/advisors/4.svg',
-    logo: '/assets/ecosystem/tuesday-vc.svg'
+    name: "Lok Lee",
+    company: "Tuesday VC",
+    img: "/assets/advisors/4.svg",
+    logo: "/assets/ecosystem/tuesday-vc.svg",
   },
-]
+];
+
+export const CustomerSupport = [
+  {
+    label: "Enhanced Support",
+    price: 50,
+    effects: [
+      "24/7 availability",
+      "Multiple modes of contact",
+      "Allows up to 8 tickets per month",
+    ],
+    month: 24,
+  },
+  {
+    label: "Standard Support",
+    price: 0,
+    effects: [
+      "Web-based only",
+      "Limited to 2 tickets per month",
+      "Target response time of 3 business days (no guarantee)",
+    ],
+    month: 0,
+  },
+];

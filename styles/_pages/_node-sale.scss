@@ -1,0 +1,97 @@
+// James Lee, 08/02/2024, Created for LightNode Sale
+.light-node-sale {
+  .row-10 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .flex-row-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .gap-8 {
+    gap: 8px;
+  }
+  .gap-16 {
+    gap: 16px;
+  }
+  .gap-36 {
+    gap: 16px;
+  }
+  .h-white {
+    color: #fff !important;
+  }
+  .h-pink {
+    color: #f1d1e5 !important;
+  }
+  .h-black-50 {
+    color: #444343 !important;
+  }
+  .p-white {
+    color: #b0aeae !important;
+  }
+  .p-white-50 {
+    color: #dcdada !important;
+  }
+  .mt-20 {
+    margin-top: 20px !important;
+  }
+  .mt-40 {
+    margin-top: 40px;
+    @media screen and (max-width: 768px) {
+      margin-top: 20px;
+    }
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  span {
+    margin: 0px;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+  .extrabold {
+    font-weight: 800;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  .text-line {
+    text-decoration-line: underline;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+  .not-allowed {
+    cursor: not-allowed;
+  }
+}

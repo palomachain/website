@@ -2,7 +2,6 @@ import React from "react";
 import Head from "next/head";
 
 function SEO({ description, title, content }) {
-
   const metaDescription = content ? content.intro : null;
 
   let metaImage = content ? content.image : null;

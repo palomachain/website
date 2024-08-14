@@ -1,0 +1,40 @@
+.container {
+  cursor: not-allowed;
+  margin-bottom: 48px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 150%;
+  border: none;
+  gap: 0;
+  height: 50px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.error {
+  background: #5c3538 !important;
+  color: #fc4751 !important;
+}
+
+.disabled {
+  background: #f9ddfb !important;
+}
+
+.success {
+  background: #2c2c2c;
+  color: #fff;
+  cursor: pointer;
+}
+
+.loadingBtn {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+}
+
+.errorMark img {
+  margin-right: 7px;
+  border-radius: 0% !important;
+}

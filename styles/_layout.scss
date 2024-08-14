@@ -15,8 +15,8 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    z-index: 9999;
-    background: #EAE5E5;
+    z-index: 2000;
+    background: #eae5e5;
 
     @media screen and (max-width: 850px) {
       flex-direction: column;
@@ -75,7 +75,7 @@
       }
 
       &.active {
-        color: #FF62C4;
+        color: #ff62c4;
       }
 
       &.disabled {
@@ -87,7 +87,7 @@
         display: flex;
         margin-left: 100px;
         border-radius: 6.537px;
-        background: #F1D1E5;
+        background: #f1d1e5;
         width: 276.26px;
 
         &:hover {
@@ -130,7 +130,7 @@
         cursor: pointer;
 
         &.active {
-          color: #FF62C4;
+          color: #ff62c4;
         }
       }
     }
@@ -151,7 +151,7 @@
       left: 0px;
       // top: 109px;
       display: none;
-      z-index: 8000;
+      z-index: 1000;
       box-shadow: 0px 4px 3px rgba(182, 182, 182, 0.23);
 
       &-padding {
@@ -337,7 +337,7 @@
         }
 
         &:hover {
-          color: #FF62C4;
+          color: #ff62c4;
         }
       }
     }

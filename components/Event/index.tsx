@@ -1,5 +1,5 @@
-import UpcomingEvent from "./UpcomingEvent";
-import PastEvent from "./PastEvent"; 
 import NoEvents from "./NoEvents";
+import PastEvent from "./PastEvent";
+import UpcomingEvent from "./UpcomingEvent";
 
-export { UpcomingEvent, PastEvent, NoEvents }
+export { NoEvents, PastEvent, UpcomingEvent };

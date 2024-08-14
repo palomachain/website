@@ -1,14 +1,89 @@
-import { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Arbitrum,
+  Binance,
+  Ethereum,
+  Optimism,
+  Polygon,
+  Base,
+} from "@thirdweb-dev/chains";
+import { ThirdwebProvider, frameWallet } from "@thirdweb-dev/react";
+import useWagmi from "hooks/useWagmi";
+import { WalletProvider } from "hooks/useWallet";
 import Layout from "layout";
+import mixpanel from "mixpanel-browser";
+import { AppProps } from "next/app";
+import { useEffect, useState } from "react";
+import { Client, HydrationProvider } from "react-hydration-provider";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { store } from "store";
+import { WagmiConfig } from "wagmi";
+import Moralis from "moralis";
+import { envParam } from "configs/constants";
 
 import "../styles/index.scss";
-import mixpanel from "mixpanel-browser";
+import "react-toastify/dist/ReactToastify.css";
 
-mixpanel.init(process.env.MIXPANEL_API_KEY)
-const App = ({ Component, router, pageProps }: AppProps) => (
-  <Layout router={router}>
-    <Component {...pageProps} />
-  </Layout>
-);
+const apiKey = envParam.REACT_APP_MORALIS_SERVICE_API;
+Moralis.start({
+  apiKey: apiKey,
+});
+
+mixpanel.init(process.env.MIXPANEL_API_KEY);
+const App = ({ Component, router, pageProps }: AppProps) => {
+  const { wagmiConfig } = useWagmi();
+
+  const queryClient = new QueryClient();
+
+  const [auth, setAuth] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // @ts-ignore
+      window.Browser = {
+        T: () => {},
+      };
+      setAuth(true);
+    } else setAuth(false);
+  }, []);
+
+  return auth ? (
+    <HydrationProvider>
+      <QueryClientProvider client={queryClient}>
+        <Client>
+          <Provider store={store}>
+            <ThirdwebProvider
+              supportedWallets={[frameWallet()]}
+              supportedChains={[
+                Ethereum,
+                Polygon,
+                Binance,
+                Arbitrum,
+                Optimism,
+                Base,
+              ]}
+              activeChain={Ethereum}
+              clientId={process.env.thirdWebApiKey}
+            >
+              <WagmiConfig config={wagmiConfig}>
+                <WalletProvider>
+                  <Layout router={router}>
+                    <Component {...pageProps} />
+                  </Layout>
+                </WalletProvider>
+              </WagmiConfig>
+            </ThirdwebProvider>
+            <ToastContainer
+              autoClose={8000}
+              pauseOnFocusLoss={false}
+              position={"top-right"}
+            />
+          </Provider>
+        </Client>
+      </QueryClientProvider>
+    </HydrationProvider>
+  ) : null;
+};
 
 export default App;

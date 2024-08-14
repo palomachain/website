@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+  border-radius: 6.537px;
+  border: 1px solid #d8d3d3;
+  background: #fff;
+  padding: 12px 18px;
+
+  .input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    border: none;
+    flex: 1;
+    width: 100%;
+    margin-left: 8px;
+    outline: none;
+    background: transparent;
+    color: #2c2c2c;
+  }
+}

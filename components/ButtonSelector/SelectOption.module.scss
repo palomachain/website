@@ -1,0 +1,41 @@
+.sortBy {
+  box-shadow: none;
+  border: 1px solid #ffffff !important;
+  border-radius: 8px;
+  padding: 8px 18px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.001em;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sortBy:hover {
+  border: 1px solid #25262c;
+}
+.buttonSelector {
+  padding: 0px 18px;
+  margin-top: 6px;
+  width: calc(50% - 48px * 2);
+  right: auto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.32px;
+  color: #ffffff;
+  top: unset;
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 32px);
+  }
+}
+.sortOption {
+  padding: 8px 0;
+  cursor: pointer;
+  color: #ffffff;
+  .disabled {
+    color: #807e7e;
+  }
+}

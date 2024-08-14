@@ -1,0 +1,11 @@
+.container {
+  height: 770px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+
+  .widget {
+    margin-top: 16px;
+    border: none;
+  }
+}

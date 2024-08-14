@@ -100,7 +100,8 @@ const navMenu = [
     hasLink: true,
     link: `${baseUrl}/blog`,
     external: false,
-    description: "Stay up to date with the depevopments, news and announcements in Paloma.",
+    description:
+      "Stay up to date with the depevopments, news and announcements in Paloma.",
     submenus: [
       {
         title: "news and announcements",
@@ -120,7 +121,7 @@ const navMenu = [
         link: `${baseUrl}/blog/events`,
         external: false,
       },
-    ]
+    ],
   },
   {
     title: "Events",
@@ -249,7 +250,6 @@ const footerMenu = [
         link: GITHUB_LINK,
         external: true,
       },
-     
     ],
   },
 ];

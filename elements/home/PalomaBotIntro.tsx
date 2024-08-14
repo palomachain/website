@@ -8,7 +8,9 @@ const PalomaBotIntro = () => (
         <div className="subTitle">PALOMA BOT</div>
         <h1 className="title">Decentralized Crypto trading Bots</h1>
         <p className="description">
-        Create secure, fast, private, and decentralized blockchain trading bots for any public blockchain. Keep all your strategies and bot revenues for yourself and your community.
+          Create secure, fast, private, and decentralized blockchain trading
+          bots for any public blockchain. Keep all your strategies and bot
+          revenues for yourself and your community.
         </p>
         <a
           href={PALOMABOT_WEBSITE_LINK}

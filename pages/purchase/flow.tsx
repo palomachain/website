@@ -42,23 +42,17 @@ const supportedNetworks = {
 const PurchaseFlow = () => {
   const { wallet } = useWallet();
   const provider = useProvider(wallet);
-  const walletNetwork = wallet?.network
-    ? Number(parseIntString(wallet.network))
-    : 1;
+  const walletNetwork = wallet?.network ? Number(parseIntString(wallet.network)) : 1;
 
   const [selectedChain, setSelectedChain] = useState<string>();
 
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
   const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
-  const {
-    getProcessingFeeAmount,
-    getSubscriptionFeeAmount,
-    getSlippageFeePercent,
-    buyNow,
-  } = useNodeSale({
-    provider,
-    wallet,
-  });
+  const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } =
+    useNodeSale({
+      provider,
+      wallet,
+    });
   const { getSwapPath, getQuoteAmount, getSwapPathForV3 } = useUniswap({
     provider,
     wallet,
@@ -69,17 +63,14 @@ const PurchaseFlow = () => {
   const [quantity, setQuantity] = useState(1);
   const [promoCode, setPromoCode] = useState<string>();
   const [appliedPromoCode, setApplyPromoCode] = useState<string>();
-  const [selectedSupport, setSupport] = useState<number>(
-    CustomerSupport.length - 1
-  );
+  const [selectedSupport, setSupport] = useState<number>(CustomerSupport.length - 1);
   const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
   const [agreeTermsOfUse, setAgreeTermsOfUse] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
   const [agreeAck, setAgreeAck] = useState<boolean>(false);
 
   const [step, setStep] = useState(1);
-  const [fetchingPriceLoading, setFetchingPriceLoading] =
-    useState<boolean>(false);
+  const [fetchingPriceLoading, setFetchingPriceLoading] = useState<boolean>(false);
   const [isTxLoading, setTxLoading] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState(false);
   const [pendingTxHash, setPendingTxHash] = useState("");
@@ -88,13 +79,9 @@ const PurchaseFlow = () => {
   const [pendingModalProcess, setPendingModalProcess] = useState(false);
 
   const [fromToken, setFromToken] = useState(mockTool.getEmptyToken());
-  const [fromTokenExchangeRate, setFromTokenExchangeRate] = useState(
-    new BigNumber(0)
-  );
+  const [fromTokenExchangeRate, setFromTokenExchangeRate] = useState(new BigNumber(0));
   const [swapPath, setSwapPath] = useState<string>(null);
-  const [expectedAmount, setExpectedAmount] = useState<IBalance>(
-    mockTool.emptyTokenBalance()
-  );
+  const [expectedAmount, setExpectedAmount] = useState<IBalance>(mockTool.emptyTokenBalance());
 
   const [nodePrice, setNodePrice] = useState<number>(StartingPrice);
   const [processingFee, setProcessingFee] = useState<number>(5);
@@ -114,8 +101,7 @@ const PurchaseFlow = () => {
   }, [wallet]);
 
   const totalSupportPrice = useMemo(() => {
-    const subFee =
-      CustomerSupport[selectedSupport].price > 0 ? subscriptionFee : 0;
+    const subFee = CustomerSupport[selectedSupport].price > 0 ? subscriptionFee : 0;
     return subFee * CustomerSupport[selectedSupport].month;
   }, [selectedSupport, subscriptionFee]);
 
@@ -132,14 +118,9 @@ const PurchaseFlow = () => {
       fromTokenExchangeRate
     ) {
       const expectedAmount = totalPay + (nodePrice * slippageFeePc) / 100;
-      const tokenAmount = BigNumber(expectedAmount).dividedBy(
-        fromTokenExchangeRate
-      );
+      const tokenAmount = BigNumber(expectedAmount).dividedBy(fromTokenExchangeRate);
       const amount = {
-        raw: balanceTool.convertToWei(
-          tokenAmount.toString(),
-          fromToken.decimals
-        ),
+        raw: balanceTool.convertToWei(tokenAmount.toString(), fromToken.decimals),
         format: tokenAmount.toString(),
       };
 
@@ -187,11 +168,7 @@ const PurchaseFlow = () => {
         }
       } else {
         promo_code && setApplyPromoCode(null);
-        toast.error(
-          promo_code
-            ? "Invalid Promo Code"
-            : "API async error. Please try again."
-        );
+        toast.error(promo_code ? "Invalid Promo Code" : "API async error. Please try again.");
       }
     } else {
       toast.error("API async error. Please try again.");
@@ -307,10 +284,7 @@ const PurchaseFlow = () => {
     {},
     {
       selectFromResult: (result) => ({
-        listedTokens: selectListedSwapTokensByChainId(
-          result.data,
-          selectedChainId
-        ),
+        listedTokens: selectListedSwapTokensByChainId(result.data, selectedChainId),
       }),
     }
   );
@@ -322,12 +296,7 @@ const PurchaseFlow = () => {
     setSuccessModal(true);
   };
 
-  const callbackWaiting = ({
-    txHash,
-    txTitle,
-    txText,
-    txProcessing = false,
-  }) => {
+  const callbackWaiting = ({ txHash, txTitle, txText, txProcessing = false }) => {
     // OnWait handler
     if (txTitle !== undefined) setPendingModalTitle(txTitle);
     if (txText !== undefined) setPendingModalText(txText);
@@ -405,9 +374,7 @@ const PurchaseFlow = () => {
               <p>Node Quantity</p>
               <div className="purchase-sale-set__quantity__value">
                 <button
-                  className={`increase ${
-                    quantity <= 1 ? "not-allowed" : "pointer"
-                  }`}
+                  className={`increase ${quantity <= 1 ? "not-allowed" : "pointer"}`}
                   onClick={() => setQuantityValue()}
                   disabled={quantity <= 1}
                 >
@@ -429,9 +396,7 @@ const PurchaseFlow = () => {
                 />
                 <button
                   className={`increase ${
-                    quantity >= TotalNodes - saledNodes
-                      ? "not-allowed"
-                      : "pointer"
+                    quantity >= TotalNodes - saledNodes ? "not-allowed" : "pointer"
                   }`}
                   onClick={() => setQuantityValue(true)}
                   disabled={quantity >= TotalNodes - saledNodes}
@@ -491,9 +456,7 @@ const PurchaseFlow = () => {
                         <span className="purchase-sale-pay__supports-effects__sub">
                           * Requires a 24-month subscription. Total cost: $
                           {formatNumber(
-                            support.price > 0
-                              ? subscriptionFee * support.month
-                              : 0,
+                            support.price > 0 ? subscriptionFee * support.month : 0,
                             0,
                             0
                           )}
@@ -508,9 +471,9 @@ const PurchaseFlow = () => {
         </>
       ) : (
         <>
-          <div className="pointer" onClick={() => setStep(1)}>
-            <img src="/assets/icons/back.svg" alt="back" /> Paloma LightNode
-            Subscription Sale
+          <div className="purchase-sale-set__back" onClick={() => setStep(1)}>
+            <img src="/assets/icons/back.svg" alt="back" />
+            <p>Paloma LightNode Subscription Sale</p>
           </div>
           <div className="purchase-sale-set__select">
             <SelectChain
@@ -652,10 +615,7 @@ const PurchaseFlow = () => {
         blockExplorer={getTxHashLink(targetChain?.chainId)}
       />
 
-      <SuccessModal
-        show={successModal}
-        onClose={() => setSuccessModal(false)}
-      />
+      <SuccessModal show={successModal} onClose={() => setSuccessModal(false)} />
     </div>
   );
 };

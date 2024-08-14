@@ -53,6 +53,7 @@
     padding: 73px 58px;
     @media screen and (max-width: 768px) {
       max-width: 100%;
+      padding: 73px 16px;
     }
 
     h3 {
@@ -111,13 +112,16 @@
   }
 
   .purchase-flow {
-    padding: 74px 57px;
+    padding: 73px 57px;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 0px 20px 20px 0px;
     background: #f5f5f5;
+    @media screen and (max-width: 768px) {
+      padding: 73px 16px;
+    }
 
     .purchase-sale-end {
       border-radius: 8px 8px 0px 0px;
@@ -160,6 +164,10 @@
       display: grid;
       grid-template-columns: 1fr 0.6fr;
       gap: 22px;
+      @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+      }
 
       &__flex {
         display: flex;
@@ -231,6 +239,16 @@
         }
       }
 
+      &__back {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        p {
+          margin-top: 2px;
+        }
+      }
       &__select {
         display: grid;
         grid-template-columns: 1fr 1fr;

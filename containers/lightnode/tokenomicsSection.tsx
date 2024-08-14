@@ -1,3 +1,5 @@
+import Purchase from "components/Button/purchase";
+
 const tokenomicsSection = () => (
   <section className="tokenomics-section">
     <div className="tokenomics">
@@ -9,7 +11,7 @@ const tokenomicsSection = () => (
         this fund is to attract community members to build and expand the Paloma
         community.
       </p>
-      <button className="purchase-button mt-40">Purchase your LightNode</button>
+      <Purchase className="mt-40" />
     </div>
     <div className="tokenomics-photo">
       <img src="/assets/home/tokenomics.svg" alt="tokenomics" />

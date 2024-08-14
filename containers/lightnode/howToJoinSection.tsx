@@ -1,3 +1,4 @@
+import Purchase from "components/Button/purchase";
 import { JoinFlow } from "utils/data";
 
 const howToJoinSection = () => (
@@ -8,13 +9,12 @@ const howToJoinSection = () => (
         <span>The Flock</span>
       </h1>
       <p>
-        The Paloma LightNode is a Paloma blockchain program that secures the
-        Paloma network by managing the delegation of stake to the most reliable
-        cross-chain communication validators. Those who join the network become
-        a pigeon and will be rewarded with GRAINs as their client continues to
-        work each second to keep the Paloma network secure.
+        The Paloma LightNode is a Paloma blockchain program that secures the Paloma network by
+        managing the delegation of stake to the most reliable cross-chain communication validators.
+        Those who join the network become a pigeon and will be rewarded with GRAINs as their client
+        continues to work each second to keep the Paloma network secure.
       </p>
-      <button className="purchase-button mt-40">Purchase your LightNode</button>
+      <Purchase className="mt-40" />
       <img src="/assets/home/pigeons-fly-2.png" alt="pigeons-flow-2" />
     </div>
     <div className="join-flow-step">

@@ -1,9 +1,9 @@
 export const SupportChains = [
-  "eth",
-  "binance",
+  "ethereum",
+  "bnb",
   "arbitrum",
   "base",
-  "op",
+  "optimism",
   "b",
   "polygon",
 ];

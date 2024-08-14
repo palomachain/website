@@ -1,3 +1,4 @@
+import Purchase from "components/Button/purchase";
 import React, { useState } from "react";
 
 const whatisPalomaSection = () => (
@@ -18,9 +19,7 @@ const whatisPalomaSection = () => (
           accompanying computation of new logic, be sent to the smart contract
           from another state.
         </p>
-        <button className="purchase-button mt-40">
-          Purchase your LightNode
-        </button>
+        <Purchase className="mt-40" />
       </div>
       <img src="/assets/home/pigeons-fly-2.png" />
     </div>
@@ -37,9 +36,7 @@ const whatisPalomaSection = () => (
           engineering resources and developer-friendly environments that
           encourage sophisticated state and logic-call development.
         </span>
-        <button className="purchase-button purchase-button-white mt-40">
-          Purchase your LightNode
-        </button>
+        <Purchase className="purchase-button-white mt-40" />
       </div>
       <img
         src="/assets/home/pigeon-question-mark.png"
@@ -71,9 +68,7 @@ const whatisPalomaSection = () => (
           To be a validator on Paloma is to secure fast relay execution on all
           chains approved by governance.
         </span>
-        <button className="purchase-button mt-40">
-          Purchase your LightNode
-        </button>
+        <Purchase className="mt-40" />
       </div>
     </div>
     <div className="describe-card">
@@ -90,9 +85,7 @@ const whatisPalomaSection = () => (
           stake unbonded. This aligns validators interest with builders: to
           secure messages and deliver them on time on target chains.
         </span>
-        <button className="purchase-button purchase-button-white mt-40">
-          Purchase your LightNode
-        </button>
+        <Purchase className="purchase-button-white mt-40" />
       </div>
       <div className="flex-row">
         <img
@@ -146,9 +139,7 @@ const whatisPalomaSection = () => (
             <img src="/assets/icons/download.png" alt="download-icon" />
             Download White Paper
           </button>
-          <button className="purchase-button mt-40">
-            Purchase your LightNode
-          </button>
+          <Purchase className="mt-40" />
         </div>
       </div>
     </div>

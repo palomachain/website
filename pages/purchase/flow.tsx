@@ -13,10 +13,10 @@ import useProvider from "hooks/useProvider";
 import useUniswap from "hooks/useUniswap";
 import { useWallet } from "hooks/useWallet";
 import { IBalance, IToken } from "interfaces/swap";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Countdown from "react-countdown";
 import { toast } from "react-toastify";
-import { useLazyGetNodeSalePriceQuery } from "services/api/nodesale";
+import { useLazyGetNodeSalePriceQuery, useLazyGetTotalPurchasedQuery } from "services/api/nodesale";
 import { useLazyGetTokenPricesQuery } from "services/api/price";
 import { useGetUniswapTokenListQuery } from "services/api/tokens";
 import { selectCurrentUsdPrice } from "services/selectors/price";
@@ -47,6 +47,7 @@ const PurchaseFlow = () => {
   const [selectedChain, setSelectedChain] = useState<string>();
 
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
+  const [fetchTotalPurchased] = useLazyGetTotalPurchasedQuery();
   const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
   const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } =
     useNodeSale({
@@ -59,7 +60,7 @@ const PurchaseFlow = () => {
   });
 
   const [endDate, setEndDate] = useState(NodeSaleStartDate); // Set the End date of node sale
-  const [saledNodes, setSaledNodes] = useState(0); // Set Saled Nodes Count
+  const [totalPurchased, setTotalPurchased] = useState(0); // Set Saled Nodes Count
   const [quantity, setQuantity] = useState(1);
   const [promoCode, setPromoCode] = useState<string>();
   const [appliedPromoCode, setApplyPromoCode] = useState<string>();
@@ -154,6 +155,17 @@ const PurchaseFlow = () => {
       delayDebounceFn();
     }
   }, [wallet, selectedChainId]);
+
+  useEffect(() => {
+    const delayDebounceFn = async () => {
+      const totalPurchasedCount = await fetchTotalPurchased({});
+      if (totalPurchasedCount.isSuccess) {
+        setTotalPurchased(totalPurchasedCount?.data?.paid_node_cnt ?? 0);
+      }
+    };
+
+    delayDebounceFn();
+  }, []);
 
   const getNodePrice = async (amount: number, promo_code?: string) => {
     const decodeData = stringToHex(promo_code);
@@ -273,7 +285,7 @@ const PurchaseFlow = () => {
   }, [provider, wallet, fromToken, expectedAmount]);
 
   const isValidTokenAmount = useMemo(() => {
-    return quantity > 0 && quantity <= TotalNodes - saledNodes;
+    return quantity > 0 && quantity <= TotalNodes - totalPurchased;
   }, [quantity]);
 
   const isAllAgree = useMemo(() => {
@@ -352,12 +364,12 @@ const PurchaseFlow = () => {
               type="range"
               min={1}
               max={TotalNodes}
-              value={saledNodes}
+              value={totalPurchased}
               className="purchase-subscription__range"
               readOnly
             />
             <p>
-              {saledNodes}/{TotalNodes}
+              {totalPurchased}/{TotalNodes}
             </p>
           </div>
           <div className="purchase-sale-set">
@@ -386,20 +398,20 @@ const PurchaseFlow = () => {
                   value={quantity}
                   onChange={(e) =>
                     setQuantity(
-                      Number(e.target.value) > TotalNodes - saledNodes
-                        ? TotalNodes - saledNodes
+                      Number(e.target.value) > TotalNodes - totalPurchased
+                        ? TotalNodes - totalPurchased
                         : Number(e.target.value)
                     )
                   }
                   min={1}
-                  max={TotalNodes - saledNodes}
+                  max={TotalNodes - totalPurchased}
                 />
                 <button
                   className={`increase ${
-                    quantity >= TotalNodes - saledNodes ? "not-allowed" : "pointer"
+                    quantity >= TotalNodes - totalPurchased ? "not-allowed" : "pointer"
                   }`}
                   onClick={() => setQuantityValue(true)}
-                  disabled={quantity >= TotalNodes - saledNodes}
+                  disabled={quantity >= TotalNodes - totalPurchased}
                 >
                   +
                 </button>

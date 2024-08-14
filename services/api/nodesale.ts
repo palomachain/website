@@ -13,6 +13,11 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
+    getTotalPurchased: build.query<GetNodeSaleApiResponse, {}>({
+      query: () => ({
+        url: `${nodesaleApiUrl}/purchased`,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -25,5 +30,5 @@ export type GetNodeSaleApiArg = {
 
 export type PriceResultData = any;
 
-export const { useGetNodeSalePriceQuery, useLazyGetNodeSalePriceQuery } =
+export const { useGetNodeSalePriceQuery, useLazyGetNodeSalePriceQuery, useGetTotalPurchasedQuery, useLazyGetTotalPurchasedQuery } =
   injectedRtkApi;

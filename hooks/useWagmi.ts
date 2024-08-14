@@ -1,5 +1,12 @@
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
-import { arbitrum, bsc, gnosis, mainnet, optimism, polygon } from "wagmi/chains";
+import {
+  arbitrum,
+  bsc,
+  gnosis,
+  mainnet,
+  optimism,
+  polygon,
+} from "wagmi/chains";
 
 const useWagmi = () => {
   const chains = [mainnet, polygon, bsc, gnosis, arbitrum, optimism];

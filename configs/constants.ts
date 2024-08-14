@@ -1,7 +1,17 @@
 const envParam = {
-  palomaNestServiceAPIBaseUrl: process.env.PALOMA_NEST_SERVICE_API_BASE_URL || '',
-  onramperApiKey: process.env.ONRAMPER_API_KEY || '',
-  palomaExtensionId: process.env.PALOMA_EXTENSION_ID || 'cjmmdephaciiailjnoikekdebkcbcfmi',
+  palomaNestServiceAPIBaseUrl:
+    process.env.PALOMA_NEST_SERVICE_API_BASE_URL || "",
+  onramperApiKey: process.env.ONRAMPER_API_KEY || "",
+  palomaExtensionId:
+    process.env.PALOMA_EXTENSION_ID || "cjmmdephaciiailjnoikekdebkcbcfmi",
+  REACT_APP_MORALIS_SERVICE_API:
+    process.env.REACT_APP_MORALIS_SERVICE_API || "",
+  nodeSale_eth: process.env.NODESALE_CONTRACT_ETH || "",
+  nodeSale_bnb: process.env.NODESALE_CONTRACT_BNB || "",
+  nodeSale_base: process.env.NODESALE_CONTRACT_BASE || "",
+  nodeSale_arb: process.env.NODESALE_CONTRACT_ARB || "",
+  nodeSale_op: process.env.NODESALE_CONTRACT_OP || "",
+  nodeSale_polygon: process.env.NODESALE_CONTRACT_POLYGON || "",
 };
 
 const Networks = {
@@ -58,12 +68,14 @@ const DEFAULT_MAIN_CHAINS = [
 
 const SLIPPAGE_DOMINATOR = 1000;
 const SLIPPAGE_PERCENTAGE = 1; // default slippage is 1%
+const DEADLINE = 5; // 5 MIN
 
 export {
-  envParam,
   AddNetwork,
+  DEADLINE,
   DEFAULT_MAIN_CHAINS,
   Networks,
   SLIPPAGE_DOMINATOR,
   SLIPPAGE_PERCENTAGE,
+  envParam,
 };

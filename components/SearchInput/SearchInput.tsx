@@ -17,7 +17,7 @@ const SearchInput = ({
   className,
 }: SearchInputProps) => (
   <section className={cn(style.container, className)}>
-    <img src="/assets/images/Search.svg" alt="" width={12} height={18} />
+    <img src="/assets/icons/search.svg" alt="" width={12} height={18} />
     <input
       className={style.input}
       type="text"

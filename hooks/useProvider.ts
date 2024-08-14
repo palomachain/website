@@ -5,11 +5,15 @@ import { useMemo } from "react";
 
 const useProvider = (wallet: Wallet) => {
   const provider = useMemo(() => {
-    let provider: ethers.providers.Web3Provider | ethers.providers.JsonRpcProvider;
+    let provider:
+      | ethers.providers.Web3Provider
+      | ethers.providers.JsonRpcProvider;
     if (wallet?.provider) {
       provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     } else {
-      provider = new ethers.providers.JsonRpcProvider(supportedNetworks["1"].rpcUrls[0]);
+      provider = new ethers.providers.JsonRpcProvider(
+        supportedNetworks["1"].rpcUrls[0]
+      );
     }
 
     return provider;

@@ -1,3 +1,3 @@
-import PurchaseButton from './PurchaseButton';
+import PurchaseButton from "./PurchaseButton";
 
 export default PurchaseButton;

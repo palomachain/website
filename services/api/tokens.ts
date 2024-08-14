@@ -1,35 +1,53 @@
-import { envParam } from 'configs/constants';
-import { api } from 'services';
-import { TMap } from 'types';
+import { envParam } from "configs/constants";
+import { api } from "services";
+import { TMap } from "types";
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getApeswapTokenList: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getApeswapTokenList: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/apeswap-listed`,
       }),
     }),
-    getUniswapTokenList: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getUniswapTokenList: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/uniswap-listed`,
       }),
     }),
-    getUniswapTokenListForBase: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getUniswapTokenListForBase: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/base`,
       }),
     }),
-    getUniswapCoinGeckoTokenList: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getUniswapCoinGeckoTokenList: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/uniswap-coingecko-listed`,
       }),
     }),
-    getPancakeSwapCoinGeckoTokenList: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getPancakeSwapCoinGeckoTokenList: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/pancake-coingecko-listed`,
       }),
     }),
-    getCurveSwapTokenList: build.query<GetListedSwapTokensApiResponse, GetListedSwapTokensApiArg>({
+    getCurveSwapTokenList: build.query<
+      GetListedSwapTokensApiResponse,
+      GetListedSwapTokensApiArg
+    >({
       query: () => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/curveswap-listed`,
       }),

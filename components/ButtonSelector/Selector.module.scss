@@ -1,17 +1,17 @@
 .selectList {
   position: absolute;
   margin-top: 87px;
-  background: #29292B;
-  box-shadow: 2px 2px 5px #1b1b1e;
-  border-radius: 7px;
-  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #d8d3d3;
+  background: #fff;
+  padding: 8px 18px;
   width: calc(50% - 4px);
   z-index: 20;
 }
 .selectOption {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
@@ -22,15 +22,16 @@
   margin-bottom: 12px;
 }
 .selectNetwork {
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.32px;
+  color: #2c2c2c;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 31.533px; /* 197.083% */
+  letter-spacing: -0.016px;
 }
 .disabled {
   color: #807e7e;
   font-weight: 500;
-  img {
-    opacity: 0.5;
-  }
+  // img {
+  //   opacity: 0.5;
+  // }
 }

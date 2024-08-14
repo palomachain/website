@@ -42,9 +42,10 @@ const nodesaleSection = () => {
         <h3>JOIN THE FLOCK</h3>
         <h1>PALOMA LIGHTNODES</h1>
         <p>
-          Introducing a new way to earn and participate in a global community: The Paloma Flock.
-          Paloma is a new blockchain network that is secured by a global community of pigeons that
-          deliver transaction messages to any blockchain's smart contract Virtual Machine (VM).
+          Introducing a new way to earn and participate in a global community:
+          The Paloma Flock. Paloma is a new blockchain network that is secured
+          by a global community of pigeons that deliver transaction messages to
+          any blockchain's smart contract Virtual Machine (VM).
         </p>
         <button className="purchase-button">Purchase your LightNode</button>
       </div>
@@ -59,7 +60,11 @@ const nodesaleSection = () => {
           <p>SUPPORTED CHAINS</p>
           <div className="nodesale-chains">
             {SupportChains.map((chain, index) => (
-              <img src={`/assets/chains/${chain}.png`} alt={chain} key={index} />
+              <img
+                src={`/assets/chains/${chain}.png`}
+                alt={chain}
+                key={index}
+              />
             ))}
           </div>
         </div>

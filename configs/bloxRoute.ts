@@ -2,7 +2,7 @@ import { ChainID } from "configs/chains";
 
 const ethProtect = {
   chainId: "0x1",
-  rpcUrls: ['https://serene-divine-crater.quiknode.pro/'],
+  rpcUrls: ["https://serene-divine-crater.quiknode.pro/"],
   chainName: "ETH MEV Protected",
   nativeCurrency: {
     name: "ETH",
@@ -14,7 +14,7 @@ const ethProtect = {
 
 const bscProtect = {
   chainId: "0x38",
-  rpcUrls: ['https://volume.liquify.com/api=0440032/bsc'],
+  rpcUrls: ["https://volume.liquify.com/api=0440032/bsc"],
   chainName: "BSC MEV Protected",
   nativeCurrency: {
     name: "BNB",
@@ -26,7 +26,7 @@ const bscProtect = {
 
 const polygonProtect = {
   chainId: "0x89",
-  rpcUrls: ['https://volume.liquify.com/api=0440032/polygon'],
+  rpcUrls: ["https://volume.liquify.com/api=0440032/polygon"],
   chainName: "Polygon MEV Protected",
   nativeCurrency: {
     name: "MATIC",

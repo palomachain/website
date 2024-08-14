@@ -1,7 +1,7 @@
-import React from 'react';
-import Modal from 'components/Modal';
+import React from "react";
+import Modal from "components/Modal";
 
-import style from './PendingTransactionModal.module.scss';
+import style from "./PendingTransactionModal.module.scss";
 
 interface PendingTransactionModalProps {
   show?: boolean;
@@ -28,12 +28,14 @@ const PendingTransactionModal = ({
     <Modal className={style.container} onClose={onClose}>
       {isProcessing ? (
         <div className="flex-column">
-          <img className={style.staticImage} src="/assets/images/Pigeon_static.svg" width={94} height={100} />
-          <img className={style.loadingBar} src="/assets/images/Loading_bar.svg" />
+          <img
+            className={style.loadingBar}
+            src="/assets/icons/loading_bar.svg"
+          />
         </div>
       ) : (
         <div className="flex-column">
-          <img className={style.loadingImage} src="/assets/images/Pigeon_loading_2.svg" width={94} height={100} />
+          <img className={style.loadingImage} src="/assets/icons/loading.svg" />
         </div>
       )}
       <h3 className={style.title}>{title}</h3>

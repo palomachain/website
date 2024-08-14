@@ -6,34 +6,39 @@
   align-items: center;
 
   .loadingImage {
-    width: 140px;
-    height: 116px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .title {
+    color: #2c2c2c;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
-    margin-bottom: 24px;
+    line-height: normal;
+    margin-top: 34px;
+    margin-bottom: 17px;
   }
 
   .text {
-    font-weight: 500;
+    color: #6b6666;
+    text-align: center;
     font-size: 14px;
-    line-height: 18px;
-    margin-bottom: 24px;
-    max-width: 275px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 40px;
+    max-width: 397px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .telegramAlert {
-    background: #F9DDFB;
+    background: #f9ddfb;
     border-radius: 4px;
     padding: 14px 25px;
-    color: #3973FC;
+    color: #3973fc;
     font-weight: 700;
     font-size: 14px;
     line-height: 150%;
@@ -46,11 +51,11 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 24px;
-    max-width: 275px;
+    max-width: 400px;
   }
 
   .mybots {
-    color: #3973FC;
+    color: #3973fc;
     font-weight: 500;
     font-size: 14px;
     line-height: 18px;
@@ -61,5 +66,24 @@
 
   .stepWizard {
     margin-bottom: 60px;
+  }
+
+  .gotoBtn {
+    border-radius: 6.827px;
+    background: #2c2c2c;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    height: 46px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+    cursor: pointer;
   }
 }

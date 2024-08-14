@@ -4,7 +4,8 @@ const featuresSection = () => (
   <section className="features-section">
     <h1>LightNode Features</h1>
     <p className="mt-20">
-      Your Paloma LightNode Application runs the following commands automatically:
+      Your Paloma LightNode Application runs the following commands
+      automatically:
     </p>
     <button className="purchase-button mt-40">Purchase your LightNode</button>
     <div className="features-cards">

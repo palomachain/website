@@ -1,11 +1,10 @@
-import React from 'react';
-import Link from 'next/link';
-import { StaticLink } from 'configs/links';
-import { envParam } from 'configs/constants';
-import Modal from 'components/Modal';
-// import StepperWizard from 'components/Stepper';
+import React from "react";
+import Link from "next/link";
+import { StaticLink } from "configs/links";
+import Modal from "components/Modal";
+import { useRouter } from "next/router";
 
-import style from './SuccessModal.module.scss';
+import style from "./SuccessModal.module.scss";
 
 interface SuccessRampProps {
   show?: boolean;
@@ -15,21 +14,33 @@ interface SuccessRampProps {
   onClose?: () => void;
 }
 
-const SuccessRamp = ({ show, isStepWizard = false, steps, activeStep, onClose }: SuccessRampProps) => {
+const SuccessRamp = ({
+  show,
+  isStepWizard = false,
+  steps,
+  activeStep,
+  onClose,
+}: SuccessRampProps) => {
   if (!show) return null;
+
+  const router = useRouter();
+
+  const onClick = () => {
+    router.push(StaticLink.ACTIVATE); // Register
+  };
 
   return (
     <Modal className={style.container} onClose={onClose}>
-      <img className={style.loadingImage} src="/assets/images/Pigeon_success.svg" />
-      <h3 className={style.title}>Bot Successfully Created!</h3>
+      <img className={style.loadingImage} src="/assets/icons/success.svg" />
+      <h3 className={style.title}>Paloma LightNodes successfully purchased</h3>
       <p className={style.text}>
-        {isStepWizard
-          ? "Now that your EURe tokens are in your Gnosis Address, it's time to transfer them to your bank account using Monerium."
-          : 'Activate Telegram alerts to know when your position is exited'}
+        Your LightNode transaction has been successfully processed. Please
+        register your nodes for software support before downloading the Paloma
+        LightNode Client.
       </p>
-      <Link href={StaticLink.REGISTER}>
-        <p className={style.mybots}>Continue to Registration</p>
-      </Link>
+      <div onClick={onClick} className={style.gotoBtn}>
+        Continue to Registration
+      </div>
     </Modal>
   );
 };

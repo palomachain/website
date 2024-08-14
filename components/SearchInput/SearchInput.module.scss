@@ -1,9 +1,9 @@
 .container {
   display: flex;
   align-items: center;
-  background: #1f1f22;
-  border: 1px solid #f8f9fb;
-  border-radius: 6.53678px;
+  border-radius: 6.537px;
+  border: 1px solid #d8d3d3;
+  background: #fff;
   padding: 12px 18px;
 
   .input {
@@ -16,6 +16,6 @@
     margin-left: 8px;
     outline: none;
     background: transparent;
-    color: #f2f2f2;
+    color: #2c2c2c;
   }
 }

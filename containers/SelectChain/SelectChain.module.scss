@@ -3,6 +3,10 @@
   display: grid;
   grid-gap: 10px;
   position: relative;
+  p {
+    font-size: 14px;
+    font-weight: 600;
+  }
 
   .mb16 {
     margin-bottom: 16px;
@@ -13,9 +17,9 @@
   }
 
   .profitInput {
-    background: #29292b;
-    border: 1px solid #f8f9fb;
     border-radius: 8px;
+    border: 1px solid #d8d3d3;
+    background: #fff;
     display: flex;
     flex-direction: row;
     align-items: center;

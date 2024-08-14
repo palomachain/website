@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js';
+import BigNumber from "bignumber.js";
 
 interface IChain {
   icon?: string;
@@ -17,7 +17,7 @@ interface IToken {
   decimals?: number;
   balance?: string;
   usdAmount?: string;
-  amount?: '0' | string;
+  amount?: "0" | string;
 }
 
 interface IBalance {

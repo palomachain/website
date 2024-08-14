@@ -6,9 +6,6 @@
   align-items: center;
 
   .loadingImage {
-    width: 140px;
-    height: 116px;
-    margin-left: 45px;
     cursor: auto !important;
   }
 
@@ -26,22 +23,29 @@
   }
 
   .title {
+    color: #2c2c2c;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
     font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
-    margin-bottom: 16px;
+    line-height: normal;
+    margin-top: 35px;
+    margin-bottom: 24px;
   }
 
   .text {
     word-break: break-all;
-    font-weight: 600;
+    color: #2c2c2c;
+    text-align: center;
     font-size: 16px;
-    line-height: 23px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
     margin-bottom: 55px;
   }
 
   .tx {
-    color: #F9DDFB;
+    color: #f9ddfb;
     font-weight: 500;
     font-size: 14px;
     line-height: 135.8%;

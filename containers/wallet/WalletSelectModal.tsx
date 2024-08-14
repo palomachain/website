@@ -32,7 +32,10 @@ const WalletSelectModal = ({
   };
 
   return (
-    <Modal title={showConnecting ? "Connecting..." : "Connect Wallet"} onClose={onClose}>
+    <Modal
+      title={showConnecting ? "Connecting..." : "Connect Wallet"}
+      onClose={onClose}
+    >
       <section className={style.wizardView}>
         {!showConnecting && (
           <>
@@ -59,7 +62,7 @@ const WalletSelectModal = ({
               {web3ModalLoading ? (
                 <>
                   <img
-                    src="/assets/images/Loading_circle.svg"
+                    src="/assets/icons/loading_circle.svg"
                     height="25px"
                     style={{ marginTop: 5 }}
                   />
@@ -79,7 +82,10 @@ const WalletSelectModal = ({
               Check your Wallet for a connection request.
             </p>
             <LoadingBtn />
-            <section className={style.tryAgainWrapper} onClick={onChooseMetamask}>
+            <section
+              className={style.tryAgainWrapper}
+              onClick={onChooseMetamask}
+            >
               <img src="/assets/images/Try_again.svg" alt="" />
               <span className={style.balance}>Try again</span>
             </section>

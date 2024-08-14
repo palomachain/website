@@ -35,7 +35,10 @@ const RangeSlider = ({
       </div>
       <div className="slider-range-input">
         <div
-          style={{ marginLeft: `calc(${bubble}% - ${valueWidth / 2}px)`, width: `${valueWidth}px` }}
+          style={{
+            marginLeft: `calc(${bubble}% - ${valueWidth / 2}px)`,
+            width: `${valueWidth}px`,
+          }}
           className="slider-range-value"
         >
           {step >= 1 ? formatNumber(value, 0, 0) : value}

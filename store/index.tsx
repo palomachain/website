@@ -1,6 +1,6 @@
-import { api } from 'services';
-import { configureStore } from '@reduxjs/toolkit';
-import requestTool from './request';
+import { api } from "services";
+import { configureStore } from "@reduxjs/toolkit";
+import requestTool from "./request";
 
 const store = configureStore({
   reducer: {

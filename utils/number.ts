@@ -35,7 +35,9 @@ export const toFixed = (number, decimals, string = false) => {
 };
 
 export const toShow = (num, decimals) => {
-  return new BigNumber(num).isGreaterThan(10 ** 9) ? "∞" : toFixed(num, decimals, true).toString();
+  return new BigNumber(num).isGreaterThan(10 ** 9)
+    ? "∞"
+    : toFixed(num, decimals, true).toString();
 };
 
 export const getOnlyDigitalValue = (val: number) => {
@@ -90,11 +92,22 @@ export const intToString = (value) => {
   return shortValue + suffixes[suffixNum];
 };
 
-export function formatNumber(value: string | number, minPrecision = 2, maxPrecision = 2) {
+export const formatNumber = (
+  value: string | number,
+  minPrecision = 2,
+  maxPrecision = 2
+) => {
   const options = {
     minimumFractionDigits: minPrecision,
     maximumFractionDigits: maxPrecision,
   };
 
   return Number(value).toLocaleString("en-US", options);
-}
+};
+
+export const toFixedWithoutRound = (
+  number: string | number,
+  decimals: number = 4
+) => {
+  return new BigNumber(number).toFixed(decimals, 1);
+};

@@ -4,6 +4,13 @@
   gap: 16px;
   width: 100%;
 
+  p {
+    color: #2c2c2c;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 150%; /* 21px */
+    letter-spacing: -0.42px;
+  }
   .walletBalance {
     font-weight: 500;
     font-size: 12px;
@@ -24,9 +31,9 @@
   }
 
   .tradingInfo {
-    background: #1f1f22;
-    border: 1px solid #f8f9fb;
     border-radius: 8px;
+    border: 1px solid #d8d3d3;
+    background: #fff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -35,20 +42,18 @@
     cursor: pointer;
 
     .token {
-      background: #29292b;
-      border-radius: 7px 0px 0px 7px;
-      width: 152px;
-      height: 44px;
-      font-weight: 700;
-      font-size: 14px;
-      line-height: 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      letter-spacing: -0.001em;
-      color: #ffffff;
+      color: #2c2c2c;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 31.533px; /* 225.238% */
+      letter-spacing: -0.014px;
       padding-left: 18px;
       padding-right: 18px;
+      width: 100%;
     }
 
     .tokenValueInfo {

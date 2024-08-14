@@ -7,11 +7,11 @@ const RotatedHeader = ({
   title = "",
   leftImage = "",
   rightImage = "",
-  theme = "dark"
+  theme = "dark",
 }) => {
   return (
     <div className={cn("rotated-header-container", className)}>
-      <div className={cn('skew-bg', theme)}>
+      <div className={cn("skew-bg", theme)}>
         {leftImage !== "" && <img src={leftImage} className="left-image" />}
         <h1 className="header-title">{title}</h1>
         {rightImage !== "" && <img src={rightImage} className="right-image" />}

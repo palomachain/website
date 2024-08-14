@@ -28,6 +28,9 @@
       flex-direction: column;
     }
   }
+  .justify-between {
+    justify-content: space-between;
+  }
   .gap-8 {
     gap: 8px;
   }

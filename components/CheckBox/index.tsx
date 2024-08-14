@@ -24,7 +24,12 @@ const CheckBox = ({
       ) : (
         <input type="checkbox" checked={checked} onChange={onChange} />
       )}
-      <span className={classNames(style.checkmark, disabled ? style.disabled : undefined)}>
+      <span
+        className={classNames(
+          style.checkmark,
+          disabled ? style.disabled : undefined
+        )}
+      >
         {label}
       </span>
     </label>

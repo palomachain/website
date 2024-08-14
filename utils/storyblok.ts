@@ -12,20 +12,20 @@ export const fetchBlogs = async (params = {}) => {
     const key = Object.keys(params)[i];
     const value = params[key];
     filterQuery[key] = {
-      like: value
-    }
+      like: value,
+    };
   }
 
   const blogs = [];
-  let moreData =  true;
+  let moreData = true;
   let currentPage = 1;
 
-  while(moreData) {
+  while (moreData) {
     let response = await Storyblok.get("cdn/stories/", {
       starts_with: "blog/",
       page: currentPage,
       per_page: 100,
-      filter_query: filterQuery
+      filter_query: filterQuery,
     });
 
     moreData = response.data.stories.length == 100;
@@ -34,8 +34,8 @@ export const fetchBlogs = async (params = {}) => {
     for (const story of response.data.stories) {
       if (story.published_at != null) {
         if (
-            story.full_slug.startsWith("blog/") &&
-            !story.full_slug.endsWith("blog/")
+          story.full_slug.startsWith("blog/") &&
+          !story.full_slug.endsWith("blog/")
         ) {
           blogs.push(story);
         }
@@ -99,7 +99,7 @@ export const filterBlogs = (eventList, category = "") => {
 
 export const fetchPageValues = async (param) => {
   var response = await Storyblok.get("cdn/stories/", {
-    "starts_with": param,
+    starts_with: param,
   });
 
   if (response.data.stories.length > 0) {

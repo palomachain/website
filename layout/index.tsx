@@ -1,17 +1,14 @@
-import React from 'react'
-import Head from 'next/head'
-import { isMobile } from 'react-device-detect'
+import React from "react";
+import Head from "next/head";
+import { isMobile } from "react-device-detect";
 
-import LayoutHeader from './header'
-import Footer from './footer'
+import LayoutHeader from "./header";
+import Footer from "./footer";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Layout({
-  children,
-  router,
-}) {
+export default function Layout({ children, router }) {
   return (
     <>
       <Head>
@@ -23,17 +20,19 @@ export default function Layout({
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
 
-      <main className='layout-container'>
+      <main className="layout-container">
         <a id="back-to-top-anchor" href="/" />
         <LayoutHeader router={router} />
-        {(
-          React.cloneElement(children, {
-            router,
-          })
-        )}
+        {React.cloneElement(children, {
+          router,
+        })}
         <Footer />
       </main>
-      <ToastContainer autoClose={10000} pauseOnFocusLoss={false} position={isMobile ? 'bottom-center' : 'top-right'} />
+      <ToastContainer
+        autoClose={10000}
+        pauseOnFocusLoss={false}
+        position={isMobile ? "bottom-center" : "top-right"}
+      />
     </>
-  )
+  );
 }

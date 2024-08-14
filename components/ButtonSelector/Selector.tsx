@@ -19,7 +19,9 @@ const Selector = ({
   className,
 }: ButtonProps) => {
   return (
-    showSelectModal && selectableList && selectableList.length > 0 && (
+    showSelectModal &&
+    selectableList &&
+    selectableList.length > 0 && (
       <div className={cn(style.selectList, className)}>
         <div>
           {selectableList.map((list: object, index: number) => (
@@ -27,17 +29,14 @@ const Selector = ({
               key={index}
               className={cn(
                 style.selectOption,
-                String(selected) !== list['name'] ? style.disabled : ""
+                String(selected) !== list["name"] ? style.disabled : ""
               )}
-              onClick={() => handleSelect(list['id'])}
+              onClick={() => handleSelect(list["id"])}
             >
-              {list && list['icon'] && <img
-                src={list['icon']}
-                width={25}
-                height={25}
-                alt=""
-              />}
-              <span>{list['name']}</span>
+              {list && list["icon"] && (
+                <img src={list["icon"]} width={25} height={25} alt="" />
+              )}
+              <span>{list["name"]}</span>
             </div>
           ))}
         </div>

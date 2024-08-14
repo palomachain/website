@@ -409,7 +409,7 @@ export const Advisors = [
   {
     name: "Marko Baricevic",
     company: "Cosmos",
-    img: "/assets/advisors/2.png",
+    img: "/assets/advisors/2.svg",
     logo: "/assets/ecosystem/cosmos.svg",
   },
   {

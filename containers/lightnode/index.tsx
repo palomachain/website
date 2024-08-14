@@ -38,7 +38,7 @@ const lightnode = () => (
     <TokenomicsSection />
     <TokenomicsEngineSection />
     <TopicSection3 />
-    <AdvisorsSection />
+    {/* <AdvisorsSection /> */}
     <TeamsSection />
     <TopicSection4 />
     <SubscriptionSection />

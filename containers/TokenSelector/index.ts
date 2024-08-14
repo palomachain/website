@@ -1,3 +1,3 @@
-import TokenSelector from "./TokenSelector";
+import TokenSelector from './TokenSelector';
 
 export default TokenSelector;

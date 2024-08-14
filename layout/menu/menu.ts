@@ -1,49 +1,43 @@
-import {
-  TELEGRAM_LINK,
-  TWITTER_LINK,
-  GITHUB_LINK,
-  DISCORD_LINK,
-  PALOMABOT_WEBSITE_LINK,
-} from "utils/constants";
+import { TELEGRAM_LINK, TWITTER_LINK, GITHUB_LINK, DISCORD_LINK, PALOMABOT_WEBSITE_LINK } from 'utils/constants';
 
 const baseUrl = process.env.BASE_URL;
 
 const navMenu = [
   {
-    title: "Developers",
+    title: 'Developers',
     hasLink: false,
-    description: "Find here all the useful links to start building on Paloma.",
+    description: 'Find here all the useful links to start building on Paloma.',
     submenus: [
       {
-        title: "Get Started",
+        title: 'Get Started',
         hasLink: false,
         submenus: [
           {
-            title: "Quick Start",
+            title: 'Quick Start',
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/develop/quick-start/quick-start.html",
+            link: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
             external: true,
           },
           {
-            title: "Governance",
+            title: 'Governance',
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/resources/governance.html",
+            link: 'https://docs.palomachain.com/guide/resources/governance.html',
             external: true,
           },
         ],
       },
       {
-        title: "Guides",
+        title: 'Guides',
         hasLink: false,
         submenus: [
           {
-            title: "Running a node",
+            title: 'Running a node',
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/maintain/node/requirements.html",
+            link: 'https://docs.palomachain.com/guide/maintain/node/requirements.html',
             external: true,
           },
           {
-            title: "Set up a limit order bot",
+            title: 'Set up a limit order bot',
             hasLink: true,
             link: PALOMABOT_WEBSITE_LINK,
             external: true,
@@ -51,25 +45,25 @@ const navMenu = [
         ],
       },
       {
-        title: "Github",
+        title: 'Github',
         hasLink: false,
         submenus: [
           {
-            title: "Read me",
+            title: 'Read me',
             hasLink: true,
-            link: "https://github.com/palomachain/paloma",
+            link: 'https://github.com/palomachain/paloma',
             external: true,
           },
         ],
       },
       {
-        title: "Security",
+        title: 'Security',
         hasLink: false,
         submenus: [
           {
-            title: "Read me",
+            title: 'Read me',
             hasLink: true,
-            link: "https://docs.palomachain.com/guide/security/security.html",
+            link: 'https://docs.palomachain.com/guide/security/security.html',
             external: true,
           },
         ],
@@ -77,18 +71,18 @@ const navMenu = [
     ],
   },
   {
-    title: "Applications",
+    title: 'Applications',
     hasLink: false,
-    description: "Discover the ecosystem of Paloma Products and Applications.",
+    description: 'Discover the ecosystem of Paloma Products and Applications.',
     submenus: [
       {
-        title: "Compass EVM",
+        title: 'Compass EVM',
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html",
+        link: 'https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html',
         external: true,
       },
       {
-        title: "Palomabot",
+        title: 'Palomabot',
         hasLink: true,
         link: PALOMABOT_WEBSITE_LINK,
         external: true,
@@ -96,27 +90,26 @@ const navMenu = [
     ],
   },
   {
-    title: "Blog",
+    title: 'Blog',
     hasLink: true,
     link: `${baseUrl}/blog`,
     external: false,
-    description:
-      "Stay up to date with the depevopments, news and announcements in Paloma.",
+    description: 'Stay up to date with the depevopments, news and announcements in Paloma.',
     submenus: [
       {
-        title: "news and announcements",
+        title: 'news and announcements',
         hasLink: true,
         link: `${baseUrl}/blog/announcements`,
         external: false,
       },
       {
-        title: "Project Developments",
+        title: 'Project Developments',
         hasLink: true,
         link: `${baseUrl}/blog/project-updates`,
         external: false,
       },
       {
-        title: "event Recaps",
+        title: 'event Recaps',
         hasLink: true,
         link: `${baseUrl}/blog/events`,
         external: false,
@@ -124,46 +117,46 @@ const navMenu = [
     ],
   },
   {
-    title: "Events",
+    title: 'Events',
     hasLink: true,
     link: `${baseUrl}/event/`,
     external: false,
   },
   {
-    title: "Forum",
+    title: 'Forum',
     hasLink: true,
-    link: "https://forum.palomachain.com/",
+    link: 'https://forum.palomachain.com/',
     external: true,
   },
 ];
 
 const footerMenu = [
   {
-    title: "Features",
+    title: 'Features',
     hasLink: false,
     submenus: [
       {
-        title: "pigeon",
+        title: 'pigeon',
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/maintain/node/install-pigeon.html",
+        link: 'https://docs.palomachain.com/guide/maintain/node/install-pigeon.html',
         external: true,
       },
       {
-        title: "SDKs",
+        title: 'SDKs',
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/quick-start/resources.html#sdks",
+        link: 'https://docs.palomachain.com/guide/develop/quick-start/resources.html#sdks',
         external: true,
       },
       {
-        title: "Compass-EVM",
+        title: 'Compass-EVM',
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html#model",
+        link: 'https://docs.palomachain.com/guide/develop/applications/compass-evm/overview.html#model',
         external: true,
       },
     ],
   },
   {
-    title: "Examples",
+    title: 'Examples',
     hasLink: false,
     submenus: [
       // {
@@ -179,7 +172,7 @@ const footerMenu = [
       //   external: true,
       // },
       {
-        title: "Limit Order Bot",
+        title: 'Limit Order Bot',
         hasLink: true,
         link: PALOMABOT_WEBSITE_LINK,
         external: true,
@@ -187,17 +180,17 @@ const footerMenu = [
     ],
   },
   {
-    title: "Company",
+    title: 'Company',
     hasLink: false,
     submenus: [
       {
-        title: "Careers",
+        title: 'Careers',
         hasLink: true,
-        link: "https://volume.finance/careers/",
+        link: 'https://volume.finance/careers/',
         external: true,
       },
       {
-        title: "Brand Assets",
+        title: 'Brand Assets',
         hasLink: true,
         link: `${baseUrl}/brand-assets`,
         external: false,
@@ -209,43 +202,43 @@ const footerMenu = [
       //   external: false,
       // },
       {
-        title: "Forum",
+        title: 'Forum',
         hasLink: true,
-        link: "https://forum.palomachain.com/",
+        link: 'https://forum.palomachain.com/',
         external: true,
       },
       {
-        title: "Security",
+        title: 'Security',
         hasLink: true,
-        link: "https://docs.palomachain.com/guide/security/security.html",
+        link: 'https://docs.palomachain.com/guide/security/security.html',
         external: true,
       },
     ],
   },
   {
-    title: "Social Media",
+    title: 'Social Media',
     hasLink: false,
     submenus: [
       {
-        title: "Discord",
+        title: 'Discord',
         hasLink: true,
         link: DISCORD_LINK,
         external: true,
       },
       {
-        title: "Telegram",
+        title: 'Telegram',
         hasLink: true,
         link: TELEGRAM_LINK,
         external: true,
       },
       {
-        title: "Twitter",
+        title: 'Twitter',
         hasLink: true,
         link: TWITTER_LINK,
         external: true,
       },
       {
-        title: "Github",
+        title: 'Github',
         hasLink: true,
         link: GITHUB_LINK,
         external: true,

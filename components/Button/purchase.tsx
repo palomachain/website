@@ -1,6 +1,6 @@
-import { StaticLink } from "configs/links";
-import { useRouter } from "next/router";
-import React from "react";
+import { StaticLink } from 'configs/links';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 interface PurchaseButtonProps {
   className?: string;
@@ -8,11 +8,7 @@ interface PurchaseButtonProps {
   disable?: boolean;
 }
 
-const Purchase = ({
-  className,
-  text = "Purchase your LightNode",
-  disable = false,
-}: PurchaseButtonProps) => {
+const Purchase = ({ className, text = 'Purchase your LightNode', disable = false }: PurchaseButtonProps) => {
   const router = useRouter();
 
   return (

@@ -1,4 +1,4 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
 const abbreviateNumberFactory =
   (symbols) =>
@@ -25,7 +25,7 @@ const abbreviateNumberFactory =
     );
   };
 
-const SI_SYMBOLS = ["", "k", "M", "G", "T", "P", "E"];
+const SI_SYMBOLS = ['', 'k', 'M', 'G', 'T', 'P', 'E'];
 
 export const abbreviateNumberSI = abbreviateNumberFactory(SI_SYMBOLS);
 
@@ -35,9 +35,7 @@ export const toFixed = (number, decimals, string = false) => {
 };
 
 export const toShow = (num, decimals) => {
-  return new BigNumber(num).isGreaterThan(10 ** 9)
-    ? "∞"
-    : toFixed(num, decimals, true).toString();
+  return new BigNumber(num).isGreaterThan(10 ** 9) ? '∞' : toFixed(num, decimals, true).toString();
 };
 
 export const getOnlyDigitalValue = (val: number) => {
@@ -51,7 +49,7 @@ export const getOnlyPointsValue = (val: number) => {
 export const numberWithCommas = (x) => {
   x = x.toString();
   var pattern = /(-?\d+)(\d{3})/;
-  while (pattern.test(x)) x = x.replace(pattern, "$1,$2");
+  while (pattern.test(x)) x = x.replace(pattern, '$1,$2');
   return x;
 };
 
@@ -68,7 +66,7 @@ export const compare = (x, y) => {
 };
 
 export const allowOnlyNumber = (value) => {
-  if (value === "") {
+  if (value === '') {
     return true;
   }
 
@@ -78,12 +76,10 @@ export const allowOnlyNumber = (value) => {
 };
 
 export const intToString = (value) => {
-  const suffixes = ["", "K", "M", "B", "T"];
+  const suffixes = ['', 'K', 'M', 'B', 'T'];
 
-  const suffixNum = Math.floor(("" + value).length / 3);
-  let shortValue = parseFloat(
-    (suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision()
-  );
+  const suffixNum = Math.floor(('' + value).length / 3);
+  let shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision());
 
   if (shortValue % 1 != 0) {
     shortValue = Number(shortValue.toFixed(1));
@@ -92,22 +88,15 @@ export const intToString = (value) => {
   return shortValue + suffixes[suffixNum];
 };
 
-export const formatNumber = (
-  value: string | number,
-  minPrecision = 2,
-  maxPrecision = 2
-) => {
+export const formatNumber = (value: string | number, minPrecision = 2, maxPrecision = 2) => {
   const options = {
     minimumFractionDigits: minPrecision,
     maximumFractionDigits: maxPrecision,
   };
 
-  return Number(value).toLocaleString("en-US", options);
+  return Number(value).toLocaleString('en-US', options);
 };
 
-export const toFixedWithoutRound = (
-  number: string | number,
-  decimals: number = 4
-) => {
+export const toFixedWithoutRound = (number: string | number, decimals: number = 4) => {
   return new BigNumber(number).toFixed(decimals, 1);
 };

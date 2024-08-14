@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import MobileFooter from "./menu/MobileFooter";
-import { footerMenu } from "./menu/menu";
+import MobileFooter from './menu/MobileFooter';
+import { footerMenu } from './menu/menu';
 
 const Footer = () => (
   <div className="footer-container">
@@ -15,12 +15,9 @@ const Footer = () => (
         </Link>
       </div>
       {footerMenu.map((item_1) => (
-        <div
-          className="footer-view-links"
-          key={`footer-menu-1-${item_1.title}`}
-        >
+        <div className="footer-view-links" key={`footer-menu-1-${item_1.title}`}>
           <h3 className="footer-subtitle">{item_1.title}</h3>
-          {"submenus" in item_1 &&
+          {'submenus' in item_1 &&
             item_1.submenus.map((item_2) => (
               <React.Fragment key={`footer-menu-2-${item_2.title}`}>
                 {item_2.external && (
@@ -28,9 +25,7 @@ const Footer = () => (
                     {item_2.title}
                   </a>
                 )}
-                {!item_2.external && (
-                  <Link href={item_2.link}>{item_2.title}</Link>
-                )}
+                {!item_2.external && <Link href={item_2.link}>{item_2.title}</Link>}
               </React.Fragment>
             ))}
         </div>

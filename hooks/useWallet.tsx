@@ -1,22 +1,16 @@
-import { useDisconnect } from "@thirdweb-dev/react";
-import { disconnect, switchNetwork } from "@wagmi/core";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { AddNetwork } from "configs/constants";
-import { supportedNetworks } from "configs/networks";
-import WalletSelectModal from "containers/wallet/WalletSelectModal";
-import { NetworkIds, Provider, Wallet } from "interfaces/network";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { toast } from "react-toastify";
-import Cookies from "universal-cookie";
-import { errorMessage } from "utils/errorMessage";
-import { parseDexString, parseIntString } from "utils/string";
-import { useAccount, useNetwork } from "wagmi";
+import { useDisconnect } from '@thirdweb-dev/react';
+import { disconnect, switchNetwork } from '@wagmi/core';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
+import { AddNetwork } from 'configs/constants';
+import { supportedNetworks } from 'configs/networks';
+import WalletSelectModal from 'containers/wallet/WalletSelectModal';
+import { NetworkIds, Provider, Wallet } from 'interfaces/network';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
+import { errorMessage } from 'utils/errorMessage';
+import { parseDexString, parseIntString } from 'utils/string';
+import { useAccount, useNetwork } from 'wagmi';
 
 const cookies = new Cookies();
 
@@ -29,10 +23,7 @@ type WalletContextType = {
   openConnectionModal: () => void;
   requestSwitchNetwork: (chainId: number | string) => Promise<boolean>;
   requestAddNetwork: (chainId: number | string) => void;
-  networkSelect: (
-    defaultChain: number | string,
-    supportChains: object
-  ) => Promise<boolean>;
+  networkSelect: (defaultChain: number | string, supportChains: object) => Promise<boolean>;
   error: Error | null;
   availableProviders: { [providerName in Provider]: boolean };
 };
@@ -47,8 +38,7 @@ const initialWallet = {
   },
   error: null,
 };
-export const WalletContext =
-  createContext<Partial<WalletContextType>>(initialWallet);
+export const WalletContext = createContext<Partial<WalletContextType>>(initialWallet);
 
 const initialWalletState: Wallet = {
   account: null,
@@ -57,11 +47,7 @@ const initialWalletState: Wallet = {
   network: null,
 };
 
-export const WalletProvider = ({
-  children,
-}: {
-  children: JSX.Element;
-}): JSX.Element => {
+export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
   const ethereum = (window as any).ethereum;
   const { address, isConnected } = useAccount();
 
@@ -81,28 +67,15 @@ export const WalletProvider = ({
   const [wallet, setWallet] = useState<Wallet>(initialWalletState);
 
   const setMetamaskWallet = async () => {
-    const walletFromCookie: Partial<Wallet> = await cookies.get(
-      "current_wallet"
-    );
-    const accounts: [] = ethereum
-      ? await ethereum.request({ method: "eth_accounts" })
-      : [];
+    const walletFromCookie: Partial<Wallet> = await cookies.get('current_wallet');
+    const accounts: [] = ethereum ? await ethereum.request({ method: 'eth_accounts' }) : [];
 
-    if (
-      walletFromCookie &&
-      walletFromCookie.account &&
-      walletFromCookie.providerName &&
-      accounts.length > 0
-    ) {
-      if (walletFromCookie.providerName === "metamask") {
+    if (walletFromCookie && walletFromCookie.account && walletFromCookie.providerName && accounts.length > 0) {
+      if (walletFromCookie.providerName === 'metamask') {
         const provider = (window as any).ethereum;
-        const network =
-          (await ethereum.request({ method: "net_version" })) || "1";
+        const network = (await ethereum.request({ method: 'net_version' })) || '1';
         setWallet({ ...walletFromCookie, network, provider } as Wallet);
-      } else if (
-        walletFromCookie.providerName === "walletconnect" ||
-        walletFromCookie.providerName === "frame"
-      ) {
+      } else if (walletFromCookie.providerName === 'walletconnect' || walletFromCookie.providerName === 'frame') {
         const provider = (window as any).ethereum;
         const network = walletFromCookie.network;
         setWallet({ ...walletFromCookie, network, provider } as Wallet);
@@ -142,7 +115,7 @@ export const WalletProvider = ({
     // disconnect from frame
     await frameDisconnect();
 
-    cookies.remove("current_wallet", { path: "/" });
+    cookies.remove('current_wallet', { path: '/' });
     setWallet({
       account: null,
       providerName: null,
@@ -155,25 +128,22 @@ export const WalletProvider = ({
   useEffect(() => {
     if (ethereum) {
       const handleNetworkChange = (networkId: NetworkIds) => {
-        if (wallet?.providerName !== "metamask") return;
+        if (wallet?.providerName !== 'metamask') return;
 
         setWallet({ ...wallet, network: networkId });
       };
 
       const handleAccountChange = async (accounts: `0x${string}`[]) => {
         // If we are not currently connected with metamask, then no-op
-        if (wallet.providerName !== "metamask") return;
+        if (wallet.providerName !== 'metamask') return;
 
         const [account] = accounts;
         if (account) {
           const walletObj: Wallet = {
             account,
-            providerName: "metamask",
+            providerName: 'metamask',
             provider: (window as any).ethereum,
-            network:
-              parseIntString(
-                await ethereum.request({ method: "net_version" })
-              ) || "1",
+            network: parseIntString(await ethereum.request({ method: 'net_version' })) || '1',
           };
 
           setWallet(walletObj);
@@ -181,35 +151,35 @@ export const WalletProvider = ({
           disconnectWallet();
         }
       };
-      ethereum.on("accountsChanged", handleAccountChange);
+      ethereum.on('accountsChanged', handleAccountChange);
 
-      ethereum.on("chainChanged", handleNetworkChange);
+      ethereum.on('chainChanged', handleNetworkChange);
 
       return () => {
-        ethereum.removeListener("accountsChanged", handleAccountChange);
-        ethereum.removeListener("chainChanged", handleNetworkChange);
+        ethereum.removeListener('accountsChanged', handleAccountChange);
+        ethereum.removeListener('chainChanged', handleNetworkChange);
       };
     }
   }, [disconnectWallet, ethereum, wallet]);
 
-  const connectMetaMask = async (network = "1") => {
+  const connectMetaMask = async (network = '1') => {
     if (!ethereum) return;
 
     try {
       const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
+        method: 'eth_requestAccounts',
       });
 
       const [account] = accounts;
       const walletObj: Wallet = {
         account,
-        providerName: "metamask",
+        providerName: 'metamask',
         provider: (window as any).ethereum,
         network: parseIntString(network),
       };
 
       cookies.set(
-        "current_wallet",
+        'current_wallet',
         {
           account,
           providerName: walletObj.providerName,
@@ -217,16 +187,16 @@ export const WalletProvider = ({
         },
         {
           expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-          path: "/",
-        }
+          path: '/',
+        },
       );
       setWallet(walletObj);
 
       setShowChooseWalletModal(false);
       return true;
     } catch (error) {
-      console.log("error", error);
-      toast.info(errorMessage(error), { toastId: "wallet-warning" });
+      console.log('error', error);
+      toast.info(errorMessage(error), { toastId: 'wallet-warning' });
       setShowConnecting(false);
       return false;
     }
@@ -236,15 +206,14 @@ export const WalletProvider = ({
   useEffect(() => {
     try {
       if (wallet && wallet?.account) {
-        cookies.remove("current_wallet", { path: "/" });
-        const walletFromCookie: Partial<Wallet> = cookies.get("current_wallet");
+        cookies.remove('current_wallet', { path: '/' });
+        const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
         if (
           !walletFromCookie ||
-          (walletFromCookie.account !== wallet.account &&
-            walletFromCookie.network !== wallet.network)
+          (walletFromCookie.account !== wallet.account && walletFromCookie.network !== wallet.network)
         ) {
           cookies.set(
-            "current_wallet",
+            'current_wallet',
             {
               account: wallet.account,
               providerName: wallet.providerName,
@@ -252,8 +221,8 @@ export const WalletProvider = ({
             },
             {
               expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
-              path: "/",
-            }
+              path: '/',
+            },
           );
         }
       }
@@ -263,7 +232,7 @@ export const WalletProvider = ({
   }, [wallet]);
 
   const handleConnectMetamask = async () => {
-    const network = await ethereum.request({ method: "net_version" });
+    const network = await ethereum.request({ method: 'net_version' });
     await connectMetaMask(network);
   };
 
@@ -278,7 +247,7 @@ export const WalletProvider = ({
 
   useEffect(() => {
     if (address && isConnected && chain) {
-      const walletFromCookie: Partial<Wallet> = cookies.get("current_wallet");
+      const walletFromCookie: Partial<Wallet> = cookies.get('current_wallet');
 
       if (walletFromCookie)
         setWallet({
@@ -291,7 +260,7 @@ export const WalletProvider = ({
       else
         setWallet({
           account: address,
-          providerName: "walletconnect",
+          providerName: 'walletconnect',
           provider: (window as any).ethereum,
           network: String(chain.id),
         });
@@ -307,11 +276,11 @@ export const WalletProvider = ({
   };
 
   const requestSwitchNetwork = async (chainId: string) => {
-    if (wallet.providerName === "metamask") {
+    if (wallet.providerName === 'metamask') {
       const hex = parseDexString(chainId);
       try {
         await ethereum.request({
-          method: "wallet_switchEthereumChain",
+          method: 'wallet_switchEthereumChain',
           params: [
             {
               chainId: hex,
@@ -320,10 +289,10 @@ export const WalletProvider = ({
         });
       } catch (error) {
         // This error code indicates that the chain has not been added to MetaMask
-        console.log("error", error);
+        console.log('error', error);
         if (error.code === 4902) {
           await ethereum.request({
-            method: "wallet_AddNetwork",
+            method: 'wallet_AddNetwork',
             params: [
               {
                 chainId: hex,
@@ -334,7 +303,7 @@ export const WalletProvider = ({
         }
         return false;
       }
-    } else if (wallet.providerName === "walletconnect") {
+    } else if (wallet.providerName === 'walletconnect') {
       try {
         if (chainId !== wallet.network) {
           const network = await switchNetwork({ chainId: Number(chainId) });
@@ -343,7 +312,7 @@ export const WalletProvider = ({
           }
         }
       } catch (error) {
-        console.log("error", error);
+        console.log('error', error);
         return false;
       }
     }
@@ -360,10 +329,7 @@ export const WalletProvider = ({
     // });
   };
 
-  const networkSelect = async (
-    defaultChain: string,
-    supportChains: object = supportedNetworks
-  ) => {
+  const networkSelect = async (defaultChain: string, supportChains: object = supportedNetworks) => {
     if (!wallet || !wallet.network) {
       const result = await connectMetaMask(defaultChain);
       if (result) return true;

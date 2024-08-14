@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
-import cn from "classnames";
-import useOutsideAlerter from "hooks/useOutsideAlerter";
-import ButtonSelector from "./ButtonSelector";
-import Button from "../Button";
+import React, { useState, useRef } from 'react';
+import cn from 'classnames';
+import useOutsideAlerter from 'hooks/useOutsideAlerter';
+import ButtonSelector from './ButtonSelector';
+import Button from '../Button';
 
-import style from "components/ButtonSelector/SelectOption.module.scss";
+import style from 'components/ButtonSelector/SelectOption.module.scss';
 
 interface SelectOptionProps {
   title?: string;
@@ -51,14 +51,8 @@ const SelectOption = ({
         <ButtonSelector className={cn(style.buttonSelector, modalClassName)}>
           <>
             {options.map((option, index) => (
-              <div
-                key={index}
-                className={style.sortOption}
-                onClick={() => handleChangeSelectOption(option)}
-              >
-                <span className={value !== option ? style.disabled : ""}>
-                  {option}
-                </span>
+              <div key={index} className={style.sortOption} onClick={() => handleChangeSelectOption(option)}>
+                <span className={value !== option ? style.disabled : ''}>{option}</span>
               </div>
             ))}
           </>

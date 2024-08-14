@@ -1,42 +1,42 @@
-import BigNumber from "bignumber.js";
-import CheckBox from "components/CheckBox";
-import PendingTransactionModal from "components/Modal/PendingTransactionModal";
-import SuccessModal from "components/Modal/SuccessModal";
-import { allChains } from "configs/chains";
-import { DEADLINE, SLIPPAGE_PERCENTAGE } from "configs/constants";
-import { getTxHashLink } from "configs/links";
-import SelectChain from "containers/SelectChain";
-import TokenSelector from "containers/TokenSelector";
-import { Addresses, VETH_ADDRESS } from "contracts/addresses";
-import useNodeSale from "hooks/useNodeSale";
-import useProvider from "hooks/useProvider";
-import useUniswap from "hooks/useUniswap";
-import { useWallet } from "hooks/useWallet";
-import { IBalance, IToken } from "interfaces/swap";
-import React, { useEffect, useMemo, useState } from "react";
-import Countdown from "react-countdown";
-import { toast } from "react-toastify";
-import { useLazyGetNodeSalePriceQuery, useLazyGetTotalPurchasedQuery } from "services/api/nodesale";
-import { useLazyGetTokenPricesQuery } from "services/api/price";
-import { useGetUniswapTokenListQuery } from "services/api/tokens";
-import { selectCurrentUsdPrice } from "services/selectors/price";
-import { selectListedSwapTokensByChainId } from "services/selectors/tokens";
-import balanceTool from "utils/balance";
-import { NodeSaleStartDate, StartingPrice, TotalNodes } from "utils/constants";
-import { CustomerSupport } from "utils/data";
-import mockTool from "utils/mock";
-import { formatNumber } from "utils/number";
-import { parseIntString, stringToHex } from "utils/string";
-import PurchaseButton from "./PurchaseButton";
-import TotalPay from "./TotalPay";
+import BigNumber from 'bignumber.js';
+import CheckBox from 'components/CheckBox';
+import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
+import SuccessModal from 'components/Modal/SuccessModal';
+import { allChains } from 'configs/chains';
+import { DEADLINE, SLIPPAGE_PERCENTAGE } from 'configs/constants';
+import { getTxHashLink } from 'configs/links';
+import SelectChain from 'containers/SelectChain';
+import TokenSelector from 'containers/TokenSelector';
+import { Addresses, VETH_ADDRESS } from 'contracts/addresses';
+import useNodeSale from 'hooks/useNodeSale';
+import useProvider from 'hooks/useProvider';
+import useUniswap from 'hooks/useUniswap';
+import { useWallet } from 'hooks/useWallet';
+import { IBalance, IToken } from 'interfaces/swap';
+import React, { useEffect, useMemo, useState } from 'react';
+import Countdown from 'react-countdown';
+import { toast } from 'react-toastify';
+import { useLazyGetNodeSalePriceQuery, useLazyGetTotalPurchasedQuery } from 'services/api/nodesale';
+import { useLazyGetTokenPricesQuery } from 'services/api/price';
+import { useGetUniswapTokenListQuery } from 'services/api/tokens';
+import { selectCurrentUsdPrice } from 'services/selectors/price';
+import { selectListedSwapTokensByChainId } from 'services/selectors/tokens';
+import balanceTool from 'utils/balance';
+import { NodeSaleStartDate, StartingPrice, TotalNodes } from 'utils/constants';
+import { CustomerSupport } from 'utils/data';
+import mockTool from 'utils/mock';
+import { formatNumber } from 'utils/number';
+import { parseIntString, stringToHex } from 'utils/string';
+import PurchaseButton from './PurchaseButton';
+import TotalPay from './TotalPay';
 
 const supportedNetworks = {
-  "1": "Ethereum",
-  "10": "Optimism",
-  "56": "BNB",
-  "137": "Polygon",
-  "8453": "Base",
-  "42161": "Arbitrum",
+  '1': 'Ethereum',
+  '10': 'Optimism',
+  '56': 'BNB',
+  '137': 'Polygon',
+  '8453': 'Base',
+  '42161': 'Arbitrum',
 };
 
 const PurchaseFlow = () => {
@@ -49,11 +49,10 @@ const PurchaseFlow = () => {
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
   const [fetchTotalPurchased] = useLazyGetTotalPurchasedQuery();
   const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
-  const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } =
-    useNodeSale({
-      provider,
-      wallet,
-    });
+  const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
+    provider,
+    wallet,
+  });
   const { getSwapPath, getQuoteAmount, getSwapPathForV3 } = useUniswap({
     provider,
     wallet,
@@ -74,9 +73,9 @@ const PurchaseFlow = () => {
   const [fetchingPriceLoading, setFetchingPriceLoading] = useState<boolean>(false);
   const [isTxLoading, setTxLoading] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState(false);
-  const [pendingTxHash, setPendingTxHash] = useState("");
-  const [pendingModalTitle, setPendingModalTitle] = useState("");
-  const [pendingModalText, setPendingModalText] = useState("");
+  const [pendingTxHash, setPendingTxHash] = useState('');
+  const [pendingModalTitle, setPendingModalTitle] = useState('');
+  const [pendingModalText, setPendingModalText] = useState('');
   const [pendingModalProcess, setPendingModalProcess] = useState(false);
 
   const [fromToken, setFromToken] = useState(mockTool.getEmptyToken());
@@ -90,9 +89,7 @@ const PurchaseFlow = () => {
   const [slippageFeePc, setSlippageFeePc] = useState<number>(1);
 
   const { selectedChainId, targetChain } = useMemo(() => {
-    const targetChain = wallet.network
-      ? allChains[parseIntString(wallet.network)]
-      : mockTool.getMockChain();
+    const targetChain = wallet.network ? allChains[parseIntString(wallet.network)] : mockTool.getMockChain();
     const selectedChainId = targetChain?.chainId;
 
     return {
@@ -111,13 +108,7 @@ const PurchaseFlow = () => {
   }, [nodePrice, totalSupportPrice, processingFee]);
 
   useEffect(() => {
-    if (
-      totalPay &&
-      slippageFeePc &&
-      fromToken &&
-      fromToken.address !== "" &&
-      fromTokenExchangeRate
-    ) {
+    if (totalPay && slippageFeePc && fromToken && fromToken.address !== '' && fromTokenExchangeRate) {
       const expectedAmount = totalPay + (nodePrice * slippageFeePc) / 100;
       const tokenAmount = BigNumber(expectedAmount).dividedBy(fromTokenExchangeRate);
       const amount = {
@@ -172,18 +163,18 @@ const PurchaseFlow = () => {
     const price = await fetchNodePrice({ amount, promo_code: decodeData });
 
     if (price.isSuccess) {
-      if (Number(price.data["price"]) !== 0) {
-        setNodePrice(Number(BigNumber(price.data["price"]).dividedBy(1000000)));
+      if (Number(price.data['price']) !== 0) {
+        setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000)));
         if (promo_code) {
           setApplyPromoCode(promo_code);
-          toast.success("Congratulations! Your Promo Code has been verified.");
+          toast.success('Congratulations! Your Promo Code has been verified.');
         }
       } else {
         promo_code && setApplyPromoCode(null);
-        toast.error(promo_code ? "Invalid Promo Code" : "API async error. Please try again.");
+        toast.error(promo_code ? 'Invalid Promo Code' : 'API async error. Please try again.');
       }
     } else {
-      toast.error("API async error. Please try again.");
+      toast.error('API async error. Please try again.');
     }
   };
 
@@ -217,24 +208,21 @@ const PurchaseFlow = () => {
     if (wallet.network) {
       const chainId = parseIntString(wallet.network);
       if (chainId in supportedNetworks) setSelectedChain(chainId);
-      else setSelectedChain("");
-    } else setSelectedChain("");
+      else setSelectedChain('');
+    } else setSelectedChain('');
   }, [wallet.network]);
 
   // Handler when fromToken selected
   useEffect(() => {
     const fetchBalance = async () => {
-      if (fromToken.address === "") return;
+      if (fromToken.address === '') return;
       if (!provider || !wallet || !wallet.network) return;
       if (walletNetwork.toString() !== targetChain?.chainId.toString()) return;
 
       // Get fromToken Price in USD
       const priceData = await fetchTokenPrice({
         network: targetChain.chainId,
-        token:
-          fromToken.address === VETH_ADDRESS
-            ? Addresses[targetChain?.chainId].weth
-            : fromToken.address,
+        token: fromToken.address === VETH_ADDRESS ? Addresses[targetChain?.chainId].weth : fromToken.address,
       }).unwrap();
       setFromTokenExchangeRate(selectCurrentUsdPrice(priceData));
     };
@@ -245,7 +233,7 @@ const PurchaseFlow = () => {
   // Handle FromToken Amount (inputAmount) Changed
   useEffect(() => {
     const changeAmount = async () => {
-      if (fromToken.address === "") return;
+      if (fromToken.address === '') return;
       if (!provider || !wallet || !wallet.network) return;
       if (wallet.network.toString() !== targetChain.chainId.toString()) return;
       if (expectedAmount.raw.comparedTo(0) <= 0) return;
@@ -255,9 +243,9 @@ const PurchaseFlow = () => {
       // toToken is USDC
       const toToken: IToken = {
         address: Addresses[selectedChainId].usdc,
-        symbol: "USDC",
-        displayName: "USDC",
-        icon: "https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+        symbol: 'USDC',
+        displayName: 'USDC',
+        icon: 'https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png',
         decimals: 6,
       };
 
@@ -269,7 +257,7 @@ const PurchaseFlow = () => {
         DEADLINE,
         parseIntString(wallet.network),
         false,
-        true
+        true,
       );
 
       const quoteAmount = getQuoteAmount(uniswapPath);
@@ -298,13 +286,13 @@ const PurchaseFlow = () => {
       selectFromResult: (result) => ({
         listedTokens: selectListedSwapTokensByChainId(result.data, selectedChainId),
       }),
-    }
+    },
   );
 
   // SwapSuccess handler
   const callbackSuccess = async ({ hash }) => {
     setTxLoading(false);
-    setPendingTxHash("");
+    setPendingTxHash('');
     setSuccessModal(true);
   };
 
@@ -317,7 +305,7 @@ const PurchaseFlow = () => {
   };
 
   const callbackError = (e) => {
-    toast.error(e ? e : "Something went wrong");
+    toast.error(e ? e : 'Something went wrong');
     setTxLoading(false);
   };
 
@@ -340,7 +328,7 @@ const PurchaseFlow = () => {
             callbackSuccess,
             callbackError,
             callbackWaiting,
-            stringToHex(appliedPromoCode)
+            stringToHex(appliedPromoCode),
           );
         }
       } catch (e) {
@@ -386,7 +374,7 @@ const PurchaseFlow = () => {
               <p>Node Quantity</p>
               <div className="purchase-sale-set__quantity__value">
                 <button
-                  className={`increase ${quantity <= 1 ? "not-allowed" : "pointer"}`}
+                  className={`increase ${quantity <= 1 ? 'not-allowed' : 'pointer'}`}
                   onClick={() => setQuantityValue()}
                   disabled={quantity <= 1}
                 >
@@ -400,16 +388,14 @@ const PurchaseFlow = () => {
                     setQuantity(
                       Number(e.target.value) > TotalNodes - totalPurchased
                         ? TotalNodes - totalPurchased
-                        : Number(e.target.value)
+                        : Number(e.target.value),
                     )
                   }
                   min={1}
                   max={TotalNodes - totalPurchased}
                 />
                 <button
-                  className={`increase ${
-                    quantity >= TotalNodes - totalPurchased ? "not-allowed" : "pointer"
-                  }`}
+                  className={`increase ${quantity >= TotalNodes - totalPurchased ? 'not-allowed' : 'pointer'}`}
                   onClick={() => setQuantityValue(true)}
                   disabled={quantity >= TotalNodes - totalPurchased}
                 >
@@ -424,15 +410,8 @@ const PurchaseFlow = () => {
                 Add Promo Code <span>(Optional)</span>
               </p>
               <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
-                <input
-                  value={promoCode}
-                  onChange={(e) => setPromoCode(e.target.value)}
-                  className="purchase-promo"
-                />
-                <div
-                  className="purchase-promo-apply pointer"
-                  onClick={() => getNodePriceWithPromoCode(promoCode)}
-                >
+                <input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="purchase-promo" />
+                <div className="purchase-promo-apply pointer" onClick={() => getNodePriceWithPromoCode(promoCode)}>
                   Apply
                 </div>
               </div>
@@ -467,11 +446,7 @@ const PurchaseFlow = () => {
                       {support.price > 0 && (
                         <span className="purchase-sale-pay__supports-effects__sub">
                           * Requires a 24-month subscription. Total cost: $
-                          {formatNumber(
-                            support.price > 0 ? subscriptionFee * support.month : 0,
-                            0,
-                            0
-                          )}
+                          {formatNumber(support.price > 0 ? subscriptionFee * support.month : 0, 0, 0)}
                         </span>
                       )}
                     </div>
@@ -546,7 +521,7 @@ const PurchaseFlow = () => {
           <CheckBox
             label={
               <>
-                I agree with the{" "}
+                I agree with the{' '}
                 <a
                   href="https://docs.google.com/document/d/1puUO41mEjnj6qQqFpSyjzXIJanfG16KoXEZ8xBoB-VI/edit"
                   target="_blank"
@@ -561,7 +536,7 @@ const PurchaseFlow = () => {
           <CheckBox
             label={
               <>
-                I agree with the{" "}
+                I agree with the{' '}
                 <a
                   href="https://docs.google.com/document/d/1xt-CNyditQZXZLcfwM_wsPMpiBL5TUiFQu7Alnw5VeY/edit"
                   target="_blank"
@@ -576,7 +551,7 @@ const PurchaseFlow = () => {
           <CheckBox
             label={
               <>
-                I agree with the{" "}
+                I agree with the{' '}
                 <a
                   href="https://docs.google.com/document/d/1wohVWiIEvsrswkV3KbOoxmOmc0fwnE6Wsk_JIqQrKrE/edit?usp=sharing"
                   target="_blank"

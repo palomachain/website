@@ -21,36 +21,28 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
     "name": "approveMax",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
     "name": "approveMaxMinusOne",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
     "name": "approveZeroThenMax",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "token", "type": "address" }],
     "name": "approveZeroThenMaxMinusOne",
     "outputs": [],
     "stateMutability": "payable",
@@ -113,9 +105,7 @@
       }
     ],
     "name": "exactInput",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountOut", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountOut", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -145,9 +135,7 @@
       }
     ],
     "name": "exactInputSingle",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountOut", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountOut", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -170,9 +158,7 @@
       }
     ],
     "name": "exactOutput",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountIn", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -202,9 +188,7 @@
       }
     ],
     "name": "exactOutputSingle",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountIn", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -318,13 +302,9 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "bytes[]", "name": "data", "type": "bytes[]" }
-    ],
+    "inputs": [{ "internalType": "bytes[]", "name": "data", "type": "bytes[]" }],
     "name": "multicall",
-    "outputs": [
-      { "internalType": "bytes[]", "name": "results", "type": "bytes[]" }
-    ],
+    "outputs": [{ "internalType": "bytes[]", "name": "results", "type": "bytes[]" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -416,9 +396,7 @@
       { "internalType": "address", "name": "to", "type": "address" }
     ],
     "name": "swapExactTokensForTokens",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountOut", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountOut", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -430,9 +408,7 @@
       { "internalType": "address", "name": "to", "type": "address" }
     ],
     "name": "swapTokensForExactTokens",
-    "outputs": [
-      { "internalType": "uint256", "name": "amountIn", "type": "uint256" }
-    ],
+    "outputs": [{ "internalType": "uint256", "name": "amountIn", "type": "uint256" }],
     "stateMutability": "payable",
     "type": "function"
   },
@@ -504,9 +480,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "amountMinimum", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "amountMinimum", "type": "uint256" }],
     "name": "unwrapWETH9",
     "outputs": [],
     "stateMutability": "payable",
@@ -536,9 +510,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "value", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "uint256", "name": "value", "type": "uint256" }],
     "name": "wrapETH",
     "outputs": [],
     "stateMutability": "payable",

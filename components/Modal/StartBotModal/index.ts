@@ -1,3 +1,3 @@
-import StartBotModal from "./StartBotModal";
+import StartBotModal from './StartBotModal';
 
 export default StartBotModal;

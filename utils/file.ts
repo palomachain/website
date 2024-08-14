@@ -1,19 +1,15 @@
 export const isImageFile = (file) => {
-  if (
-    file.type === "image/png" ||
-    file.type === "image/jpg" ||
-    file.type === "image/jpeg"
-  ) {
+  if (file.type === 'image/png' || file.type === 'image/jpg' || file.type === 'image/jpeg') {
     return true;
   }
 
   return false;
 };
 
-export const getFileExtension = (fileName) => fileName.split(".").pop();
+export const getFileExtension = (fileName) => fileName.split('.').pop();
 
 export const b64toBlob = (b64Data, contentType, sliceSize) => {
-  contentType = contentType || "";
+  contentType = contentType || '';
   sliceSize = sliceSize || 512;
 
   const byteCharacters = atob(b64Data);

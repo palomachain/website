@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
-import classNames from "classnames";
-import balanceTool from "utils/balance";
-import { ITokenBalance } from "interfaces/swap";
+import React, { useMemo } from 'react';
+import classNames from 'classnames';
+import balanceTool from 'utils/balance';
+import { ITokenBalance } from 'interfaces/swap';
 
-import style from "./TokenAmountView.module.scss";
+import style from './TokenAmountView.module.scss';
 
 interface TokenAmountViewProps {
   title?: string;
@@ -15,10 +15,7 @@ const TokenAmountView = ({ token, title, className }: TokenAmountViewProps) => {
   const usdAmount = useMemo(() => {
     if (!token) return 0;
 
-    const usd = balanceTool.convertToDollar(
-      token.balance.format,
-      token.exchangeRate
-    );
+    const usd = balanceTool.convertToDollar(token.balance.format, token.exchangeRate);
     return usd;
   }, [token]);
 

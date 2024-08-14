@@ -1,13 +1,10 @@
-import { envParam } from "configs/constants";
-import { api } from "services";
-import { parseIntString } from "utils/string";
+import { envParam } from 'configs/constants';
+import { api } from 'services';
+import { parseIntString } from 'utils/string';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getTokenPrices: build.query<
-      GetTokenPricesApiResponse,
-      GetTokenPricesApiArg
-    >({
+    getTokenPrices: build.query<GetTokenPricesApiResponse, GetTokenPricesApiArg>({
       query: (queryArg) => ({
         url: `${envParam.palomaNestServiceAPIBaseUrl}/tokens/market-data`,
         params: {
@@ -20,8 +17,7 @@ const injectedRtkApi = api.injectEndpoints({
   overrideExisting: false,
 });
 export { injectedRtkApi as api };
-export type GetTokenPricesApiResponse =
-  /** status 200 Success */ GasTokenPriceResultData;
+export type GetTokenPricesApiResponse = /** status 200 Success */ GasTokenPriceResultData;
 export type GetTokenPricesApiArg = {
   network: string | number;
   token: string;
@@ -29,5 +25,4 @@ export type GetTokenPricesApiArg = {
 
 export type GasTokenPriceResultData = any;
 
-export const { useGetTokenPricesQuery, useLazyGetTokenPricesQuery } =
-  injectedRtkApi;
+export const { useGetTokenPricesQuery, useLazyGetTokenPricesQuery } = injectedRtkApi;

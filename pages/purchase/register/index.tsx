@@ -1,5 +1,5 @@
-import Describe from "../describe";
-import RegisterFlow from "./registration";
+import Describe from '../describe';
+import RegisterFlow from './registration';
 
 const Register = () => {
   return (

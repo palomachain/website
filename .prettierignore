@@ -1,0 +1,7 @@
+build
+package-lock.json
+node_modules
+.github
+.next
+*.d.ts
+*.js

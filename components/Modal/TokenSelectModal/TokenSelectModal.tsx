@@ -1,17 +1,17 @@
-import Modal from "components/Modal";
-import SearchInput from "components/SearchInput";
-import TokenView from "components/TokenView";
-import { Addresses, VETH_ADDRESS } from "contracts/addresses";
-import useMoralis from "hooks/useMoralis";
-import { useWallet } from "hooks/useWallet";
-import { IToken } from "interfaces/swap";
-import React, { useEffect, useMemo, useState } from "react";
-import { useLazyGetTokenPricesQuery } from "services/api/price";
-import { selectCurrentUsdPrice } from "services/selectors/price";
-import balanceTool from "utils/balance";
-import { isSameContract, parseDexString, parseIntString } from "utils/string";
+import Modal from 'components/Modal';
+import SearchInput from 'components/SearchInput';
+import TokenView from 'components/TokenView';
+import { Addresses, VETH_ADDRESS } from 'contracts/addresses';
+import useMoralis from 'hooks/useMoralis';
+import { useWallet } from 'hooks/useWallet';
+import { IToken } from 'interfaces/swap';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useLazyGetTokenPricesQuery } from 'services/api/price';
+import { selectCurrentUsdPrice } from 'services/selectors/price';
+import balanceTool from 'utils/balance';
+import { isSameContract, parseDexString, parseIntString } from 'utils/string';
 
-import style from "./TokenSelectModal.module.scss";
+import style from './TokenSelectModal.module.scss';
 
 interface TokenSelectModalProps {
   show?: boolean;
@@ -36,80 +36,53 @@ const TokenSelectModal = ({
   const { wallet } = useWallet();
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [tokensList, setTokensList] = useState(tokens);
   const [tokenLoading, setTokenLoading] = useState<boolean>(true);
 
   const [availableToken, setAvailableToken] = useState<IToken[]>([]);
 
-  const usdAmount = async (
-    tokenAddress: string,
-    balance: string,
-    decimals: number
-  ) => {
+  const usdAmount = async (tokenAddress: string, balance: string, decimals: number) => {
     const priceData = await fetchTokenPrice({
       network: parseIntString(wallet.network),
       token:
         wallet.network &&
-        (isSameContract(tokenAddress)
-          ? Addresses[parseIntString(wallet.network)].weth
-          : tokenAddress),
+        (isSameContract(tokenAddress) ? Addresses[parseIntString(wallet.network)].weth : tokenAddress),
     }).unwrap();
     return balanceTool.convertToDollar(
       balanceTool.convertFromWei(balance, 4, decimals),
-      selectCurrentUsdPrice(priceData)
+      selectCurrentUsdPrice(priceData),
     );
   };
 
   const fetchTokensList = async () => {
     if (showMyToken) {
-      let myTokenList = await getMyTokens(
-        wallet.account,
-        parseDexString(wallet.network || "0x1")
-      );
+      let myTokenList = await getMyTokens(wallet.account, parseDexString(wallet.network || '0x1'));
       // moralis api call one more time if result is empty while updating the api
       if (myTokenList.length === 0) {
-        myTokenList = await getMyTokens(
-          wallet.account,
-          parseDexString(wallet.network || "0x1")
-        );
+        myTokenList = await getMyTokens(wallet.account, parseDexString(wallet.network || '0x1'));
       }
 
       let resultTokens = [];
       // Check ETH balance
-      const ethBalance: string = await getNativeBalance(
-        wallet.account,
-        parseDexString(wallet.network || "0x1")
-      );
+      const ethBalance: string = await getNativeBalance(wallet.account, parseDexString(wallet.network || '0x1'));
 
-      if (ethBalance !== "0") {
-        let ethToken = tokensList.find((token) =>
-          isSameContract(token.address)
-        );
+      if (ethBalance !== '0') {
+        let ethToken = tokensList.find((token) => isSameContract(token.address));
         ethToken.balance = ethBalance;
-        ethToken.usdAmount = await usdAmount(
-          VETH_ADDRESS,
-          ethBalance,
-          ethToken.decimals
-        );
+        ethToken.usdAmount = await usdAmount(VETH_ADDRESS, ethBalance, ethToken.decimals);
         resultTokens.push(ethToken);
       }
 
       await Promise.all(
         myTokenList.map(async (myToken) => {
-          let result = tokensList.find((token) =>
-            isSameContract(token.address, myToken.token_address)
-          );
+          let result = tokensList.find((token) => isSameContract(token.address, myToken.token_address));
           if (result) {
             result.balance = myToken.balance;
-            result.usdAmount = await usdAmount(
-              myToken.token_address,
-              myToken.balance,
-              myToken.decimals
-            );
+            result.usdAmount = await usdAmount(myToken.token_address, myToken.balance, myToken.decimals);
             resultTokens.push(result);
           }
-        })
+        }),
       );
 
       resultTokens = resultTokens.sort(function (a, b) {
@@ -153,7 +126,7 @@ const TokenSelectModal = ({
     const result = availableToken.filter(
       (token) =>
         token.symbol.toLowerCase().includes(search.toLowerCase()) ||
-        token.displayName.toLowerCase().includes(search.toLowerCase())
+        token.displayName.toLowerCase().includes(search.toLowerCase()),
     );
     return result;
   }, [availableToken, search]);
@@ -196,25 +169,18 @@ const TokenSelectModal = ({
       {!tokenLoading && selectableTokens.length > 0 && (
         <section className={style.tokenList}>
           {selectableTokens.map((token) => (
-            <TokenView
-              token={token}
-              key={`${token.symbol}-${token.address}`}
-              onClick={(val) => onSelectToken(val)}
-            />
+            <TokenView token={token} key={`${token.symbol}-${token.address}`} onClick={(val) => onSelectToken(val)} />
           ))}
         </section>
       )}
 
-      {!tokenLoading &&
-        availableToken.length > 0 &&
-        selectableTokens.length === 0 && (
-          <section className={style.tokenEmpty}>
-            <p className={style.tokenEmptyText}>
-              We couldn't find tokens with this name. <br></br>Please try search
-              again.
-            </p>
-          </section>
-        )}
+      {!tokenLoading && availableToken.length > 0 && selectableTokens.length === 0 && (
+        <section className={style.tokenEmpty}>
+          <p className={style.tokenEmptyText}>
+            We couldn't find tokens with this name. <br></br>Please try search again.
+          </p>
+        </section>
+      )}
 
       {!tokenLoading && availableToken.length === 0 && (
         <section className={style.tokenEmpty}>

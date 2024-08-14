@@ -1,15 +1,11 @@
-import RotatedHeader from "components/RotatedHeader";
-import { getCookie, setCookie } from "cookies-next";
-import PalomaBotIntro from "elements/home/PalomaBotIntro";
-import mixpanel from "mixpanel-browser";
-import React, { useEffect, useState } from "react";
-import {
-  getFollowersCount,
-  getMessageCount,
-  getPalomaBotStats,
-} from "utils/axios";
-import { PAGE_LANDING } from "utils/constants";
-import { fetchPageValues } from "utils/storyblok";
+import RotatedHeader from 'components/RotatedHeader';
+import { getCookie, setCookie } from 'cookies-next';
+import PalomaBotIntro from 'elements/home/PalomaBotIntro';
+import mixpanel from 'mixpanel-browser';
+import React, { useEffect, useState } from 'react';
+import { getFollowersCount, getMessageCount, getPalomaBotStats } from 'utils/axios';
+import { PAGE_LANDING } from 'utils/constants';
+import { fetchPageValues } from 'utils/storyblok';
 
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
@@ -23,7 +19,7 @@ export default function Bots({ state, router }) {
     totalMessagesCount: 19673,
     todayMessageCount: 0,
   });
-  const [followers, setFollowers] = useState("");
+  const [followers, setFollowers] = useState('');
 
   useEffect(() => {
     const getPageData = async () => {
@@ -56,11 +52,11 @@ export default function Bots({ state, router }) {
   }, []);
 
   useEffect(() => {
-    const ignore = getCookie("ignore");
+    const ignore = getCookie('ignore');
 
     if (ignore) {
       // extend the time the user is ignored
-      setCookie("ignore", "true", { maxAge: 60 * 60 * 24 * 7 * 10000 });
+      setCookie('ignore', 'true', { maxAge: 60 * 60 * 24 * 7 * 10000 });
     }
   }, []);
 
@@ -97,12 +93,10 @@ export default function Bots({ state, router }) {
           <div className="home-page-text">
             <h2>Permissionless Bots</h2>
             <p>
-              Paloma's bots are low-latency and bidirectional smart contracts
-              that are managed by the Paloma blockchain. Paloma validators act
-              as custodians to monitor and execute state change instructions
-              sent by developers and by users on target blockchains including
-              Ethereum, BSC Chain, Polygon, Ethereum L2s, and any Cosmos-SDK
-              Chain
+              Paloma's bots are low-latency and bidirectional smart contracts that are managed by the Paloma blockchain.
+              Paloma validators act as custodians to monitor and execute state change instructions sent by developers
+              and by users on target blockchains including Ethereum, BSC Chain, Polygon, Ethereum L2s, and any
+              Cosmos-SDK Chain
             </p>
           </div>
           <div className="home-page-image">
@@ -132,27 +126,18 @@ export default function Bots({ state, router }) {
           </div>
         </div>
 
-        <RotatedHeader
-          title="Use Cases"
-          theme="dark"
-          className="home-section-header"
-        />
+        <RotatedHeader title="Use Cases" theme="dark" className="home-section-header" />
 
         <div className="home-page-section">
           <div className="home-page-text">
             <span className="pink">Uniswap V2 Position</span>
             <h2>Build a Limit</h2>
             <h2>Order Bot</h2>
-            <p style={{ textAlign: "left" }}>
-              We deliver a game-changer blockchain for developers. our protocol
-              was built from developers to developers. Easy to use, easy to
-              love. Get started now!
+            <p style={{ textAlign: 'left' }}>
+              We deliver a game-changer blockchain for developers. our protocol was built from developers to developers.
+              Easy to use, easy to love. Get started now!
             </p>
-            <a
-              href="https://docs.palomachain.com/"
-              className="home-page-button"
-              style={{ width: "100%" }}
-            >
+            <a href="https://docs.palomachain.com/" className="home-page-button" style={{ width: '100%' }}>
               View Docs
               <img src="/assets/arrows/arrow-top-right.png" />
             </a>
@@ -186,11 +171,7 @@ export default function Bots({ state, router }) {
           </div>
         </div> */}
 
-        <RotatedHeader
-          title="How to Build on Paloma?"
-          theme="dark"
-          className="home-section-header"
-        />
+        <RotatedHeader title="How to Build on Paloma?" theme="dark" className="home-section-header" />
 
         <div className="home-page-section">
           <div className="home-how-to-build">
@@ -199,9 +180,8 @@ export default function Bots({ state, router }) {
               <div className="content">
                 <h1>Create a Bot</h1>
                 <p>
-                  Create your bot with a simple command-line entry on Paloma.
-                  Pay for your bot's gas in GRAINs or ETH at the command line.
-                  Let fly!
+                  Create your bot with a simple command-line entry on Paloma. Pay for your bot's gas in GRAINs or ETH at
+                  the command line. Let fly!
                 </p>
               </div>
             </div>
@@ -212,9 +192,8 @@ export default function Bots({ state, router }) {
               <div className="content">
                 <h1>Deploy Your Bot</h1>
                 <p>
-                  Use Paloma's Python or JavaScript SDK to send a transaction or
-                  command to your bot on Paloma and your desired target chain.
-                  Watch your bot interact with other contracts.
+                  Use Paloma's Python or JavaScript SDK to send a transaction or command to your bot on Paloma and your
+                  desired target chain. Watch your bot interact with other contracts.
                 </p>
               </div>
             </div>
@@ -224,14 +203,13 @@ export default function Bots({ state, router }) {
               <div className="content">
                 <h1>Create Another Bot</h1>
                 <p>
-                  Use Paloma to determine when to fire the next bot message to
-                  the pigeons. Pay gas in GRAINs or ETH.
+                  Use Paloma to determine when to fire the next bot message to the pigeons. Pay gas in GRAINs or ETH.
                 </p>
               </div>
               <a
                 href="https://docs.palomachain.com/"
                 className="home-page-button"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 target="_blank"
               >
                 View Docs
@@ -251,7 +229,7 @@ export default function Bots({ state, router }) {
               href="https://discord.gg/tNqkNHvVNc"
               className="home-page-button"
               target="_blank"
-              style={{ background: "#fff" }}
+              style={{ background: '#fff' }}
             >
               Join The Flock
               <img src="/assets/arrows/arrow-top-right.png" />

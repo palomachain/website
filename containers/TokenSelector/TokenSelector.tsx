@@ -1,12 +1,12 @@
-import BigNumber from "bignumber.js";
-import classNames from "classnames";
-import OnramperModal from "components/Modal/OmramperModal";
-import TokenSelectModal from "components/Modal/TokenSelectModal";
-import { useWallet } from "hooks/useWallet";
-import { IBalance, IToken } from "interfaces/swap";
-import { useState } from "react";
-import SelectDropDown from "../SelectDropDown";
-import style from "./TokenSelector.module.scss";
+import BigNumber from 'bignumber.js';
+import classNames from 'classnames';
+import OnramperModal from 'components/Modal/OmramperModal';
+import TokenSelectModal from 'components/Modal/TokenSelectModal';
+import { useWallet } from 'hooks/useWallet';
+import { IBalance, IToken } from 'interfaces/swap';
+import { useState } from 'react';
+import SelectDropDown from '../SelectDropDown';
+import style from './TokenSelector.module.scss';
 
 interface TokenSelectorProps {
   label?: string;
@@ -69,27 +69,16 @@ const TokenSelector = ({
             inputClassName={style.dropdownInputClass}
           />
         ) : (
-          <div
-            className={style.token}
-            onClick={() => handleShowTokenSelectModal()}
-          >
+          <div className={style.token} onClick={() => handleShowTokenSelectModal()}>
             <div className="flex-row gap-8">
-              {token.icon !== "" && (
-                <img src={token.icon} width={25} height={25} />
-              )}
-              {token.symbol === "" ? (
-                "Select Token"
+              {token.icon !== '' && <img src={token.icon} width={25} height={25} />}
+              {token.symbol === '' ? (
+                'Select Token'
               ) : (
-                <div className={classNames(style.symbol, "bold")}>
-                  {token.symbol}
-                </div>
+                <div className={classNames(style.symbol, 'bold')}>{token.symbol}</div>
               )}
             </div>
-            <img
-              className={style.selectIcon}
-              src="/assets/icons/down.svg"
-              alt=""
-            />
+            <img className={style.selectIcon} src="/assets/icons/down.svg" alt="" />
           </div>
         )}
       </div>
@@ -104,10 +93,7 @@ const TokenSelector = ({
         />
       )}
 
-      <OnramperModal
-        show={showOnramperModal}
-        onBack={() => setShowOnramperModal(false)}
-      />
+      <OnramperModal show={showOnramperModal} onBack={() => setShowOnramperModal(false)} />
     </section>
   );
 };

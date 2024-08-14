@@ -1,23 +1,14 @@
-import {
-  prepareWriteContract,
-  readContract,
-  waitForTransaction,
-  writeContract,
-} from "@wagmi/core";
-import BigNumber from "bignumber.js";
-import nodesaleContractAbi from "contracts/abi/nodesale.abi.json";
-import {
-  Addresses,
-  VETH_ADDRESS,
-  ZERO_ADDRESS_PALOMA,
-} from "contracts/addresses";
-import { GAS_MULTIPLIER } from "contracts/constants";
-import { ethers } from "ethers";
-import { IBalance, IToken } from "interfaces/swap";
-import React from "react";
-import { errorMessage } from "utils/errorMessage";
-import { parseIntString } from "utils/string";
-import useToken from "./useToken";
+import { prepareWriteContract, readContract, waitForTransaction, writeContract } from '@wagmi/core';
+import BigNumber from 'bignumber.js';
+import nodesaleContractAbi from 'contracts/abi/nodesale.abi.json';
+import { Addresses, VETH_ADDRESS, ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
+import { GAS_MULTIPLIER } from 'contracts/constants';
+import { ethers } from 'ethers';
+import { IBalance, IToken } from 'interfaces/swap';
+import React from 'react';
+import { errorMessage } from 'utils/errorMessage';
+import { parseIntString } from 'utils/string';
+import useToken from './useToken';
 
 const useNodeSale = ({ provider, wallet }) => {
   const { tokenApprove } = useToken({ provider });
@@ -29,7 +20,7 @@ const useNodeSale = ({ provider, wallet }) => {
       const gasFeeAmount = await readContract({
         address: contractAddress,
         abi: nodesaleContractAbi,
-        functionName: "processing_fee",
+        functionName: 'processing_fee',
         chainId: Number(chainId),
       });
 
@@ -45,7 +36,7 @@ const useNodeSale = ({ provider, wallet }) => {
       const gasFeeAmount = await readContract({
         address: contractAddress,
         abi: nodesaleContractAbi,
-        functionName: "subscription_fee",
+        functionName: 'subscription_fee',
         chainId: Number(chainId),
       });
 
@@ -61,7 +52,7 @@ const useNodeSale = ({ provider, wallet }) => {
       const gasFeeAmount = await readContract({
         address: contractAddress,
         abi: nodesaleContractAbi,
-        functionName: "slippage_fee_percentage",
+        functionName: 'slippage_fee_percentage',
         chainId: Number(chainId),
       });
 
@@ -72,12 +63,12 @@ const useNodeSale = ({ provider, wallet }) => {
     }
   };
 
-  const getActivate = async (chain = "42161") => {
+  const getActivate = async (chain = '42161') => {
     try {
       const activates = await readContract({
         address: Addresses[chain].node_sale,
         abi: nodesaleContractAbi,
-        functionName: "activates",
+        functionName: 'activates',
         chainId: Number(chain),
         args: [wallet.account],
       });
@@ -85,15 +76,15 @@ const useNodeSale = ({ provider, wallet }) => {
       return activates.toString();
     } catch (error) {
       console.error(error);
-      return "";
+      return '';
     }
   };
 
-  const activateWallet = async (palomaWallet, chain = "42161") => {
+  const activateWallet = async (palomaWallet, chain = '42161') => {
     try {
       if (!provider) return;
       // If WalletConnect
-      await provider.send("eth_requestAccounts", []);
+      await provider.send('eth_requestAccounts', []);
       const signer = provider.getSigner();
 
       // Almost never return exponential notation:
@@ -102,24 +93,14 @@ const useNodeSale = ({ provider, wallet }) => {
       const factoryAddress = Addresses[chain].node_sale;
       if (!factoryAddress) return;
 
-      const factoryContract = new ethers.Contract(
-        factoryAddress,
-        nodesaleContractAbi,
-        signer
-      );
-      let depositEstimateGas =
-        await factoryContract.estimateGas.activate_wallet(palomaWallet);
-      console.log("Estimating gas...", depositEstimateGas.toString());
+      const factoryContract = new ethers.Contract(factoryAddress, nodesaleContractAbi, signer);
+      let depositEstimateGas = await factoryContract.estimateGas.activate_wallet(palomaWallet);
+      console.log('Estimating gas...', depositEstimateGas.toString());
 
       let txHash;
-      console.log("Preparing transaction hash...");
-      if (
-        wallet.providerName === "metamask" ||
-        wallet.providerName === "frame"
-      ) {
-        depositEstimateGas = depositEstimateGas.add(
-          depositEstimateGas.div(GAS_MULTIPLIER)
-        );
+      console.log('Preparing transaction hash...');
+      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
         const { hash } = await factoryContract.activate_wallet(palomaWallet, {
           gasLimit: depositEstimateGas,
@@ -129,22 +110,19 @@ const useNodeSale = ({ provider, wallet }) => {
         const { request } = await prepareWriteContract({
           address: factoryAddress,
           abi: nodesaleContractAbi,
-          functionName: "activate_wallet",
+          functionName: 'activate_wallet',
           account: wallet.account,
           args: [palomaWallet],
           chainId: Number(chain),
         });
-        console.log("Preparing deposit function...");
+        console.log('Preparing deposit function...');
         const { hash } = await writeContract(request);
         txHash = hash;
       }
-      console.log("Deposit hash", txHash);
+      console.log('Deposit hash', txHash);
 
       if (txHash) {
-        if (
-          wallet.providerName === "metamask" ||
-          wallet.providerName === "frame"
-        ) {
+        if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
           await provider.waitForTransaction(txHash);
         } else {
           // WalletConnect
@@ -170,18 +148,18 @@ const useNodeSale = ({ provider, wallet }) => {
     onSuccess = (res) => {},
     onError = (res) => {},
     onWait = (res) => {},
-    promo_code?: string
+    promo_code?: string,
   ) => {
     try {
       if (!provider) return;
       // If WalletConnect
-      await provider.send("eth_requestAccounts", []);
+      await provider.send('eth_requestAccounts', []);
       const signer = provider.getSigner();
 
       // Almost never return exponential notation:
       BigNumber.config({ EXPONENTIAL_AT: 1e9 });
 
-      if (contractAddress === "") return;
+      if (contractAddress === '') return;
 
       const approveResult = await tokenApprove(
         fromToken,
@@ -189,27 +167,20 @@ const useNodeSale = ({ provider, wallet }) => {
         contractAddress,
         expectedAmount,
         onWait,
-        onError
+        onError,
       );
       if (!approveResult) return;
 
       onWait({
-        txTitle: "Waiting for Purchasing LightNodes Confirmation",
+        txTitle: 'Waiting for Purchasing LightNodes Confirmation',
         txText: (
           <span>
-            Purchasing{" "}
-            <span style={{ textDecoration: "underline" }}>
-              {node_count} Paloma LightNodes
-            </span>
+            Purchasing <span style={{ textDecoration: 'underline' }}>{node_count} Paloma LightNodes</span>
           </span>
         ),
       });
 
-      const factoryContract = new ethers.Contract(
-        contractAddress,
-        nodesaleContractAbi,
-        signer
-      );
+      const factoryContract = new ethers.Contract(contractAddress, nodesaleContractAbi, signer);
 
       let txHash: any;
 
@@ -221,29 +192,22 @@ const useNodeSale = ({ provider, wallet }) => {
       args.push(
         node_count,
         totalCost,
-        promo_code && promo_code !== "" ? promo_code : ZERO_ADDRESS_PALOMA,
+        promo_code && promo_code !== '' ? promo_code : ZERO_ADDRESS_PALOMA,
         swapPath, //
         isSubSupport, // enhanced
-        sub_month
+        sub_month,
       );
-      console.log("args", args);
+      console.log('args', args);
 
-      const buyNowFunctionName = isForETH ? "pay_for_eth" : "pay_for_token";
-      let depositEstimateGas = await factoryContract.estimateGas[
-        buyNowFunctionName
-      ](...args, {
+      const buyNowFunctionName = isForETH ? 'pay_for_eth' : 'pay_for_token';
+      let depositEstimateGas = await factoryContract.estimateGas[buyNowFunctionName](...args, {
         value: ethValue,
       });
-      console.log("Estimating gas...", depositEstimateGas.toString());
+      console.log('Estimating gas...', depositEstimateGas.toString());
 
-      console.log("Preparing transaction hash...");
-      if (
-        wallet.providerName === "metamask" ||
-        wallet.providerName === "frame"
-      ) {
-        depositEstimateGas = depositEstimateGas.add(
-          depositEstimateGas.div(GAS_MULTIPLIER)
-        );
+      console.log('Preparing transaction hash...');
+      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
         const { hash } = await factoryContract[buyNowFunctionName](...args, {
           value: ethValue,
@@ -260,31 +224,25 @@ const useNodeSale = ({ provider, wallet }) => {
           value: ethValue,
           chainId: Number(chainId),
         });
-        console.log("Preparing deposit function...");
+        console.log('Preparing deposit function...');
         const { hash } = await writeContract(request);
         txHash = hash;
       }
-      console.log("Deposit hash", txHash);
+      console.log('Deposit hash', txHash);
 
       onWait({
-        txTitle: "Processing Transaction...",
+        txTitle: 'Processing Transaction...',
         txText: (
           <p>
-            Purchasing{" "}
-            <span style={{ textDecoration: "underline" }}>
-              {node_count} Paloma LightNodes
-            </span>
+            Purchasing <span style={{ textDecoration: 'underline' }}>{node_count} Paloma LightNodes</span>
           </p>
         ),
-        txHash: "",
+        txHash: '',
         txProcessing: true,
       });
 
       if (txHash) {
-        if (
-          wallet.providerName === "metamask" ||
-          wallet.providerName === "frame"
-        ) {
+        if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
           await provider.waitForTransaction(txHash);
         } else {
           // WalletConnect

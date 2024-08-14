@@ -10,13 +10,13 @@
   }
 }
 
-@import "libraries/global";
+@import 'libraries/global';
 
-@import "components";
-@import "elements";
-@import "pages";
+@import 'components';
+@import 'elements';
+@import 'pages';
 
-@import "layout";
+@import 'layout';
 
 body {
   background-color: $main_bg_color;

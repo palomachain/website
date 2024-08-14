@@ -1,3 +1,3 @@
-import TokenAmountView from "./TokenAmountView";
+import TokenAmountView from './TokenAmountView';
 
 export default TokenAmountView;

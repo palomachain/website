@@ -1,13 +1,13 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 
 function SEO({ description, title, content }) {
   const metaDescription = content ? content.intro : null;
 
   let metaImage = content ? content.image : null;
-  metaImage = "http:" + metaImage;
+  metaImage = 'http:' + metaImage;
 
-  let pageTitle = content ? content.title : "Volume Finance";
+  let pageTitle = content ? content.title : 'Volume Finance';
 
   return (
     <Head>

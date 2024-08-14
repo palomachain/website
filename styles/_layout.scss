@@ -1,4 +1,4 @@
-@import "libraries/global";
+@import 'libraries/global';
 
 .layout-container {
   width: 100vw;
@@ -182,7 +182,7 @@
           height: 25px;
           text-transform: capitalize;
 
-          background-image: url("/assets/arrows/arrow-top-right.png");
+          background-image: url('/assets/arrows/arrow-top-right.png');
           background-repeat: no-repeat;
           background-position: center right;
           padding-right: 15px;
@@ -190,7 +190,7 @@
 
           &:hover {
             color: #ff62c4;
-            background-image: url("/assets/arrows/arrow-top-right-pink.png");
+            background-image: url('/assets/arrows/arrow-top-right-pink.png');
           }
 
           img {

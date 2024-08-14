@@ -1,7 +1,7 @@
-import React from "react";
-import cn from "classnames";
+import React from 'react';
+import cn from 'classnames';
 
-import style from "components/ButtonSelector/Selector.module.scss";
+import style from 'components/ButtonSelector/Selector.module.scss';
 
 interface ButtonProps {
   selectableList: object[];
@@ -11,13 +11,7 @@ interface ButtonProps {
   className?: string;
 }
 
-const Selector = ({
-  selectableList,
-  showSelectModal,
-  handleSelect,
-  selected,
-  className,
-}: ButtonProps) => {
+const Selector = ({ selectableList, showSelectModal, handleSelect, selected, className }: ButtonProps) => {
   return (
     showSelectModal &&
     selectableList &&
@@ -27,16 +21,11 @@ const Selector = ({
           {selectableList.map((list: object, index: number) => (
             <div
               key={index}
-              className={cn(
-                style.selectOption,
-                String(selected) !== list["name"] ? style.disabled : ""
-              )}
-              onClick={() => handleSelect(list["id"])}
+              className={cn(style.selectOption, String(selected) !== list['name'] ? style.disabled : '')}
+              onClick={() => handleSelect(list['id'])}
             >
-              {list && list["icon"] && (
-                <img src={list["icon"]} width={25} height={25} alt="" />
-              )}
-              <span>{list["name"]}</span>
+              {list && list['icon'] && <img src={list['icon']} width={25} height={25} alt="" />}
+              <span>{list['name']}</span>
             </div>
           ))}
         </div>

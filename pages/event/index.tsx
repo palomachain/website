@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { fetchEvents } from "utils/storyblok";
+import React, { useEffect, useState } from 'react';
+import { fetchEvents } from 'utils/storyblok';
 
-import { UpcomingEvent, PastEvent } from "components/Event";
-import RotatedHeader from "components/RotatedHeader";
+import { UpcomingEvent, PastEvent } from 'components/Event';
+import RotatedHeader from 'components/RotatedHeader';
 
-import { convertUTCtoLocalTime, parseDate } from "utils/date";
+import { convertUTCtoLocalTime, parseDate } from 'utils/date';
 
 const Events = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -21,9 +21,7 @@ const Events = () => {
         const event = data[i];
 
         const currentTime = new Date().getTime();
-        const eventTime = convertUTCtoLocalTime(
-          parseDate(event.content.EventTime).getTime()
-        );
+        const eventTime = convertUTCtoLocalTime(parseDate(event.content.EventTime).getTime());
 
         if (eventTime >= currentTime) {
           upcomingEvents.push(event);

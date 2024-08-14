@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const LightNode = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/");
+    router.push('/');
   });
 
   return <></>;

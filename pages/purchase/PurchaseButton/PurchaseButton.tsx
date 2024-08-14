@@ -1,12 +1,12 @@
-import BigNumber from "bignumber.js";
-import cn from "classnames";
-import Button from "components/Button";
-import { NO_CHAIN_SELECTED } from "configs/chains";
-import { useWallet } from "hooks/useWallet";
-import { IBalance, IToken } from "interfaces/swap";
-import React, { useMemo } from "react";
+import BigNumber from 'bignumber.js';
+import cn from 'classnames';
+import Button from 'components/Button';
+import { NO_CHAIN_SELECTED } from 'configs/chains';
+import { useWallet } from 'hooks/useWallet';
+import { IBalance, IToken } from 'interfaces/swap';
+import React, { useMemo } from 'react';
 
-import styles from "./PurchaseButton.module.scss";
+import styles from './PurchaseButton.module.scss';
 
 interface PurchaseButtonProps {
   chainId: string;
@@ -47,7 +47,7 @@ const PurchaseButton = ({
   swapPath,
   className,
   onClickStart,
-  buttonText = "Start Bot",
+  buttonText = 'Start Bot',
 }: PurchaseButtonProps) => {
   const { openConnectionModal, requestSwitchNetwork } = useWallet();
 
@@ -55,8 +55,8 @@ const PurchaseButton = ({
     if (!chainId) {
       return {
         disabled: false,
-        text: "Connect Wallet",
-        style: "",
+        text: 'Connect Wallet',
+        style: '',
         onClick: () => {
           openConnectionModal();
         },
@@ -73,10 +73,7 @@ const PurchaseButton = ({
     }
 
     if (step !== 1) {
-      if (
-        chainId.toString() === NO_CHAIN_SELECTED ||
-        chainId.toString() !== botChain
-      ) {
+      if (chainId.toString() === NO_CHAIN_SELECTED || chainId.toString() !== botChain) {
         return {
           disabled: true,
           text: `Select Correct Chain`,
@@ -87,22 +84,19 @@ const PurchaseButton = ({
         };
       }
 
-      if (!fromToken || fromToken.address === "") {
+      if (!fromToken || fromToken.address === '') {
         return {
           disabled: true,
-          text: "Select Token",
+          text: 'Select Token',
           style: styles.disabled,
           onClick: () => {},
         };
       }
 
-      if (
-        expectedAmount.raw.comparedTo(0) > 0 &&
-        expectedAmount.raw.comparedTo(BigNumber(fromToken.balance)) > 0
-      ) {
+      if (expectedAmount.raw.comparedTo(0) > 0 && expectedAmount.raw.comparedTo(BigNumber(fromToken.balance)) > 0) {
         return {
           disabled: true,
-          text: "Insufficient Token Amount",
+          text: 'Insufficient Token Amount',
           style: styles.disabled,
           onClick: () => {},
         };
@@ -111,7 +105,7 @@ const PurchaseButton = ({
       if (isFetchingPriceLoading || isTxLoading) {
         return {
           disabled: true,
-          text: "Loading...",
+          text: 'Loading...',
           style: styles.disabled,
           isLoading: true,
           onClick: () => {},
@@ -148,7 +142,7 @@ const PurchaseButton = ({
         styles.container,
         className,
         buttonStatus.style,
-        !buttonStatus.disabled ? styles.cursor : undefined
+        !buttonStatus.disabled ? styles.cursor : undefined,
       )}
       full={full}
       onClick={() => buttonStatus.onClick()}
@@ -161,7 +155,7 @@ const PurchaseButton = ({
             alt="loading"
             width={40}
             height={36}
-            style={{ marginTop: "6px" }}
+            style={{ marginTop: '6px' }}
           />
         )}
         {buttonStatus.text}

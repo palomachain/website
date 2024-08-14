@@ -1,24 +1,24 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import cn from "classnames";
+import cn from 'classnames';
 
 const blogSubMenus = [
   {
-    image: "/assets/blog/announcement.png",
-    imageHovered: "/assets/blog/announcement-selected.png",
+    image: '/assets/blog/announcement.png',
+    imageHovered: '/assets/blog/announcement-selected.png',
     title: (
       <span>
         News and <br />
         Announcements
       </span>
     ),
-    link: "/blog/announcements",
-    size: "",
+    link: '/blog/announcements',
+    size: '',
   },
   {
-    image: "/assets/blog/project-updates.png",
-    imageHovered: "/assets/blog/project-updates-selected.png",
+    image: '/assets/blog/project-updates.png',
+    imageHovered: '/assets/blog/project-updates-selected.png',
     title: (
       <span>
         Project
@@ -26,12 +26,12 @@ const blogSubMenus = [
         Developments
       </span>
     ),
-    link: "/blog/project-updates",
-    size: "small",
+    link: '/blog/project-updates',
+    size: 'small',
   },
   {
-    image: "/assets/blog/ama.png",
-    imageHovered: "/assets/blog/ama-selected.png",
+    image: '/assets/blog/ama.png',
+    imageHovered: '/assets/blog/ama-selected.png',
     title: (
       <span>
         Event
@@ -39,8 +39,8 @@ const blogSubMenus = [
         Recaps
       </span>
     ),
-    link: "/blog/events",
-    size: "",
+    link: '/blog/events',
+    size: '',
   },
 ];
 
@@ -49,8 +49,8 @@ const BlogCategory = () => (
     {blogSubMenus.map((menu, index) => (
       <Link href={menu.link} key={`blog-submenu-${index}`}>
         <div className="blog-page-image">
-          <img className={cn("normal", menu.size)} src={menu.image} />
-          <img className={cn("hovered", menu.size)} src={menu.imageHovered} />
+          <img className={cn('normal', menu.size)} src={menu.image} />
+          <img className={cn('hovered', menu.size)} src={menu.imageHovered} />
           <span>{menu.title}</span>
         </div>
       </Link>

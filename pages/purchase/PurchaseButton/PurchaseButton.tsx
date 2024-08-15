@@ -3,6 +3,7 @@ import cn from 'classnames';
 import Button from 'components/Button';
 import { NO_CHAIN_SELECTED } from 'configs/chains';
 import { useWallet } from 'hooks/useWallet';
+import { IPriceTiers } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React, { useMemo } from 'react';
 
@@ -24,6 +25,7 @@ interface PurchaseButtonProps {
   totalSupportPrice?: number;
   expectedAmount?: IBalance;
   swapPath?: string;
+  priceTiers?: IPriceTiers[];
   className?: string;
   onClickStart: () => void;
   buttonText: string;
@@ -45,6 +47,7 @@ const PurchaseButton = ({
   totalSupportPrice,
   expectedAmount,
   swapPath,
+  priceTiers,
   className,
   onClickStart,
   buttonText = 'Start Bot',
@@ -67,6 +70,15 @@ const PurchaseButton = ({
       return {
         disabled: true,
         text: buttonText,
+        style: styles.disabled,
+        onClick: () => {},
+      };
+    }
+
+    if (!isValidTokenAmount) {
+      return {
+        disabled: true,
+        text: 'Input Node Quantity',
         style: styles.disabled,
         onClick: () => {},
       };
@@ -133,6 +145,7 @@ const PurchaseButton = ({
     expectedAmount,
     isFetchingPriceLoading,
     swapPath,
+    priceTiers,
   ]);
 
   return (

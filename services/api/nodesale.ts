@@ -18,6 +18,11 @@ const injectedRtkApi = api.injectEndpoints({
         url: `${nodesaleApiUrl}/purchased`,
       }),
     }),
+    getPriceTiers: build.query<GetNodeSaleApiResponse, {}>({
+      query: () => ({
+        url: `${nodesaleApiUrl}/pricetiers`,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -35,4 +40,5 @@ export const {
   useLazyGetNodeSalePriceQuery,
   useGetTotalPurchasedQuery,
   useLazyGetTotalPurchasedQuery,
+  useLazyGetPriceTiersQuery,
 } = injectedRtkApi;

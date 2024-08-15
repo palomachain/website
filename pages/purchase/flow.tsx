@@ -12,20 +12,26 @@ import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import useUniswap from 'hooks/useUniswap';
 import { useWallet } from 'hooks/useWallet';
+import { IPriceTiers } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React, { useEffect, useMemo, useState } from 'react';
 import Countdown from 'react-countdown';
+import ReactSlider from 'react-slider';
 import { toast } from 'react-toastify';
-import { useLazyGetNodeSalePriceQuery, useLazyGetTotalPurchasedQuery } from 'services/api/nodesale';
+import {
+  useLazyGetNodeSalePriceQuery,
+  useLazyGetPriceTiersQuery,
+  useLazyGetTotalPurchasedQuery,
+} from 'services/api/nodesale';
 import { useLazyGetTokenPricesQuery } from 'services/api/price';
 import { useGetUniswapTokenListQuery } from 'services/api/tokens';
 import { selectCurrentUsdPrice } from 'services/selectors/price';
 import { selectListedSwapTokensByChainId } from 'services/selectors/tokens';
 import balanceTool from 'utils/balance';
-import { NodeSaleEndDate, StartingPrice, TotalNodes } from 'utils/constants';
+import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
-import { formatNumber } from 'utils/number';
+import { abbreviateNumberSI, formatNumber } from 'utils/number';
 import { parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import TotalPay from './TotalPay';
@@ -49,6 +55,8 @@ const PurchaseFlow = () => {
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
   const [fetchTotalPurchased] = useLazyGetTotalPurchasedQuery();
   const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
+  const [fetchPriceTiers] = useLazyGetPriceTiersQuery();
+
   const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
     provider,
     wallet,
@@ -60,7 +68,7 @@ const PurchaseFlow = () => {
 
   const [endDate, setEndDate] = useState(NodeSaleEndDate); // Set the End date of node sale
   const [totalPurchased, setTotalPurchased] = useState(0); // Set Saled Nodes Count
-  const [quantity, setQuantity] = useState(1);
+  const [priceTiers, setPriceTiers] = useState<IPriceTiers[]>();
   const [promoCode, setPromoCode] = useState<string>();
   const [appliedPromoCode, setApplyPromoCode] = useState<string>();
   const [selectedSupport, setSupport] = useState<number>(CustomerSupport.length - 1);
@@ -83,7 +91,7 @@ const PurchaseFlow = () => {
   const [swapPath, setSwapPath] = useState<string>(null);
   const [expectedAmount, setExpectedAmount] = useState<IBalance>(mockTool.emptyTokenBalance());
 
-  const [nodePrice, setNodePrice] = useState<number>(StartingPrice);
+  const [nodePrice, setNodePrice] = useState<number>(0);
   const [processingFee, setProcessingFee] = useState<number>(5);
   const [subscriptionFee, setSubscriptionFee] = useState<number>(50);
   const [slippageFeePc, setSlippageFeePc] = useState<number>(1);
@@ -106,6 +114,10 @@ const PurchaseFlow = () => {
   const totalPay = useMemo(() => {
     return nodePrice + processingFee + totalSupportPrice;
   }, [nodePrice, totalSupportPrice, processingFee]);
+
+  const quantity = useMemo(() => {
+    return priceTiers && priceTiers.length > 0 ? priceTiers.reduce((acc, curr) => acc + curr.inputAmount, 0) : 0;
+  }, [priceTiers]);
 
   useEffect(() => {
     if (totalPay && slippageFeePc && fromToken && fromToken.address !== '' && fromTokenExchangeRate) {
@@ -150,8 +162,28 @@ const PurchaseFlow = () => {
   useEffect(() => {
     const delayDebounceFn = async () => {
       const totalPurchasedCount = await fetchTotalPurchased({});
-      if (totalPurchasedCount.isSuccess) {
-        setTotalPurchased(totalPurchasedCount?.data?.paid_node_cnt ?? 0);
+      let purchasedCount = Number(totalPurchasedCount?.data?.paid_node_cnt) ?? 0;
+      const priceTiersCnt = await fetchPriceTiers({});
+      if (priceTiersCnt.isSuccess) {
+        let tempPriceTiers: IPriceTiers[] = [];
+        priceTiersCnt?.data.map((tier, index) => {
+          if (tier.quantity > purchasedCount) {
+            tempPriceTiers.push({
+              quantity: tier.quantity,
+              price: tier.price,
+              fdv: tier.fdv,
+              purchased: purchasedCount,
+              slot: index + 1,
+              inputAmount: 0,
+            });
+
+            purchasedCount = 0;
+          } else {
+            purchasedCount -= tier.quantity;
+          }
+        });
+
+        setPriceTiers([...tempPriceTiers]);
       }
     };
 
@@ -178,7 +210,7 @@ const PurchaseFlow = () => {
     }
   };
 
-  const getNodePriceWithPromoCode = async (code: string) => {
+  const applyPromoCode = async (code: string) => {
     await getNodePrice(quantity, code);
   };
 
@@ -200,8 +232,39 @@ const PurchaseFlow = () => {
     }
   };
 
-  const setQuantityValue = (isPlus = false) => {
-    setQuantity(isPlus ? quantity + 1 : quantity - 1);
+  const setInputAmount = (index: number, newValue: number) => {
+    let tempPriceTiers = priceTiers;
+    if (
+      tempPriceTiers[index].inputAmount + tempPriceTiers[index].purchased >= tempPriceTiers[index].quantity &&
+      tempPriceTiers[index].inputAmount > newValue
+    ) {
+      tempPriceTiers[index].inputAmount = newValue;
+      tempPriceTiers.forEach((tier, key) => {
+        if (key > index && tier.inputAmount > 0) {
+          tempPriceTiers[key].inputAmount = 0;
+        }
+      });
+    } else {
+      let remainValue = newValue + tempPriceTiers[index].purchased - tempPriceTiers[index].quantity;
+      if (remainValue > 0) {
+        tempPriceTiers[index].inputAmount = tempPriceTiers[index].quantity - tempPriceTiers[index].purchased;
+        for (let key = index + 1; remainValue > 0 && key <= tempPriceTiers.length - 1; key++) {
+          tempPriceTiers[key].inputAmount =
+            remainValue > tempPriceTiers[key].quantity ? tempPriceTiers[key].quantity : remainValue;
+          remainValue -= tempPriceTiers[key].quantity;
+        }
+      } else {
+        tempPriceTiers[index].inputAmount = newValue;
+      }
+    }
+
+    setPriceTiers([...tempPriceTiers]);
+  };
+
+  const handleInputAmount = (index: number, isPlus = false) => {
+    const prevAmount = priceTiers[index].inputAmount;
+    const newValue = isPlus ? prevAmount + 1 : prevAmount - 1;
+    setInputAmount(index, newValue);
   };
 
   useEffect(() => {
@@ -347,63 +410,77 @@ const PurchaseFlow = () => {
         <>
           <div className="purchase-subscription">
             <h3>Paloma LightNode Subscription Sale</h3>
-            <p>Slot 1 Remaining Nodes</p>
-            <input
-              type="range"
-              min={1}
-              max={TotalNodes}
-              value={totalPurchased}
-              className="purchase-subscription__range"
-              readOnly
-            />
-            <p>
-              {totalPurchased}/{TotalNodes}
-            </p>
           </div>
-          <div className="purchase-sale-set">
-            <div className="purchase-sale-set__price purchase-sale-set__flex">
-              <p>
-                Price per Node <span>(Slot 1)</span>
-              </p>
-              <div className="purchase-sale-set__price__value flex-row">
-                <h2>{StartingPrice} USD</h2>
-                <p>Implied FDV $5MM</p>
-              </div>
-            </div>
-            <div className="purchase-sale-set__quantity purchase-sale-set__flex">
-              <p>Node Quantity</p>
-              <div className="purchase-sale-set__quantity__value">
-                <button
-                  className={`increase ${quantity <= 1 ? 'not-allowed' : 'pointer'}`}
-                  onClick={() => setQuantityValue()}
-                  disabled={quantity <= 1}
-                >
-                  -
-                </button>
-                <input
-                  type="number"
-                  className="quantity_value"
-                  value={quantity}
-                  onChange={(e) =>
-                    setQuantity(
-                      Number(e.target.value) > TotalNodes - totalPurchased
-                        ? TotalNodes - totalPurchased
-                        : Number(e.target.value),
-                    )
-                  }
-                  min={1}
-                  max={TotalNodes - totalPurchased}
-                />
-                <button
-                  className={`increase ${quantity >= TotalNodes - totalPurchased ? 'not-allowed' : 'pointer'}`}
-                  onClick={() => setQuantityValue(true)}
-                  disabled={quantity >= TotalNodes - totalPurchased}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-          </div>
+          {priceTiers && priceTiers.length > 0 ? (
+            priceTiers.map(
+              (tier, index) =>
+                (index > 0
+                  ? priceTiers[index - 1].quantity <=
+                    priceTiers[index - 1].purchased + priceTiers[index - 1].inputAmount
+                  : true) && (
+                  <div key={index}>
+                    <div className="purchase-subscription">
+                      <p>Slot {tier.slot} Remaining Nodes</p>
+                      <ReactSlider
+                        className="horizontal-slider"
+                        thumbClassName="example-thumb"
+                        trackClassName="example-track"
+                        min={0}
+                        max={tier.quantity}
+                        value={tier.quantity - tier.purchased}
+                        disabled
+                      />
+                      <p>
+                        {tier.quantity - tier.purchased}/{tier.quantity}
+                      </p>
+                    </div>
+                    <div className="purchase-sale-set" style={{ marginTop: '15px' }}>
+                      <div className="purchase-sale-set__price purchase-sale-set__flex">
+                        <p>
+                          Price per Node <span>(Slot {tier.slot})</span>
+                        </p>
+                        <div className="purchase-sale-set__price__value flex-row">
+                          <h2>{Number(tier.price) / 10 ** 6} USD</h2>
+                          <p>Implied FDV ${abbreviateNumberSI(tier.fdv, 2, 2)}</p>
+                        </div>
+                      </div>
+                      <div className="purchase-sale-set__quantity purchase-sale-set__flex">
+                        <p>Node Quantity</p>
+                        <div className="purchase-sale-set__quantity__value">
+                          <button
+                            className={`increase ${tier.inputAmount <= 0 ? 'not-allowed' : 'pointer'}`}
+                            onClick={() => handleInputAmount(index)}
+                            disabled={tier.inputAmount <= 0}
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            className="quantity_value"
+                            value={tier.inputAmount}
+                            onChange={(e) => setInputAmount(index, Number(e.target.value))}
+                            min={0}
+                            // max={tier.quantity - tier.purchased}
+                          />
+                          <button
+                            className={`increase ${
+                              tier.quantity <= tier.purchased + tier.inputAmount ? 'not-allowed' : 'pointer'
+                            }`}
+                            onClick={() => handleInputAmount(index, true)}
+                            disabled={tier.quantity <= tier.purchased + tier.inputAmount}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ),
+            )
+          ) : (
+            <img src="/assets/icons/loading_circle.svg" width={24} alt="loading" style={{ margin: 'auto' }} />
+          )}
+
           <div className="purchase-sale-set purchase-sale-promo">
             <div className="purchase-sale-set__price purchase-sale-set__flex">
               <p>
@@ -411,7 +488,7 @@ const PurchaseFlow = () => {
               </p>
               <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
                 <input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="purchase-promo" />
-                <div className="purchase-promo-apply pointer" onClick={() => getNodePriceWithPromoCode(promoCode)}>
+                <div className="purchase-promo-apply pointer" onClick={() => applyPromoCode(promoCode)}>
                   Apply
                 </div>
               </div>
@@ -483,13 +560,21 @@ const PurchaseFlow = () => {
         <div className="purchase-sale-set__price purchase-sale-set__flex">
           <p>You Pay</p>
           <div className="purchase-sale-pay">
-            <TotalPay
-              title="1x LightNode Slot 1"
-              step={step}
-              price={nodePrice}
-              exchangeRate={fromTokenExchangeRate}
-              fromToken={fromToken}
-            />
+            {priceTiers &&
+              priceTiers.length > 0 &&
+              priceTiers.map(
+                (tier, index) =>
+                  tier.inputAmount > 0 && (
+                    <TotalPay
+                      key={index}
+                      title={`${tier.inputAmount}x LightNode Slot ${tier.slot}`}
+                      step={step}
+                      price={(Number(tier.price) * tier.inputAmount) / 10 ** 6}
+                      exchangeRate={fromTokenExchangeRate}
+                      fromToken={fromToken}
+                    />
+                  ),
+              )}
             <TotalPay
               title="Purchase Processing Fee"
               step={step}
@@ -590,6 +675,7 @@ const PurchaseFlow = () => {
         totalSupportPrice={totalSupportPrice}
         expectedAmount={expectedAmount} // token amount
         swapPath={swapPath}
+        priceTiers={priceTiers}
         buttonText="Buy Now"
       />
       <PendingTransactionModal

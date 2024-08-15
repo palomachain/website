@@ -11,13 +11,19 @@ import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech
 import style from './activate.module.scss';
 
 const mainChain = '42161'; // Arbitrum
+const STEPS = {
+  CONNECT_WALLET: 1,
+  ACTIVATE_PALOMA: 2,
+  ACTIVATED: 3,
+  TERMINAL: 4,
+};
+const shCommand = 'sh $HOME/Downloads/run.sh activate';
 
 const Activate = () => {
   const { connectMetaMask, connectWalletConnect, requestSwitchNetwork, disconnectWallet, wallet } = useWallet();
   const provider = useProvider(wallet);
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
-  const [confirmedWallet, setConfirmedWallet] = useState(false);
-  const [activated, setActivated] = useState(false);
+  const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
   const [activatedPalomaAddress, setActivatedPalomaAddress] = useState<string>();
 
   const [loadingMetamask, setLoadingMetamask] = useState(false);
@@ -48,10 +54,8 @@ const Activate = () => {
       const checkActivate = async () => {
         const activateAddress: string = await getActivate();
         const isActivated = activateAddress !== ZERO_ADDRESS_PALOMA;
-        setActivated(isActivated);
+        isActivated && setSteps(STEPS.ACTIVATED);
         isActivated && setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
-
-        setConfirmedWallet(true);
       };
       checkActivate();
     }
@@ -77,7 +81,7 @@ const Activate = () => {
 
       const activate = await activateWallet(stringToHexWithBech(palomaAddress));
       if (activate) {
-        setActivated(true);
+        setSteps(STEPS.ACTIVATED);
         setActivatedPalomaAddress(palomaAddress);
       }
     } catch (error) {
@@ -89,13 +93,13 @@ const Activate = () => {
 
   const onClickClose = () => {
     disconnectWallet();
-    setConfirmedWallet(false);
+    setSteps(STEPS.CONNECT_WALLET);
   };
 
   return (
     <section className={style.container}>
-      <div className={style.walletModal}>
-        {!confirmedWallet ? (
+      <div className={classNames(style.walletModal, steps === STEPS.TERMINAL ? style.terminalModal : undefined)}>
+        {steps === STEPS.CONNECT_WALLET && (
           <>
             <h1 className={style.title}>Activate your Paloma LightNode</h1>
             <p>
@@ -120,30 +124,8 @@ const Activate = () => {
               </Button>
             </div>
           </>
-        ) : activated ? (
-          <>
-            <img className={style.loadingImage} src="/assets/icons/success.svg" alt="success" />
-            <h1>Your Paloma LightNode Was Successfully Activated</h1>
-            <p>
-              Your LightNode transaction has been successfully processed. Please register your nodes for software
-              support before downloading the Paloma LightNode Client.
-            </p>
-            <div className={style.activeWallets}>
-              <div className={style.walletItem}>
-                <div className={style.activeRound} />
-                <p>{shortenString(wallet.account, 6, 6)}</p>
-              </div>
-              <div className={style.walletItem}>
-                <img src="/assets/icons/connect.svg" alt="connect" />
-              </div>
-              <div className={style.walletItem}>
-                <div className={style.activeRound} />
-                <p>{shortenString(activatedPalomaAddress, 8, 6)}</p>
-              </div>
-            </div>
-            <h3>Return to the Paloma LightNode Client and start minting.</h3>
-          </>
-        ) : (
+        )}
+        {steps === STEPS.ACTIVATE_PALOMA && (
           <>
             <div className={style.walletItem}>
               <div className={style.activeRound} />
@@ -178,6 +160,54 @@ const Activate = () => {
                 'Activate'
               )}
             </button>
+          </>
+        )}
+        {steps === STEPS.ACTIVATED && (
+          <>
+            <img className={style.loadingImage} src="/assets/icons/success.svg" alt="success" />
+            <h1>Your Paloma LightNode Was Successfully Activated</h1>
+            <p>
+              Your LightNode transaction has been successfully processed. Please register your nodes for software
+              support before downloading the Paloma LightNode Client.
+            </p>
+            <div className={style.activeWallets}>
+              <div className={style.walletItem}>
+                <div className={style.activeRound} />
+                <p>{shortenString(wallet.account, 6, 6)}</p>
+              </div>
+              <div className={style.walletItem}>
+                <img src="/assets/icons/connect.svg" alt="connect" />
+              </div>
+              <div className={style.walletItem}>
+                <div className={style.activeRound} />
+                <p>{shortenString(activatedPalomaAddress, 8, 6)}</p>
+              </div>
+            </div>
+            <button className={style.activateBtn} onClick={() => setSteps(STEPS.TERMINAL)}>
+              Continue
+            </button>
+          </>
+        )}
+        {steps === STEPS.TERMINAL && (
+          <>
+            <h1>Return to your Light Node</h1>
+            <div className={style.terminal}>
+              <div className={style.terminal__round}>1</div>
+              <div className={style.terminal__item}>
+                <p>After activating your LightNode, open the Terminal application found in the Utilities folder.</p>
+                <p>a. Copy and Past the command:</p>
+                <div className={style.shCommand}>
+                  <p>
+                    sh $HOME/Downloads/run.sh <span>activate</span>
+                  </p>
+                  <img
+                    src="/assets/icons/copy.svg"
+                    alt="copy"
+                    onClick={() => navigator.clipboard.writeText(shCommand)}
+                  />
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>

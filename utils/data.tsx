@@ -445,21 +445,21 @@ export const DownloadPaloma = {
           externalBtns: [
             {
               text: 'Mac with Apple Silicon',
-              link: '',
+              link: 'https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64',
             },
             {
               text: 'Mac with Intel Chip',
-              link: '',
+              link: 'https://desktop.docker.com/mac/main/amd64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-amd64',
             },
           ],
           describe:
-            'On your Mac, pull down the Apple icon in the upper-left corner of your screen. Choose About This Mac. If the window shows an item labeled Chip, you have a Mac with Apple silicon. If the window shows an item labeled Processor, you have an Intel-based Mac.',
+            'On your Mac, pull down the Apple icon in the upper-left corner of your screen. Choose About This Mac. If the window shows an item labeled Chip, you have a Mac with Apple silicon. If the window shows an item labeled Processor, you have an Intel-based Mac.',
         },
         {
           title: (
             <p>
               Double-click <span>Docker.dmg</span> to open the installer, then drag the Docker icon to
-              the Applications folder. By default, Docker Desktop is installed at <span>/Applications/Docker.app.</span>
+              the Applications folder. By default, Docker Desktop is installed at <span>/Applications/Docker.app.</span>
             </p>
           ),
         },
@@ -469,6 +469,54 @@ export const DownloadPaloma = {
               Double-click <span>Docker.app</span> in the <b>Applications</b> folder to start Docker.
             </p>
           ),
+        },
+        {
+          title: (
+            <p>
+              The Docker menu displays the Docker Subscription Service Agreement.
+            </p>
+          ),
+        },
+        {
+          title: (
+            <p>
+              Select <b>Accept</b> to continue. Docker Desktop starts after you accept the terms.
+            </p>
+          ),
+        },
+        {
+          title: (
+            <p>
+              Select Finish.
+            </p>
+          ),
+        },
+      ],
+    },
+    {
+      head: 'Download the Setup Script',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Mac hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: 'https://github.com/VolumeFi/lightnode-client/blob/main/run.sh',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              After downloading the setup on your Mac, open the Terminal application found in the Utilities folder
+            </p>
+          ),
+          items: [
+            {
+              name: 'Copy and Past the command:',
+              command: 'sh $HOME/Downloads/run.sh'
+            }
+          ]
         },
       ],
     },

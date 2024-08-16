@@ -44,6 +44,7 @@ const supportedNetworks = {
   '8453': 'Base',
   '42161': 'Arbitrum',
 };
+const supportedChainIds = ['1', '10', '56', '137', '8453', '42161'];
 
 const PurchaseFlow = () => {
   const { wallet } = useWallet();
@@ -659,8 +660,8 @@ const PurchaseFlow = () => {
       )}
 
       <PurchaseButton
-        chainId={wallet ? wallet.network : null}
-        botChain={selectedChain}
+        chainId={wallet ? parseIntString(wallet.network) : null}
+        supportChains={supportedChainIds}
         full
         onClickStart={() => handleStart()}
         isValidTokenAmount={isValidTokenAmount}

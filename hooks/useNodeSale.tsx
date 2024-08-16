@@ -185,10 +185,10 @@ const useNodeSale = ({ provider, wallet }) => {
       let txHash: any;
 
       const isForETH = fromToken.address === VETH_ADDRESS;
-      const ethValue = isForETH ? expectedAmount.raw.toString() : 0;
+      const ethValue = isForETH ? expectedAmount.raw.multipliedBy(1.003).toFixed(0) : 0; // slippage 0.3%
 
       let args = [];
-      !isForETH && args.push(fromToken.address, expectedAmount.raw.toString());
+      !isForETH && args.push(fromToken.address, expectedAmount.raw.multipliedBy(1.003).toFixed(0)); // slippage 0.3%
       args.push(
         node_count,
         totalCost,
@@ -198,6 +198,7 @@ const useNodeSale = ({ provider, wallet }) => {
         sub_month,
       );
       console.log('args', args);
+      console.log('ethValue', ethValue);
 
       const buyNowFunctionName = isForETH ? 'pay_for_eth' : 'pay_for_token';
       let depositEstimateGas = await factoryContract.estimateGas[buyNowFunctionName](...args, {

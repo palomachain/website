@@ -3,7 +3,7 @@ import { supportedNetworks } from './networks';
 
 enum StaticLink {
   Home = '/',
-  PURCHASE = '/purchase/',
+  PURCHASE = '/',
   REGISTER = '/purchase/register/',
   ACTIVATE = '/purchase/activate',
 }

@@ -11,7 +11,7 @@ import styles from './PurchaseButton.module.scss';
 
 interface PurchaseButtonProps {
   chainId: string;
-  botChain: string;
+  supportChains: string[];
   full?: boolean;
   isValidTokenAmount: boolean;
   isTxLoading: boolean;
@@ -33,7 +33,7 @@ interface PurchaseButtonProps {
 
 const PurchaseButton = ({
   chainId,
-  botChain,
+  supportChains,
   full,
   isValidTokenAmount,
   isTxLoading,
@@ -85,14 +85,12 @@ const PurchaseButton = ({
     }
 
     if (step !== 1) {
-      if (chainId.toString() === NO_CHAIN_SELECTED || chainId.toString() !== botChain) {
+      if (chainId.toString() === NO_CHAIN_SELECTED || !supportChains.includes(chainId)) {
         return {
           disabled: true,
           text: `Select Correct Chain`,
           style: styles.disabled,
-          onClick: async () => {
-            await requestSwitchNetwork(botChain);
-          },
+          onClick: () => {},
         };
       }
 
@@ -139,7 +137,7 @@ const PurchaseButton = ({
     promoCode,
     step,
     chainId,
-    botChain,
+    supportChains,
     fromTokenExchangeRate,
     totalSupportPrice,
     expectedAmount,

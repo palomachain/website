@@ -2,6 +2,7 @@ import { envParam } from 'configs/constants';
 import { StaticLink } from 'configs/links';
 import { useRouter } from 'next/router';
 import Cookies from 'universal-cookie';
+import { NodeSaleStartDate } from 'utils/constants';
 
 const cookies = new Cookies();
 
@@ -39,11 +40,17 @@ const usePasscode = () => {
     let date = 0;
 
     try {
-      // Load passcode cookie
-      const walletFromCookie = await cookies.get('passcode');
-      if (walletFromCookie && walletFromCookie.isPassed) {
-        const expireTime = new Date(walletFromCookie.expiresTime).getTime();
-        if (expireTime > Date.now()) date = expireTime;
+      console.log('date', Date.now());
+
+      if (Date.now() >= NodeSaleStartDate) {
+        date = Date.now();
+      } else {
+        // Load passcode cookie
+        const walletFromCookie = await cookies.get('passcode');
+        if (walletFromCookie && walletFromCookie.isPassed) {
+          const expireTime = new Date(walletFromCookie.expiresTime).getTime();
+          if (expireTime > Date.now()) date = expireTime;
+        }
       }
     } catch (error) {
       throw new Error(error);

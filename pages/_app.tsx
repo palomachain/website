@@ -60,7 +60,7 @@ const App = ({ Component, router, pageProps }: AppProps) => {
                 </WalletProvider>
               </WagmiConfig>
             </ThirdwebProvider>
-            <ToastContainer autoClose={8000} pauseOnFocusLoss={false} position={'top-right'} />
+            <ToastContainer autoClose={5000} pauseOnFocusLoss={false} position={'top-right'} />
           </Provider>
         </Client>
       </QueryClientProvider>

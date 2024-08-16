@@ -14,6 +14,13 @@ const PasscodeInput = ({ passcodeValue, setPasscodeValue, disabled = false, clas
   const [currentFocusedIndex, setCurrentFocusedIndex] = useState(0);
   const inputRefs = useRef<Array<HTMLInputElement> | []>([]);
 
+  const inputRef0 = useRef(null);
+  const inputRef1 = useRef(null);
+  const inputRef2 = useRef(null);
+  const inputRef3 = useRef(null);
+
+  const refs = [inputRef0, inputRef1, inputRef2, inputRef3];
+
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const keyCode = parseInt(e.key);
     if (!(keyCode >= 0 && keyCode <= 9) && e.key !== 'Backspace' && !(e.metaKey && e.key === 'v')) {
@@ -42,14 +49,14 @@ const PasscodeInput = ({ passcodeValue, setPasscodeValue, disabled = false, clas
       } else {
         setCurrentFocusedIndex(index - 1);
         if (inputRefs && inputRefs.current && index === currentFocusedIndex) {
-          inputRefs.current[index - 1].focus();
+          refs[index - 1].current.focus();
         }
       }
     } else {
       if (parseInt(e.key) && index < passcodeValue.length - 1) {
         setCurrentFocusedIndex(index + 1);
         if (inputRefs && inputRefs.current && index === currentFocusedIndex) {
-          inputRefs.current[index + 1].focus();
+          refs[index + 1].current.focus();
         }
       }
     }
@@ -57,7 +64,6 @@ const PasscodeInput = ({ passcodeValue, setPasscodeValue, disabled = false, clas
 
   const onFocus = (e: BaseSyntheticEvent, index: number) => {
     setCurrentFocusedIndex(index);
-    // e.target.focus();
   };
 
   useEffect(() => {
@@ -88,10 +94,10 @@ const PasscodeInput = ({ passcodeValue, setPasscodeValue, disabled = false, clas
 
         if (newArray.length < passcodeValue.length && currentFocusedIndex === 0) {
           setCurrentFocusedIndex(newArray.length - 1);
-          inputRefs.current[newArray.length - 1].focus();
+          refs[newArray.length - 1].current.focus();
         } else {
           setCurrentFocusedIndex(passcodeValue.length - 1);
-          inputRefs.current[passcodeValue.length - 1].focus();
+          refs[passcodeValue.length - 1].current.focus();
         }
       } catch (err) {
         console.error(err);
@@ -117,8 +123,8 @@ const PasscodeInput = ({ passcodeValue, setPasscodeValue, disabled = false, clas
             onKeyDown={(e) => onKeyDown(e)}
             onFocus={(e) => onFocus(e, index)}
             className={classNames(style.digitInput, String(value) === '' ? style.validInput : undefined)}
-            autoFocus={index === 0}
-            ref={(el) => el && (inputRefs.current[index] = el)}
+            autoFocus={index === currentFocusedIndex}
+            ref={refs[index]}
           />
         </div>
       ))}

@@ -428,3 +428,51 @@ export const CustomerSupport = [
     month: 0,
   },
 ];
+
+export const SupportSystems = {
+  Mac: 'MacOS',
+  Window: 'Windows',
+  Linux: 'Linux',
+};
+
+export const DownloadPaloma = {
+  [SupportSystems.Mac]: [
+    {
+      head: 'Download the installer',
+      steps: [
+        {
+          title: <p>Download the installer for your Mac hardware</p>,
+          externalBtns: [
+            {
+              text: 'Mac with Apple Silicon',
+              link: '',
+            },
+            {
+              text: 'Mac with Intel Chip',
+              link: '',
+            },
+          ],
+          describe:
+            'On your Mac, pull down the Apple icon in the upper-left corner of your screen. Choose About This Mac. If the window shows an item labeled Chip, you have a Mac with Apple silicon. If the window shows an item labeled Processor, you have an Intel-based Mac.',
+        },
+        {
+          title: (
+            <p>
+              Double-click <span>Docker.dmg</span> to open the installer, then drag the Docker icon to
+              the Applications folder. By default, Docker Desktop is installed at <span>/Applications/Docker.app.</span>
+            </p>
+          ),
+        },
+        {
+          title: (
+            <p>
+              Double-click <span>Docker.app</span> in the <b>Applications</b> folder to start Docker.
+            </p>
+          ),
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Window]: {},
+  [SupportSystems.Linux]: {},
+};

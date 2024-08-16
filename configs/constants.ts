@@ -9,6 +9,7 @@ const envParam = {
   nodeSale_arb: process.env.NODESALE_CONTRACT_ARB || '',
   nodeSale_op: process.env.NODESALE_CONTRACT_OP || '',
   nodeSale_polygon: process.env.NODESALE_CONTRACT_POLYGON || '',
+  PASSCODE: process.env.PASSCODE || '',
 };
 
 const Networks = {

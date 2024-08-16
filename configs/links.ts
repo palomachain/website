@@ -3,9 +3,11 @@ import { supportedNetworks } from './networks';
 
 enum StaticLink {
   Home = '/',
-  PURCHASE = '/',
+  PURCHASE = '/purchase',
   REGISTER = '/purchase/register/',
+  DOWNLOAD = '/purchase/download',
   ACTIVATE = '/purchase/activate',
+  PASSCODE = '/passcode',
 }
 
 const enableImageLink = (name: string, enable: boolean = true) => {

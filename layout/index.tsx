@@ -25,7 +25,6 @@ export default function Layout({ children, router }) {
         })}
         <Footer />
       </main>
-      <ToastContainer autoClose={10000} pauseOnFocusLoss={false} position={isMobile ? 'bottom-center' : 'top-right'} />
     </>
   );
 }

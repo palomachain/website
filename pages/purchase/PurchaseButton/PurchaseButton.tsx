@@ -52,7 +52,7 @@ const PurchaseButton = ({
   onClickStart,
   buttonText = 'Start Bot',
 }: PurchaseButtonProps) => {
-  const { openConnectionModal, requestSwitchNetwork } = useWallet();
+  const { openConnectionModal } = useWallet();
 
   const buttonStatus = useMemo(() => {
     if (!chainId) {

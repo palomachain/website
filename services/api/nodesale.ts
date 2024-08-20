@@ -23,9 +23,23 @@ const injectedRtkApi = api.injectEndpoints({
         url: `${nodesaleApiUrl}/pricetiers`,
       }),
     }),
+    postRegister: build.mutation<PostRegisterApiResponse, PostRegisterApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/register`,
+        method: 'POST',
+        body: queryArg,
+      }),
+    }),
+    getRegisterConfirmation: build.query<GetNodeSaleApiResponse, GetRegisterConfirmationApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/confirmation`,
+        params: queryArg,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
+
 export { injectedRtkApi as api };
 export type GetNodeSaleApiResponse = /** status 200 Success */ PriceResultData;
 export type GetNodeSaleApiArg = {
@@ -35,10 +49,25 @@ export type GetNodeSaleApiArg = {
 
 export type PriceResultData = any;
 
+export type PostRegisterApiResponse = /** status 200 Success */ {
+  code?: number;
+  success?: boolean;
+  msg?: string;
+};
+export type PostRegisterApiArg = {
+  username: string;
+  email: string;
+};
+export type GetRegisterConfirmationApiArg = {
+  token: string;
+};
+
 export const {
   useGetNodeSalePriceQuery,
   useLazyGetNodeSalePriceQuery,
   useGetTotalPurchasedQuery,
   useLazyGetTotalPurchasedQuery,
   useLazyGetPriceTiersQuery,
+  usePostRegisterMutation,
+  useLazyGetRegisterConfirmationQuery,
 } = injectedRtkApi;

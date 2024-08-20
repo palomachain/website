@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import style from './SuccessModal.module.scss';
 
-interface SuccessRampProps {
+interface SuccessModalProps {
   show?: boolean;
   isStepWizard?: boolean;
   steps?: string[];
@@ -14,13 +14,13 @@ interface SuccessRampProps {
   onClose?: () => void;
 }
 
-const SuccessRamp = ({ show, isStepWizard = false, steps, activeStep, onClose }: SuccessRampProps) => {
+const SuccessModal = ({ show, isStepWizard = false, steps, activeStep, onClose }: SuccessModalProps) => {
   if (!show) return null;
 
   const router = useRouter();
 
   const onClick = () => {
-    router.push(StaticLink.ACTIVATE); // Register
+    router.push(StaticLink.REGISTER);
   };
 
   return (
@@ -38,4 +38,4 @@ const SuccessRamp = ({ show, isStepWizard = false, steps, activeStep, onClose }:
   );
 };
 
-export default SuccessRamp;
+export default SuccessModal;

@@ -1,3 +1,5 @@
+import { IDownloadAndInstallNodeSteps } from 'interfaces/nodeSale';
+
 export const SupportChains = ['ethereum', 'bnb', 'arbitrum', 'base', 'optimism', 'b', 'polygon'];
 
 export const JoinFlow = [
@@ -432,10 +434,12 @@ export const CustomerSupport = [
 export const SupportSystems = {
   Mac: 'MacOS',
   Window: 'Windows',
-  Linux: 'Linux',
+  // Linux: 'Linux',
 };
 
-export const DownloadPaloma = {
+export const PalomaDownloadAndInstallSteps: {
+  [x: string]: IDownloadAndInstallNodeSteps[];
+} = {
   [SupportSystems.Mac]: [
     {
       head: 'Download the installer',
@@ -458,8 +462,8 @@ export const DownloadPaloma = {
         {
           title: (
             <p>
-              Double-click <span>Docker.dmg</span> to open the installer, then drag the Docker icon to
-              the Applications folder. By default, Docker Desktop is installed at <span>/Applications/Docker.app.</span>
+              Double-click <span>Docker.dmg</span> to open the installer, then drag the Docker icon to the Applications
+              folder. By default, Docker Desktop is installed at <span>/Applications/Docker.app.</span>
             </p>
           ),
         },
@@ -471,11 +475,7 @@ export const DownloadPaloma = {
           ),
         },
         {
-          title: (
-            <p>
-              The Docker menu displays the Docker Subscription Service Agreement.
-            </p>
-          ),
+          title: <p>The Docker menu displays the Docker Subscription Service Agreement.</p>,
         },
         {
           title: (
@@ -487,7 +487,7 @@ export const DownloadPaloma = {
         {
           title: (
             <p>
-              Select Finish.
+              Select <b>Finish.</b>
             </p>
           ),
         },
@@ -507,20 +507,194 @@ export const DownloadPaloma = {
         },
         {
           title: (
-            <p>
-              After downloading the setup on your Mac, open the Terminal application found in the Utilities folder
-            </p>
+            <p>After downloading the setup on your Mac, open the Terminal application found in the Utilities folder</p>
           ),
           items: [
             {
-              name: 'Copy and Past the command:',
-              command: 'sh $HOME/Downloads/run.sh'
-            }
-          ]
+              name: <p>Copy and Past the command:</p>,
+              command: <p>sh $HOME/Downloads/setup.sh</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      head: 'Install the Lightnode',
+      steps: [
+        {
+          title: <p>Open the Terminal Application in Macintosh Utilities</p>,
+          items: [
+            {
+              name: <p>Copy and Past the command:</p>,
+              command: (
+                <p>
+                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+                  ./password-store/.password-store:/root/.password-store palomachain/
+                  <span>lightnode-client:latest</span>
+                </p>
+              ),
+              copyCommand:
+                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
+            },
+          ],
+        },
+        {
+          title: <p>After activating the node, you can keep it running in the background</p>,
+          items: [
+            {
+              name: <p>Copy and Past the command:</p>,
+              command: (
+                <p>
+                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+                  ./password-store/.password-store:/root/.password-store palomachain/
+                  <span>lightnode-client:latest automate</span>
+                </p>
+              ),
+              copyCommand:
+                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
+            },
+            {
+              name: <p>Input your keystore password</p>,
+            },
+            {
+              name: <p>Press CTRL-P - CTRL-Q</p>,
+            },
+          ],
         },
       ],
     },
   ],
-  [SupportSystems.Window]: {},
-  [SupportSystems.Linux]: {},
+  [SupportSystems.Window]: [
+    {
+      head: 'Download the installer',
+      steps: [
+        {
+          title: <p>Download the installer for your Windows hardware</p>,
+          externalBtns: [
+            {
+              text: 'Windows Intel Chip',
+              link: 'https://desktop.docker.com/win/main/amd64/Docker Desktop Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-amd64',
+            },
+            {
+              text: 'ARM Chip',
+              link: 'https://desktop.docker.com/win/main/arm64/Docker Desktop Installer.exe?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-win-arm64',
+            },
+          ],
+          describe:
+            'Open the Settings app (Win + I) and go to System > About. Under Device specifications, check "System type": x64-based or x86-based means an Intel or AMD processor, while ARM-based indicates an ARM processor.',
+        },
+        {
+          title: (
+            <p>
+              Double-click <span>Docker Desktop Installer.exe</span> to run the installer.
+              <br />
+              By default, Docker Desktop is installed at
+              <br />
+              <span>C:\Program Files\Docker\Docker</span>
+            </p>
+          ),
+        },
+        {
+          title: (
+            <p>
+              When prompted, ensure the <b>Use WSL 2</b> instead of <b>Hyper-V</b> option on the Configuration page is
+              selected or not depending on your choice of backend.
+              <br />
+              <br />
+              If your system only supports one of the two options, you will not be able to select which backend to use
+            </p>
+          ),
+        },
+        {
+          title: (
+            <p>
+              Follow the instructions on the installation wizard to authorize the installer and proceed with the
+              install.
+            </p>
+          ),
+        },
+        {
+          title: <p>When the installation is successful, select Close to complete the installation process.</p>,
+        },
+      ],
+    },
+    {
+      head: 'Start Docker Desktop for Microsoft Windows',
+      describe: (
+        <p>
+          Docker Desktop does not start automatically after installation.
+          <br />
+          To start Docker Desktop:
+        </p>
+      ),
+      steps: [
+        {
+          title: <p>Search for Docker, and select Docker Desktop in the search results</p>,
+          img: <img src="/assets/home/search-docker.png" alt="search-docker" />,
+        },
+        {
+          title: <p>The Docker menu displays the Docker Subscription Service Agreement.</p>,
+        },
+        {
+          title: (
+            <p>
+              Select <b>Accept</b> to continue. Docker Desktop starts after you accept the terms.
+              <br />
+              <br />
+              Note that Docker Desktop won't run if you do not agree to the terms.
+              <br />
+              You can choose to accept the terms at a later date by opening Docker Desktop.
+            </p>
+          ),
+        },
+      ],
+    },
+    {
+      head: 'Install the Lightnode',
+      steps: [
+        {
+          title: <p>Open the the command line in Windows</p>,
+          items: [
+            {
+              name: <p>Copy and Past the command:</p>,
+              command: (
+                <p>
+                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+                  ./password-store/.password-store:/root/.password-store palomachain/
+                  <span>lightnode-client:latest</span>
+                </p>
+              ),
+              copyCommand:
+                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
+            },
+          ],
+        },
+        {
+          title: <p>After registering the node, you can keep it running in the background</p>,
+          items: [
+            {
+              name: <p>Copy and Past the command:</p>,
+              command: (
+                <p>
+                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+                  ./password-store/.password-store:/root/.password-store palomachain/
+                  <span>lightnode-client:latest automate</span>
+                </p>
+              ),
+              copyCommand:
+                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
+            },
+            {
+              name: <p>Input your keystore password</p>,
+            },
+            {
+              name: <p>Press CTRL-P - CTRL-Q</p>,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  // [SupportSystems.Linux]: {},
 };

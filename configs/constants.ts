@@ -10,6 +10,7 @@ const envParam = {
   nodeSale_op: process.env.NODESALE_CONTRACT_OP || '',
   nodeSale_polygon: process.env.NODESALE_CONTRACT_POLYGON || '',
   PASSCODE: process.env.PASSCODE || '',
+  thirdWebApiKey: process.env.THIRDWEB_API_KEY || '',
 };
 
 const Networks = {

@@ -21,7 +21,7 @@ type WalletContextType = {
   connectWalletConnect: () => Promise<void>;
   disconnectWallet: () => void;
   openConnectionModal: () => void;
-  requestSwitchNetwork: (chainId: number | string) => Promise<boolean>;
+  requestSwitchNetwork: (chainId: number | string, isMetaMask?: boolean) => Promise<boolean>;
   requestAddNetwork: (chainId: number | string) => void;
   networkSelect: (defaultChain: number | string, supportChains: object) => Promise<boolean>;
   error: Error | null;
@@ -190,10 +190,16 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
           path: '/',
         },
       );
-      setWallet(walletObj);
 
-      setShowChooseWalletModal(false);
-      return true;
+      const changedNetwork = await requestSwitchNetwork(network);
+
+      if (changedNetwork) {
+        setWallet(walletObj);
+        setShowChooseWalletModal(false);
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       console.log('error', error);
       toast.info(errorMessage(error), { toastId: 'wallet-warning' });
@@ -275,8 +281,8 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     }
   };
 
-  const requestSwitchNetwork = async (chainId: string) => {
-    if (wallet.providerName === 'metamask') {
+  const requestSwitchNetwork = async (chainId: string, isMetaMask = true) => {
+    if (wallet.providerName === 'metamask' || isMetaMask) {
       const hex = parseDexString(chainId);
       try {
         await ethereum.request({

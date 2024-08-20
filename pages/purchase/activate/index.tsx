@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Button from 'components/Button';
+import Command from 'components/Command';
 import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
@@ -17,10 +18,17 @@ const STEPS = {
   ACTIVATED: 3,
   TERMINAL: 4,
 };
-const shCommand = 'sh $HOME/Downloads/run.sh activate';
+const shCommand = {
+  command: (
+    <p>
+      sh $HOME/Downloads/setup.sh <span>activate</span>
+    </p>
+  ),
+  copyCommand: 'sh $HOME/Downloads/setup.sh activate',
+};
 
 const Activate = () => {
-  const { connectMetaMask, connectWalletConnect, requestSwitchNetwork, disconnectWallet, wallet } = useWallet();
+  const { connectMetaMask, connectWalletConnect, disconnectWallet, wallet } = useWallet();
   const provider = useProvider(wallet);
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
   const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
@@ -35,9 +43,8 @@ const Activate = () => {
   const handleChooseMetamask = async () => {
     if (!loadingMetamask) {
       setLoadingMetamask(true);
-      await connectMetaMask(mainChain);
-      await requestSwitchNetwork(mainChain);
-      setLoadingMetamask(false);
+      const isConnectedWallet = await connectMetaMask(mainChain);
+      !isConnectedWallet && setLoadingMetamask(false);
     }
   };
 
@@ -49,15 +56,23 @@ const Activate = () => {
     }
   };
 
+  const checkActivate = async () => {
+    const activateAddress: string = await getActivate();
+
+    const isActivated = activateAddress && activateAddress !== ZERO_ADDRESS_PALOMA;
+    if (isActivated) {
+      setSteps(STEPS.ACTIVATED);
+      setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
+    } else {
+      setSteps(STEPS.ACTIVATE_PALOMA);
+    }
+  };
+
   useEffect(() => {
     if (wallet && parseIntString(wallet.network) === mainChain) {
-      const checkActivate = async () => {
-        const activateAddress: string = await getActivate();
-        const isActivated = activateAddress !== ZERO_ADDRESS_PALOMA;
-        isActivated && setSteps(STEPS.ACTIVATED);
-        isActivated && setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
-      };
       checkActivate();
+    } else {
+      setSteps(STEPS.CONNECT_WALLET);
     }
   }, [wallet, provider]);
 
@@ -195,17 +210,7 @@ const Activate = () => {
               <div className={style.terminal__round}>1</div>
               <div className={style.terminal__item}>
                 <p>After activating your LightNode, open the Terminal application found in the Utilities folder.</p>
-                <p>a. Copy and Past the command:</p>
-                <div className={style.shCommand}>
-                  <p>
-                    sh $HOME/Downloads/run.sh <span>activate</span>
-                  </p>
-                  <img
-                    src="/assets/icons/copy.svg"
-                    alt="copy"
-                    onClick={() => navigator.clipboard.writeText(shCommand)}
-                  />
-                </div>
+                <Command command={shCommand.command} copyCommand={shCommand.copyCommand} />
               </div>
             </div>
           </>

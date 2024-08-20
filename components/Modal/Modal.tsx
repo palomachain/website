@@ -8,14 +8,15 @@ interface ModalProps {
   onBack?: () => void;
   onClose?: () => void;
   className?: string;
+  contentClassName?: string;
   showHeader?: boolean;
   children: ReactElement | ReactElement[];
 }
 
-const Modal = ({ title, onBack, onClose, className, children, showHeader = true }: ModalProps) => (
+const Modal = ({ title, onBack, onClose, className, contentClassName, children, showHeader = true }: ModalProps) => (
   <ModalContainer className={className}>
     {showHeader && <ModalHeader title={title} onBack={onBack} onClose={onClose} />}
-    <ModalContent>{children}</ModalContent>
+    <ModalContent className={contentClassName}>{children}</ModalContent>
   </ModalContainer>
 );
 

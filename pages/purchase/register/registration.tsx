@@ -42,10 +42,14 @@ const RegisterFlow = () => {
 
       if (!callApi.error) {
         setConfirm(true);
+      } else {
+        if (callApi?.error['data']['msg'].includes('already exists')) {
+          toast.info('We already sent a confirmation email to your email address. Please confirm your email.');
+        }
       }
     } catch (error) {
       console.log(error);
-      if (error?.includes('registered') || error?.msg?.includes('registered')) {
+      if (error?.includes('already exists') || error?.msg?.includes('already exists')) {
         toast.info('We already sent a confirmation email to your email address. Please confirm your email.');
       } else {
         toast.error('Failed! Please try again...');

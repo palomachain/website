@@ -91,11 +91,13 @@ const PurchaseFlow = () => {
   const [fromTokenExchangeRate, setFromTokenExchangeRate] = useState(new BigNumber(0));
   const [swapPath, setSwapPath] = useState<string>(null);
   const [expectedAmount, setExpectedAmount] = useState<IBalance>(mockTool.emptyTokenBalance());
+  const [quoteAmount, setQuoteAmount] = useState<IBalance>(mockTool.emptyTokenBalance());
 
   const [nodePrice, setNodePrice] = useState<number>(0);
-  const [processingFee, setProcessingFee] = useState<number>(5);
-  const [subscriptionFee, setSubscriptionFee] = useState<number>(50);
-  const [slippageFeePc, setSlippageFeePc] = useState<number>(1);
+  const [processingFee, setProcessingFee] = useState<number>(5); // $5
+  const [subscriptionFee, setSubscriptionFee] = useState<number>(50); // 50$
+  const [slippageFeePc, setSlippageFeePc] = useState<number>(1); // default 1%
+  const txSlippageFeePc = 0.3; // 0.3%
 
   const { selectedChainId, targetChain } = useMemo(() => {
     const targetChain = wallet.network ? allChains[parseIntString(wallet.network)] : mockTool.getMockChain();
@@ -112,8 +114,12 @@ const PurchaseFlow = () => {
     return subFee * CustomerSupport[selectedSupport].month;
   }, [selectedSupport, subscriptionFee]);
 
+  const slippageFee = useMemo(() => {
+    return (nodePrice * (slippageFeePc + txSlippageFeePc)) / 100;
+  }, [nodePrice, slippageFeePc, txSlippageFeePc]);
+
   const totalPay = useMemo(() => {
-    return nodePrice + processingFee + totalSupportPrice;
+    return nodePrice + processingFee + totalSupportPrice + slippageFee;
   }, [nodePrice, totalSupportPrice, processingFee]);
 
   const quantity = useMemo(() => {
@@ -121,17 +127,15 @@ const PurchaseFlow = () => {
   }, [priceTiers]);
 
   useEffect(() => {
-    if (totalPay && slippageFeePc && fromToken && fromToken.address !== '' && fromTokenExchangeRate) {
-      const expectedAmount = totalPay + (nodePrice * slippageFeePc) / 100;
-      const tokenAmount = BigNumber(expectedAmount).dividedBy(fromTokenExchangeRate);
+    if (totalPay) {
       const amount = {
-        raw: balanceTool.convertToWei(tokenAmount.toString(), fromToken.decimals),
-        format: tokenAmount.toString(),
+        raw: balanceTool.convertToWei(totalPay.toString(), 6), // USDC
+        format: totalPay.toString(),
       };
 
       setExpectedAmount(amount);
     }
-  }, [totalPay, slippageFeePc, fromToken, fromTokenExchangeRate]);
+  }, [totalPay, fromToken]);
 
   useEffect(() => {
     if (isValidTokenAmount) {
@@ -301,40 +305,58 @@ const PurchaseFlow = () => {
       if (!provider || !wallet || !wallet.network) return;
       if (wallet.network.toString() !== targetChain.chainId.toString()) return;
       if (expectedAmount.raw.comparedTo(0) <= 0) return;
+      if (!selectedChain) return;
 
-      setFetchingPriceLoading(true);
+      const errorText = 'Unsupported token. Please choose another token.';
 
-      // toToken is USDC
-      const toToken: IToken = {
-        address: Addresses[selectedChainId].usdc,
-        symbol: 'USDC',
-        displayName: 'USDC',
-        icon: 'https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png',
-        decimals: 6,
-      };
+      try {
+        setFetchingPriceLoading(true);
 
-      const uniswapPath = await getSwapPath(
-        fromToken,
-        toToken,
-        expectedAmount,
-        SLIPPAGE_PERCENTAGE,
-        DEADLINE,
-        parseIntString(wallet.network),
-        false,
-        true,
-      );
+        // toToken is USDC
+        const toToken: IToken = {
+          address: Addresses[selectedChainId].usdc,
+          symbol: 'USDC',
+          displayName: 'USDC',
+          icon: 'https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png',
+          decimals: 6,
+        };
 
-      const quoteAmount = getQuoteAmount(uniswapPath);
-      const swapPathForV3 = getSwapPathForV3(uniswapPath, toToken);
-
-      if (quoteAmount !== null) {
-        setSwapPath(swapPathForV3);
+        const uniswapPath = await getSwapPath(
+          fromToken,
+          toToken,
+          expectedAmount, // toTokenAmount
+          SLIPPAGE_PERCENTAGE,
+          DEADLINE,
+          parseIntString(wallet.network),
+          false,
+          true,
+        );
+        if (uniswapPath !== null) {
+          const quoteAmount = getQuoteAmount(uniswapPath);
+          if (quoteAmount !== null) {
+            setQuoteAmount(quoteAmount);
+            const swapPathForV3 = getSwapPathForV3(uniswapPath, toToken);
+            setSwapPath(swapPathForV3);
+          } else {
+            toast.error(errorText);
+          }
+        } else {
+          toast.error(errorText);
+        }
+      } catch (error) {
+        toast.error(errorText);
       }
+
       setFetchingPriceLoading(false);
     };
 
     changeAmount();
-  }, [provider, wallet, fromToken, expectedAmount]);
+  }, [provider, wallet.network, fromToken, expectedAmount, selectedChain]);
+
+  useEffect(() => {
+    setFromToken(mockTool.getEmptyToken());
+    setSwapPath(null);
+  }, [selectedChain]);
 
   const isValidTokenAmount = useMemo(() => {
     return quantity > 0 && quantity <= TotalNodes - totalPurchased;
@@ -376,15 +398,22 @@ const PurchaseFlow = () => {
   const handleStart = async () => {
     if (step === 1) {
       setStep(2);
+      window.scrollTo(0, 0);
     } else {
       try {
         if (!isTxLoading) {
           setTxLoading(true);
 
+          const tokenAmount = BigNumber(totalPay).dividedBy(fromTokenExchangeRate).toString();
+          const expectTokenAmount = {
+            raw: balanceTool.convertToWei(tokenAmount, fromToken.decimals),
+            format: tokenAmount,
+          };
+
           await buyNow(
             fromToken,
             quantity,
-            expectedAmount,
+            expectTokenAmount.raw.comparedTo(quoteAmount.raw) > 0 ? expectTokenAmount : quoteAmount, // Choose big amount
             (nodePrice * 1000000).toFixed(0),
             CustomerSupport[selectedSupport].price > 0,
             CustomerSupport[selectedSupport].month,
@@ -593,11 +622,19 @@ const PurchaseFlow = () => {
               />
             )}
             <TotalPay
+              title="Slippage Fees"
+              step={step}
+              price={slippageFee}
+              exchangeRate={fromTokenExchangeRate}
+              fromToken={fromToken}
+            />
+            <TotalPay
               title="Total"
               step={step}
               price={totalPay}
               exchangeRate={fromTokenExchangeRate}
               fromToken={fromToken}
+              expectTokenAmount={Number(quoteAmount.format)}
             />
           </div>
         </div>
@@ -656,7 +693,7 @@ const PurchaseFlow = () => {
           />
         </>
       ) : (
-        <p>All purchases include a 1% slippage fee for swaps.</p>
+        <p>All purchases include a {slippageFeePc + txSlippageFeePc}% slippage fee for swaps.</p>
       )}
 
       <PurchaseButton
@@ -675,6 +712,7 @@ const PurchaseFlow = () => {
         fromTokenExchangeRate={fromTokenExchangeRate}
         totalSupportPrice={totalSupportPrice}
         expectedAmount={expectedAmount} // token amount
+        quoteAmount={quoteAmount} // token amount
         swapPath={swapPath}
         priceTiers={priceTiers}
         buttonText="Buy Now"

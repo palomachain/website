@@ -42,11 +42,9 @@ class Ether extends NativeCurrency {
 }
 
 const useUniswap = ({ provider, wallet }) => {
-  // const [registerClaim] = usePostRegisterClaimMutation();
-
   const generateRoute = async (
     fromToken: IToken,
-    fromTokenBalance: IBalance,
+    expectToTokenAmount: IBalance,
     toToken: IToken,
     slippage: number,
     deadline: number,
@@ -87,26 +85,16 @@ const useUniswap = ({ provider, wallet }) => {
     const currencyIn = Ether.onChain(Number(chainId));
     const currencyOut = Ether.onChain(Number(chainId));
 
-    const route = routerConfig
-      ? await router.route(
-          CurrencyAmount.fromRawAmount(
-            fromToken.address === VETH_ADDRESS ? currencyIn : tokenIn,
-            fromTokenBalance.raw.toString(),
-          ),
-          toToken.address === VETH_ADDRESS ? currencyOut : tokenOut,
-          TradeType.EXACT_OUTPUT,
-          options,
-          routerConfig,
-        )
-      : await router.route(
-          CurrencyAmount.fromRawAmount(
-            fromToken.address === VETH_ADDRESS ? currencyIn : tokenIn,
-            fromTokenBalance.raw.toString(),
-          ),
-          toToken.address === VETH_ADDRESS ? currencyOut : tokenOut,
-          TradeType.EXACT_OUTPUT,
-          options,
-        );
+    const route = await router.route(
+      CurrencyAmount.fromRawAmount(
+        toToken.address === VETH_ADDRESS ? currencyOut : tokenOut,
+        expectToTokenAmount.raw.toString(),
+      ),
+      fromToken.address === VETH_ADDRESS ? currencyIn : tokenIn,
+      TradeType.EXACT_INPUT,
+      options,
+      routerConfig,
+    );
 
     return route;
   };
@@ -132,13 +120,13 @@ const useUniswap = ({ provider, wallet }) => {
    * @param poolAddress
    * @param tokenIn
    * @param tokenOut
-   * @param tokenInAmount
+   * @param tokenOutAmount
    * @returns
    */
   const getSwapPath = async (
     fromToken: IToken,
     toToken: IToken,
-    tokenInAmount: IBalance,
+    tokenOutAmount: IBalance,
     slippage: number,
     deadline: number,
     chainId: string | number,
@@ -150,56 +138,16 @@ const useUniswap = ({ provider, wallet }) => {
     try {
       const swapRoute =
         useV2Only === true
-          ? await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+          ? await generateRoute(fromToken, tokenOutAmount, toToken, slippage, deadline, chainId.toString(), {
               protocols: [Protocol.V2],
             })
           : useV3Only === true
-          ? await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
+          ? await generateRoute(fromToken, tokenOutAmount, toToken, slippage, deadline, chainId.toString(), {
               protocols: [Protocol.V3],
             })
-          : await generateRoute(fromToken, tokenInAmount, toToken, slippage, deadline, chainId.toString());
+          : await generateRoute(fromToken, tokenOutAmount, toToken, slippage, deadline, chainId.toString());
 
       return swapRoute;
-    } catch (e) {
-      console.log(e);
-      return null;
-    }
-  };
-
-  const getSwapPaths = async (
-    selectedTokens: IToken[],
-    toToken: IToken,
-    slippage: number,
-    deadline: number,
-    chainId: string | number,
-    useV2Only?: boolean,
-  ) => {
-    if (!provider) return null;
-
-    try {
-      const swapRoutes = await Promise.all(
-        selectedTokens.map(async (token) => {
-          if (token && Number(token?.amount) > 0) {
-            const tokenInAmount: IBalance = {
-              raw: balanceTool.convertToWei(token.amount, token.decimals),
-              format: token.amount,
-            };
-
-            const swapRoute =
-              useV2Only === true
-                ? await generateRoute(token, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
-                    protocols: [Protocol.V2],
-                  })
-                : await generateRoute(token, tokenInAmount, toToken, slippage, deadline, chainId.toString(), {
-                    protocols: [Protocol.V3],
-                  });
-
-            return { swapRoute, token };
-          }
-        }),
-      );
-
-      return swapRoutes;
     } catch (e) {
       console.log(e);
       return null;
@@ -352,7 +300,6 @@ const useUniswap = ({ provider, wallet }) => {
     generateRoute,
     getPool,
     getSwapPath,
-    getSwapPaths,
     getSwapPathForV3,
     getQuoteAmount,
     getQuoteAmounts,

@@ -24,6 +24,7 @@ interface PurchaseButtonProps {
   fromTokenExchangeRate?: BigNumber;
   totalSupportPrice?: number;
   expectedAmount?: IBalance;
+  quoteAmount?: IBalance;
   swapPath?: string;
   priceTiers?: IPriceTiers[];
   className?: string;
@@ -46,6 +47,7 @@ const PurchaseButton = ({
   fromTokenExchangeRate,
   totalSupportPrice,
   expectedAmount,
+  quoteAmount,
   swapPath,
   priceTiers,
   className,
@@ -62,6 +64,7 @@ const PurchaseButton = ({
         style: '',
         onClick: () => {
           openConnectionModal();
+          onClickStart();
         },
       };
     }
@@ -141,6 +144,7 @@ const PurchaseButton = ({
     fromTokenExchangeRate,
     totalSupportPrice,
     expectedAmount,
+    quoteAmount,
     isFetchingPriceLoading,
     swapPath,
     priceTiers,

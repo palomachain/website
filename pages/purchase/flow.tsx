@@ -32,7 +32,7 @@ import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
 import { abbreviateNumberSI, formatNumber } from 'utils/number';
-import { parseIntString, stringToHex } from 'utils/string';
+import { isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import TotalPay from './TotalPay';
 
@@ -287,12 +287,16 @@ const PurchaseFlow = () => {
       if (!provider || !wallet || !wallet.network) return;
       if (walletNetwork.toString() !== targetChain?.chainId.toString()) return;
 
-      // Get fromToken Price in USD
-      const priceData = await fetchTokenPrice({
-        network: targetChain.chainId,
-        token: fromToken.address === VETH_ADDRESS ? Addresses[targetChain?.chainId].weth : fromToken.address,
-      }).unwrap();
-      setFromTokenExchangeRate(selectCurrentUsdPrice(priceData));
+      if (isSameContract(fromToken.address, Addresses[selectedChainId].usdc)) {
+        setFromTokenExchangeRate(BigNumber(1));
+      } else {
+        // Get fromToken Price in USD
+        const priceData = await fetchTokenPrice({
+          network: targetChain.chainId,
+          token: fromToken.address === VETH_ADDRESS ? Addresses[targetChain?.chainId].weth : fromToken.address,
+        }).unwrap();
+        setFromTokenExchangeRate(selectCurrentUsdPrice(priceData));
+      }
     };
 
     fetchBalance();
@@ -321,27 +325,32 @@ const PurchaseFlow = () => {
           decimals: 6,
         };
 
-        const uniswapPath = await getSwapPath(
-          fromToken,
-          toToken,
-          expectedAmount, // toTokenAmount
-          SLIPPAGE_PERCENTAGE,
-          DEADLINE,
-          parseIntString(wallet.network),
-          false,
-          true,
-        );
-        if (uniswapPath !== null) {
-          const quoteAmount = getQuoteAmount(uniswapPath);
-          if (quoteAmount !== null) {
-            setQuoteAmount(quoteAmount);
-            const swapPathForV3 = getSwapPathForV3(uniswapPath, toToken);
-            setSwapPath(swapPathForV3);
+        if (isSameContract(fromToken.address, toToken.address)) {
+          setQuoteAmount(mockTool.emptyTokenBalance());
+          setSwapPath('0x00');
+        } else {
+          const uniswapPath = await getSwapPath(
+            fromToken,
+            toToken,
+            expectedAmount, // toTokenAmount
+            SLIPPAGE_PERCENTAGE,
+            DEADLINE,
+            parseIntString(wallet.network),
+            false,
+            true,
+          );
+          if (uniswapPath !== null) {
+            const quoteAmount = getQuoteAmount(uniswapPath);
+            if (quoteAmount !== null) {
+              setQuoteAmount(quoteAmount);
+              const swapPathForV3 = getSwapPathForV3(uniswapPath, toToken);
+              setSwapPath(swapPathForV3);
+            } else {
+              toast.error(errorText);
+            }
           } else {
             toast.error(errorText);
           }
-        } else {
-          toast.error(errorText);
         }
       } catch (error) {
         toast.error(errorText);

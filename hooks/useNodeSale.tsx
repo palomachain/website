@@ -185,10 +185,10 @@ const useNodeSale = ({ provider, wallet }) => {
       let txHash: any;
 
       const isForETH = fromToken.address === VETH_ADDRESS;
-      const ethValue = isForETH ? expectedAmount.raw.multipliedBy(1.003).toFixed(0) : 0; // slippage 0.3%
+      const ethValue = isForETH ? expectedAmount.raw.toFixed(0) : 0;
 
       let args = [];
-      !isForETH && args.push(fromToken.address, expectedAmount.raw.multipliedBy(1.003).toFixed(0)); // slippage 0.3%
+      !isForETH && args.push(fromToken.address, expectedAmount.raw.toFixed(0));
       args.push(
         node_count,
         totalCost,

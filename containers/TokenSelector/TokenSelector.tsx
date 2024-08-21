@@ -75,7 +75,7 @@ const TokenSelector = ({
               {token.symbol === '' ? (
                 'Select Token'
               ) : (
-                <div className={classNames(style.symbol, 'bold')}>{token.symbol}</div>
+                <p className='bold'>{token.symbol}</p>
               )}
             </div>
             <img className={style.selectIcon} src="/assets/icons/down.svg" alt="" />

@@ -17,7 +17,7 @@ const ecosystemSection = () => (
             <p>{data.describe}</p>
           </div>
           <div className="ecosystem-body">
-            <img src={`/assets/ecosystem/${data.backgroundImg}`} alt={data.title} />
+            {/* {data.backgroundImg && <img src={`/assets/ecosystem/${data.backgroundImg}`} alt={data.title} />} */}
             <div className="ecosystem-items">
               {data.items.map((item, j) => (
                 <div className="ecosystem-item" key={j}>

@@ -20,6 +20,7 @@ import TopicSection5 from './topic5Section';
 import TopicSection6 from './topic6Section';
 import VolumesSection from './volumesSection';
 import WhatIsPalomaSection from './whatisPalomaSection';
+import WhereCanBuySection from './whereCanBuySection';
 
 const lightnode = () => (
   <div className="page-container light-node-sale lightnode-container">
@@ -41,6 +42,7 @@ const lightnode = () => (
     {/* <AdvisorsSection /> */}
     <TeamsSection />
     <TopicSection4 />
+    {/* <WhereCanBuySection /> */}
     <SubscriptionSection />
     <TopicSection6 />
     <RewardCalculatorSection />

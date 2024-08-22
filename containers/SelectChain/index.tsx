@@ -60,7 +60,7 @@ const SelectChain = ({
           <div className="flex-row gap-8">
             {selectedChain && selectedChain !== '' && (
               <img
-                src={`/assets/chains/${supportChains[selectedChain].toLowerCase()}.png`}
+                src={`/assets/chains/${supportChains[selectedChain].toLowerCase()}.svg`}
                 width={25}
                 height={25}
                 alt=""

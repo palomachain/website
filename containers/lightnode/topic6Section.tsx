@@ -12,9 +12,7 @@ const topic6Section = () => (
         <h3 className="h-black-50">Former CTO & VP Engineering, Ignite</h3>
       </div>
     </div>
-    <div className="topic-photo">
-      <img src="/assets/topic/topic6.svg" alt="topic-6" />
-    </div>
+    <img src="/assets/topic/topic6.png" alt="topic-6" />
   </section>
 );
 

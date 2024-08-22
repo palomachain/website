@@ -1,8 +1,6 @@
 const topic4Section = () => (
   <section className="topic-section">
-    <div className="topic-photo">
-      <img src="/assets/topic/topic4.svg" alt="topic-4" />
-    </div>
+    <img src="/assets/topic/topic4.png" alt="topic-4" />
     <div className="topic">
       <p>
         “The Threshold Protocol network and community is excited to work with Paloma We look to Paloma network to

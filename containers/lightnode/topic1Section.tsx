@@ -13,9 +13,7 @@ const topic1Section = () => (
         <h3 className="h-black-50">Co-Founder, Nectar</h3>
       </div>
     </div>
-    <div className="topic-photo">
-      <img src="/assets/topic/topic1.svg" alt="topic-1" />
-    </div>
+    <img src="/assets/topic/topic1.png" alt="topic-1" />
   </section>
 );
 

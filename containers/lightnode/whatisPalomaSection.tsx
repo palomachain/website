@@ -33,7 +33,7 @@ const whatisPalomaSection = () => (
         </span>
         <Purchase className="purchase-button-white mt-40" />
       </div>
-      <img src="/assets/home/pigeon-question-mark.png" alt="pigeon-question-mark" className="img1" />
+      <img src="/assets/home/pigeon-question-mark.svg" alt="pigeon-question-mark" className="img1" />
     </div>
     <div className="describe-card describe-card-white">
       <div className="flex-row">

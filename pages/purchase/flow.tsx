@@ -655,7 +655,7 @@ const PurchaseFlow = () => {
               <>
                 I agree with the{' '}
                 <a
-                  href="https://docs.google.com/document/d/1puUO41mEjnj6qQqFpSyjzXIJanfG16KoXEZ8xBoB-VI/edit"
+                  href="https://palomachain.com/lightnode_sales_terms_and_conditions"
                   target="_blank"
                 >
                   Paloma LightNode Sale Terms and Conditions.
@@ -670,7 +670,7 @@ const PurchaseFlow = () => {
               <>
                 I agree with the{' '}
                 <a
-                  href="https://docs.google.com/document/d/1xt-CNyditQZXZLcfwM_wsPMpiBL5TUiFQu7Alnw5VeY/edit"
+                  href="https://palomachain.com/lightnode_sales_terms_of_use"
                   target="_blank"
                 >
                   Paloma LightNode Sale Terms of Use.
@@ -685,7 +685,7 @@ const PurchaseFlow = () => {
               <>
                 I agree with the{' '}
                 <a
-                  href="https://docs.google.com/document/d/1wohVWiIEvsrswkV3KbOoxmOmc0fwnE6Wsk_JIqQrKrE/edit?usp=sharing"
+                  href="https://palomachain.com/privacy"
                   target="_blank"
                 >
                   Paloma LightNode Privacy Policy.

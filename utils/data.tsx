@@ -1,6 +1,6 @@
 import { IDownloadAndInstallNodeSteps } from 'interfaces/nodeSale';
 
-export const SupportChains = ['ethereum', 'bnb', 'arbitrum', 'base', 'optimism', 'b', 'polygon', 'gnosis'];
+export const SupportChains = ['ethereum', 'binance', 'arbitrum', 'base', 'optimism', 'b', 'polygon', 'gnosis'];
 
 export const JoinFlow = [
   'To join the flock, you will need to purchase a Paloma LightNode.',
@@ -11,18 +11,18 @@ export const JoinFlow = [
 
 export const WorkFlow = [
   {
-    icon: 'pigeon-work-1.png',
+    icon: 'pigeon-work-1.svg',
     title: 'Validator Pigeons',
     describe: 'Validator pigeons manage the blockchain, execute transaction relays, and run advanced Paloma software.',
   },
   {
-    icon: 'pigeon-work-2.png',
+    icon: 'pigeon-work-2.svg',
     title: 'Delegator Pigeons',
     describe:
       'Delegator pigeons stake their tokens with reliable validators to ensure no validator controls more than 60% of the network.',
   },
   {
-    icon: 'pigeon-work-3.png',
+    icon: 'pigeon-work-3.svg',
     title: 'Paloma Users',
     describe:
       "Paloma users create apps for trading, security, lending, borrowing, and monitoring digital assets. As Paloma grows, relay revenue will go to those who maintain the network's security and quality.",

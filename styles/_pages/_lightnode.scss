@@ -661,12 +661,7 @@
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
-  .topic-photo {
-    background: #ff62c4;
-    img {
-      opacity: 0.5;
-    }
-  }
+
   .topic {
     display: flex;
     flex-direction: column;
@@ -690,6 +685,85 @@
       font-weight: 700;
       line-height: normal;
       text-transform: capitalize;
+    }
+  }
+}
+
+.where-can-buy-section {
+  background: #f7f3f3;
+  display: flex;
+  flex-direction: column;
+  padding: 85px 88px;
+  gap: 40px;
+  @media screen and (max-width: 768px) {
+    padding: 85px 16px;
+  }
+
+  .where-can-buy {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    &__head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: start;
+      max-width: 573px;
+      width: 100%;
+
+      .mt-80 {
+        margin-top: 80px !important;
+      }
+
+      h1 {
+        margin-bottom: 28px;
+      }
+      h3 {
+        color: #444343;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+    }
+
+    &__chains {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 23px;
+      width: 460px;
+      text-align: center;
+      margin: auto;
+    }
+
+    &__chains-chain {
+      width: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+
+      img {
+        width: 89px;
+        height: 89px;
+      }
+
+      p {
+        color: #2c2c2c;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: capitalize;
+      }
     }
   }
 }

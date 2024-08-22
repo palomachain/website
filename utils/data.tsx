@@ -1,6 +1,6 @@
 import { IDownloadAndInstallNodeSteps } from 'interfaces/nodeSale';
 
-export const SupportChains = ['ethereum', 'bnb', 'arbitrum', 'base', 'optimism', 'b', 'polygon'];
+export const SupportChains = ['ethereum', 'bnb', 'arbitrum', 'base', 'optimism', 'b', 'polygon', 'gnosis'];
 
 export const JoinFlow = [
   'To join the flock, you will need to purchase a Paloma LightNode.',
@@ -296,6 +296,23 @@ export const EcosystemData = [
       },
       {
         name: 'Create any Trading Pair on Paloma with Zero Gas',
+      },
+    ],
+  },
+  {
+    icon: 'nectar.png',
+    title: 'NECTAR',
+    describe:
+      "Nectar is a decentralized delta-hedged stablecoin built on Arbitrum's GMX. Zero minting fees, no interest. Funding rate income insures against negative periods.",
+    items: [
+      {
+        name: 'With Nectar, We Can Create Delta Neutral Hedges for any Pair as Long as There is Access to an Off-Chain Perp.',
+      },
+      {
+        name: 'New Markets Can be Created as Soon as Perp Markets are Created. All that is Required is Initial Liquidity for a Token/NecUSD Pair.',
+      },
+      {
+        name: 'Nectar Captures the Long Tail of Assets to Offer Liquid, Delta Neutral Stablecoin Issuance.',
       },
     ],
   },

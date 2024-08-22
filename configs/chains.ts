@@ -15,42 +15,42 @@ export enum ChainID {
 
 export const allChains: { [key: string]: EVMChain } = {
   [ChainID.ETHEREUM_MAIN]: {
-    icon: '/assets/chains/ethereum.png',
+    icon: '/assets/chains/ethereum.svg',
     chainName: 'Ethereum',
     chainId: ChainID.ETHEREUM_MAIN,
     rpc: 'https://serene-divine-crater.quiknode.pro/',
     blockExplorerUrl: 'https://etherscan.io/',
   },
   [ChainID.OPTIMISM_MAIN]: {
-    icon: '/assets/chains/optimism.png',
+    icon: '/assets/chains/optimism.svg',
     chainName: 'Optimism',
     chainId: ChainID.OPTIMISM_MAIN,
     rpc: 'https://mainnet.optimism.io/',
     blockExplorerUrl: 'https://optimistic.etherscan.io/',
   },
   [ChainID.BSC_MAIN]: {
-    icon: '/assets/chains/bnb.png',
+    icon: '/assets/chains/bnb.svg',
     chainName: 'BNB',
     chainId: ChainID.BSC_MAIN,
     rpc: 'https://volume.liquify.com/api=0440032/bsc',
     blockExplorerUrl: 'https://bscscan.com/',
   },
   [ChainID.ARBITRUM_MAIN]: {
-    icon: '/assets/chains/arbitrum.png',
+    icon: '/assets/chains/arbitrum.svg',
     chainName: 'Arbitrum',
     chainId: ChainID.ARBITRUM_MAIN,
     rpc: 'https://arb1.arbitrum.io/rpc',
     blockExplorerUrl: 'https://arbiscan.io/',
   },
   [ChainID.POLYGON_MAIN]: {
-    icon: `/assets/chains/polygon.png`,
+    icon: `/assets/chains/polygon.svg`,
     chainName: 'Polygon',
     chainId: ChainID.POLYGON_MAIN,
     rpc: 'https://polygon.rpc.blxrbdn.com/',
     blockExplorerUrl: 'https://polygonscan.com/',
   },
   [ChainID.BASE_MAIN]: {
-    icon: `/assets/chains/base.png`,
+    icon: `/assets/chains/base.svg`,
     chainName: 'Base',
     chainId: ChainID.BASE_MAIN,
     rpc: 'https://mainnet.base.org/',

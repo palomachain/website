@@ -60,7 +60,7 @@ const nodesaleSection = () => {
           <p>SUPPORTED CHAINS</p>
           <div className="nodesale-chains">
             {SupportChains.map((chain, index) => (
-              <img src={`/assets/chains/${chain}.png`} alt={chain} key={index} />
+              <img src={`/assets/chains/${chain}.svg`} alt={chain} key={index} />
             ))}
           </div>
         </div>

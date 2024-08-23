@@ -11,9 +11,7 @@ const topic3Section = () => (
         <h3 className="h-black-50">Founder & CEO, TokenSoft</h3>
       </div>
     </div>
-    <div className="topic-photo">
-      <img src="/assets/topic/topic3.svg" alt="topic-3" />
-    </div>
+    <img src="/assets/topic/topic3.png" alt="topic-3" />
   </section>
 );
 

@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   display: flex;
   align-items: center;
@@ -20,14 +22,14 @@
   }
 
   .display {
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 14px;
     line-height: 18px;
     color: #2c2c2c;
   }
 
   .symbol {
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 10px;
     line-height: 137.831%;
     text-transform: capitalize;
@@ -89,13 +91,13 @@
 }
 .selectedTokenText {
   font-size: 18px;
-  font-weight: 600;
+  font-family: $Inter-600;
 }
 .selectedTokenNumber {
   color: #afafaf;
   font-size: 10px;
   font-style: normal;
-  font-weight: 400;
+  font-family: $Inter-400;
   line-height: normal;
   text-transform: capitalize;
   padding: 0 12px;

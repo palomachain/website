@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .home-page-container {
   width: 100%;
 
@@ -47,11 +49,11 @@
     }
 
     h1 {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 54px;
       line-height: 72px;
       text-transform: capitalize;
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       color: #2c2c2c;
 
       @media screen and (max-width: 768px) {
@@ -62,7 +64,7 @@
     }
 
     h2 {
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       font-size: 40px;
       line-height: 53px;
       color: #2c2c2c;
@@ -101,7 +103,7 @@
     }
 
     p {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 14px;
       line-height: 25px;
       color: #2c2c2c;
@@ -131,7 +133,7 @@
     align-items: center;
     color: #2c2c2c;
     font-size: 16px;
-    font-family: 'RockStar-Medium';
+    font-family: $RockStar-500;
     max-width: 422px;
     margin-top: 26px;
 
@@ -189,7 +191,7 @@
     }
 
     .subtitle {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 20px;
       line-height: 26px;
       color: #ff62c4;
@@ -201,7 +203,7 @@
     }
 
     .title {
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       font-size: 54px;
       line-height: 74px;
       color: #2c2c2c;
@@ -254,7 +256,7 @@
         h3 {
           font-size: 28px;
           line-height: 37px;
-          font-family: $font-bold;
+          font-family: $RockStar-700;
           color: #2c2c2c;
           text-align: center;
 
@@ -265,7 +267,7 @@
         }
 
         p {
-          font-weight: 400;
+          font-family: $RockStar-400;
           font-size: 14px;
           line-height: 25px;
 
@@ -331,7 +333,7 @@
       }
 
       .number {
-        font-family: $font-bold;
+        font-family: $RockStar-700;
         font-size: 54px;
         line-height: 73px;
         text-transform: capitalize;
@@ -347,7 +349,7 @@
       }
 
       h1 {
-        font-family: $font-bold;
+        font-family: $RockStar-700;
         font-size: 20px;
         line-height: 27px;
         text-transform: capitalize;
@@ -410,7 +412,7 @@
 
     .number {
       margin-top: 16px;
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       font-size: 54px;
       line-height: 72px;
 
@@ -439,7 +441,7 @@
     }
 
     .flock-numbers {
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       font-size: 100px;
       line-height: 173px;
 
@@ -467,7 +469,7 @@
       font-size: 54px;
       line-height: 72px;
       color: #2c2c2c;
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       width: 100%;
       text-align: center;
     }
@@ -518,7 +520,7 @@
           color: #2c2c2c;
           font-size: 28px;
           line-height: 48px;
-          font-family: $font-semibold;
+          font-family: $RockStar-600;
         }
 
         .desc {
@@ -537,7 +539,7 @@
         align-items: center;
         border: 2px solid #cbc0c0;
         font-size: 54px;
-        font-family: $font-bold;
+        font-family: $RockStar-700;
         color: #cbc0c0;
 
         &.active {

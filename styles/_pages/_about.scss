@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .about-page-container {
   width: 100%;
 
@@ -42,11 +44,11 @@
     }
 
     h1 {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 54px;
       line-height: 72px;
       text-transform: capitalize;
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       color: #2c2c2c;
 
       @media screen and (max-width: 768px) {
@@ -56,7 +58,7 @@
     }
 
     p {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 20px;
       line-height: 32px;
       color: #2c2c2c;
@@ -79,7 +81,7 @@
     align-items: center;
     color: #2c2c2c;
     font-size: 16px;
-    font-family: 'RockStar-Medium';
+    font-family: $RockStar-500;
     margin-top: 26px;
     position: relative;
 
@@ -137,7 +139,7 @@
     }
 
     .subtitle {
-      font-weight: 400;
+      font-family: $RockStar-400;
       font-size: 20px;
       line-height: 26px;
       color: #ff62c4;
@@ -149,7 +151,7 @@
     }
 
     .title {
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       font-size: 54px;
       line-height: 74px;
       color: #2c2c2c;

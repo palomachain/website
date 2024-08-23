@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   padding: 73px 57px;
   width: 100%;
@@ -18,7 +20,7 @@
     color: #2c2c2c;
     font-size: 20px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: normal;
     cursor: pointer;
   }
@@ -27,7 +29,7 @@
     color: #2c2c2c;
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-family: $Inter-600;
     line-height: 150%; /* 21px */
     letter-spacing: -0.42px;
   }
@@ -41,7 +43,7 @@
     outline: none;
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-family: $Inter-400;
     line-height: 150%; /* 21px */
     letter-spacing: -0.42px;
   }
@@ -58,7 +60,7 @@
     text-align: center;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: 150%; /* 24px */
     letter-spacing: -0.32px;
     border: none;
@@ -85,20 +87,18 @@
     .title {
       color: #2c2c2c;
       text-align: center;
-      font-family: Inter;
+      font-family: $Inter-700;
       font-size: 24px;
       font-style: normal;
-      font-weight: 700;
       line-height: normal;
       margin-top: 34px;
     }
     .text {
       color: #2c2c2c;
       text-align: center;
-      font-family: Inter;
+      font-family: $Inter-400;
       font-size: 20px;
       font-style: normal;
-      font-weight: 400;
       line-height: 121.168%; /* 24.234px */
       margin-top: 10px;
     }

@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .selectList {
   position: absolute;
   margin-top: 6px;
@@ -17,7 +19,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-weight: 500;
+  font-family: $Inter-500;
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.32px;
@@ -26,7 +28,7 @@
   margin-bottom: 22px;
 }
 .selectNetwork {
-  font-weight: 500;
+  font-family: $Inter-500;
   font-size: 14px;
   line-height: 16px;
   letter-spacing: -0.32px;

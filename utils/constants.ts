@@ -27,3 +27,10 @@ export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponen
 
 export const NodeSaleStartDate = 1725447600 * 1000; // 11:00 AM, September 4, 2024 Coordinated Universal Time (UTC)
 export const NodeSaleEndDate = 1728039600 * 1000; // 11:00 AM, Oct 4, 2024 Coordinated Universal Time (UTC)
+
+export const PaymentStatus = [
+  0, // purchased
+  1, // whitelisted
+  2, // activated
+  3, // sold
+];

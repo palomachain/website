@@ -1,9 +1,11 @@
+@import '/styles/libraries/global';
+
 .container {
   width: auto;
   height: auto;
   background: transparent;
   border-radius: 4px;
-  font-weight: 700;
+  font-family: $Inter-700;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: -0.03em;

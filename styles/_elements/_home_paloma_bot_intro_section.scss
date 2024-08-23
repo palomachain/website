@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .paloma-bot-intro-bg {
   background: rgba(225, 233, 255, 0.77);
   background-image: url('/assets/home/cloud.svg');
@@ -18,7 +20,7 @@
   }
 
   .title {
-    font-family: $font-bold;
+    font-family: $RockStar-700;
     font-size: 40px !important;
     line-height: 50px !important;
   }

@@ -29,7 +29,7 @@ export const allChains: { [key: string]: EVMChain } = {
     blockExplorerUrl: 'https://optimistic.etherscan.io/',
   },
   [ChainID.BSC_MAIN]: {
-    icon: '/assets/chains/bnb.svg',
+    icon: '/assets/chains/binance.svg',
     chainName: 'BNB',
     chainId: ChainID.BSC_MAIN,
     rpc: 'https://volume.liquify.com/api=0440032/bsc',

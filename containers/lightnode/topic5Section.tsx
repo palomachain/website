@@ -1,8 +1,6 @@
 const topic5Section = () => (
   <section className="topic-section">
-    <div className="topic-photo">
-      <img src="/assets/topic/topic5.svg" alt="topic-5" />
-    </div>
+    <img src="/assets/topic/topic5.png" alt="topic-5" />
     <div className="topic">
       <p>
         “My team at Vitwit are proud contributors to the Paloma protocol. We work with the best engineering teams in the

@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .rotated-header-container {
   width: 100vw;
   max-width: 100%;
@@ -41,7 +43,7 @@
       margin: 0px;
       width: fit-content;
       font-size: 28px;
-      font-family: $font-bold;
+      font-family: $RockStar-700;
       text-transform: capitalize;
 
       @media screen and (max-width: 768px) {

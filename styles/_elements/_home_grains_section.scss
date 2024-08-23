@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .grain-drop-container {
   width: 100%;
 
@@ -32,7 +34,7 @@
       }
 
       .subtitle {
-        font-weight: 400;
+        font-family: $RockStar-400;
         font-size: 20px;
         line-height: 27px;
         text-transform: capitalize;
@@ -45,8 +47,8 @@
       }
 
       .title {
-        font-family: $font-bold;
-        font-weight: 400;
+        font-family: $RockStar-700;
+        font-family: $RockStar-400;
         font-size: 40px;
         line-height: 53px;
         text-transform: capitalize;
@@ -59,7 +61,7 @@
       }
 
       .description {
-        font-weight: 400;
+        font-family: $RockStar-400;
         font-size: 14px;
         line-height: 18px;
         text-transform: capitalize;
@@ -103,7 +105,7 @@
       }
 
       .number {
-        font-family: $font-bold;
+        font-family: $RockStar-700;
         font-size: 54px;
         line-height: 73px;
         text-transform: capitalize;
@@ -117,7 +119,7 @@
       }
 
       .title {
-        font-family: $font-semibold;
+        font-family: $RockStar-600;
         font-size: 20px;
         line-height: 27px;
         text-transform: capitalize;
@@ -131,7 +133,7 @@
       }
 
       .link {
-        font-weight: 400;
+        font-family: $RockStar-400;
         font-size: 14px;
         line-height: 18px;
 

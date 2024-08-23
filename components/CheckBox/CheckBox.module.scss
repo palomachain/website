@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   .container input[type='checkbox'] {
     --active: #ff62c4;
@@ -29,22 +31,24 @@
     gap: 10px;
 
     span {
-      margin-top: 4px;
       color: #2c2c2c;
       font-size: 14px;
-      font-weight: 600;
+      font-family: $Inter-600;
       line-height: 150%;
       letter-spacing: -0.42px;
+      display: flex !important;
+      align-items: center;
+      gap: 6px;
     }
 
     .disabled {
       font-size: 12px;
-      font-weight: 500;
+      font-family: $Inter-500;
     }
     a {
       color: #ff62c4;
       font-size: 14px;
-      font-weight: 500;
+      font-family: $Inter-500;
       line-height: 25.161px;
       letter-spacing: -0.126px;
       text-decoration-line: underline;

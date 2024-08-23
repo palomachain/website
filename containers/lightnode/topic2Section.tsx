@@ -1,8 +1,6 @@
 const topic2Section = () => (
   <section className="topic-section">
-    <div className="topic-photo">
-      <img src="/assets/topic/topic2.png" alt="topic-2" />
-    </div>
+    <img src="/assets/topic/topic2.png" alt="topic-2" />
     <div className="topic">
       <p>
         "I have processed over $30MM worth of volume myself through Paloma's many bots in just a few months. I am

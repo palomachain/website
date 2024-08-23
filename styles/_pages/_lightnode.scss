@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .lightnode-container {
   .purchase-button {
     background: #2c2c2c;
@@ -9,7 +11,7 @@
     cursor: pointer;
     color: #fff;
     font-size: 16px;
-    font-weight: 700;
+    font-family: $Inter-700;
     display: flex;
     align-items: center;
   }
@@ -24,23 +26,20 @@
 
   h1 {
     color: #2c2c2c;
-    font-family: 'RockStar-Semibold';
+    font-family: $RockStar-400;
     font-size: 40px;
-    font-weight: 400;
     text-transform: uppercase;
   }
   h2 {
     color: #2c2c2c;
-    font-family: 'RockStar-Semibold';
+    font-family: $RockStar-400;
     font-size: 30px;
-    font-weight: 400;
     text-transform: uppercase;
   }
   p {
     color: #444333;
-    font-family: 'RockStar-Semibold';
+    font-family: $Inter-500;
     font-size: 16px;
-    font-weight: 500;
   }
 }
 
@@ -72,20 +71,17 @@
     h3 {
       color: #444343;
       font-size: 16px;
-      font-weight: 400;
-      font-family: 'RockStar-Semibold';
+      font-family: $RockStar-400;
     }
     h1 {
       color: #2c2c2c;
       font-size: 34px;
-      font-weight: 400;
-      font-family: 'RockStar-Semibold';
+      font-family: $RockStar-400;
     }
     p {
       color: #444343;
       font-size: 16px;
-      font-weight: 500;
-      font-family: 'RockStar-Semibold';
+      font-family: $Inter-500;
     }
   }
 
@@ -128,8 +124,7 @@
     }
     h2 {
       font-size: 20px;
-      font-weight: 400;
-      font-family: 'RockStar-Semibold';
+      font-family: $RockStar-400;
     }
     .timeView {
       display: flex;
@@ -140,13 +135,11 @@
 
       h1 {
         font-size: 60px;
-        font-weight: 400;
-        font-family: 'RockStar-Semibold';
+        font-family: $RockStar-400;
       }
       span {
         font-size: 18px;
-        font-weight: 400;
-        font-family: 'RockStar-Semibold';
+        font-family: $Inter-400;
       }
     }
     .nodesale-chains {
@@ -177,9 +170,8 @@
   h1 {
     min-width: 50%;
     color: #fff;
-    font-family: 'RockStar-Semibold';
+    font-family: $RockStar-400;
     font-size: 60px;
-    font-weight: 400;
     text-transform: uppercase;
   }
   span {
@@ -189,7 +181,7 @@
     color: #fff;
     font-size: 20px;
     font-style: italic;
-    font-weight: 500;
+    font-family: $Inter-500;
   }
 }
 
@@ -205,9 +197,8 @@
 
   span {
     color: #444333;
-    font-family: 'RockStar-Semibold';
+    font-family: $Inter-500;
     font-size: 16px;
-    font-weight: 500;
   }
 
   .what-is {
@@ -340,7 +331,7 @@
         font-size: 50px;
       }
       p {
-        font-weight: 600;
+        font-family: $Inter-600;
         color: #2c2c2c;
         max-width: 323px;
         text-align: center;
@@ -371,9 +362,8 @@
   }
   .h3-title {
     color: #b0aeae;
-    font-family: 'RockStar-Semibold';
+    font-family: $RockStar-400;
     font-size: 16px;
-    font-weight: 400;
     text-transform: uppercase;
   }
   .p-describe {
@@ -409,8 +399,7 @@
       h3 {
         color: #fff;
         font-size: 20px;
-        font-weight: 700;
-        font-family: 'RockStar-Semibold';
+        font-family: $RockStar-700;
       }
       p {
         margin-top: 12px;
@@ -464,9 +453,8 @@
 
         h3 {
           font-size: 16px;
-          font-weight: 600;
           margin-bottom: 8px;
-          font-family: 'RockStar-Semibold';
+          font-family: $RockStar-600;
         }
       }
     }
@@ -640,7 +628,7 @@
           color: #fff;
           h3 {
             font-size: 16px;
-            font-weight: 700;
+            font-family: $RockStar-700;
             text-transform: capitalize;
           }
           p {
@@ -661,12 +649,7 @@
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
-  .topic-photo {
-    background: #ff62c4;
-    img {
-      opacity: 0.5;
-    }
-  }
+
   .topic {
     display: flex;
     flex-direction: column;
@@ -682,14 +665,93 @@
       color: #444343;
       font-size: 24px;
       font-style: italic;
-      font-weight: 500;
+      font-family: $Inter-500;
     }
     h3 {
       color: #ff62c4;
       font-size: 28px;
-      font-weight: 700;
+      font-family: $Inter-700;
       line-height: normal;
       text-transform: capitalize;
+    }
+  }
+}
+
+.where-can-buy-section {
+  background: #f7f3f3;
+  display: flex;
+  flex-direction: column;
+  padding: 85px 88px;
+  gap: 40px;
+  @media screen and (max-width: 768px) {
+    padding: 85px 16px;
+  }
+
+  .where-can-buy {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    &__head {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: start;
+      max-width: 573px;
+      width: 100%;
+
+      .mt-80 {
+        margin-top: 80px !important;
+      }
+
+      h1 {
+        margin-bottom: 28px;
+      }
+      h3 {
+        color: #444343;
+        font-size: 16px;
+        font-style: normal;
+        font-family: $RockStar-400;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+    }
+
+    &__chains {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 23px;
+      width: 460px;
+      text-align: center;
+      margin: auto;
+    }
+
+    &__chains-chain {
+      width: 125px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+
+      img {
+        width: 89px;
+        height: 89px;
+      }
+
+      p {
+        color: #2c2c2c;
+        font-size: 20px;
+        font-style: normal;
+        font-family: $Inter-700;
+        line-height: normal;
+        text-transform: capitalize;
+      }
     }
   }
 }
@@ -748,7 +810,7 @@
     p {
       color: #b0aeae;
       font-size: 16px;
-      font-weight: 500;
+      font-family: $Inter-500;
       margin-bottom: 35px;
     }
   }
@@ -855,13 +917,13 @@
       align-items: center;
       color: #2c2c2c;
       font-size: 18px;
-      font-weight: 600;
+      font-family: $Inter-600;
     }
     .subscription-table-row {
       background: #393939;
       color: #fff;
       font-size: 18px;
-      font-weight: 600;
+      font-family: $Inter-600;
     }
     .subscription-table-row2 {
       background: #4f4e4e;
@@ -881,9 +943,8 @@
 
   span {
     color: #444333;
-    font-family: 'RockStar-Semibold';
+    font-family: $Inter-500;
     font-size: 16px;
-    font-weight: 500;
   }
 
   .what-is {
@@ -1030,23 +1091,23 @@
       h1 {
         color: #2c2c2c;
         font-size: 79.651px;
-        font-weight: 400;
+        font-family: $RockStar-400;
       }
       h2 {
         color: #2c2c2c;
         font-size: 26.55px;
-        font-weight: 400;
+        font-family: $RockStar-400;
       }
       h3 {
         color: #737171;
         font-size: 21.24px;
-        font-weight: 400;
+        font-family: $RockStar-400;
         text-transform: uppercase;
       }
       p {
         color: #2c2c2c;
         font-size: 16px;
-        font-weight: 700;
+        font-family: $Inter-700;
         text-transform: capitalize;
         margin-top: 32px;
       }
@@ -1110,7 +1171,7 @@
       text-align: start;
       color: #fff;
       font-size: 18px;
-      font-weight: 600;
+      font-family: $Inter-600;
     }
     .table-body {
       padding-left: 33px;
@@ -1127,18 +1188,18 @@
       background: #4f4e4e;
       color: #fff;
       font-size: 18px;
-      font-weight: 700;
+      font-family: $Inter-700;
 
       span {
         color: #a09e9e;
-        font-weight: 500;
+        font-family: $Inter-500;
       }
     }
     .table-pink-bg {
       background: #f1d1e5;
       color: #2c2c2c;
       font-size: 30px;
-      font-weight: 800;
+      font-family: $Inter-800;
     }
     .table-black-bg {
       background: #2c2c2c;
@@ -1157,7 +1218,7 @@
 
   h1 {
     color: #fff;
-    margin-bottom: 78px;
+    margin-bottom: 78px !important;
     text-align: center;
   }
   .node-sale-links {
@@ -1172,7 +1233,7 @@
     h3 {
       color: #fff;
       font-size: 20px;
-      font-weight: 700;
+      font-family: $Inter-700;
     }
     .node-sale-links-items {
       margin-top: 22px;
@@ -1211,7 +1272,7 @@
         a {
           color: #fff;
           font-size: 16px;
-          font-weight: 500;
+          font-family: $Inter-500;
         }
       }
       .node-sale-links-item-pink {
@@ -1268,13 +1329,13 @@
       p {
         color: #f6f2f2;
         font-size: 24px;
-        font-weight: 700;
+        font-family: $Inter-700;
         margin-bottom: 10px;
       }
       span {
         color: #f6f2f2;
         font-size: 20px;
-        font-weight: 400;
+        font-family: $Inter-400;
       }
       .advisors-item-logo {
         position: absolute;

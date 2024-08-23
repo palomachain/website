@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   width: 100%;
   display: grid;
@@ -5,7 +7,7 @@
   position: relative;
   p {
     font-size: 14px;
-    font-weight: 600;
+    font-family: $Inter-600;
   }
 
   .mb16 {
@@ -31,7 +33,7 @@
       border: none;
       outline: none;
       background-color: transparent;
-      font-weight: 500;
+      font-family: $Inter-500;
       font-size: 15px;
       line-height: 22px;
       color: #f8f9fb;

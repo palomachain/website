@@ -40,8 +40,6 @@ const usePasscode = () => {
     let date = 0;
 
     try {
-      console.log('date', Date.now());
-
       if (Date.now() >= NodeSaleStartDate) {
         date = Date.now();
       } else {

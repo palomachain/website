@@ -654,10 +654,7 @@ const PurchaseFlow = () => {
             label={
               <>
                 I agree with the{' '}
-                <a
-                  href="https://palomachain.com/lightnode_sales_terms_and_conditions"
-                  target="_blank"
-                >
+                <a href="https://palomachain.com/lightnode_sales_terms_and_conditions" target="_blank">
                   Paloma LightNode Sale Terms and Conditions.
                 </a>
               </>
@@ -669,10 +666,7 @@ const PurchaseFlow = () => {
             label={
               <>
                 I agree with the{' '}
-                <a
-                  href="https://palomachain.com/lightnode_sales_terms_of_use"
-                  target="_blank"
-                >
+                <a href="https://palomachain.com/lightnode_sales_terms_of_use" target="_blank">
                   Paloma LightNode Sale Terms of Use.
                 </a>
               </>
@@ -684,10 +678,7 @@ const PurchaseFlow = () => {
             label={
               <>
                 I agree with the{' '}
-                <a
-                  href="https://palomachain.com/privacy"
-                  target="_blank"
-                >
+                <a href="https://palomachain.com/privacy" target="_blank">
                   Paloma LightNode Privacy Policy.
                 </a>
               </>

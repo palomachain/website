@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   width: 100%;
   padding: 109px 0;
@@ -25,7 +27,7 @@
     text-align: center;
     font-size: 28px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: normal;
   }
   .description {
@@ -34,7 +36,7 @@
     text-align: center;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-family: $Inter-500;
     line-height: 135.8%; /* 21.728px */
     text-transform: capitalize;
   }
@@ -62,7 +64,7 @@
     color: #2C2C2C;
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-family: $Inter-500;
     line-height: 135.8%;
     text-transform: capitalize;
   }
@@ -71,6 +73,6 @@
     color: #ff62c4;
     text-decoration-line: underline;
     cursor: pointer;
-    font-weight: 600;
+    font-family: $Inter-600;
   }
 }

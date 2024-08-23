@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .mobile-header-menu {
   position: fixed;
   left: 0px;
@@ -66,7 +68,7 @@
       line-height: 19px;
       text-transform: uppercase;
       color: #2c2c2c;
-      font-family: $font-semibold;
+      font-family: $RockStar-600;
       flex: 1;
     }
 

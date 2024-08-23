@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -9,7 +11,7 @@
     color: #2C2C2C;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-family: $Inter-500;
     line-height: 145%; /* 23.2px */
   }
   .head {
@@ -33,7 +35,7 @@
       font-feature-settings: 'ss01' on, 'cv01' on, 'cv11' on;
       font-size: 14px;
       font-style: normal;
-      font-weight: 400;
+      font-family: $Inter-400;
       line-height: 20px; /* 142.857% */
     }
     span {

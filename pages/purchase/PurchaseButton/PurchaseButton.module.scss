@@ -1,7 +1,9 @@
+@import '/styles/libraries/global';
+
 .container {
   cursor: not-allowed;
   margin-bottom: 48px;
-  font-weight: 700;
+  font-family: $Inter-700;
   font-size: 14px;
   line-height: 150%;
   border: none;

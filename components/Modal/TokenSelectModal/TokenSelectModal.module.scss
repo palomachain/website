@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   height: 567px;
   display: flex;
@@ -35,7 +37,7 @@
 
   .tokenEmptyText {
     margin-top: 69px;
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 14px;
     line-height: 16px;
     text-align: center;
@@ -43,7 +45,7 @@
   }
 
   .text {
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 15px;
     line-height: 19px;
     text-align: center;
@@ -58,7 +60,7 @@
 
 .switchWallet {
   padding: 14px 39px;
-  font-weight: 700;
+  font-family: $Inter-700;
   font-size: 14px;
   line-height: 150%;
   display: flex;

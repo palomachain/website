@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -7,12 +9,12 @@
   p {
     color: #2c2c2c;
     font-size: 14px;
-    font-weight: 600;
+    font-family: $Inter-600;
     line-height: 150%; /* 21px */
     letter-spacing: -0.42px;
   }
   .walletBalance {
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 12px;
     line-height: 15px;
     display: flex;
@@ -24,7 +26,7 @@
   }
 
   .max {
-    font-weight: 700;
+    font-family: $Inter-700;
     text-transform: uppercase;
     color: #f9ddfb;
     cursor: pointer;
@@ -48,7 +50,7 @@
       color: #2c2c2c;
       font-size: 14px;
       font-style: normal;
-      font-weight: 500;
+      font-family: $Inter-500;
       line-height: 31.533px; /* 225.238% */
       letter-spacing: -0.014px;
       padding-left: 18px;
@@ -73,7 +75,7 @@
       justify-content: flex-end;
 
       .tokenAmount {
-        font-weight: 500;
+        font-family: $Inter-500;
         font-size: 14px;
         line-height: 0px;
         color: #f8f9fb;
@@ -86,7 +88,7 @@
       }
 
       .usdPrice {
-        font-weight: 500;
+        font-family: $Inter-500;
         font-size: 10px;
         line-height: 14px;
         letter-spacing: -0.001em;

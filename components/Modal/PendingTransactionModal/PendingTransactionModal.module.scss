@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   height: 400px;
   display: flex;
@@ -27,7 +29,7 @@
     text-align: center;
     font-size: 24px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: normal;
     margin-top: 35px;
     margin-bottom: 16px;
@@ -39,14 +41,14 @@
     text-align: center;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-family: $Inter-500;
     line-height: normal;
     margin-bottom: 73px;
   }
 
   .tx {
     color: #2c2c2c;
-    font-weight: 700;
+    font-family: $Inter-700;
     font-size: 14px;
     line-height: 150%; /* 21px */
     letter-spacing: -0.28px;

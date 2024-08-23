@@ -1,3 +1,5 @@
+@import '/styles/libraries/global';
+
 .container {
   height: auto;
   display: flex;
@@ -15,7 +17,7 @@
     text-align: center;
     font-size: 24px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: normal;
     margin-top: 34px;
     margin-bottom: 17px;
@@ -26,7 +28,7 @@
     text-align: center;
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-family: $Inter-500;
     line-height: normal;
     margin-bottom: 40px;
     max-width: 397px;
@@ -39,7 +41,7 @@
     border-radius: 4px;
     padding: 14px 25px;
     color: #3973fc;
-    font-weight: 700;
+    font-family: $Inter-700;
     font-size: 14px;
     line-height: 150%;
     display: flex;
@@ -56,7 +58,7 @@
 
   .mybots {
     color: #3973fc;
-    font-weight: 500;
+    font-family: $Inter-500;
     font-size: 14px;
     line-height: 18px;
     padding: 0 90px;
@@ -81,7 +83,7 @@
     text-align: center;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
+    font-family: $Inter-700;
     line-height: 150%; /* 24px */
     letter-spacing: -0.32px;
     cursor: pointer;

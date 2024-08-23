@@ -518,7 +518,7 @@ export const PalomaDownloadAndInstallSteps: {
           externalBtns: [
             {
               text: 'Download Setup',
-              link: 'https://github.com/VolumeFi/lightnode-client/blob/main/run.sh',
+              link: 'https://download.palomachain.com/lightnode/setup.sh',
             },
           ],
         },

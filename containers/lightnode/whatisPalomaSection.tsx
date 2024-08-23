@@ -6,7 +6,7 @@ const whatisPalomaSection = () => (
     <div className="what-is">
       <div className="what-is-paloma">
         <h1>
-          WHAT IS<br></br>PALOMA?
+          WHAT IS PALOMA?
         </h1>
         <p>
           Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart-contract messages fast and securely,

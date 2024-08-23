@@ -57,7 +57,7 @@ const nodesaleSection = () => {
           <Countdown date={remainStartDate} renderer={rendererTime} />
         </div>
         <div className="flex-col gap-16">
-          <p>SUPPORTED CHAINS</p>
+          <p>PARTICIPATING CHAINS</p>
           <div className="nodesale-chains">
             {SupportChains.map((chain, index) => (
               <img src={`/assets/chains/${chain}.svg`} alt={chain} key={index} />

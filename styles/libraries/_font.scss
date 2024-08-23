@@ -1,182 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap');
 
 @font-face {
-  font-family: 'RockStar-NarrowExtraLightItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowExtraLightItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowExtraLightItalic/font.woff') format('woff');
+  font-family: 'RockStar-200';
+  src: local('RockStar-200'), url('/static/fonts/RockStar/RockStar-ExtraLight.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-Medium';
-  src: url('/static/fonts/RockStar/RockStarMedium/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarMedium/font.woff') format('woff');
+  font-family: 'RockStar-300';
+  src: local('RockStar-300'), url('/static/fonts/RockStar/RockStar-Light.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-LightItalic';
-  src: url('/static/fonts/RockStar/RockStarLightItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarLightItalic/font.woff') format('woff');
+  font-family: 'RockStar-400';
+  src: local('RockStar-400'), url('/static/fonts/RockStar/RockStar-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-ExtraBoldItalic';
-  src: url('/static/fonts/RockStar/RockStarExtraBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarExtraBoldItalic/font.woff') format('woff');
+  font-family: 'RockStar-500';
+  src: local('RockStar-500'), url('/static/fonts/RockStar/RockStar-500.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-RegularItalic';
-  src: url('/static/fonts/RockStar/RockStarRegularItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarRegularItalic/font.woff') format('woff');
+  font-family: 'RockStar-600';
+  src: local('RockStar-600'), url('/static/fonts/RockStar/RockStar-SemiBold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-SemiBold';
-  src: url('/static/fonts/RockStar/RockStarSemiBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarSemiBold/font.woff') format('woff');
+  font-family: 'RockStar-700';
+  src: local('RockStar-700'), url('/static/fonts/RockStar/RockStar-Bold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-ExtraLightItalic';
-  src: url('/static/fonts/RockStar/RockStarExtraLightItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarExtraLightItalic/font.woff') format('woff');
+  font-family: 'RockStar-800';
+  src: local('RockStar-800'), url('/static/fonts/RockStar/RockStar-ExtraBold.ttf') format('truetype');
+}
+
+
+@font-face {
+  font-family: 'Inter-100';
+  src: local('Inter-100'), url('/static/fonts/Inter/Inter-Thin.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-BoldItalic';
-  src: url('/static/fonts/RockStar/RockStarBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarBoldItalic/font.woff') format('woff');
+  font-family: 'Inter-200';
+  src: local('Inter-200'), url('/static/fonts/Inter/Inter-ExtraLight.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-Black';
-  src: url('/static/fonts/RockStar/RockStarBlack/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarBlack/font.woff') format('woff');
+  font-family: 'Inter-300';
+  src: local('Inter-300'), url('/static/fonts/Inter/Inter-Light.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-ExtraLight';
-  src: url('/static/fonts/RockStar/RockStarExtraLight/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarExtraLight/font.woff') format('woff');
+  font-family: 'Inter-400';
+  src: local('Inter-400'), url('/static/fonts/Inter/Inter-Regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-MediumItalic';
-  src: url('/static/fonts/RockStar/RockStarMediumItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarMediumItalic/font.woff') format('woff');
+  font-family: 'Inter-500';
+  src: local('Inter-500'), url('/static/fonts/Inter/Inter-Medium.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-Bold';
-  src: url('/static/fonts/RockStar/RockStarBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarBold/font.woff') format('woff');
+  font-family: 'Inter-600';
+  src: local('Inter-600'), url('/static/fonts/Inter/Inter-SemiBold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-NarrowExtraLight';
-  src: url('/static/fonts/RockStar/RockStarNarrowExtraLight/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowExtraLight/font.woff') format('woff');
+  font-family: 'Inter-700';
+  src: local('Inter-700'), url('/static/fonts/Inter/Inter-Bold.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'RockStar-Regular';
-  src: url('/static/fonts/RockStar/RockStarRegular/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarRegular/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-Light';
-  src: url('/static/fonts/RockStar/RockStarLight/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarLight/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-ExtraBold';
-  src: url('/static/fonts/RockStar/RockStarExtraBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarExtraBold/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-UltraBlackItalic';
-  src: url('/static/fonts/RockStar/RockStarUltraBlackItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarUltraBlackItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-UltraBlack';
-  src: url('/static/fonts/RockStar/RockStarUltraBlack/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarUltraBlack/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-SemiBoldItalic';
-  src: url('/static/fonts/RockStar/RockStarSemiBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarSemiBoldItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-BlackItalic';
-  src: url('/static/fonts/RockStar/RockStarBlackItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarBlackItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowBlack';
-  src: url('/static/fonts/RockStar/RockStarNarrowBlack/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowBlack/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowUltraBlackItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowUltraBlackItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowUltraBlackItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowUltraBlack';
-  src: url('/static/fonts/RockStar/RockStarNarrowUltraBlack/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowUltraBlack/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowMedium';
-  src: url('/static/fonts/RockStar/RockStarNarrowMedium/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowMedium/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowExtraBoldItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowExtraBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowExtraBoldItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowExtraBold';
-  src: url('/static/fonts/RockStar/RockStarNarrowExtraBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowExtraBold/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowSemiBold';
-  src: url('/static/fonts/RockStar/RockStarNarrowSemiBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowSemiBold/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowBlackItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowBlackItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowBlackItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowSemiBoldItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowSemiBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowSemiBoldItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowLight';
-  src: url('/static/fonts/RockStar/RockStarNarrowLight/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowLight/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowRegularItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowRegularItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowRegularItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowRegular';
-  src: url('/static/fonts/RockStar/RockStarNarrowRegular/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowRegular/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowBoldItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowBoldItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowBoldItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowLightItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowLightItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowLightItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowMediumItalic';
-  src: url('/static/fonts/RockStar/RockStarNarrowMediumItalic/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowMediumItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'RockStar-NarrowBold';
-  src: url('/static/fonts/RockStar/RockStarNarrowBold/font.woff2') format('woff2'),
-    url('/static/fonts/RockStar/RockStarNarrowBold/font.woff') format('woff');
+  font-family: 'Inter-800';
+  src: local('Inter-800'), url('/static/fonts/Inter/Inter-ExtraBold.ttf') format('truetype');
 }

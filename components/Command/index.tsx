@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import style from './Command.module.scss';
+import classNames from 'classnames';
 
 interface ICommandWrapper {
   step?: string | number;
@@ -18,20 +19,39 @@ const Command = ({
   copyCommand,
   isCopyAvailable = true,
   className,
-}: ICommandWrapper) => (
-  <section className={style.container}>
-    <div className={style.head}>
-      <p>{step}.</p> {title}
-    </div>
-    {command && (
-      <div className={style.shCommand}>
-        <div className={style.command}>{command}</div>
-        {isCopyAvailable && (
-          <img src="/assets/icons/copy.svg" alt="copy" onClick={() => navigator.clipboard.writeText(copyCommand)} />
-        )}
+}: ICommandWrapper) => {
+  const [isCopied, setCopied] = useState(false);
+
+  const onClickCopy = () => {
+    setCopied(true);
+    navigator.clipboard.writeText(copyCommand);
+  };
+
+  useEffect(() => {
+    if (isCopied) {
+      const delayDebounceFn = setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+
+      return () => clearTimeout(delayDebounceFn);
+    }
+  }, [isCopied]);
+
+  return (
+    <section className={style.container}>
+      <div className={style.head}>
+        <p>{step}.</p> {title}
       </div>
-    )}
-  </section>
-);
+      {command && (
+        <div className={style.shCommand}>
+          <div className={style.command}>{command}</div>
+          {isCopyAvailable && (
+            <div className={classNames(style.copyIcon, isCopied ? style.copied : undefined)} onClick={onClickCopy} />
+          )}
+        </div>
+      )}
+    </section>
+  );
+};
 
 export default Command;

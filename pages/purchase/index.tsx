@@ -8,8 +8,8 @@ const Purchase = () => {
   const [loading, setLoading] = useState(true);
 
   const checkAlreadyPassedCode = async () => {
-    await isAlreadyPassedCode();
-    setLoading(false);
+    const date = await isAlreadyPassedCode();
+    date !== 0 && setLoading(false);
   };
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Purchase = () => {
   }, []);
 
   return loading ? (
-    <></>
+    <div style={{ height: '100vh' }}></div>
   ) : (
     <div className="page-container light-node-sale">
       <div className=" purchase-flow-page">

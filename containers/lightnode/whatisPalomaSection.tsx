@@ -5,9 +5,7 @@ const whatisPalomaSection = () => (
   <section className="what-is-paloma-section">
     <div className="what-is">
       <div className="what-is-paloma">
-        <h1>
-          WHAT IS PALOMA?
-        </h1>
+        <h1>WHAT IS PALOMA?</h1>
         <p>
           Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves smart-contract messages fast and securely,
           between any other public blockchain with an active RPC endpoint. Paloma is designed for developers who wish to

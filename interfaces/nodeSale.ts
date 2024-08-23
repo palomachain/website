@@ -20,7 +20,7 @@ export interface IDownloadAndInstallNodeSteps {
     items?: {
       name: string | JSX.Element;
       command?: string | JSX.Element;
-      copyCommand?: string
+      copyCommand?: string;
     }[];
     img?: JSX.Element;
   }[];

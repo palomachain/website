@@ -72,11 +72,7 @@ const TokenSelector = ({
           <div className={style.token} onClick={() => handleShowTokenSelectModal()}>
             <div className="flex-row gap-8">
               {token.icon !== '' && <img src={token.icon} width={25} height={25} />}
-              {token.symbol === '' ? (
-                'Select Token'
-              ) : (
-                <p className='bold'>{token.symbol}</p>
-              )}
+              {token.symbol === '' ? 'Select Token' : <p className="bold">{token.symbol}</p>}
             </div>
             <img className={style.selectIcon} src="/assets/icons/down.svg" alt="" />
           </div>

@@ -85,6 +85,8 @@ const RegisterFlow = () => {
             <br />
             Click the link to confirm your email
           </p>
+          <p className={style.subText}>If you haven't received an email after a minute.</p>
+          <span className={style.clickAgain} onClick={() => setConfirm(false)}>Click here to try again.</span>
         </Modal>
       )}
     </div>

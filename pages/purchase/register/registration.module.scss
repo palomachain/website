@@ -102,6 +102,21 @@
       line-height: 121.168%; /* 24.234px */
       margin-top: 10px;
     }
+    .subText {
+      font-family: $Inter-500;
+      color: #6b6666;
+      font-size: 14px;
+      line-height: 155%;
+      margin-top: 60px;
+      margin-bottom: 8px;
+    }
+    .clickAgain {
+      font-family: $Inter-500;
+      color: #ff62c4;
+      font-size: 14px;
+      text-decoration-line: underline;
+      cursor: pointer;
+    }
   }
 
   .contentClassName {

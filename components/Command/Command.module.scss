@@ -19,6 +19,9 @@
     flex-direction: row;
     gap: 4px;
     align-items: center;
+    font-family: $Inter-500;
+    font-size: 16px;
+    line-height: 145%;
   }
   .shCommand {
     border-radius: 16px;
@@ -35,7 +38,7 @@
       font-feature-settings: 'ss01' on, 'cv01' on, 'cv11' on;
       font-size: 14px;
       font-style: normal;
-      font-family: $Inter-400;
+      font-family: $Inter-400 !important;
       line-height: 20px; /* 142.857% */
     }
     span {

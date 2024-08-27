@@ -28,6 +28,10 @@
   font-family: 'RockStar-800';
   src: local('RockStar-800'), url('/static/fonts/RockStar/RockStar-ExtraBold.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'RockStar-Black';
+  src: local('RockStar-Black'), url('/static/fonts/RockStar/RockStar-Black.ttf') format('truetype');
+}
 
 @font-face {
   font-family: 'Inter-100';

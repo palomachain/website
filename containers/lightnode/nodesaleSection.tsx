@@ -41,11 +41,11 @@ const nodesaleSection = () => {
     <section className="nodesale-section">
       <div className="nodesale-describe">
         <h3>JOIN THE FLOCK</h3>
-        <h1>PALOMA LIGHTNODES</h1>
+        <h1>PALOMA LIGHT NODES</h1>
         <p>
-          Introducing a new way to earn and participate in a global community: The Paloma Flock. Paloma is a new
-          blockchain network that is secured by a global community of pigeons that deliver transaction messages to any
-          blockchain's smart contract Virtual Machine (VM).
+          Introducing a new way to work and a participate in a global community: The Paloma Flock. Paloma is a new
+          blockchain network that is secured by community of global pigeons that deliver transaction messages to any
+          blockchain.
         </p>
         <Purchase />
       </div>
@@ -56,7 +56,7 @@ const nodesaleSection = () => {
           <h2>NODE SALE STARTS IN</h2>
           <Countdown date={remainStartDate} renderer={rendererTime} />
         </div>
-        <div className="flex-col gap-16">
+        <div className="flex-col gap-36">
           <p>PARTICIPATING CHAINS</p>
           <div className="nodesale-chains">
             {SupportChains.map((chain, index) => (

@@ -17,7 +17,11 @@ const tokenomicsSection = () => (
         <h3>Total Grains</h3>
         <h1>6.14</h1>
         <h2>Billion Grains</h2>
-        <p>Cosmos Inflation Rate 3% (With Full Staking)</p>
+        <p>
+          Cosmos Inflation Rate 3%
+          <br />
+          (With Full Staking)
+        </p>
       </div>
     </div>
   </section>

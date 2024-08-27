@@ -26,15 +26,21 @@
 
   h1 {
     color: #2c2c2c;
-    font-family: $RockStar-400;
+    font-family: $RockStar-Black;
     font-size: 40px;
     text-transform: uppercase;
+    font-weight: 400;
   }
   h2 {
     color: #2c2c2c;
-    font-family: $RockStar-400;
+    font-family: $RockStar-Black;
     font-size: 30px;
     text-transform: uppercase;
+    font-weight: 400;
+  }
+  h3 {
+    font-family: $RockStar-Black;
+    font-weight: 400;
   }
   p {
     color: #444333;
@@ -71,12 +77,12 @@
     h3 {
       color: #444343;
       font-size: 16px;
-      font-family: $RockStar-400;
+      font-family: $RockStar-Black;
     }
     h1 {
       color: #2c2c2c;
       font-size: 34px;
-      font-family: $RockStar-400;
+      font-family: $RockStar-Black;
     }
     p {
       color: #444343;
@@ -101,6 +107,7 @@
     position: relative;
     width: calc(50% - 110px);
     gap: 64px;
+    z-index: 10;
     @media screen and (max-width: 768px) {
       width: 100%;
       padding: 80px 16px;
@@ -112,6 +119,11 @@
     p,
     span {
       color: #fff;
+      font-family: $RockStar-Black;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 400;
     }
     .nodesale-bg {
       width: 644px;
@@ -124,7 +136,6 @@
     }
     h2 {
       font-size: 20px;
-      font-family: $RockStar-400;
     }
     .timeView {
       display: flex;
@@ -135,11 +146,9 @@
 
       h1 {
         font-size: 60px;
-        font-family: $RockStar-400;
       }
       span {
         font-size: 18px;
-        font-family: $Inter-400;
       }
     }
     .nodesale-chains {
@@ -170,7 +179,6 @@
   h1 {
     min-width: 50%;
     color: #fff;
-    font-family: $RockStar-400;
     font-size: 60px;
     text-transform: uppercase;
   }
@@ -314,6 +322,10 @@
 
   .join-flow {
     max-width: 550px;
+
+    h1 {
+      margin-bottom: 16px;
+    }
   }
   .join-flow-step {
     width: 100%;
@@ -362,7 +374,6 @@
   }
   .h3-title {
     color: #b0aeae;
-    font-family: $RockStar-400;
     font-size: 16px;
     text-transform: uppercase;
   }
@@ -650,6 +661,10 @@
     flex-direction: column;
   }
 
+  img {
+    width: 475px;
+  }
+
   .topic {
     display: flex;
     flex-direction: column;
@@ -714,7 +729,6 @@
         color: #444343;
         font-size: 16px;
         font-style: normal;
-        font-family: $RockStar-400;
         line-height: normal;
         text-transform: uppercase;
         margin-bottom: 8px;
@@ -1091,17 +1105,14 @@
       h1 {
         color: #2c2c2c;
         font-size: 79.651px;
-        font-family: $RockStar-400;
       }
       h2 {
         color: #2c2c2c;
         font-size: 26.55px;
-        font-family: $RockStar-400;
       }
       h3 {
         color: #737171;
         font-size: 21.24px;
-        font-family: $RockStar-400;
         text-transform: uppercase;
       }
       p {

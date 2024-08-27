@@ -1,7 +1,7 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 
 import style from './Command.module.scss';
-import classNames from 'classnames';
 
 interface ICommandWrapper {
   step?: string | number;
@@ -40,7 +40,7 @@ const Command = ({
   return (
     <section className={style.container}>
       <div className={style.head}>
-        <p>{step}.</p> {title}
+        <p>{step}.</p> <p>{title}</p>
       </div>
       {command && (
         <div className={style.shCommand}>

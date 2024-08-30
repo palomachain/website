@@ -3,7 +3,7 @@ import CheckBox from 'components/CheckBox';
 import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
 import SuccessModal from 'components/Modal/SuccessModal';
 import { allChains } from 'configs/chains';
-import { DEADLINE, SLIPPAGE_PERCENTAGE } from 'configs/constants';
+import { DEADLINE, purchaseSupportedNetworks, SLIPPAGE_PERCENTAGE } from 'configs/constants';
 import { getTxHashLink } from 'configs/links';
 import SelectChain from 'containers/SelectChain';
 import TokenSelector from 'containers/TokenSelector';
@@ -35,16 +35,6 @@ import { abbreviateNumberSI, formatNumber } from 'utils/number';
 import { isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import TotalPay from './TotalPay';
-
-const supportedNetworks = {
-  '1': 'Ethereum',
-  '10': 'Optimism',
-  '56': 'BNB',
-  '137': 'Polygon',
-  '8453': 'Base',
-  '42161': 'Arbitrum',
-};
-const supportedChainIds = ['1', '10', '56', '137', '8453', '42161'];
 
 const PurchaseFlow = () => {
   const { wallet } = useWallet();
@@ -275,7 +265,7 @@ const PurchaseFlow = () => {
   useEffect(() => {
     if (wallet.network) {
       const chainId = parseIntString(wallet.network);
-      if (chainId in supportedNetworks) setSelectedChain(chainId);
+      if (chainId in purchaseSupportedNetworks) setSelectedChain(chainId);
       else setSelectedChain('');
     } else setSelectedChain('');
   }, [wallet.network]);
@@ -581,12 +571,12 @@ const PurchaseFlow = () => {
           <div className="purchase-sale-set__select">
             <SelectChain
               selectedChain={selectedChain}
-              supportChains={supportedNetworks}
+              supportChains={purchaseSupportedNetworks}
               setSelectedChain={setSelectedChain}
             />
             <TokenSelector
               label="Purchasing Token"
-              supportedNetworks={supportedNetworks}
+              supportedNetworks={purchaseSupportedNetworks}
               token={fromToken}
               listedTokens={listedTokens}
               onSelectToken={(token) => setFromToken({ ...token })}
@@ -698,7 +688,6 @@ const PurchaseFlow = () => {
 
       <PurchaseButton
         chainId={wallet ? parseIntString(wallet.network) : null}
-        supportChains={supportedChainIds}
         full
         onClickStart={() => handleStart()}
         isValidTokenAmount={isValidTokenAmount}

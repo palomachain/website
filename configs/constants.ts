@@ -13,12 +13,12 @@ const envParam = {
   thirdWebApiKey: process.env.THIRDWEB_API_KEY || '',
 };
 
-const Networks = {
+const purchaseSupportedNetworks = {
   '1': 'Ethereum',
   '10': 'Optimism',
   '56': 'BNB',
-  '8453': 'Base',
   '137': 'Polygon',
+  '8453': 'Base',
   '42161': 'Arbitrum',
 };
 
@@ -69,4 +69,12 @@ const SLIPPAGE_DOMINATOR = 1000;
 const SLIPPAGE_PERCENTAGE = 1; // default slippage is 1%
 const DEADLINE = 5; // 5 MIN
 
-export { AddNetwork, DEADLINE, DEFAULT_MAIN_CHAINS, Networks, SLIPPAGE_DOMINATOR, SLIPPAGE_PERCENTAGE, envParam };
+export {
+  AddNetwork,
+  DEADLINE,
+  DEFAULT_MAIN_CHAINS,
+  purchaseSupportedNetworks,
+  SLIPPAGE_DOMINATOR,
+  SLIPPAGE_PERCENTAGE,
+  envParam,
+};

@@ -10,14 +10,15 @@ import { toast } from 'react-toastify';
 import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
 
 import style from './activate.module.scss';
+import { purchaseSupportedNetworks } from 'configs/constants';
 
-const mainChain = '42161'; // Arbitrum
 const STEPS = {
   CONNECT_WALLET: 1,
   ACTIVATE_PALOMA: 2,
   ACTIVATED: 3,
   TERMINAL: 4,
 };
+
 const shCommand = {
   command: (
     <p>
@@ -43,7 +44,7 @@ const Activate = () => {
   const handleChooseMetamask = async () => {
     if (!loadingMetamask) {
       setLoadingMetamask(true);
-      const isConnectedWallet = await connectMetaMask(mainChain);
+      const isConnectedWallet = await connectMetaMask();
       !isConnectedWallet && setLoadingMetamask(false);
     }
   };
@@ -66,10 +67,13 @@ const Activate = () => {
     } else {
       setSteps(STEPS.ACTIVATE_PALOMA);
     }
+
+    setLoadingMetamask(false);
+    setLoadingWalletconnect(false);
   };
 
   useEffect(() => {
-    if (wallet && parseIntString(wallet.network) === mainChain) {
+    if (wallet && parseIntString(wallet.network) in purchaseSupportedNetworks) {
       checkActivate();
     } else {
       setSteps(STEPS.CONNECT_WALLET);

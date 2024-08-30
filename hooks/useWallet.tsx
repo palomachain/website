@@ -17,7 +17,7 @@ const cookies = new Cookies();
 type WalletContextType = {
   ethereum?: any;
   wallet: Wallet;
-  connectMetaMask: (e: string) => Promise<boolean>;
+  connectMetaMask: (e?: string) => Promise<boolean>;
   connectWalletConnect: () => Promise<void>;
   disconnectWallet: () => void;
   openConnectionModal: () => void;

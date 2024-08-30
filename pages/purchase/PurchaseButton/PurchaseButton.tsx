@@ -6,12 +6,12 @@ import { useWallet } from 'hooks/useWallet';
 import { IPriceTiers } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React, { useMemo } from 'react';
+import { purchaseSupportedNetworks } from 'configs/constants';
 
 import styles from './PurchaseButton.module.scss';
 
 interface PurchaseButtonProps {
   chainId: string;
-  supportChains: string[];
   full?: boolean;
   isValidTokenAmount: boolean;
   isTxLoading: boolean;
@@ -34,7 +34,6 @@ interface PurchaseButtonProps {
 
 const PurchaseButton = ({
   chainId,
-  supportChains,
   full,
   isValidTokenAmount,
   isTxLoading,
@@ -88,7 +87,7 @@ const PurchaseButton = ({
     }
 
     if (step !== 1) {
-      if (chainId.toString() === NO_CHAIN_SELECTED || !supportChains.includes(chainId)) {
+      if (chainId.toString() === NO_CHAIN_SELECTED || !(chainId in purchaseSupportedNetworks)) {
         return {
           disabled: true,
           text: `Select Correct Chain`,
@@ -140,7 +139,6 @@ const PurchaseButton = ({
     promoCode,
     step,
     chainId,
-    supportChains,
     fromTokenExchangeRate,
     totalSupportPrice,
     expectedAmount,

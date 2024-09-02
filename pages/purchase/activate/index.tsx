@@ -8,9 +8,9 @@ import { useWallet } from 'hooks/useWallet';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
+import { purchaseSupportedNetworks } from 'configs/constants';
 
 import style from './activate.module.scss';
-import { purchaseSupportedNetworks } from 'configs/constants';
 
 const STEPS = {
   CONNECT_WALLET: 1,
@@ -29,7 +29,7 @@ const shCommand = {
 };
 
 const Activate = () => {
-  const { connectMetaMask, connectWalletConnect, disconnectWallet, wallet } = useWallet();
+  const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet } = useWallet();
   const provider = useProvider(wallet);
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
   const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
@@ -44,8 +44,7 @@ const Activate = () => {
   const handleChooseMetamask = async () => {
     if (!loadingMetamask) {
       setLoadingMetamask(true);
-      const isConnectedWallet = await connectMetaMask();
-      !isConnectedWallet && setLoadingMetamask(false);
+      handleConnectMetamask();
     }
   };
 
@@ -98,7 +97,7 @@ const Activate = () => {
     try {
       setActivating(true);
 
-      const activate = await activateWallet(stringToHexWithBech(palomaAddress));
+      const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(wallet.network));
       if (activate) {
         setSteps(STEPS.ACTIVATED);
         setActivatedPalomaAddress(palomaAddress);

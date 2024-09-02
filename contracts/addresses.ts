@@ -61,7 +61,7 @@ export const Addresses: TMap = {
     wallchainRouterManager: '0x1d658D2f8Fdae5A52be5e2D37b6013a1F776bEe8',
 
     weth: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', // wmatic address
-    usdc: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+    usdc: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
     usdt: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
 
     node_sale: envParam.nodeSale_polygon,

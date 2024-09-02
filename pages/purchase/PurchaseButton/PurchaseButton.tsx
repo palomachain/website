@@ -139,6 +139,7 @@ const PurchaseButton = ({
     promoCode,
     step,
     chainId,
+    fromToken,
     fromTokenExchangeRate,
     totalSupportPrice,
     expectedAmount,

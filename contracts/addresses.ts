@@ -34,7 +34,7 @@ export const Addresses: TMap = {
 
     weth: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', // wbnb address
     bat: '0x101d82428437127bf1608f699cd651e6abf9766e',
-    usdc: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+    usdc: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
     usdt: '0x55d398326f99059fF775485246999027B3197955',
 
     node_sale: envParam.nodeSale_bnb,
@@ -61,7 +61,7 @@ export const Addresses: TMap = {
     wallchainRouterManager: '0x1d658D2f8Fdae5A52be5e2D37b6013a1F776bEe8',
 
     weth: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', // wmatic address
-    usdc: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
+    usdc: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
     usdt: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
 
     node_sale: envParam.nodeSale_polygon,

@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import CheckBox from 'components/CheckBox';
 import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
 import SuccessModal from 'components/Modal/SuccessModal';
-import { allChains } from 'configs/chains';
+import { allChains, ChainID } from 'configs/chains';
 import { DEADLINE, purchaseSupportedNetworks, SLIPPAGE_PERCENTAGE } from 'configs/constants';
 import { getTxHashLink } from 'configs/links';
 import SelectChain from 'containers/SelectChain';
@@ -262,6 +262,10 @@ const PurchaseFlow = () => {
     setInputAmount(index, newValue);
   };
 
+  const isValidTokenAmount = useMemo(() => {
+    return quantity > 0 && quantity <= TotalNodes - totalPurchased;
+  }, [quantity]);
+
   useEffect(() => {
     if (wallet.network) {
       const chainId = parseIntString(wallet.network);
@@ -297,7 +301,7 @@ const PurchaseFlow = () => {
     const changeAmount = async () => {
       if (fromToken.address === '') return;
       if (!provider || !wallet || !wallet.network) return;
-      if (wallet.network.toString() !== targetChain.chainId.toString()) return;
+      if (parseIntString(wallet.network) !== targetChain.chainId.toString()) return;
       if (expectedAmount.raw.comparedTo(0) <= 0) return;
       if (!selectedChain) return;
 
@@ -312,7 +316,7 @@ const PurchaseFlow = () => {
           symbol: 'USDC',
           displayName: 'USDC',
           icon: 'https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png',
-          decimals: 6,
+          decimals: parseIntString(wallet.network) === ChainID.BSC_MAIN ? 18 : 6,
         };
 
         if (isSameContract(fromToken.address, toToken.address)) {
@@ -350,16 +354,12 @@ const PurchaseFlow = () => {
     };
 
     changeAmount();
-  }, [provider, wallet.network, fromToken, expectedAmount, selectedChain]);
+  }, [provider, wallet.network, fromToken, expectedAmount, selectedChain, isValidTokenAmount]);
 
   useEffect(() => {
     setFromToken(mockTool.getEmptyToken());
     setSwapPath(null);
   }, [selectedChain]);
-
-  const isValidTokenAmount = useMemo(() => {
-    return quantity > 0 && quantity <= TotalNodes - totalPurchased;
-  }, [quantity]);
 
   const isAllAgree = useMemo(() => {
     return agreeTerms && agreeTermsOfUse && agreeAck;

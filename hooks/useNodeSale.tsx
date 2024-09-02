@@ -80,7 +80,7 @@ const useNodeSale = ({ provider, wallet }) => {
     }
   };
 
-  const activateWallet = async (palomaWallet, chain = '42161') => {
+  const activateWallet = async (palomaWallet, chain) => {
     try {
       if (!provider) return;
       // If WalletConnect

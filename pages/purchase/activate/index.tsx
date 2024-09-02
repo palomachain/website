@@ -57,16 +57,18 @@ const Activate = () => {
   };
 
   const checkActivate = async () => {
-    const activateAddress: string = await getActivate();
+    /** Disabled checking if a Paloma address is already active. Multiple Paloma addresses can be active. */
 
-    const isActivated = activateAddress && activateAddress !== ZERO_ADDRESS_PALOMA;
-    if (isActivated) {
-      setSteps(STEPS.ACTIVATED);
-      setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
-    } else {
-      setSteps(STEPS.ACTIVATE_PALOMA);
-    }
+    // const activateAddress: string = await getActivate();
+    // const isActivated = activateAddress && activateAddress !== ZERO_ADDRESS_PALOMA;
+    // if (isActivated) {
+    //   setSteps(STEPS.ACTIVATED);
+    //   setActivatedPalomaAddress(hexToStringWithBech(activateAddress));
+    // } else {
+    //   setSteps(STEPS.ACTIVATE_PALOMA);
+    // }
 
+    setSteps(STEPS.ACTIVATE_PALOMA);
     setLoadingMetamask(false);
     setLoadingWalletconnect(false);
   };

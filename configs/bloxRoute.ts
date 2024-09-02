@@ -1,8 +1,8 @@
-import { ChainID } from 'configs/chains';
+import { ChainID, ChainRPC } from 'configs/chains';
 
 const ethProtect = {
   chainId: '0x1',
-  rpcUrls: ['https://serene-divine-crater.quiknode.pro/'],
+  rpcUrls: [ChainRPC.ETHEREUM_MAIN],
   chainName: 'ETH MEV Protected',
   nativeCurrency: {
     name: 'ETH',
@@ -14,7 +14,7 @@ const ethProtect = {
 
 const bscProtect = {
   chainId: '0x38',
-  rpcUrls: ['https://volume.liquify.com/api=0440032/bsc'],
+  rpcUrls: [ChainRPC.BSC_MAIN],
   chainName: 'BSC MEV Protected',
   nativeCurrency: {
     name: 'BNB',

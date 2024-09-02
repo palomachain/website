@@ -30,7 +30,7 @@ const useToken = ({ provider }) => {
         return 18;
       }
     } catch (error) {
-      return 18;
+      return 0;
     }
   };
 

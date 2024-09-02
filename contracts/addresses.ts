@@ -34,7 +34,7 @@ export const Addresses: TMap = {
 
     weth: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', // wbnb address
     bat: '0x101d82428437127bf1608f699cd651e6abf9766e',
-    usdc: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
+    usdc: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d',
     usdt: '0x55d398326f99059fF775485246999027B3197955',
 
     node_sale: envParam.nodeSale_bnb,

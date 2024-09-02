@@ -1,5 +1,6 @@
 import { prepareWriteContract, readContract, waitForTransaction, writeContract } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
+import { ChainID } from 'configs/chains';
 import nodesaleContractAbi from 'contracts/abi/nodesale.abi.json';
 import { Addresses, VETH_ADDRESS, ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 import { GAS_MULTIPLIER } from 'contracts/constants';
@@ -13,6 +14,7 @@ import useToken from './useToken';
 const useNodeSale = ({ provider, wallet }) => {
   const { tokenApprove } = useToken({ provider });
   const chainId = wallet?.network ? Number(parseIntString(wallet.network)) : 1;
+  const usdcDecimals = chainId === Number(ChainID.BSC_MAIN) ? 18 : 6;
   const contractAddress = Addresses[chainId.toString()].node_sale;
 
   const getProcessingFeeAmount = async () => {
@@ -24,7 +26,7 @@ const useNodeSale = ({ provider, wallet }) => {
         chainId: Number(chainId),
       });
 
-      return Number(gasFeeAmount) / 10 ** 6;
+      return Number(gasFeeAmount) / 10 ** usdcDecimals;
     } catch (error) {
       console.error(error);
       return;
@@ -40,7 +42,7 @@ const useNodeSale = ({ provider, wallet }) => {
         chainId: Number(chainId),
       });
 
-      return Number(gasFeeAmount) / 10 ** 6;
+      return Number(gasFeeAmount) / 10 ** usdcDecimals;
     } catch (error) {
       console.error(error);
       return;

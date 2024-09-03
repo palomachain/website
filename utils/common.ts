@@ -15,7 +15,7 @@ export const isValidEmail = (email: string) => {
   else return false;
 };
 
-const validNameRegex = /^[a-zA-Z]+$/;
+const validNameRegex = /^[A-zÀ-ÖØ-öø-ÿ]+$/;
 export const isValidName = (value: string) => {
   const val = value.trim();
   if (val === '') return false;

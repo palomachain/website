@@ -191,7 +191,7 @@ const PurchaseFlow = () => {
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
-        setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000)));
+        setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
         if (promo_code) {
           setApplyPromoCode(promo_code);
           toast.success('Congratulations! Your Promo Code has been verified.');
@@ -413,7 +413,7 @@ const PurchaseFlow = () => {
             fromToken,
             quantity,
             expectTokenAmount.raw.comparedTo(quoteAmount.raw) > 0 ? expectTokenAmount : quoteAmount, // Choose big amount
-            (nodePrice * 1000000).toFixed(0),
+            (nodePrice * 10 ** (parseIntString(wallet.network) === ChainID.BSC_MAIN ? 18 : 6)).toFixed(0),
             CustomerSupport[selectedSupport].price > 0,
             CustomerSupport[selectedSupport].month,
             swapPath,

@@ -7,16 +7,18 @@ import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
-import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
+import { parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
 import { purchaseSupportedNetworks } from 'configs/constants';
+import { useLazyGetIsUsedPalomaAddressQuery } from 'services/api/nodesale';
 
 import style from './activate.module.scss';
 
 const STEPS = {
   CONNECT_WALLET: 1,
   ACTIVATE_PALOMA: 2,
-  ACTIVATED: 3,
-  TERMINAL: 4,
+  ALREADY_USED_PALOMA: 3,
+  ACTIVATED: 4,
+  TERMINAL: 5,
 };
 
 const shCommand = {
@@ -32,6 +34,8 @@ const Activate = () => {
   const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet } = useWallet();
   const provider = useProvider(wallet);
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
+  const [fetchIsUsedPalomaAddress] = useLazyGetIsUsedPalomaAddressQuery();
+
   const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
   const [activatedPalomaAddress, setActivatedPalomaAddress] = useState<string>();
 
@@ -99,6 +103,20 @@ const Activate = () => {
     try {
       setActivating(true);
 
+      /** Check if already used paloma address */
+      const isUsedPalomaAddress = await fetchIsUsedPalomaAddress({ paloma: palomaAddress });
+      console.log('isUsedPalomaAddress', isUsedPalomaAddress);
+      if (isUsedPalomaAddress.isSuccess) {
+        if (isUsedPalomaAddress.data) {
+          setSteps(STEPS.ALREADY_USED_PALOMA);
+          return;
+        }
+      } else {
+        toast.error('Invalid paloma address. Please confirm your paloma address again.');
+        return;
+      }
+
+      /** Activate paloma address */
       const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(wallet.network));
       if (activate) {
         setSteps(STEPS.ACTIVATED);
@@ -182,9 +200,19 @@ const Activate = () => {
             </button>
           </>
         )}
+        {steps === STEPS.ALREADY_USED_PALOMA && (
+          <>
+            <img src="/assets/icons/false.svg" alt="false" />
+            <h1>This Paloma Wallet is already in use</h1>
+            <p>The Paloma wallet you selected is already in use. Please activate your wallet using your LightNode.</p>
+            <button className={style.activateBtn} onClick={() => setSteps(STEPS.ACTIVATE_PALOMA)}>
+              Connect another Wallet
+            </button>
+          </>
+        )}
         {steps === STEPS.ACTIVATED && (
           <>
-            <img className={style.loadingImage} src="/assets/icons/success.svg" alt="success" />
+            <img src="/assets/icons/success.svg" alt="success" />
             <h1>Your Paloma LightNode Was Successfully Activated</h1>
             <p>
               Your LightNode transaction has been successfully processed. Please register your nodes for software

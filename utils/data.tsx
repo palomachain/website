@@ -677,13 +677,14 @@ export const PalomaDownloadAndInstallSteps: {
               name: <p>Copy and Past the command:</p>,
               command: (
                 <p>
-                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
-                  ./password-store/.password-store:/root/.password-store palomachain/
+                  docker run --pull=always -ti  -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
+                  $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store 
+                  palomachain/lightnode-client:v1 setup-node
                   <span>lightnode-client:latest</span>
                 </p>
               ),
               copyCommand:
-                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
+                'docker run --pull=always -ti  -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
             },
           ],
         },

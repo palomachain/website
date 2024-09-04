@@ -25,7 +25,7 @@ const abbreviateNumberFactory =
     );
   };
 
-const SI_SYMBOLS = ['', 'K', 'MM', 'G', 'T', 'P', 'E'];
+const SI_SYMBOLS = ['', 'K', 'MM', 'G', 'T', 'B', 'E'];
 
 export const abbreviateNumberSI = abbreviateNumberFactory(SI_SYMBOLS);
 

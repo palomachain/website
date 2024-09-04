@@ -33,7 +33,8 @@ const tokenomicsSection = () => {
         <img src="/assets/home/tokenomics.svg" alt="tokenomics" />
         <div className="tokenomics-grains">
           <h3>Supply</h3>
-          <h1>{abbreviateNumberSI(totalSupply, 2, 2)} GRAIN</h1>
+          <h1>{abbreviateNumberSI(totalSupply, 2, 2)}</h1>
+          <h1>GRAIN</h1>
           {/* <h2>Billion Grains</h2> */}
           <p>
             Cosmos Inflation Rate 3%

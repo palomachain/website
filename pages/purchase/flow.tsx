@@ -108,8 +108,16 @@ const PurchaseFlow = () => {
     return (nodePrice * (slippageFeePc + txSlippageFeePc)) / 100;
   }, [nodePrice, slippageFeePc, txSlippageFeePc]);
 
+  const slippageFeeForUSDC = useMemo(() => {
+    return (nodePrice * slippageFeePc) / 100;
+  }, [nodePrice, slippageFeePc, txSlippageFeePc]);
+
   const totalPay = useMemo(() => {
     return nodePrice + processingFee + totalSupportPrice + slippageFee;
+  }, [nodePrice, totalSupportPrice, processingFee]);
+
+  const totalPayForUSDC = useMemo(() => {
+    return nodePrice + processingFee + totalSupportPrice + slippageFeeForUSDC;
   }, [nodePrice, totalSupportPrice, processingFee]);
 
   const quantity = useMemo(() => {
@@ -281,7 +289,7 @@ const PurchaseFlow = () => {
       if (!provider || !wallet || !wallet.network) return;
       if (walletNetwork.toString() !== targetChain?.chainId.toString()) return;
 
-      if (isSameContract(fromToken.address, Addresses[selectedChainId].usdc)) {
+      if (isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)) {
         setFromTokenExchangeRate(BigNumber(1));
       } else {
         // Get fromToken Price in USD
@@ -403,7 +411,10 @@ const PurchaseFlow = () => {
         if (!isTxLoading) {
           setTxLoading(true);
 
-          const tokenAmount = BigNumber(totalPay).dividedBy(fromTokenExchangeRate).toString();
+          const totalPayAmount = isSameContract(fromToken.address, Addresses[selectedChainId].usdc)
+            ? totalPayForUSDC
+            : totalPay;
+          const tokenAmount = BigNumber(totalPayAmount).dividedBy(fromTokenExchangeRate).toString();
           const expectTokenAmount = {
             raw: balanceTool.convertToWei(tokenAmount, fromToken.decimals),
             format: tokenAmount,
@@ -623,14 +634,16 @@ const PurchaseFlow = () => {
             <TotalPay
               title="Slippage Fees"
               step={step}
-              price={slippageFee}
+              price={
+                isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc) ? slippageFeeForUSDC : slippageFee
+              }
               exchangeRate={fromTokenExchangeRate}
               fromToken={fromToken}
             />
             <TotalPay
               title="Total"
               step={step}
-              price={totalPay}
+              price={isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc) ? totalPayForUSDC : totalPay}
               exchangeRate={fromTokenExchangeRate}
               fromToken={fromToken}
               expectTokenAmount={Number(quoteAmount.format)}

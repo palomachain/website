@@ -36,18 +36,24 @@ const injectedRtkApi = api.injectEndpoints({
         params: queryArg,
       }),
     }),
+    getIsUsedPalomaAddress: build.query<GetNodeSaleApiResponse, GetIsUsedPalomaAddressApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/isusedaddress`,
+        params: queryArg,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
 export { injectedRtkApi as api };
-export type GetNodeSaleApiResponse = /** status 200 Success */ PriceResultData;
+export type GetNodeSaleApiResponse = /** status 200 Success */ ApiResultData;
 export type GetNodeSaleApiArg = {
   amount: number;
   promo_code?: string;
 };
 
-export type PriceResultData = any;
+export type ApiResultData = any;
 
 export type PostRegisterApiResponse = /** status 200 Success */ {
   code?: number;
@@ -61,6 +67,9 @@ export type PostRegisterApiArg = {
 export type GetRegisterConfirmationApiArg = {
   token: string;
 };
+export type GetIsUsedPalomaAddressApiArg = {
+  paloma: string;
+};
 
 export const {
   useGetNodeSalePriceQuery,
@@ -70,4 +79,5 @@ export const {
   useLazyGetPriceTiersQuery,
   usePostRegisterMutation,
   useLazyGetRegisterConfirmationQuery,
+  useLazyGetIsUsedPalomaAddressQuery,
 } = injectedRtkApi;

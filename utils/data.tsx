@@ -459,13 +459,13 @@ export const PalomaDownloadAndInstallSteps: {
 } = {
   [SupportSystems.Mac]: [
     {
-      head: 'Download the installer',
+      head: 'Download Docker installer',
       steps: [
         {
           title: <p>Download the installer for your Mac hardware</p>,
           externalBtns: [
             {
-              text: 'Mac with Apple Silicon',
+              text: 'Apple Silicon (M1 or higher)',
               link: 'https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64',
             },
             {
@@ -528,63 +528,76 @@ export const PalomaDownloadAndInstallSteps: {
           ),
           items: [
             {
-              name: <p>Copy and Past the command:</p>,
+              name: (
+                <p>
+                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                </p>
+              ),
               command: <p>sh $HOME/Downloads/setup.sh</p>,
               copyCommand: 'sh $HOME/Downloads/setup.sh',
             },
-          ],
-        },
-      ],
-    },
-    {
-      head: 'Install the Lightnode',
-      steps: [
-        {
-          title: <p>Open the Terminal Application in Macintosh Utilities</p>,
-          items: [
             {
-              name: <p>Copy and Past the command:</p>,
-              command: (
+              name: (
                 <p>
-                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
-                  ./password-store/.password-store:/root/.password-store palomachain/
-                  <span>lightnode-client:latest</span>
+                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
                 </p>
               ),
-              copyCommand:
-                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
-            },
-          ],
-        },
-        {
-          title: <p>After activating the node, you can keep it running in the background</p>,
-          items: [
-            {
-              name: <p>Copy and Past the command:</p>,
-              command: (
-                <p>
-                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
-                  ./password-store/.password-store:/root/.password-store palomachain/
-                  <span>lightnode-client:latest automate</span>
-                </p>
-              ),
-              copyCommand:
-                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
-            },
-            {
-              name: <p>Input your keystore password</p>,
-            },
-            {
-              name: <p>Press CTRL-P - CTRL-Q</p>,
+              command: <p>sh $HOME/Downloads/setup.sh</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.shv add-node',
             },
           ],
         },
       ],
     },
+    // {
+    //   head: 'Install the Lightnode',
+    //   steps: [
+    //     {
+    //       title: <p>Open the Terminal Application in Macintosh Utilities</p>,
+    //       items: [
+    //         {
+    //           name: <p>Copy and Past the command:</p>,
+    //           command: (
+    //             <p>
+    //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+    //               ./password-store/.password-store:/root/.password-store palomachain/
+    //               <span>lightnode-client:latest</span>
+    //             </p>
+    //           ),
+    //           copyCommand:
+    //             'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: <p>After activating the node, you can keep it running in the background</p>,
+    //       items: [
+    //         {
+    //           name: <p>Copy and Past the command:</p>,
+    //           command: (
+    //             <p>
+    //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+    //               ./password-store/.password-store:/root/.password-store palomachain/
+    //               <span>lightnode-client:latest automate</span>
+    //             </p>
+    //           ),
+    //           copyCommand:
+    //             'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
+    //         },
+    //         {
+    //           name: <p>Input your keystore password</p>,
+    //         },
+    //         {
+    //           name: <p>Press CTRL-P - CTRL-Q</p>,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
   ],
   [SupportSystems.Window]: [
     {
-      head: 'Download the installer',
+      head: 'Download Docker Installer',
       steps: [
         {
           title: <p>Download the installer for your Windows hardware</p>,
@@ -668,50 +681,68 @@ export const PalomaDownloadAndInstallSteps: {
       ],
     },
     {
-      head: 'Install the Lightnode',
+      head: 'Install the LightNode',
       steps: [
         {
-          title: <p>Open the the command line in Windows</p>,
+          title: <p>Open the Windows PowerShell</p>,
           items: [
             {
               name: <p>Copy and Past the command:</p>,
               command: (
                 <p>
-                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
-                  ./password-store/.password-store:/root/.password-store palomachain/
-                  <span>lightnode-client:latest</span>
+                  docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
+                  $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store
+                  palomachain/lightnode-client:v1 setup-node
                 </p>
               ),
               copyCommand:
-                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest',
+                'docker run --pull=always -ti  -v $env:USERPROFILEpaloma-lightnode.gnupg:/root/.gnupg -v $env:USERPROFILEpaloma-lightnode.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
             },
           ],
         },
-        {
-          title: <p>After registering the node, you can keep it running in the background</p>,
-          items: [
-            {
-              name: <p>Copy and Past the command:</p>,
-              command: (
-                <p>
-                  docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
-                  ./password-store/.password-store:/root/.password-store palomachain/
-                  <span>lightnode-client:latest automate</span>
-                </p>
-              ),
-              copyCommand:
-                'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
-            },
-            {
-              name: <p>Input your keystore password</p>,
-            },
-            {
-              name: <p>Press CTRL-P - CTRL-Q</p>,
-            },
-          ],
-        },
+        // {
+        //   title: <p>After registering the node, you can keep it running in the background</p>,
+        //   items: [
+        //     {
+        //       name: <p>Copy and Past the command:</p>,
+        //       command: (
+        //         <p>
+        //           docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
+        //           ./password-store/.password-store:/root/.password-store palomachain/
+        //           <span>lightnode-client:latest automate</span>
+        //         </p>
+        //       ),
+        //       copyCommand:
+        //         'docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v ./password-store/.password-store:/root/.password-store palomachain/lightnode-client:latest automate',
+        //     },
+        //     {
+        //       name: <p>Input your keystore password</p>,
+        //     },
+        //     {
+        //       name: <p>Press CTRL-P - CTRL-Q</p>,
+        //     },
+        //   ],
+        // },
       ],
     },
   ],
-  // [SupportSystems.Linux]: {},
+  // [SupportSystems.Linux]: [
+  //   {
+  //     head: 'Download Docker installer',
+  //     describe:
+  //       'To get started with Docker Engine on Ubuntu, make sure you meet the prerequisites, and then follow the installation steps.',
+  //     requests: {
+  //       head: 'Prerequisites',
+  //       steps: [
+  //         {
+  //           title: 'Firewall limitations',
+  //           items: [
+  //             warning: 'Before you install Docker, make sure you consider the following security implications and firewall incompatibilities.',
+
+  //           ]
+  //         },
+  //       ],
+  //     },
+  //   },
+  // ],
 };

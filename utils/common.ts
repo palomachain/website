@@ -30,3 +30,9 @@ export const isValidName = (value: string) => {
     (lastName ? validNameRegex.test(lastName) : true)
   );
 };
+
+const validPromoCodeRegex = /^[a-zA-Z0-9]+$/;
+export const isValidPromoCode = (value: string) => {
+  if (value.match(validPromoCodeRegex)) return true;
+  else return false;
+};

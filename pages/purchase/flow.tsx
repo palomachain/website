@@ -29,6 +29,7 @@ import { useGetUniswapTokenListQuery } from 'services/api/tokens';
 import { selectCurrentUsdPrice } from 'services/selectors/price';
 import { selectListedSwapTokensByChainId } from 'services/selectors/tokens';
 import balanceTool from 'utils/balance';
+import { isValidPromoCode } from 'utils/common';
 import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
@@ -235,6 +236,11 @@ const PurchaseFlow = () => {
         </>
       );
     }
+  };
+
+  const inputPromoCode = (value: string) => {
+    const isValid = isValidPromoCode(value.toUpperCase());
+    if (isValid || value.length === 0) setPromoCode(value.toUpperCase());
   };
 
   const setInputAmount = (index: number, newValue: number) => {
@@ -529,7 +535,7 @@ const PurchaseFlow = () => {
                 Add Promo Code <span>(Optional)</span>
               </p>
               <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
-                <input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="purchase-promo" />
+                <input value={promoCode} onChange={(e) => inputPromoCode(e.target.value)} className="purchase-promo" />
                 <div className="purchase-promo-apply pointer" onClick={() => applyPromoCode(promoCode)}>
                   Apply
                 </div>

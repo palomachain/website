@@ -19,7 +19,8 @@ import Countdown from 'react-countdown';
 import ReactSlider from 'react-slider';
 import { toast } from 'react-toastify';
 import {
-  useLazyGetNodeSalePriceQuery,
+  useLazyGetEstimateNodePriceQuery,
+  useLazyGetNodePriceQuery,
   useLazyGetPriceTiersQuery,
   useLazyGetTotalPurchasedQuery,
 } from 'services/api/nodesale';
@@ -45,7 +46,8 @@ const PurchaseFlow = () => {
 
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
   const [fetchTotalPurchased] = useLazyGetTotalPurchasedQuery();
-  const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
+  const [fetchNodePrice] = useLazyGetNodePriceQuery();
+  const [fetchEstimateNodePrice] = useLazyGetEstimateNodePriceQuery();
   const [fetchPriceTiers] = useLazyGetPriceTiersQuery();
 
   const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
@@ -195,7 +197,7 @@ const PurchaseFlow = () => {
 
   const getNodePrice = async (amount: number, promo_code?: string) => {
     const decodeData = stringToHex(promo_code);
-    const price = await fetchNodePrice({ amount, promo_code: decodeData });
+    const price = await fetchEstimateNodePrice({ amount, promo_code: decodeData });
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
@@ -209,7 +211,7 @@ const PurchaseFlow = () => {
         toast.error(promo_code ? 'Invalid Promo Code' : 'API async error. Please try again.');
       }
     } else {
-      toast.error('API async error. Please try again.');
+      toast.error(price?.error['data'] ?? 'API async error. Please try again.');
     }
   };
 

@@ -19,7 +19,8 @@ import Countdown from 'react-countdown';
 import ReactSlider from 'react-slider';
 import { toast } from 'react-toastify';
 import {
-  useLazyGetNodeSalePriceQuery,
+  useLazyGetEstimateNodePriceQuery,
+  useLazyGetNodePriceQuery,
   useLazyGetPriceTiersQuery,
   useLazyGetTotalPurchasedQuery,
 } from 'services/api/nodesale';
@@ -28,6 +29,7 @@ import { useGetUniswapTokenListQuery } from 'services/api/tokens';
 import { selectCurrentUsdPrice } from 'services/selectors/price';
 import { selectListedSwapTokensByChainId } from 'services/selectors/tokens';
 import balanceTool from 'utils/balance';
+import { isValidPromoCode } from 'utils/common';
 import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
@@ -45,7 +47,8 @@ const PurchaseFlow = () => {
 
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
   const [fetchTotalPurchased] = useLazyGetTotalPurchasedQuery();
-  const [fetchNodePrice] = useLazyGetNodeSalePriceQuery();
+  const [fetchNodePrice] = useLazyGetNodePriceQuery();
+  const [fetchEstimateNodePrice] = useLazyGetEstimateNodePriceQuery();
   const [fetchPriceTiers] = useLazyGetPriceTiersQuery();
 
   const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
@@ -195,7 +198,7 @@ const PurchaseFlow = () => {
 
   const getNodePrice = async (amount: number, promo_code?: string) => {
     const decodeData = stringToHex(promo_code);
-    const price = await fetchNodePrice({ amount, promo_code: decodeData });
+    const price = await fetchEstimateNodePrice({ amount, promo_code: decodeData });
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
@@ -209,7 +212,7 @@ const PurchaseFlow = () => {
         toast.error(promo_code ? 'Invalid Promo Code' : 'API async error. Please try again.');
       }
     } else {
-      toast.error('API async error. Please try again.');
+      toast.error(price?.error['data'] ?? 'API async error. Please try again.');
     }
   };
 
@@ -233,6 +236,11 @@ const PurchaseFlow = () => {
         </>
       );
     }
+  };
+
+  const inputPromoCode = (value: string) => {
+    const isValid = isValidPromoCode(value.toUpperCase());
+    if (isValid || value.length === 0) setPromoCode(value.toUpperCase());
   };
 
   const setInputAmount = (index: number, newValue: number) => {
@@ -527,7 +535,7 @@ const PurchaseFlow = () => {
                 Add Promo Code <span>(Optional)</span>
               </p>
               <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
-                <input value={promoCode} onChange={(e) => setPromoCode(e.target.value)} className="purchase-promo" />
+                <input value={promoCode} onChange={(e) => inputPromoCode(e.target.value)} className="purchase-promo" />
                 <div className="purchase-promo-apply pointer" onClick={() => applyPromoCode(promoCode)}>
                   Apply
                 </div>

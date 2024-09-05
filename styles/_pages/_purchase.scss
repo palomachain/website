@@ -172,7 +172,7 @@
       display: grid;
       grid-template-columns: 1fr 0.6fr;
       gap: 22px;
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 1260px) {
         display: flex;
         flex-direction: column;
       }
@@ -233,6 +233,7 @@
             background: #d8d3d3;
             border: none;
             width: 39px;
+            min-width: 39px;
             height: 39px;
             display: flex;
             align-items: center;
@@ -243,6 +244,8 @@
             background: transparent;
             border: none;
             outline: none;
+            width: 100%;
+            min-width: 100px;
           }
         }
       }

@@ -542,7 +542,7 @@ export const PalomaDownloadAndInstallSteps: {
                   <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
                 </p>
               ),
-              command: <p>sh $HOME/Downloads/setup.sh</p>,
+              command: <p>sh $HOME/Downloads/setup.sh add-node</p>,
               copyCommand: 'sh $HOME/Downloads/setup.shv add-node',
             },
           ],

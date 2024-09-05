@@ -1,18 +1,11 @@
 import classNames from 'classnames';
-import Button from 'components/Button';
-import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
-import useNodeSale from 'hooks/useNodeSale';
-import useProvider from 'hooks/useProvider';
-import { useWallet } from 'hooks/useWallet';
-import { useEffect, useMemo, useState } from 'react';
-import { toast } from 'react-toastify';
-import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
+import Command from 'components/Command';
+import { StaticLink } from 'configs/links';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
+import { PalomaDownloadAndInstallSteps, SupportSystems } from 'utils/data';
 
 import style from './download.module.scss';
-import { PalomaDownloadAndInstallSteps, SupportSystems } from 'utils/data';
-import { useRouter } from 'next/router';
-import { StaticLink } from 'configs/links';
-import Command from 'components/Command';
 
 const DownloadAndInstall = () => {
   const router = useRouter();

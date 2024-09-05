@@ -47,11 +47,20 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      color: #8a8383;
+      text-align: center;
+      font-family: $Inter-500;
+      font-size: 16px;
+      font-style: normal;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
     }
 
     .active {
       border-radius: 8px;
       background: #d8d3d3;
+      color: #2C2C2C;
+      font-family: $Inter-600;
     }
   }
 

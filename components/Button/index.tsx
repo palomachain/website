@@ -3,7 +3,7 @@ import style from 'components/Button/Button.module.scss';
 import React, { PropsWithChildren } from 'react';
 
 interface ButtonProps {
-  type: 'pink' | 'blue' | 'yellow' | 'dark' | 'grey' | 'default' | 'disabled' | 'outline' | 'text';
+  type: 'pink' | 'blue' | 'yellow' | 'dark' | 'grey' | 'green' | 'default' | 'disabled' | 'outline' | 'text';
   className?: string;
   onClick?: () => void;
   full?: boolean;

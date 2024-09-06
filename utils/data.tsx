@@ -697,7 +697,7 @@ export const PalomaDownloadAndInstallSteps: {
                 </p>
               ),
               copyCommand:
-                'docker run --pull=always -ti  -v $env:USERPROFILEpaloma-lightnode.gnupg:/root/.gnupg -v $env:USERPROFILEpaloma-lightnode.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
+                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
             },
           ],
         },
@@ -899,7 +899,7 @@ export const PalomaDownloadAndInstallSteps: {
   // //                   sudo chmod a+r /etc/apt/keyrings/docker.asc
 
   // //                   # Add the repository to Apt sources:
-  // //                   echo \   
+  // //                   echo \
   // // "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   // //                   sudo apt-get update
   // //                 </p>
@@ -911,7 +911,7 @@ export const PalomaDownloadAndInstallSteps: {
   // {
   //   title: <p>Install the Docker packages.</p>,
   //   describe: <p>To install the latest version, run:</p>
-    
+
   // }
   //         ],
   //       },

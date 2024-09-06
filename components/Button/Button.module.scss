@@ -26,6 +26,7 @@
     background: #cccaca !important;
     color: #767676;
     cursor: not-allowed;
+    border: none !important;
   }
 
   &.dark {
@@ -55,6 +56,14 @@
   &.grey {
     background: #29292b;
     color: #5d5d5e;
+  }
+
+  &.green {
+    border-radius: 8px;
+    border: 1px solid #24925e;
+    background: #2db072;
+    box-shadow: 0px 3px 4px 0px #dedede;
+    color: #fff;
   }
 
   &.disabled {

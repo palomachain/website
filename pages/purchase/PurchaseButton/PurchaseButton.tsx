@@ -151,7 +151,7 @@ const PurchaseButton = ({
 
   return (
     <Button
-      type="dark"
+      type="green"
       className={cn(
         styles.container,
         className,

@@ -50,9 +50,9 @@ const Login = () => {
 
         const result = await postLogin({
           email,
-          redirect: redirect.includes('credit') ? `${StaticLink.PURCHASE}&type=${redirect}` : StaticLink.ACTIVATE,
+          redirect: redirect ? (type ? `${redirect}&type=${type}_login` : redirect) : StaticLink.ACTIVATE,
         });
-        console.log('result', result);
+
         if (result.error && result.error['status'] === 400 && result.error['data']['msg'].includes('not found')) {
           setNotRegistered(true);
         } else if (!result.error) {
@@ -73,7 +73,7 @@ const Login = () => {
           New?{' '}
           <span
             className={style.register}
-            onClick={() => router.push(`${StaticLink.REGISTER}?redirect=${StaticLink.LOGIN}`)}
+            onClick={() => router.push(`${StaticLink.REGISTER}?redirect=${redirect}&type=${type}_register`)}
           >
             Create an Account
           </span>

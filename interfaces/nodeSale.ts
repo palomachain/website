@@ -27,12 +27,3 @@ export interface IDownloadAndInstallNodeSteps {
     img?: JSX.Element;
   }[];
 }
-
-export interface IPurchaseInfo {
-  node_count: number;
-  node_price: number;
-  isSupport: boolean;
-  supportMonth: number;
-  amount_in: IBalance;
-  price_tiers: IPriceTier[];
-}

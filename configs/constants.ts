@@ -15,13 +15,14 @@ const envParam = {
 };
 
 const purchaseSupportedNetworks = {
+  '0000': 'Credit Card',
+  '0001': 'Bank Account',
   '1': 'Ethereum',
   '10': 'Optimism',
   '56': 'BNB',
   '137': 'Polygon',
   '8453': 'Base',
   '42161': 'Arbitrum',
-  '000': 'Credit Card',
 };
 
 const AddNetwork = {

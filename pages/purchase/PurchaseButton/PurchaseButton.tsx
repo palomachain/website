@@ -55,20 +55,20 @@ const PurchaseButton = ({
   onClickStart,
   buttonText = 'Buy Now',
 }: PurchaseButtonProps) => {
-  const { openConnectionModal } = useWallet();
+  // const { openConnectionModal } = useWallet();
 
   const buttonStatus = useMemo(() => {
-    if (!chainId) {
-      return {
-        disabled: false,
-        text: 'Connect Wallet',
-        style: '',
-        onClick: () => {
-          openConnectionModal();
-          onClickStart();
-        },
-      };
-    }
+    // if (!chainId) {
+    //   return {
+    //     disabled: false,
+    //     text: 'Connect Wallet',
+    //     style: '',
+    //     onClick: () => {
+    //       openConnectionModal();
+    //       onClickStart();
+    //     },
+    //   };
+    // }
 
     if (!isAllAgree) {
       return {
@@ -89,7 +89,7 @@ const PurchaseButton = ({
     }
 
     if (step !== 1) {
-      if (chainId.toString() === NO_CHAIN_SELECTED || !(chainId in purchaseSupportedNetworks)) {
+      if (!chainId || chainId.toString() === NO_CHAIN_SELECTED || !(chainId in purchaseSupportedNetworks)) {
         return {
           disabled: true,
           text: `Select Correct Chain`,

@@ -47,7 +47,7 @@ import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
 import { abbreviateNumberSI, formatNumber } from 'utils/number';
-import { isSameContract, parseIntString, stringToHex } from 'utils/string';
+import { isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import PurchaseWithFiatButton from './PurchaseButton/PurchaseWithFiatButton';
 import TotalPay from './TotalPay';
@@ -76,7 +76,13 @@ const PurchaseFlow = () => {
   const [postPayForToken] = usePostPayForTokenMutation();
   const { getTokenBalance } = useToken({ provider });
 
-  const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
+  const {
+    getProcessingFeeAmount,
+    getSubscriptionFeeAmount,
+    getSlippageFeePercent,
+    buyNow,
+    getDiscountPercentForPromo,
+  } = useNodeSale({
     provider,
     wallet,
   });
@@ -120,6 +126,7 @@ const PurchaseFlow = () => {
   const [processingFee, setProcessingFee] = useState<number>(5); // $5
   const [subscriptionFee, setSubscriptionFee] = useState<number>(50); // 50$
   const [slippageFeePc, setSlippageFeePc] = useState<number>(1); // default 1%
+  const [discountPercent, setDiscountPercent] = useState<number>(5); // default 5%
   const txSlippageFeePc = 0.3; // 0.3%
 
   const { selectedChainId, targetChain } = useMemo(() => {
@@ -159,7 +166,7 @@ const PurchaseFlow = () => {
 
   const usdcToken = (chain = selectedChain) => {
     return {
-      address: Addresses[chain === ChainID.CREDIT_CARD ? ChainID.ARBITRUM_MAIN : chain].usdc,
+      address: Addresses[isFiat(chain) ? ChainID.ARBITRUM_MAIN : chain].usdc,
       symbol: 'USDC',
       displayName: 'USDC',
       icon: 'https://cdn.jsdelivr.net/gh/curvefi/curve-assets/images/assets/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png',
@@ -207,10 +214,8 @@ const PurchaseFlow = () => {
   }, []);
 
   useEffect(() => {
-    if (type && type.includes('credit')) {
-      setFetchingPriceLoading(true);
-
-      setSelectedChain(ChainID.CREDIT_CARD);
+    if (type && type.includes('fiat')) {
+      setSelectedChain(type.includes('credit') ? ChainID.CREDIT_CARD : ChainID.BANK_ACCOUNT);
       setFromToken({ ...usdcToken(ChainID.CREDIT_CARD) }); // set as a Arbitrum USDC token
       setFromTokenExchangeRate(new BigNumber(1)); // USDC rate is 1
 
@@ -224,6 +229,7 @@ const PurchaseFlow = () => {
         } else {
           setStep(2);
           setPriceTiers(purchaseInfo?.data?.price_tiers);
+          purchaseInfo?.data?.promoCode && setApplyPromoCode(purchaseInfo?.data?.promoCode);
         }
       };
       purchaseToken();
@@ -231,28 +237,33 @@ const PurchaseFlow = () => {
   }, [type]);
 
   useEffect(() => {
-    if (selectedChain === ChainID.CREDIT_CARD) {
+    if (isFiat(selectedChain)) {
       setFromToken({ ...usdcToken(ChainID.CREDIT_CARD) }); // set as a Arbitrum USDC token
       setFromTokenExchangeRate(new BigNumber(1)); // USDC rate is 1
+      setCard(true);
+    } else {
+      setFromToken(mockTool.getEmptyToken());
+      setSwapPath(null);
     }
   }, [selectedChain]);
 
   useEffect(() => {
-    if (wallet && selectedChainId) {
-      const delayDebounceFn = async () => {
-        const price = await getProcessingFeeAmount();
-        setProcessingFee(price);
+    const delayDebounceFn = async () => {
+      const price = await getProcessingFeeAmount();
+      setProcessingFee(price);
 
-        const sub_price = await getSubscriptionFeeAmount();
-        setSubscriptionFee(sub_price);
+      const sub_price = await getSubscriptionFeeAmount();
+      setSubscriptionFee(sub_price);
 
-        const slippage_fee_percent = await getSlippageFeePercent();
-        setSlippageFeePc(slippage_fee_percent);
-      };
+      const slippage_fee_percent = await getSlippageFeePercent();
+      setSlippageFeePc(slippage_fee_percent);
 
-      delayDebounceFn();
-    }
-  }, [wallet, selectedChainId]);
+      const discount_percent = await getDiscountPercentForPromo();
+      setDiscountPercent(discount_percent);
+    };
+
+    delayDebounceFn();
+  }, [selectedChainId]);
 
   useEffect(() => {
     const delayDebounceFn = async () => {
@@ -282,17 +293,17 @@ const PurchaseFlow = () => {
       }
     };
 
-    (!type || !type.includes('credit')) && delayDebounceFn();
+    (!type || !type.includes('fiat')) && delayDebounceFn();
   }, []);
 
-  const getNodePrice = async (amount: number, promo_code?: string) => {
-    const decodeData = stringToHex(promo_code);
-    const price = await fetchEstimateNodePrice({ amount, promo_code: decodeData });
+  const getNodePrice = async (amount: number, promo_code?: string, isPromocodeCheck = false) => {
+    const decodeData = stringToHex(promo_code ?? appliedPromoCode);
+    const price = await fetchEstimateNodePrice({ amount: amount > 0 ? amount : 1, promo_code: decodeData });
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
         setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
-        if (promo_code) {
+        if (isPromocodeCheck) {
           setApplyPromoCode(promo_code);
           toast.success('Congratulations! Your Promo Code has been verified.');
         }
@@ -306,7 +317,7 @@ const PurchaseFlow = () => {
   };
 
   const applyPromoCode = async (code: string) => {
-    await getNodePrice(quantity, code);
+    await getNodePrice(quantity, code, true);
   };
 
   const CompleteTime = () => <span>Sale ended</span>;
@@ -372,7 +383,7 @@ const PurchaseFlow = () => {
   }, [quantity]);
 
   useEffect(() => {
-    if (wallet.network && !type?.includes('credit')) {
+    if (wallet.network && !type?.includes('fiat')) {
       const chainId = parseIntString(wallet.network);
       if (chainId in purchaseSupportedNetworks) setSelectedChain(chainId);
       else setSelectedChain('');
@@ -398,17 +409,17 @@ const PurchaseFlow = () => {
       }
     };
 
-    selectedChain !== ChainID.CREDIT_CARD && fetchBalance();
-  }, [fromToken, provider, wallet]);
+    selectedChain && !isFiat(selectedChain) && fetchBalance();
+  }, [fromToken, provider, wallet, selectedChain]);
 
   // Handle FromToken Amount (inputAmount) Changed
   useEffect(() => {
     const changeAmount = async () => {
-      if (fromToken.address === '') return;
       if (!provider || !wallet || !wallet.network) return;
       if (parseIntString(wallet.network) !== targetChain.chainId.toString()) return;
       if (expectedAmount.raw.comparedTo(0) <= 0) return;
       if (!selectedChain) return;
+      if (fromToken.address === '') return;
 
       const errorText = 'Unsupported token. Please choose another token.';
 
@@ -452,17 +463,8 @@ const PurchaseFlow = () => {
       setFetchingPriceLoading(false);
     };
 
-    changeAmount();
-  }, [provider, wallet.network, fromToken, expectedAmount, selectedChain, isValidTokenAmount]);
-
-  useEffect(() => {
-    if (selectedChain === ChainID.CREDIT_CARD) {
-      setCard(true);
-    } else {
-      setFromToken(mockTool.getEmptyToken());
-      setSwapPath(null);
-    }
-  }, [selectedChain]);
+    selectedChain && !isFiat(selectedChain) && changeAmount();
+  }, [provider, fromToken, expectedAmount, isValidTokenAmount]);
 
   const isAllAgree = useMemo(() => {
     return agreeTerms && agreeTermsOfUse && agreeAck;
@@ -498,104 +500,120 @@ const PurchaseFlow = () => {
   };
 
   const handleStartWithFiat = async () => {
-    try {
-      if (!generatingWallet) {
-        if (!isLoggedIn) {
-          const expectTokenAmount = {
-            raw: balanceTool.convertToWei(totalPayForUSDC, 6), // Arbitrum USDC decimals is 6
-            format: totalPayForUSDC.toString(),
-          };
+    if (step === 1) {
+      setStep(2);
+      window.scrollTo(0, 0);
+    } else {
+      try {
+        if (!generatingWallet) {
+          if (!isLoggedIn) {
+            const expectTokenAmount = {
+              raw: balanceTool.convertToWei(totalPayForUSDC, 6), // Arbitrum USDC decimals is 6
+              format: totalPayForUSDC.toString(),
+            };
 
-          const purchaseInfos = {
-            node_count: quantity,
-            node_price: nodePrice,
-            isSupport: CustomerSupport[selectedSupport].price > 0,
-            supportMonth: CustomerSupport[selectedSupport].month,
-            amount_in: expectTokenAmount,
-            price_tiers: priceTiers,
-            promoCode: appliedPromoCode,
-          };
-          const result = await storeData(PURCHASE_INFO, purchaseInfos);
-          // TODO
-          router.push(`${StaticLink.LOGIN}?redirect=login_with_credit_card`);
-          return;
-        } else {
-          const purchaseInfo = await getStoredData(PURCHASE_INFO);
-          const token = await getStoredData(USER_ACCESS_TOKEN);
+            const purchaseInfos = {
+              node_count: quantity,
+              node_price: nodePrice,
+              isSupport: CustomerSupport[selectedSupport].price > 0,
+              supportMonth: CustomerSupport[selectedSupport].month,
+              amount_in: expectTokenAmount,
+              price_tiers: priceTiers,
+              promoCode: appliedPromoCode,
+            };
+            const result = await storeData(PURCHASE_INFO, purchaseInfos);
+            // TODO
+            router.push(
+              `${StaticLink.LOGIN}?redirect=${StaticLink.PURCHASE}&type=fiat_with_${
+                selectedChain === ChainID.CREDIT_CARD ? 'credit_card' : 'bank_account'
+              }`,
+            );
+            return;
+          } else {
+            const purchaseInfo = await getStoredData(PURCHASE_INFO);
+            const token = await getStoredData(USER_ACCESS_TOKEN);
 
-          if (purchaseInfo.error) {
-            toast.error(purchaseInfo.error);
-            setSelectedChain(null);
-            localStorage.removeItem(USER_ACCESS_TOKEN);
-            localStorage.removeItem(PURCHASE_INFO);
-            setIsLoggedIn(false);
-            setStep(1);
-            router.push(StaticLink.PURCHASE);
-          }
+            if (purchaseInfo.error) {
+              toast.error(purchaseInfo.error);
+              setSelectedChain(null);
+              localStorage.removeItem(USER_ACCESS_TOKEN);
+              localStorage.removeItem(PURCHASE_INFO);
+              setIsLoggedIn(false);
+              setStep(1);
+              router.push(StaticLink.PURCHASE);
+            }
 
-          let myFiatWallet = fiatWallet;
+            let myFiatWallet = fiatWallet;
 
-          if (myFiatWallet) {
-            setFetchingPriceLoading(true);
+            if (myFiatWallet) {
+              setFetchingPriceLoading(true);
 
-            const tokenBalance = await getTokenBalance(myFiatWallet, Addresses[ChainID.ARBITRUM_MAIN].usdc);
+              const tokenBalance = await getTokenBalance(myFiatWallet, Addresses[ChainID.ARBITRUM_MAIN].usdc);
 
-            if (Number(tokenBalance) >= Number(purchaseInfo.data.amount_in.format)) {
-              const data = {
-                token: token.data,
-                token_in: Addresses[ChainID.ARBITRUM_MAIN].usdc,
-                amount_in: purchaseInfo.data.amount_in.raw,
-                node_count: purchaseInfo.data.node_count,
-                total_cost: (purchaseInfo.data.node_price * 10 ** 6).toString(),
-                promocode: purchaseInfo.data.promoCode ?? ZERO_ADDRESS_PALOMA,
-                path: '0x00',
-                enhanced: purchaseInfo.data.isSupport,
-                subscription_month: purchaseInfo.data.supportMonth,
-              };
-              console.log('data', data);
+              if (Number(tokenBalance) >= Number(purchaseInfo.data.amount_in.format)) {
+                const data = {
+                  token: token.data,
+                  token_in: Addresses[ChainID.ARBITRUM_MAIN].usdc,
+                  amount_in: purchaseInfo.data.amount_in.raw,
+                  node_count: purchaseInfo.data.node_count,
+                  total_cost: (purchaseInfo.data.node_price * 10 ** 6).toString(),
+                  promocode: purchaseInfo.data.promoCode ?? ZERO_ADDRESS_PALOMA,
+                  path: '0x00',
+                  enhanced: purchaseInfo.data.isSupport,
+                  subscription_month: purchaseInfo.data.supportMonth,
+                };
 
-              const result = await postPayForToken(data);
-              if (result && result.error) {
-                toast.error('Failed. Please try again later.');
+                const result = await postPayForToken(data);
+                if (result && result.error) {
+                  toast.error('Failed. Please try again later.');
+                } else {
+                  toast.success('Paloma LightNodes successfully purchased');
+                  router.push(
+                    `${StaticLink.DOWNLOAD}?type=fiat_with_${
+                      selectedChain === ChainID.CREDIT_CARD ? 'credit_card' : 'bank_account'
+                    }`,
+                  );
+                }
               } else {
-                toast.success('Paloma LightNodes successfully purchased');
-                router.push(`${StaticLink.DOWNLOAD}?type=purchase_with_credit_card`);
+                openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
               }
+              setFetchingPriceLoading(false);
             } else {
+              setGeneratingWallet(true);
+
+              const createBotResult = await postCreateBot({ token: token?.data });
+              if (createBotResult) {
+                // setFiatWallet(createBotResult);
+                if (createBotResult['wallet_address']) {
+                  setFiatWallet(createBotResult['wallet_address']);
+                  myFiatWallet = createBotResult['wallet_address'];
+                } else {
+                  const getUserFiatWallet = await getUserWalletForFiat({ token: token.data });
+                  if (
+                    getUserFiatWallet.isSuccess &&
+                    getUserFiatWallet.data &&
+                    getUserFiatWallet.data['wallet_address']
+                  ) {
+                    setFiatWallet(getUserFiatWallet.data['wallet_address']);
+                    myFiatWallet = getUserFiatWallet.data['wallet_address'];
+                  }
+                }
+              } else {
+                toast.error('Failed create a bot. Please try again later.');
+                setGeneratingWallet(false);
+                return;
+              }
+              setGeneratingWallet(false);
+
               openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
             }
-            setFetchingPriceLoading(false);
-          } else {
-            setGeneratingWallet(true);
-
-            const createBotResult = await postCreateBot({ token: token?.data });
-            if (createBotResult) {
-              // setFiatWallet(createBotResult);
-              if (createBotResult['wallet_address']) {
-                setFiatWallet(createBotResult['wallet_address']);
-                myFiatWallet = createBotResult['wallet_address'];
-              } else {
-                const getUserFiatWallet = await getUserWalletForFiat({ token: token.data });
-                if (getUserFiatWallet.isSuccess && getUserFiatWallet.data && getUserFiatWallet.data['wallet_address']) {
-                  setFiatWallet(getUserFiatWallet.data['wallet_address']);
-                  myFiatWallet = getUserFiatWallet.data['wallet_address'];
-                }
-              }
-            } else {
-              toast.error('Failed create a bot. Please try again later.');
-              setGeneratingWallet(false);
-              return;
-            }
-            setGeneratingWallet(false);
-
-            openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
           }
         }
+      } catch (e) {
+        console.log(e);
+        setGeneratingWallet(false);
+        setFetchingPriceLoading(false);
       }
-    } catch (e) {
-      console.log(e);
-      setGeneratingWallet(false);
-      setFetchingPriceLoading(false);
     }
   };
 
@@ -783,15 +801,17 @@ const PurchaseFlow = () => {
               setSelectedChain={setSelectedChain}
               title="Select Chain/Credit Cards"
             />
-            <TokenSelector
-              label="Purchasing Token"
-              supportedNetworks={purchaseSupportedNetworks}
-              token={fromToken}
-              listedTokens={listedTokens}
-              onSelectToken={(token) => setFromToken({ ...token })}
-              isDisable={selectedChain === ChainID.CREDIT_CARD}
-              canAddFund
-            />
+            {selectedChain && !isFiat(selectedChain) && (
+              <TokenSelector
+                label="Purchasing Token"
+                supportedNetworks={purchaseSupportedNetworks}
+                token={fromToken}
+                listedTokens={listedTokens}
+                onSelectToken={(token) => setFromToken({ ...token })}
+                isDisable={isFiat(selectedChain)}
+                canAddFund
+              />
+            )}
           </div>
         </>
       )}
@@ -808,7 +828,13 @@ const PurchaseFlow = () => {
                       key={index}
                       title={`${tier.inputAmount}x LightNode Slot ${tier.slot}`}
                       step={step}
-                      price={(Number(tier.price) * tier.inputAmount) / 10 ** 6}
+                      price={
+                        ((appliedPromoCode
+                          ? (Number(tier.price) * (100 - discountPercent)) / 100
+                          : Number(tier.price)) *
+                          tier.inputAmount) /
+                        10 ** 6
+                      }
                       exchangeRate={fromTokenExchangeRate}
                       fromToken={fromToken}
                     />
@@ -836,7 +862,7 @@ const PurchaseFlow = () => {
               price={
                 isSameContract(
                   fromToken.address,
-                  Addresses[selectedChain === ChainID.CREDIT_CARD ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
+                  Addresses[isFiat(selectedChain) ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
                 )
                   ? slippageFeeForUSDC
                   : slippageFee
@@ -850,7 +876,7 @@ const PurchaseFlow = () => {
               price={
                 isSameContract(
                   fromToken.address,
-                  Addresses[selectedChain === ChainID.CREDIT_CARD ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
+                  Addresses[isFiat(selectedChain) ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
                 )
                   ? totalPayForUSDC
                   : totalPay
@@ -910,7 +936,7 @@ const PurchaseFlow = () => {
         <p>All purchases include a {slippageFeePc + txSlippageFeePc}% slippage fee for swaps.</p>
       )}
 
-      {selectedChain === ChainID.CREDIT_CARD || (type && type.includes('credit')) ? (
+      {isFiat(selectedChain) ? (
         <PurchaseWithFiatButton
           onClickStart={() => handleStartWithFiat()}
           isLoggedIn={isLoggedIn}

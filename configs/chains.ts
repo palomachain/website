@@ -5,13 +5,14 @@ export const NO_CHAIN_SELECTED = '0';
 export enum ChainID {
   PALOMA_MAIN = 'messenger',
 
+  CREDIT_CARD = '0000',
+  BANK_ACCOUNT = '0001',
   ETHEREUM_MAIN = '1',
   OPTIMISM_MAIN = '10',
   BSC_MAIN = '56',
   POLYGON_MAIN = '137',
   BASE_MAIN = '8453',
   ARBITRUM_MAIN = '42161',
-  CREDIT_CARD = '000',
 }
 
 export enum ChainRPC {
@@ -24,6 +25,20 @@ export enum ChainRPC {
 }
 
 export const allChains: { [key: string]: EVMChain } = {
+  [ChainID.CREDIT_CARD]: {
+    icon: '/assets/chains/credit card.svg',
+    chainName: 'Credit Card',
+    chainId: ChainID.CREDIT_CARD,
+    rpc: '',
+    blockExplorerUrl: '',
+  },
+  [ChainID.BANK_ACCOUNT]: {
+    icon: '/assets/chains/bank account.svg',
+    chainName: 'Bank Account',
+    chainId: ChainID.BANK_ACCOUNT,
+    rpc: '',
+    blockExplorerUrl: '',
+  },
   [ChainID.ETHEREUM_MAIN]: {
     icon: '/assets/chains/ethereum.svg',
     chainName: 'Ethereum',
@@ -65,12 +80,5 @@ export const allChains: { [key: string]: EVMChain } = {
     chainId: ChainID.BASE_MAIN,
     rpc: ChainRPC.BASE_MAIN,
     blockExplorerUrl: 'https://basescan.org/',
-  },
-  [ChainID.CREDIT_CARD]: {
-    icon: '/assets/chains/credit card.svg',
-    chainName: 'Credit Card',
-    chainId: ChainID.CREDIT_CARD,
-    rpc: '',
-    blockExplorerUrl: '',
   },
 };

@@ -61,14 +61,14 @@ const PurchaseWithFiatButton = ({
       };
     }
 
-    if (!isLoggedIn) {
-      return {
-        disabled: false,
-        text: 'Log in',
-        style: styles.success,
-        onClick: onClickStart,
-      };
-    }
+    // if (!isLoggedIn) {
+    //   return {
+    //     disabled: false,
+    //     text: 'Log in',
+    //     style: styles.success,
+    //     onClick: onClickStart,
+    //   };
+    // }
 
     return {
       disabled: false,

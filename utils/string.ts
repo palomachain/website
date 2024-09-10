@@ -1,4 +1,5 @@
 import { fromBech32, fromHex, toBech32, toHex } from '@cosmjs/encoding';
+import { ChainID } from 'configs/chains';
 import { VETH_ADDRESS, ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 
 export function shorten(val, len = 18) {
@@ -86,4 +87,8 @@ export function parseByte(value: string | number, length: number = 6) {
 
 export function shortenString(val: string, prior = 6, suffix = 4) {
   return val && val.length > 10 ? `${val.slice(0, prior)}...${val.slice(-suffix)}` : val;
+}
+
+export function isFiat(chain: string) {
+  return parseIntString(chain) === ChainID.BANK_ACCOUNT || parseIntString(chain) === ChainID.CREDIT_CARD;
 }

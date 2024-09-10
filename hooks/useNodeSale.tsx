@@ -17,6 +17,22 @@ const useNodeSale = ({ provider, wallet }) => {
   const usdcDecimals = chainId === Number(ChainID.BSC_MAIN) ? 18 : 6;
   const contractAddress = Addresses[chainId.toString()].node_sale;
 
+  const getDiscountPercentForPromo = async () => {
+    try {
+      const gasFeeAmount = await readContract({
+        address: contractAddress,
+        abi: nodesaleContractAbi,
+        functionName: 'referral_discount_percentage',
+        chainId: Number(chainId),
+      });
+
+      return Number(gasFeeAmount) / 100;
+    } catch (error) {
+      console.error(error);
+      return 1;
+    }
+  };
+
   const getProcessingFeeAmount = async () => {
     try {
       const gasFeeAmount = await readContract({
@@ -263,6 +279,7 @@ const useNodeSale = ({ provider, wallet }) => {
   };
 
   return {
+    getDiscountPercentForPromo,
     getProcessingFeeAmount,
     getSubscriptionFeeAmount,
     getSlippageFeePercent,

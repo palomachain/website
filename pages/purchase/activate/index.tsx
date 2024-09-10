@@ -130,7 +130,7 @@ const Activate = () => {
       if (type && type.includes('credit')) {
         const token = await getStoredData(USER_ACCESS_TOKEN);
         if (token.data) {
-          const result = await postActivateWallet({ token: token.data, paloma: palomaAddress });
+          const result = await postActivateWallet({ token: token.data, paloma: stringToHexWithBech(palomaAddress) });
           if (result && result.error) {
             toast.error('Failed. Please try again later.');
           } else {

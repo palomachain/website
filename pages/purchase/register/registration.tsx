@@ -1,4 +1,4 @@
-import Modal from 'components/Modal';
+import ConfirmationModal from 'components/Modal/ConfirmationModal';
 import { StaticLink } from 'configs/links';
 import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
@@ -7,7 +7,6 @@ import { usePostRegisterMutation } from 'services/api/nodesale';
 import { isValidEmail, isValidName } from 'utils/common';
 
 import style from './registration.module.scss';
-import ConfirmationModal from 'components/Modal/ConfirmationModal';
 
 const RegisterFlow = () => {
   const router = useRouter();
@@ -15,6 +14,7 @@ const RegisterFlow = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const redirect = params.get('redirect');
+  const type = params.get('type');
 
   const [fullname, setFullname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -45,7 +45,7 @@ const RegisterFlow = () => {
       const callApi = await postRegister({
         email: email,
         username: fullname,
-        redirect: redirect ?? StaticLink.DOWNLOAD,
+        redirect: redirect ? (type ? `${redirect}&type=${type}` : redirect) : StaticLink.DOWNLOAD,
       });
 
       if (!callApi.error) {

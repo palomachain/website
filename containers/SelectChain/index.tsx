@@ -4,6 +4,7 @@ import { allChains, ChainID } from 'configs/chains';
 import useOutsideAlerter from 'hooks/useOutsideAlerter';
 import { useWallet } from 'hooks/useWallet';
 import { useRef, useState } from 'react';
+import { isFiat } from 'utils/string';
 
 import style from './SelectChain.module.scss';
 
@@ -32,7 +33,7 @@ const SelectChain = ({
   });
 
   const handleSelectChain = async (value: string) => {
-    if (value === ChainID.CREDIT_CARD) {
+    if (isFiat(value)) {
       setSelectedChain(value);
     } else if (!wallet || !wallet.network) {
       await connectMetaMask(value);
@@ -43,13 +44,19 @@ const SelectChain = ({
     setShowSelectChainModal(false);
   };
 
-  const selectableChainList = Object.keys(supportChains).map((chain) => {
-    return {
-      name: allChains[chain].chainName,
-      icon: allChains[chain].icon,
-      id: allChains[chain].chainId,
-    };
-  });
+  const selectableChainList = () => {
+    let list = Object.keys(supportChains).map((chain) => {
+      return {
+        name: allChains[chain].chainName,
+        icon: allChains[chain].icon,
+        id: allChains[chain].chainId,
+      };
+    });
+
+    list.sort((a, b) => (a.id.toString() === ChainID.BANK_ACCOUNT || a.id.toString() === ChainID.CREDIT_CARD ? -1 : 0));
+
+    return list;
+  };
 
   return (
     <section className={classNames(style.container, className)} ref={chainRef}>
@@ -61,14 +68,9 @@ const SelectChain = ({
         >
           <div className="flex-row gap-8">
             {selectedChain && selectedChain !== '' && (
-              <img
-                src={`/assets/chains/${supportChains[selectedChain].toLowerCase()}.svg`}
-                width={25}
-                height={25}
-                alt=""
-              />
+              <img src={`/assets/chains/${supportChains[selectedChain].toLowerCase()}.svg`} height={25} alt="" />
             )}
-            {selectedChain && selectedChain !== '' ? supportChains[selectedChain] : 'Select Chain'}
+            {selectedChain && selectedChain !== '' ? <p>{supportChains[selectedChain]}</p> : <p>{title}</p>}
           </div>
           <img src="/assets/icons/down.svg" alt="" />
         </div>
@@ -77,7 +79,7 @@ const SelectChain = ({
         <Selector
           showSelectModal={showSelectChainModal}
           handleSelect={handleSelectChain}
-          selectableList={selectableChainList}
+          selectableList={selectableChainList()}
           selected={supportChains[selectedChain]}
           className={style.selector}
         />

@@ -18,5 +18,6 @@ module.exports = {
     NODESALE_CONTRACT_POLYGON: process.env.NODESALE_CONTRACT_POLYGON,
     PASSCODE: process.env.PASSCODE,
     THIRDWEB_API_KEY: process.env.THIRDWEB_API_KEY,
+    TRANSAK_API_KEY: process.env.TRANSAK_API_KEY,
   },
 };

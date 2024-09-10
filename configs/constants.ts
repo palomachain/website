@@ -11,6 +11,7 @@ const envParam = {
   nodeSale_polygon: process.env.NODESALE_CONTRACT_POLYGON || '',
   PASSCODE: process.env.PASSCODE || '',
   thirdWebApiKey: process.env.THIRDWEB_API_KEY || '',
+  transakApiKey: process.env.TRANSAK_API_KEY || '',
 };
 
 const purchaseSupportedNetworks = {
@@ -20,6 +21,7 @@ const purchaseSupportedNetworks = {
   '137': 'Polygon',
   '8453': 'Base',
   '42161': 'Arbitrum',
+  '000': 'Credit Card',
 };
 
 const AddNetwork = {
@@ -69,6 +71,9 @@ const SLIPPAGE_DOMINATOR = 1000;
 const SLIPPAGE_PERCENTAGE = 1; // default slippage is 1%
 const DEADLINE = 5; // 5 MIN
 
+const USER_ACCESS_TOKEN = 'user_access_token';
+const PURCHASE_INFO = 'my_purchase_info';
+
 export {
   AddNetwork,
   DEADLINE,
@@ -77,4 +82,6 @@ export {
   SLIPPAGE_DOMINATOR,
   SLIPPAGE_PERCENTAGE,
   envParam,
+  USER_ACCESS_TOKEN,
+  PURCHASE_INFO,
 };

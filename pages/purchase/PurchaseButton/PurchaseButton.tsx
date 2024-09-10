@@ -1,9 +1,9 @@
 import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import Button from 'components/Button';
-import { NO_CHAIN_SELECTED } from 'configs/chains';
+import { ChainID, NO_CHAIN_SELECTED } from 'configs/chains';
 import { useWallet } from 'hooks/useWallet';
-import { IPriceTiers } from 'interfaces/nodeSale';
+import { IPriceTier } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React, { useMemo } from 'react';
 import { purchaseSupportedNetworks } from 'configs/constants';
@@ -26,7 +26,8 @@ interface PurchaseButtonProps {
   expectedAmount?: IBalance;
   quoteAmount?: IBalance;
   swapPath?: string;
-  priceTiers?: IPriceTiers[];
+  priceTiers?: IPriceTier[];
+  selectedChain?: string;
   className?: string;
   onClickStart: () => void;
   buttonText: string;
@@ -49,9 +50,10 @@ const PurchaseButton = ({
   quoteAmount,
   swapPath,
   priceTiers,
+  selectedChain,
   className,
   onClickStart,
-  buttonText = 'Start Bot',
+  buttonText = 'Buy Now',
 }: PurchaseButtonProps) => {
   const { openConnectionModal } = useWallet();
 
@@ -147,6 +149,7 @@ const PurchaseButton = ({
     isFetchingPriceLoading,
     swapPath,
     priceTiers,
+    selectedChain,
   ]);
 
   return (

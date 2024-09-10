@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Selector from 'components/ButtonSelector/Selector';
-import { allChains } from 'configs/chains';
+import { allChains, ChainID } from 'configs/chains';
 import useOutsideAlerter from 'hooks/useOutsideAlerter';
 import { useWallet } from 'hooks/useWallet';
 import { useRef, useState } from 'react';
@@ -32,7 +32,9 @@ const SelectChain = ({
   });
 
   const handleSelectChain = async (value: string) => {
-    if (!wallet || !wallet.network) {
+    if (value === ChainID.CREDIT_CARD) {
+      setSelectedChain(value);
+    } else if (!wallet || !wallet.network) {
       await connectMetaMask(value);
     } else {
       const result = await requestSwitchNetwork(value);

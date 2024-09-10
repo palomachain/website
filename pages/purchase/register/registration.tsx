@@ -7,10 +7,14 @@ import { usePostRegisterMutation } from 'services/api/nodesale';
 import { isValidEmail, isValidName } from 'utils/common';
 
 import style from './registration.module.scss';
+import ConfirmationModal from 'components/Modal/ConfirmationModal';
 
 const RegisterFlow = () => {
   const router = useRouter();
   const [postRegister] = usePostRegisterMutation();
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const redirect = params.get('redirect');
 
   const [fullname, setFullname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -38,7 +42,11 @@ const RegisterFlow = () => {
 
     try {
       setLoading(true);
-      const callApi = await postRegister({ email: email, username: fullname });
+      const callApi = await postRegister({
+        email: email,
+        username: fullname,
+        redirect: redirect ?? StaticLink.DOWNLOAD,
+      });
 
       if (!callApi.error) {
         setConfirm(true);
@@ -74,21 +82,7 @@ const RegisterFlow = () => {
           returnRegisterText
         )}
       </button>
-      {confirm && (
-        <Modal className={style.confirmEmail} contentClassName={style.contentClassName}>
-          <img className={style.loadingImage} src="/assets/icons/confirm-email.svg" alt="confirm-email" />
-          <h3 className={style.title}>Check your Email</h3>
-          <p className={style.text}>
-            We emailed a magic link to
-            <br />
-            <b>{email}</b>
-            <br />
-            Click the link to confirm your email
-          </p>
-          <p className={style.subText}>If you haven't received an email after a minute.</p>
-          <span className={style.clickAgain} onClick={() => setConfirm(false)}>Click here to try again.</span>
-        </Modal>
-      )}
+      {confirm && <ConfirmationModal email={email} setConfirm={setConfirm} />}
     </div>
   );
 };

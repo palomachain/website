@@ -1,8 +1,10 @@
+import { USER_ACCESS_TOKEN } from 'configs/constants';
 import { StaticLink } from 'configs/links';
+import useCookie from 'hooks/useCookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useLazyGetRegisterConfirmationQuery } from 'services/api/nodesale';
+import { useLazyGetLoginConfirmationQuery, useLazyGetRegisterConfirmationQuery } from 'services/api/nodesale';
 
 import style from './confirmation.module.scss';
 
@@ -11,22 +13,34 @@ const Confirmation = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const token = params.get('token');
+  const redirect = params.get('redirect');
+  const type = params.get('type');
 
-  const [getConfirmation] = useLazyGetRegisterConfirmationQuery();
+  const { storeData } = useCookie();
+  const [getRegisterConfirmation] = useLazyGetRegisterConfirmationQuery();
+  const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
 
   useEffect(() => {
-    const confirm = async () => {
-      const confirmResult = await getConfirmation({ token: token });
-      if (confirmResult.isSuccess) {
-        toast.success('Successfully confirmed your Email.');
-        router.push(StaticLink.DOWNLOAD);
-      } else {
-        toast.error('Invalid token.');
-        router.push(StaticLink.REGISTER);
-      }
-    };
-    confirm();
-  }, [token]);
+    if (token) {
+      const isRegister = redirect.includes('login') ? false : true;
+      const confirm = async () => {
+        const confirmResult = isRegister
+          ? await getRegisterConfirmation({ token: token })
+          : await getLoginConfirmation({ token: token });
+        if (confirmResult.isSuccess) {
+          // Store user access token to cookie
+          await storeData(USER_ACCESS_TOKEN, token);
+
+          toast.success('Successfully confirmed your Email.');
+          router.push(redirect ? (type ? `${redirect}?type=${type}` : redirect) : StaticLink.DOWNLOAD);
+        } else {
+          toast.error('Invalid token.');
+          router.push(StaticLink.REGISTER);
+        }
+      };
+      confirm();
+    }
+  }, [token, redirect]);
 
   return <img src="/assets/icons/confirm-email.svg" alt="confirm-email" className={style.loadingImg} />;
 };

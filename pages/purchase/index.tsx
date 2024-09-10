@@ -1,10 +1,10 @@
-import usePasscode from 'hooks/usePasscode';
+import useCookie from 'hooks/useCookie';
 import { useEffect, useState } from 'react';
 import Describe from './describe';
 import PurchaseFlow from './flow';
 
 const Purchase = () => {
-  const { isAlreadyPassedCode } = usePasscode();
+  const { isAlreadyPassedCode } = useCookie();
   const [loading, setLoading] = useState(true);
 
   const checkAlreadyPassedCode = async () => {

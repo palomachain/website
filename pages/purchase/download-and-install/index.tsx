@@ -9,6 +9,9 @@ import style from './download.module.scss';
 
 const DownloadAndInstall = () => {
   const router = useRouter();
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const type = params.get('type');
 
   const [currentTab, setCurrentTab] = useState(SupportSystems.Mac);
   const [currentStep, setCurrentStep] = useState(0);
@@ -23,7 +26,7 @@ const DownloadAndInstall = () => {
   const onChangeStep = (step: number) => {
     const nextStep = currentStep + step;
     if (nextStep > PalomaDownloadAndInstallSteps[currentTab].length - 1) {
-      router.push(StaticLink.ACTIVATE);
+      router.push(type && type.includes('credit') ? `${StaticLink.ACTIVATE}?type=${type}` : StaticLink.ACTIVATE);
     } else if (nextStep >= 0) {
       setCurrentStep(nextStep);
     }

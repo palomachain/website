@@ -1,4 +1,6 @@
+import { readContract } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
+import { ChainID } from 'configs/chains';
 import erc20Abi from 'contracts/abi/erc20.abi.json';
 import feesAbi from 'contracts/abi/fees.abi.json';
 import { Addresses, VETH_ADDRESS } from 'contracts/addresses';
@@ -185,6 +187,23 @@ const useToken = ({ provider }) => {
     }
   };
 
+  const getTokenBalance = async (userAddress, contractAddress) => {
+    try {
+      const balanceOf = await readContract({
+        address: contractAddress,
+        abi: erc20Abi,
+        functionName: 'balanceOf',
+        chainId: Number(ChainID.ARBITRUM_MAIN),
+        args: [userAddress],
+      });
+
+      return balanceTool.convertFromWei(balanceOf.toString(), 8, 6);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  };
+
   return {
     getTokenDecimals,
     getTokenName,
@@ -192,6 +211,7 @@ const useToken = ({ provider }) => {
     tokenApprove,
     fetchTokenPrice,
     slippageFromPrice,
+    getTokenBalance,
   };
 };
 

@@ -1,17 +1,20 @@
 import classNames from 'classnames';
 import Button from 'components/Button';
 import Command from 'components/Command';
+import { purchaseSupportedNetworks, USER_ACCESS_TOKEN } from 'configs/constants';
 import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useLazyGetIsUsedPalomaAddressQuery, usePostActiveWalletMutation } from 'services/api/nodesale';
 import { parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
-import { purchaseSupportedNetworks } from 'configs/constants';
-import { useLazyGetIsUsedPalomaAddressQuery } from 'services/api/nodesale';
 
 import style from './activate.module.scss';
+import useCookie from 'hooks/useCookie';
+import { useRouter } from 'next/router';
+import { StaticLink } from 'configs/links';
 
 const STEPS = {
   CONNECT_WALLET: 1,
@@ -33,8 +36,16 @@ const shCommand = {
 const Activate = () => {
   const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet } = useWallet();
   const provider = useProvider(wallet);
+
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const type = params.get('type');
+
+  const router = useRouter();
+  const { getStoredData } = useCookie();
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
   const [fetchIsUsedPalomaAddress] = useLazyGetIsUsedPalomaAddressQuery();
+  const [postActivateWallet] = usePostActiveWalletMutation();
 
   const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
   const [activatedPalomaAddress, setActivatedPalomaAddress] = useState<string>();
@@ -105,7 +116,6 @@ const Activate = () => {
 
       /** Check if already used paloma address */
       const isUsedPalomaAddress = await fetchIsUsedPalomaAddress({ paloma: palomaAddress });
-      console.log('isUsedPalomaAddress', isUsedPalomaAddress);
       if (isUsedPalomaAddress.isSuccess) {
         if (isUsedPalomaAddress.data) {
           setSteps(STEPS.ALREADY_USED_PALOMA);
@@ -117,10 +127,27 @@ const Activate = () => {
       }
 
       /** Activate paloma address */
-      const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(wallet.network));
-      if (activate) {
-        setSteps(STEPS.ACTIVATED);
-        setActivatedPalomaAddress(palomaAddress);
+      if (type && type.includes('credit')) {
+        const token = await getStoredData(USER_ACCESS_TOKEN);
+        if (token.data) {
+          const result = await postActivateWallet({ token: token.data, paloma: palomaAddress });
+          if (result && result.error) {
+            toast.error('Failed. Please try again later.');
+          } else {
+            setSteps(STEPS.ACTIVATED);
+            setActivatedPalomaAddress(palomaAddress);
+          }
+        } else {
+          toast.error('Expired your token. Please log in again.');
+          router.push(`${StaticLink.LOGIN}?type=activate_wallet`);
+          return;
+        }
+      } else {
+        const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(wallet.network));
+        if (activate) {
+          setSteps(STEPS.ACTIVATED);
+          setActivatedPalomaAddress(palomaAddress);
+        }
       }
     } catch (error) {
       console.error(error);

@@ -6,8 +6,9 @@ import { NodeSaleStartDate } from 'utils/constants';
 
 const cookies = new Cookies();
 
-const usePasscode = () => {
+const useCookie = () => {
   const router = useRouter();
+
   const invitationCode = async (code: (string | number)[]) => {
     try {
       const myCode = code.toString().replaceAll(',', '');
@@ -36,6 +37,25 @@ const usePasscode = () => {
     }
   };
 
+  const storeData = async (name: string, data: any, duration: number = 60) => {
+    try {
+      // Clear storage
+      localStorage.removeItem(name);
+
+      const time = Date.now() + duration * 60 * 1000; // until from now, default duration is 1 hour
+      const value = {
+        data: data,
+        expiresTime: new Date(time),
+      };
+      localStorage.setItem(name, JSON.stringify(value));
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
+
   const isAlreadyPassedCode = async () => {
     let date = 0;
 
@@ -58,7 +78,22 @@ const usePasscode = () => {
     }
   };
 
-  return { invitationCode, isAlreadyPassedCode };
+  const getStoredData = async (name: string) => {
+    try {
+      const storedData = localStorage.getItem(name);
+      if (storedData) {
+        const userData = JSON.parse(storedData);
+        const expireTime = new Date(userData['expiresTime']).getTime();
+        if (expireTime > Date.now()) return { data: userData['data'] };
+      }
+      return { error: 'Expired your token. Please try again.' };
+    } catch (error) {
+      // Clear storage
+      return { error: 'Expired your token. Please try again.' };
+    }
+  };
+
+  return { invitationCode, storeData, isAlreadyPassedCode, getStoredData };
 };
 
-export default usePasscode;
+export default useCookie;

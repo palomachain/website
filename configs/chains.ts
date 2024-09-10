@@ -11,6 +11,7 @@ export enum ChainID {
   POLYGON_MAIN = '137',
   BASE_MAIN = '8453',
   ARBITRUM_MAIN = '42161',
+  CREDIT_CARD = '000',
 }
 
 export enum ChainRPC {
@@ -64,5 +65,12 @@ export const allChains: { [key: string]: EVMChain } = {
     chainId: ChainID.BASE_MAIN,
     rpc: ChainRPC.BASE_MAIN,
     blockExplorerUrl: 'https://basescan.org/',
+  },
+  [ChainID.CREDIT_CARD]: {
+    icon: '/assets/chains/credit card.svg',
+    chainName: 'Credit Card',
+    chainId: ChainID.CREDIT_CARD,
+    rpc: '',
+    blockExplorerUrl: '',
   },
 };

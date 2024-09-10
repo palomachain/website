@@ -1,6 +1,6 @@
 import PasscodeInput from 'components/PasscodeInput';
 import { StaticLink } from 'configs/links';
-import usePasscode from 'hooks/usePasscode';
+import useCookie from 'hooks/useCookie';
 import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,7 +9,7 @@ import style from './passcode.module.scss';
 
 const Passcode = () => {
   const router = useRouter();
-  const { invitationCode } = usePasscode();
+  const { invitationCode } = useCookie();
 
   const [loading, setLoading] = useState(false);
   const [passcodeValue, setPasscodeValue] = useState<(string | number)[]>(['', '', '', '']);

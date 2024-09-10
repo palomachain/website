@@ -20,6 +20,7 @@ interface TokenSelectorProps {
   selectedIndex?: number;
   selectOptions?: any;
   setSelected?: (e: number) => void;
+  isDisable?: boolean;
   className?: string;
 }
 
@@ -35,6 +36,7 @@ const TokenSelector = ({
   selectedIndex,
   selectOptions,
   setSelected,
+  isDisable = false,
   className,
 }: TokenSelectorProps) => {
   const { networkSelect } = useWallet();
@@ -69,7 +71,7 @@ const TokenSelector = ({
             inputClassName={style.dropdownInputClass}
           />
         ) : (
-          <div className={style.token} onClick={() => handleShowTokenSelectModal()}>
+          <div className={style.token} onClick={() => !isDisable && handleShowTokenSelectModal()}>
             <div className="flex-row gap-8">
               {token.icon !== '' && <img src={token.icon} width={25} height={25} />}
               {token.symbol === '' ? 'Select Token' : <p className="bold">{token.symbol}</p>}

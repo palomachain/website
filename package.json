@@ -17,6 +17,7 @@
     "@storyblok/storyblok-editable": "github:storyblok/storyblok-editable",
     "@thirdweb-dev/react": "^4.9.4",
     "@thirdweb-dev/sdk": "^4.0.99",
+    "@transak/transak-sdk": "^3.1.2",
     "@uniswap/permit2-sdk": "1.2.0",
     "@uniswap/router-sdk": "1.4.0",
     "@uniswap/sdk-core": "3.2.2",

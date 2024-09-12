@@ -156,9 +156,9 @@
   .terminalModal {
     max-width: 699px;
     border-radius: 8px;
-    padding: 44px 42px;
-    align-items: flex-start;
-    gap: 46px;
+    padding: 40px 50px;
+    align-items: center;
+    gap: 30px;
     .terminal {
       display: flex;
       flex-direction: row;
@@ -228,6 +228,38 @@
           }
         }
       }
+    }
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #d8d3d3;
+    background: #fff;
+    height: 40px;
+
+    .tab {
+      width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #8a8383;
+      text-align: center;
+      font-family: $Inter-500;
+      font-size: 16px;
+      font-style: normal;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
+    }
+
+    .active {
+      border-radius: 8px;
+      background: #d8d3d3;
+      color: #2c2c2c;
+      font-family: $Inter-600;
     }
   }
 }

@@ -450,7 +450,7 @@ export const CustomerSupport = [
 
 export const SupportSystems = {
   Mac: 'MacOS',
-  Window: 'Windows',
+  Windows: 'Windows',
   Linux: 'Linux',
 };
 
@@ -595,7 +595,7 @@ export const PalomaInstructionsSteps: {
     //   ],
     // },
   ],
-  [SupportSystems.Window]: [
+  [SupportSystems.Windows]: [
     {
       head: 'Download Docker Installer',
       steps: [
@@ -1019,6 +1019,59 @@ export const PalomaInstructionsSteps: {
               copyCommand: 'sudo sh $HOME/Downloads/setup.sh add-node',
             },
           ],
+        },
+      ],
+    },
+  ],
+};
+
+export const ActivateInstructionsSteps: {
+  [x: string]: {
+    title?: string | JSX.Element;
+    commands?: {
+      name?: string | JSX.Element;
+      command?: string | JSX.Element;
+      copyCommand?: string;
+      instruction?: string | JSX.Element;
+    }[];
+  }[];
+} = {
+  [SupportSystems.Mac]: [
+    {
+      title: <p>After activating your LightNode, open the Terminal application found in the Utilities folder.</p>,
+      commands: [
+        {
+          command: <p>sh $HOME/Downloads/setup.sh activate</p>,
+          copyCommand: 'sh $HOME/Downloads/setup.sh activate',
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Windows]: [
+    {
+      title: <p>After activating your LightNode, open the Windows PowerShell</p>,
+      commands: [
+        {
+          command: (
+            <p>
+              docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
+              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v1
+              activate
+            </p>
+          ),
+          copyCommand:
+            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 activate',
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Linux]: [
+    {
+      title: <p>After activating your LightNode, open the Terminal application.</p>,
+      commands: [
+        {
+          command: <p>sudo sh $HOME/Downloads/setup.sh activate</p>,
+          copyCommand: 'sudo sh $HOME/Downloads/setup.sh activate',
         },
       ],
     },

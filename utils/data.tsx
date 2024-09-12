@@ -1,5 +1,4 @@
-import { IDownloadAndInstallNodeSteps } from 'interfaces/nodeSale';
-import { title } from 'process';
+import { IAlertInfo, IInstructionsNodeSteps } from 'interfaces/nodeSale';
 
 export const SupportChains = ['ethereum', 'binance', 'arbitrum', 'base', 'optimism', 'b', 'polygon', 'gnosis'];
 
@@ -452,11 +451,11 @@ export const CustomerSupport = [
 export const SupportSystems = {
   Mac: 'MacOS',
   Window: 'Windows',
-  // Linux: 'Linux',
+  Linux: 'Linux',
 };
 
-export const PalomaDownloadAndInstallSteps: {
-  [x: string]: IDownloadAndInstallNodeSteps[];
+export const PalomaInstructionsSteps: {
+  [x: string]: IInstructionsNodeSteps[];
 } = {
   [SupportSystems.Mac]: [
     {
@@ -527,7 +526,7 @@ export const PalomaDownloadAndInstallSteps: {
           title: (
             <p>After downloading the setup on your Mac, open the Terminal application found in the Utilities folder</p>
           ),
-          items: [
+          commands: [
             {
               name: (
                 <p>
@@ -544,7 +543,7 @@ export const PalomaDownloadAndInstallSteps: {
                 </p>
               ),
               command: <p>sh $HOME/Downloads/setup.sh add-node</p>,
-              copyCommand: 'sh $HOME/Downloads/setup.shv add-node',
+              copyCommand: 'sh $HOME/Downloads/setup.sh add-node',
             },
           ],
         },
@@ -555,7 +554,7 @@ export const PalomaDownloadAndInstallSteps: {
     //   steps: [
     //     {
     //       title: <p>Open the Terminal Application in Macintosh Utilities</p>,
-    //       items: [
+    //       commands: [
     //         {
     //           name: <p>Copy and Past the command:</p>,
     //           command: (
@@ -572,7 +571,7 @@ export const PalomaDownloadAndInstallSteps: {
     //     },
     //     {
     //       title: <p>After activating the node, you can keep it running in the background</p>,
-    //       items: [
+    //       commands: [
     //         {
     //           name: <p>Copy and Past the command:</p>,
     //           command: (
@@ -686,7 +685,7 @@ export const PalomaDownloadAndInstallSteps: {
       steps: [
         {
           title: <p>Open the Windows PowerShell</p>,
-          items: [
+          commands: [
             {
               name: <p>Copy and Past the command:</p>,
               command: (
@@ -703,7 +702,7 @@ export const PalomaDownloadAndInstallSteps: {
         },
         // {
         //   title: <p>After registering the node, you can keep it running in the background</p>,
-        //   items: [
+        //   commands: [
         //     {
         //       name: <p>Copy and Past the command:</p>,
         //       command: (
@@ -727,195 +726,301 @@ export const PalomaDownloadAndInstallSteps: {
       ],
     },
   ],
-  // [SupportSystems.Linux]: [
-  //   {
-  //     head: 'Download Docker installer',
-  //     describe:
-  //       'To get started with Docker Engine on Ubuntu, make sure you meet the prerequisites, and then follow the installation steps.',
-  //     subItems: [
-  //       {
-  //         title: 'Prerequisites',
-  //         subTitle: 'Firewall limitations',
-  //         alert: {
-  //           type: 'warning',
-  //           label:
-  //             'Before you install Docker, make sure you consider the following security implications and firewall incompatibilities.',
-  //         },
-  //         li: [
-  //           <p>
-  //             If you use ufw or firewalld to manage firewall settings, be aware that when you expose container ports
-  //             using Docker, these ports bypass your firewall rules. For more information, refer to Docker and ufw.
-  //           </p>,
-  //           <p>
-  //             Docker is only compatible with <span>iptables-nft</span> and <span>iptables-legacy</span> Firewall rules
-  //             created with <span>nft</span> are not supported on a system with Docker installed. Make sure that any
-  //             firewall rulesets you use are created with <span>iptables</span> or <span>ip6tables</span>, and that you
-  //             add them to the <span>DOCKER-USER</span> see{' '}
-  //             <a href="https://docs.docker.com/engine/network/packet-filtering-firewalls/" target="_blank">
-  //               Packet filtering and firewalls.
-  //             </a>
-  //             and firewalls.
-  //           </p>,
-  //         ],
-  //       },
-  //       {
-  //         title: 'OS Requirements',
-  //         body: [
-  //           <p>To install Docker Engine, you need the 64-bit version of one of these Ubuntu versions:</p>,
-  //           <ul>
-  //             <li>Ubuntu Noble 24.04 (LTS)</li>
-  //             <li>Ubuntu Jammy 22.04 (LTS)</li>
-  //             <li>Ubuntu Focal 20.04 (LTS)</li>
-  //           </ul>,
-  //           <p>
-  //             Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64, s390x, and ppc64le (ppc64el)
-  //             architectures.
-  //           </p>,
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     head: 'Download Docker installer',
-  //     subItems: [
-  //       {
-  //         title: 'Uninstall old versions',
-  //         body: [
-  //           <p>Before you can install Docker Engine, you need to uninstall any conflicting packages.</p>,
-  //           <p>
-  //             Distro maintainers provide unofficial distributions of Docker packages in APT. You must uninstall these
-  //             packages before you can install the official version of Docker Engine.
-  //           </p>,
-  //           <p>The unofficial packages to uninstall are:</p>,
-  //           <ul>
-  //             <li>
-  //               <span>docker.io</span>
-  //             </li>
-  //             <li>
-  //               <span>docker-compose</span>
-  //             </li>
-  //             <li>
-  //               <span>docker-compose-v2</span>
-  //             </li>
-  //             <li>
-  //               <span>docker-doc</span>
-  //             </li>
-  //             <li>
-  //               <span>podman-docker</span>
-  //             </li>
-  //           </ul>,
-  //           <p>
-  //             Moreover, Docker Engine depends on <span>containerd</span> and <span>runc.</span>. Docker Engine bundles
-  //             these dependencies as one bundle: <span>containerd.io</span> . If you have installed the{' '}
-  //             <span>containerd</span> or <span>runc.</span> previously, uninstall them to avoid conflicts with the
-  //             versions bundled with Docker Engine.
-  //           </p>,
-  //           {
-  //             name: <p>Run the following command to uninstall all conflicting packages:</p>,
-  //             command: (
-  //               <p>
-  //                 $ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
-  //                 sudo apt-get remove $pkg; done
-  //               </p>
-  //             ),
-  //             copyCommand:
-  //               '$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done',
-  //           },
-  //           <p>
-  //             <span>apt-get</span> might report that you have none of these packages installed.
-  //           </p>,
-  //           <p>
-  //             Images, containers, volumes, and networks stored in <span>/var/lib/docker/</span> aren't automatically
-  //             removed when you uninstall Docker. If you want to start with a clean installation, and prefer to clean up
-  //             any existing data, read the{' '}
-  //             <a href="https://docs.docker.com/engine/install/ubuntu/#uninstall-docker-engine" target="_blank">
-  //               uninstall Docker Engine
-  //             </a>{' '}
-  //             section.
-  //           </p>,
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     head: 'Download Docker installer',
-  //     subItems: [
-  //       {
-  //         title: <p>Installation Methods</p>,
-  //         body: [
-  //           <p>You can install Docker Engine in different ways, depending on your needs:</p>,
-  //           <ul>
-  //             <li>
-  //               Docker Engine comes bundled with{' '}
-  //               <a href="https://docs.docker.com/desktop/install/linux-install/" target="_blank">
-  //                 Docker Desktop for Linux
-  //               </a>
-  //               . This is the easiest and quickest way to get started.
-  //             </li>
-  //             <li>
-  //               Set up and install Docker Engine from{' '}
-  //               <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository" target="_blank">
-  //                 Docker's <span>apt</span> repository.
-  //               </a>
-  //             </li>
-  //             <li>
-  //               <a href="https://docs.docker.com/engine/install/ubuntu/#install-from-a-package" target="_blank">
-  //                 Install it manually
-  //               </a>{' '}
-  //               and manage upgrades manually.
-  //             </li>
-  //             <li>
-  //               Use a{' '}
-  //               <a
-  //                 href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script"
-  //                 target="_blank"
-  //               >
-  //                 convenience script
-  //               </a>
-  //               . Only recommended for testing and development environments.
-  //             </li>
-  //           </ul>,
-  //         ],
-  //       },
-  //       {
-  //         title: (
-  //           <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository" target="_blank">
-  //             Install using the <span>apt</span> repository
-  //           </a>
-  //         ),
-  //         describe:
-  //           'Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. Afterward, you can install and update Docker from the repository.',
-  //         steps: [
-  // //           {
-  // //             title: <p>Set up Docker's <span>apt</span> repository.</p>,
-  // //             items: {
-  // //               command: (
-  // //                 <p>
-  // //                   # Add Docker's official GPG key:
-  // //                   sudo apt-get update
-  // //                   sudo apt-get install ca-certificates curl
-  // //                   sudo install -m 0755 -d /etc/apt/keyrings
-  // //                   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  // //                   sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-  // //                   # Add the repository to Apt sources:
-  // //                   echo \
-  // // "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-  // //                   sudo apt-get update
-  // //                 </p>
-  // //               ),
-  // //               copyCommand:
-  // //                 '$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done',
-  // //             }
-  // //           },
-  // {
-  //   title: <p>Install the Docker packages.</p>,
-  //   describe: <p>To install the latest version, run:</p>
-
-  // }
-  //         ],
-  //       },
-  //     ],
-  //   },
-  // ],
+  [SupportSystems.Linux]: [
+    // {
+    //   head: 'Download Docker installer',
+    //   describe:
+    //     'To get started with Docker Engine on Ubuntu, make sure you meet the prerequisites, and then follow the installation steps.',
+    //   subItems: [
+    //     {
+    //       title: 'Prerequisites',
+    //       subTitle: 'Firewall limitations',
+    //       alert: {
+    //         type: 'warning',
+    //         label:
+    //           'Before you install Docker, make sure you consider the following security implications and firewall incompatibilities.',
+    //       },
+    //       li: [
+    //         <p>
+    //           If you use ufw or firewalld to manage firewall settings, be aware that when you expose container ports
+    //           using Docker, these ports bypass your firewall rules. For more information, refer to Docker and ufw.
+    //         </p>,
+    //         <p>
+    //           Docker is only compatible with <span>iptables-nft</span> and <span>iptables-legacy</span> Firewall rules
+    //           created with <span>nft</span> are not supported on a system with Docker installed. Make sure that any
+    //           firewall rulesets you use are created with <span>iptables</span> or <span>ip6tables</span>, and that you
+    //           add them to the <span>DOCKER-USER</span> see{' '}
+    //           <a href="https://docs.docker.com/engine/network/packet-filtering-firewalls/" target="_blank">
+    //             Packet filtering and firewalls.
+    //           </a>
+    //           and firewalls.
+    //         </p>,
+    //       ],
+    //     },
+    //     {
+    //       title: 'OS Requirements',
+    //       body: [
+    //         <p>To install Docker Engine, you need the 64-bit version of one of these Ubuntu versions:</p>,
+    //         <ul>
+    //           <li>Ubuntu Noble 24.04 (LTS)</li>
+    //           <li>Ubuntu Jammy 22.04 (LTS)</li>
+    //           <li>Ubuntu Focal 20.04 (LTS)</li>
+    //         </ul>,
+    //         <p>
+    //           Docker Engine for Ubuntu is compatible with x86_64 (or amd64), armhf, arm64, s390x, and ppc64le (ppc64el)
+    //           architectures.
+    //         </p>,
+    //       ],
+    //     },
+    //   ],
+    // },
+    // {
+    //   head: 'Download Docker installer',
+    //   subItems: [
+    //     {
+    //       title: 'Uninstall old versions',
+    //       body: [
+    //         <p>Before you can install Docker Engine, you need to uninstall any conflicting packages.</p>,
+    //         <p>
+    //           Distro maintainers provide unofficial distributions of Docker packages in APT. You must uninstall these
+    //           packages before you can install the official version of Docker Engine.
+    //         </p>,
+    //         <p>The unofficial packages to uninstall are:</p>,
+    //         <ul>
+    //           <li>
+    //             <span>docker.io</span>
+    //           </li>
+    //           <li>
+    //             <span>docker-compose</span>
+    //           </li>
+    //           <li>
+    //             <span>docker-compose-v2</span>
+    //           </li>
+    //           <li>
+    //             <span>docker-doc</span>
+    //           </li>
+    //           <li>
+    //             <span>podman-docker</span>
+    //           </li>
+    //         </ul>,
+    //         <p>
+    //           Moreover, Docker Engine depends on <span>containerd</span> and <span>runc.</span>. Docker Engine bundles
+    //           these dependencies as one bundle: <span>containerd.io</span> . If you have installed the{' '}
+    //           <span>containerd</span> or <span>runc.</span> previously, uninstall them to avoid conflicts with the
+    //           versions bundled with Docker Engine.
+    //         </p>,
+    //         {
+    //           name: <p>Run the following command to uninstall all conflicting packages:</p>,
+    //           command: (
+    //             <p>
+    //               $ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
+    //               sudo apt-get remove $pkg; done
+    //             </p>
+    //           ),
+    //           copyCommand:
+    //             '$ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done',
+    //         },
+    //         <p>
+    //           <span>apt-get</span> might report that you have none of these packages installed.
+    //         </p>,
+    //         <p>
+    //           Images, containers, volumes, and networks stored in <span>/var/lib/docker/</span> aren't automatically
+    //           removed when you uninstall Docker. If you want to start with a clean installation, and prefer to clean up
+    //           any existing data, read the{' '}
+    //           <a href="https://docs.docker.com/engine/install/ubuntu/#uninstall-docker-engine" target="_blank">
+    //             uninstall Docker Engine
+    //           </a>{' '}
+    //           section.
+    //         </p>,
+    //       ],
+    //     },
+    //   ],
+    // },
+    {
+      head: 'Download Docker Installer',
+      subItems: [
+        {
+          title: 'Installation Methods',
+          body: (
+            <>
+              <p>You can install Docker Engine in different ways, depending on your needs:</p>
+              <ul>
+                <li>
+                  Docker Engine comes bundled with{' '}
+                  <a href="https://docs.docker.com/desktop/install/linux-install/" target="_blank">
+                    Docker Desktop for Linux
+                  </a>
+                  . This is the easiest and quickest way to get started.
+                </li>
+                <li>
+                  Set up and install Docker Engine from{' '}
+                  <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository" target="_blank">
+                    Docker's <span>apt</span> repository.
+                  </a>
+                </li>
+                <li>
+                  <a href="https://docs.docker.com/engine/install/ubuntu/#install-from-a-package" target="_blank">
+                    Install it manually
+                  </a>{' '}
+                  and manage upgrades manually.
+                </li>
+                <li>
+                  Use a{' '}
+                  <a
+                    href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script"
+                    target="_blank"
+                  >
+                    convenience script
+                  </a>
+                  . Only recommended for testing and development environments.
+                </li>
+              </ul>
+            </>
+          ),
+        },
+        {
+          title: (
+            <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository" target="_blank">
+              Install using the <span>apt</span> repository
+            </a>
+          ),
+          describe: (
+            <p>
+              Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker
+              repository. Afterward, you can install and update Docker from the repository.
+            </p>
+          ),
+          steps: [
+            {
+              title: (
+                <p>
+                  Set up Docker's <span>apt</span> repository.
+                </p>
+              ),
+              commands: [
+                {
+                  command: (
+                    <div className="copy-command-with-color">
+                      <p className="gray-color"># Add Docker's official GPG key:</p>
+                      <p>sudo apt-get update</p>
+                      <p>sudo apt-get install ca-certificates curl</p>
+                      <p>
+                        sudo install -m <span>0755</span> -d /etc/apt/keyrings
+                      </p>
+                      <p>
+                        sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+                      </p>
+                      <p>sudo chmod a+r /etc/apt/keyrings/docker.asc</p>
+                      <p className="copy-command-with-color__gray my-24"># Add the repository to Apt sources:</p>
+                      <p>
+                        <span className="orange-color">echo</span> \<br />
+                        &nbsp;&nbsp; <span className="green-color">"deb [arch=</span>
+                        <span className="orange-color">$(</span>dpkg --print-architecture
+                        <span className="orange-color">)</span>{' '}
+                        <span className="green-color">
+                          signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu
+                        </span>{' '}
+                        \ <span className="orange-color">$(</span>. /etc/os-release <span>&&</span>{' '}
+                        <span className="orange-color">echo</span> "$VERSION_CODENAME"
+                        <span className="orange-color">)</span> <span className="green-color">stable"</span>{' '}
+                        <span className="gray-color">|</span> \<br />
+                        sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+                        <br />
+                        sudo apt-get update
+                      </p>
+                    </div>
+                  ),
+                  copyCommand:
+                    'sudo apt-get update \n sudo apt-get install ca-certificates curl \n sudo install -m 0755 -d /etc/apt/keyrings \n sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \n echo  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \\ \n sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \n sudo apt-get update',
+                },
+              ],
+              alert: {
+                type: IAlertInfo.NOTE,
+                text: (
+                  <p>
+                    If you use an Ubuntu derivative distro, such as Linux Mint, you may need to use{' '}
+                    <span>UBUNTO_CODENAME</span> instead of <span>VERSION_NAME</span>.
+                  </p>
+                ),
+              },
+            },
+            {
+              title: <p>Install the Docker packages.</p>,
+              describe: <p>To install the latest version, run:</p>,
+              commands: [
+                {
+                  command: (
+                    <p>
+                      $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+                      docker-compose-plugin
+                    </p>
+                  ),
+                  copyCommand:
+                    'sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin',
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  Verify that the Docker Engine installation is successful by running the <span>hello-world</span>{' '}
+                  image.
+                </p>
+              ),
+              commands: [
+                {
+                  command: <p>$ sudo docker run hello-world</p>,
+                  copyCommand: 'sudo docker run hello-world',
+                  instruction: (
+                    <p>
+                      This command downloads a test image and runs it in a container. When the container runs, it prints
+                      a confirmation message and exits.
+                    </p>
+                  ),
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      footer: <p>You have now successfully installed and started Docker Engine.</p>,
+    },
+    {
+      head: 'Download the Setup Script',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Linux hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: 'https://download.palomachain.com/lightnode/setup.sh',
+            },
+          ],
+        },
+        {
+          title: <p>After downloading the setup on your Linux, open the Command Line.</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                </p>
+              ),
+              command: <p>sudo sh $HOME/Downloads/setup.sh</p>,
+              copyCommand: 'sudo sh $HOME/Downloads/setup.sh',
+            },
+            {
+              name: (
+                <p>
+                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
+                </p>
+              ),
+              command: <p>sudo sh $HOME/Downloads/setup.sh add-node</p>,
+              copyCommand: 'sudo sh $HOME/Downloads/setup.sh add-node',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -59,7 +59,7 @@
     .active {
       border-radius: 8px;
       background: #d8d3d3;
-      color: #2C2C2C;
+      color: #2c2c2c;
       font-family: $Inter-600;
     }
   }
@@ -87,6 +87,23 @@
       font-size: 16px;
       font-style: normal;
       line-height: 145%; /* 23.2px */
+    }
+
+    span {
+      border-radius: 5px;
+      border: 1px solid #d8d3d3;
+      background: #f5f5f5;
+      padding: 0 10px;
+      color: #1d68be;
+    }
+
+    a {
+      color: #2c2c2c;
+      font-family: $Inter-500;
+      font-size: 16px;
+      font-style: normal;
+      line-height: 180%;
+      text-decoration-line: underline;
     }
 
     .stepDescribe {
@@ -118,19 +135,44 @@
         cursor: pointer;
       }
     }
+    .subItems {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      .subTitle,
+      .subTitle p,
+      .subTitle a {
+        color: #2c2c2c;
+        font-family: $Inter-700;
+        font-size: 18px;
+        font-style: normal;
+        line-height: 145%; /* 26.1px */
+        margin-bottom: 16px;
+      }
+
+      .subBody {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      ul {
+        margin: 0;
+      }
+      ul li {
+        color: #2c2c2c;
+        font-family: $Inter-500;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 180%; /* 28.8px */
+        margin: unset;
+      }
+    }
     .stepItems {
       display: flex;
       flex-direction: column;
       gap: 30px;
       margin-top: 30px;
-
-      span {
-        border-radius: 5px;
-        border: 1px solid #d8d3d3;
-        background: #f5f5f5;
-        padding: 0 10px;
-        color: #1d68be;
-      }
 
       .itemHead {
         display: flex;
@@ -155,6 +197,7 @@
           line-height: 145%; /* 20.3px */
         }
       }
+
       .externalBtns {
         margin-top: 15px;
         display: flex;
@@ -177,6 +220,7 @@
           font-style: normal;
           line-height: 150%; /* 24px */
           letter-spacing: -0.32px;
+          text-decoration-line: none !important;
         }
       }
       .itemDescribe {
@@ -187,7 +231,35 @@
         font-style: italic;
         line-height: 145%; /* 17.4px */
       }
-
+      .itemAlert {
+        background: #f4f9fe;
+        display: flex;
+        flex-direction: row;
+        gap: 35px;
+        margin-top: 16px;
+        .alertBgContent {
+          width: 3px;
+          height: auto;
+          background: #1d68be;
+        }
+        .alertBody {
+          display: flex;
+          flex-direction: column;
+          gap: 13px;
+          margin: 10px 0;
+        }
+        .alertType {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 6px;
+          color: #1d68be;
+          font-family: $Inter-700;
+          font-size: 16px;
+          font-style: normal;
+          line-height: 145%; /* 23.2px */
+        }
+      }
       .itemSteps {
         margin-left: 35px;
         margin-top: 15px;
@@ -198,6 +270,9 @@
       .itemImg {
         margin-top: 20px;
       }
+    }
+    .stepFooter {
+      margin-top: 16px;
     }
   }
 }

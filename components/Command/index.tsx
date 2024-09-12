@@ -8,6 +8,7 @@ interface ICommandWrapper {
   title?: string | JSX.Element;
   command?: string | JSX.Element;
   copyCommand?: string;
+  instruction?: string | JSX.Element;
   isCopyAvailable?: boolean;
   className?: string;
 }
@@ -17,6 +18,7 @@ const Command = ({
   title = 'Copy and Past the command:',
   command,
   copyCommand,
+  instruction,
   isCopyAvailable = true,
   className,
 }: ICommandWrapper) => {
@@ -50,6 +52,7 @@ const Command = ({
           )}
         </div>
       )}
+      {instruction && <div>{instruction}</div>}
     </section>
   );
 };

@@ -569,7 +569,7 @@ const PurchaseFlow = () => {
                 } else {
                   toast.success('Paloma LightNodes successfully purchased');
                   router.push(
-                    `${StaticLink.DOWNLOAD}?type=fiat_with_${
+                    `${StaticLink.INSTRUCTIONS}?type=fiat_with_${
                       selectedChain === ChainID.CREDIT_CARD ? 'credit_card' : 'bank_account'
                     }`,
                   );

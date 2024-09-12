@@ -9,21 +9,42 @@ export interface IPriceTier {
   inputAmount?: number;
 }
 
-export interface IDownloadAndInstallNodeSteps {
+export enum IAlertInfo {
+  WARN = 'Warning',
+  ERROR = 'Error',
+  NOTE = 'Note'
+}
+
+export interface ISteps {
+  title?: string | JSX.Element;
+  describe?: string | JSX.Element;
+  body?: string | JSX.Element;
+  externalBtns?: {
+    text: string;
+    link: string;
+  }[];
+  alert?: {
+    type?: IAlertInfo;
+    text?: string | JSX.Element;
+  };
+  commands?: {
+    name?: string | JSX.Element;
+    command: string | JSX.Element;
+    copyCommand: string;
+    instruction?: string | JSX.Element;
+  }[];
+  img?: JSX.Element;
+}
+
+export interface IInstructionsNodeSteps {
   head: string | JSX.Element;
   describe?: string | JSX.Element;
-  steps?: {
+  steps?: ISteps[];
+  subItems?: {
     title?: string | JSX.Element;
     describe?: string | JSX.Element;
-    externalBtns?: {
-      text: string;
-      link: string;
-    }[];
-    items?: {
-      name: string | JSX.Element;
-      command?: string | JSX.Element;
-      copyCommand?: string;
-    }[];
-    img?: JSX.Element;
+    body?: string | JSX.Element;
+    steps?: ISteps[];
   }[];
+  footer?: string | JSX.Element;
 }

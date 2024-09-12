@@ -45,7 +45,7 @@ const RegisterFlow = () => {
       const callApi = await postRegister({
         email: email,
         username: fullname,
-        redirect: redirect ? (type ? `${redirect}&type=${type}` : redirect) : StaticLink.DOWNLOAD,
+        redirect: redirect ? (type ? `${redirect}&type=${type}` : redirect) : StaticLink.INSTRUCTIONS,
       });
 
       if (!callApi.error) {

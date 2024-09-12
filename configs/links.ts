@@ -5,7 +5,7 @@ enum StaticLink {
   Home = '/',
   PURCHASE = '/purchase',
   REGISTER = '/purchase/register/',
-  DOWNLOAD = '/purchase/download-and-install',
+  INSTRUCTIONS = '/purchase/instructions',
   ACTIVATE = '/purchase/activate',
   LOGIN = '/purchase/login',
   PASSCODE = '/passcode',

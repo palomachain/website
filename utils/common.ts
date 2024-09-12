@@ -15,20 +15,9 @@ export const isValidEmail = (email: string) => {
   else return false;
 };
 
-const validNameRegex = /^[A-zÀ-ÖØ-öø-ÿ]+$/;
+const validNameRegex = /^[A-zÀ-ÖØ-öø-ÿ\s+]+$/;
 export const isValidName = (value: string) => {
-  const val = value.trim();
-  if (val === '') return false;
-  const arr = value.split(' ');
-  if (arr.length < 2 || arr.length > 4) return false;
-  const [firstName, middleName1, middleName2, lastName] = arr;
-
-  return (
-    validNameRegex.test(firstName) &&
-    validNameRegex.test(middleName1) &&
-    (middleName2 ? validNameRegex.test(middleName2) : true) &&
-    (lastName ? validNameRegex.test(lastName) : true)
-  );
+  return validNameRegex.test(value);
 };
 
 const validPromoCodeRegex = /^[a-zA-Z0-9]+$/;

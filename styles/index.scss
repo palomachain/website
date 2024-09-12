@@ -49,3 +49,25 @@ a {
 .ml-2 {
   margin-left: 20px;
 }
+
+.copy-command-with-color {
+  p {
+    font-size: 14px !important;
+    font-family: $Inter-400 !important;
+  }
+  .my-24 {
+    margin-top: 24px;
+  }
+  span {
+    text-decoration-line: none !important;
+  }
+  .gray-color {
+    color: #b4b0b0 !important;
+  }
+  .orange-color {
+    color: #f5841f !important;
+  }
+  .green-color {
+    color: #5fbe91 !important;
+  }
+}

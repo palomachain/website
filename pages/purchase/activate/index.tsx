@@ -2,19 +2,20 @@ import classNames from 'classnames';
 import Button from 'components/Button';
 import Command from 'components/Command';
 import { purchaseSupportedNetworks, USER_ACCESS_TOKEN } from 'configs/constants';
+import { StaticLink } from 'configs/links';
 import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
+import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
+import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLazyGetIsUsedPalomaAddressQuery, usePostActiveWalletMutation } from 'services/api/nodesale';
+import { ActivateInstructionsSteps, SupportSystems } from 'utils/data';
 import { parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
 
 import style from './activate.module.scss';
-import useCookie from 'hooks/useCookie';
-import { useRouter } from 'next/router';
-import { StaticLink } from 'configs/links';
 
 const STEPS = {
   CONNECT_WALLET: 1,
@@ -22,15 +23,6 @@ const STEPS = {
   ALREADY_USED_PALOMA: 3,
   ACTIVATED: 4,
   TERMINAL: 5,
-};
-
-const shCommand = {
-  command: (
-    <p>
-      sh $HOME/Downloads/setup.sh <span>activate</span>
-    </p>
-  ),
-  copyCommand: 'sh $HOME/Downloads/setup.sh activate',
 };
 
 const Activate = () => {
@@ -55,6 +47,14 @@ const Activate = () => {
 
   const [palomaAddress, setPalomaAddress] = useState<string>();
   const [activating, setActivating] = useState(false);
+
+  const [currentTab, setCurrentTab] = useState(SupportSystems.Mac);
+
+  const onChangeTab = (tab: string) => {
+    if (tab !== currentTab) {
+      setCurrentTab(tab);
+    }
+  };
 
   const handleChooseMetamask = async () => {
     if (!loadingMetamask) {
@@ -266,13 +266,35 @@ const Activate = () => {
         {steps === STEPS.TERMINAL && (
           <>
             <h1>Return to your Light Node</h1>
-            <div className={style.terminal}>
-              <div className={style.terminal__round}>1</div>
-              <div className={style.terminal__item}>
-                <p>After activating your LightNode, open the Terminal application found in the Utilities folder.</p>
-                <Command command={shCommand.command} copyCommand={shCommand.copyCommand} />
-              </div>
+            <div className={style.tabs}>
+              {Object.values(SupportSystems).map((system, index) => (
+                <div
+                  key={index}
+                  onClick={() => onChangeTab(system)}
+                  className={classNames(style.tab, currentTab === system ? style.active : undefined)}
+                >
+                  {system}
+                </div>
+              ))}
             </div>
+            {ActivateInstructionsSteps[currentTab].map((step, index) => (
+              <div className={style.terminal}>
+                <div className={style.terminal__round}>{index + 1}</div>
+                <div className={style.terminal__item}>
+                  <p>{step.title}</p>
+                  {step.commands.map((item, index) => (
+                    <Command
+                      key={index}
+                      step={String.fromCharCode(97 + index)}
+                      title={item.name}
+                      command={item.command}
+                      copyCommand={item.copyCommand}
+                      instruction={item.instruction}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
           </>
         )}
       </div>

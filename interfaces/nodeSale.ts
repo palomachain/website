@@ -12,7 +12,7 @@ export interface IPriceTier {
 export enum IAlertInfo {
   WARN = 'Warning',
   ERROR = 'Error',
-  NOTE = 'Note'
+  NOTE = 'Note',
 }
 
 export interface ISteps {
@@ -47,4 +47,12 @@ export interface IInstructionsNodeSteps {
     steps?: ISteps[];
   }[];
   footer?: string | JSX.Element;
+}
+
+export interface IBonusBalance {
+  chainId: number | string;
+  amount: {
+    raw: string;
+    format: string;
+  }
 }

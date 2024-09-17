@@ -44,10 +44,9 @@ const Login = () => {
   };
 
   const onClickLogin = async () => {
-    if (!loadingLogin && isValidEmail(email) && !notRegistered) {
+    if (!loadingLogin && isValidEmail(email)) {
       try {
         setLoadingLogin(true);
-
         const result = await postLogin({
           email,
           redirect: redirect ? (type ? `${redirect}&type=${type}_login` : redirect) : StaticLink.ACTIVATE,

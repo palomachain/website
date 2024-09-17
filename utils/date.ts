@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function GetRemainDays(currentTime, endTime) {
   const remainTime = endTime - currentTime;
 
@@ -18,8 +20,8 @@ export function GetRemainDays(currentTime, endTime) {
   };
 }
 
-export const delay = (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+export const delay = async (ms) => {
+  return await new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 const dateOptions = {
@@ -74,6 +76,15 @@ export const convertTimeString = (dateStr, toLocal = false) => {
   } else {
     return date.toLocaleDateString('en-US', timeOptions).split(',')[1].trim();
   }
+};
+
+export const convertTime = (timestamp: string | number) => {
+  // const date = new Date(timestamp).toLocaleDateString();
+  // const time = new Date(timestamp).toLocaleTimeString();
+  // return date + ' ' + time;
+
+  const date = new Date(timestamp);
+  return moment(date).utc().format('YY-MM-DD H:mm:ss');
 };
 
 export const getHourOffsetLocalTimezone = () => {

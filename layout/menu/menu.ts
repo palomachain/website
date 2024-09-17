@@ -1,3 +1,4 @@
+import { StaticLink } from 'configs/links';
 import { TELEGRAM_LINK, TWITTER_LINK, GITHUB_LINK, DISCORD_LINK, PALOMABOT_WEBSITE_LINK } from 'utils/constants';
 
 const baseUrl = process.env.BASE_URL;
@@ -127,6 +128,18 @@ const navMenu = [
     hasLink: true,
     link: 'https://forum.palomachain.com/',
     external: true,
+  },
+  {
+    title: 'LIGHTNode',
+    hasLink: true,
+    link: `${baseUrl}${StaticLink.Home}/`,
+    external: false,
+  },
+  {
+    title: 'Log In',
+    hasLink: true,
+    link: `${baseUrl}${StaticLink.LOGIN}?type=board&redirect=${StaticLink.BUYMOREBOARD}`,
+    external: false,
   },
 ];
 

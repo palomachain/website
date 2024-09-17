@@ -1,14 +1,13 @@
-import React from 'react';
 import Head from 'next/head';
-import { isMobile } from 'react-device-detect';
-
-import LayoutHeader from './header';
+import React from 'react';
 import Footer from './footer';
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import LayoutHeader from './header';
+import { StaticLink } from 'configs/links';
+import BoardHeader from './boardHeader';
 
 export default function Layout({ children, router }) {
+  const windowUrl = window.location.pathname;
+
   return (
     <>
       <Head>
@@ -19,7 +18,11 @@ export default function Layout({ children, router }) {
 
       <main className="layout-container">
         <a id="back-to-top-anchor" href="/" />
-        <LayoutHeader router={router} />
+        {windowUrl.toLowerCase().includes(StaticLink.BUYMOREBOARD) ? (
+          <BoardHeader />
+        ) : (
+          <LayoutHeader router={router} />
+        )}
         {React.cloneElement(children, {
           router,
         })}

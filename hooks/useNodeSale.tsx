@@ -10,6 +10,9 @@ import React from 'react';
 import { errorMessage } from 'utils/errorMessage';
 import { parseIntString } from 'utils/string';
 import useToken from './useToken';
+import balanceTool from 'utils/balance';
+import { delay } from 'utils/date';
+import { IBonusBalance } from 'interfaces/nodeSale';
 
 const useNodeSale = ({ provider, wallet }) => {
   const { tokenApprove } = useToken({ provider });
@@ -95,6 +98,41 @@ const useNodeSale = ({ provider, wallet }) => {
     } catch (error) {
       console.error(error);
       return '';
+    }
+  };
+
+  const getBonusAmount = async (address: string) => {
+    try {
+      let amount: IBonusBalance[] = [];
+
+      await Promise.all(
+        // TODO: Not Base chain
+        [1, 10, 56, 137, 42161].map(async (chain) => {
+          const nodesaleAddress = Addresses[chain].node_sale;
+          const balance = await readContract({
+            address: nodesaleAddress,
+            abi: nodesaleContractAbi,
+            functionName: 'claimable',
+            chainId: chain,
+            args: [address],
+          });
+
+          if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
+            amount.push({
+              chainId: chain,
+              amount: {
+                raw: balance.toString(),
+                format: balanceTool.convertFromWei(balance.toString(), 4, chain === 56 ? 18 : 6),
+              },
+            });
+          }
+        }),
+      );
+
+      return amount;
+    } catch (error) {
+      console.error(error);
+      return [];
     }
   };
 
@@ -284,6 +322,7 @@ const useNodeSale = ({ provider, wallet }) => {
     getSubscriptionFeeAmount,
     getSlippageFeePercent,
     getActivate,
+    getBonusAmount,
     activateWallet,
     buyNow,
   };

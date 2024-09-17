@@ -74,6 +74,7 @@ const DEADLINE = 5; // 5 MIN
 
 const USER_ACCESS_TOKEN = 'user_access_token';
 const PURCHASE_INFO = 'my_purchase_info';
+const PURCHASED_WALLET = 'my_recent_token_purchased_wallet';
 
 export {
   AddNetwork,
@@ -85,4 +86,5 @@ export {
   envParam,
   USER_ACCESS_TOKEN,
   PURCHASE_INFO,
+  PURCHASED_WALLET,
 };

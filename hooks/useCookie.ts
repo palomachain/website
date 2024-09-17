@@ -85,6 +85,8 @@ const useCookie = () => {
         const userData = JSON.parse(storedData);
         const expireTime = new Date(userData['expiresTime']).getTime();
         if (expireTime > Date.now()) return { data: userData['data'] };
+      } else {
+        return { error: 'Please log in first.' };
       }
       return { error: 'Expired your token. Please try again.' };
     } catch (error) {

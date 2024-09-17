@@ -1,12 +1,17 @@
-import { USER_ACCESS_TOKEN } from 'configs/constants';
+import { PURCHASED_WALLET, USER_ACCESS_TOKEN } from 'configs/constants';
 import { StaticLink } from 'configs/links';
 import useCookie from 'hooks/useCookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { useLazyGetLoginConfirmationQuery, useLazyGetRegisterConfirmationQuery } from 'services/api/nodesale';
+import {
+  useLazyGetLoginConfirmationQuery,
+  useLazyGetRegisterConfirmationQuery,
+  usePostAddAddrMutation,
+} from 'services/api/nodesale';
 
 import style from './confirmation.module.scss';
+import { checksumAddress } from 'utils/string';
 
 const Confirmation = () => {
   const router = useRouter();
@@ -16,9 +21,10 @@ const Confirmation = () => {
   const redirect = params.get('redirect');
   const type = params.get('type');
 
-  const { storeData } = useCookie();
+  const { getStoredData, storeData } = useCookie();
   const [getRegisterConfirmation] = useLazyGetRegisterConfirmationQuery();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
+  const [postAddAddr] = usePostAddAddrMutation();
 
   useEffect(() => {
     if (token) {
@@ -28,6 +34,10 @@ const Confirmation = () => {
           ? await getRegisterConfirmation({ token: token })
           : await getLoginConfirmation({ token: token });
         if (confirmResult.isSuccess) {
+          const purchasedWallet = await getStoredData(PURCHASED_WALLET);
+          if (purchasedWallet.data) {
+            await postAddAddr({ addr: checksumAddress(purchasedWallet.data), token });
+          }
           // Store user access token to cookie
           await storeData(USER_ACCESS_TOKEN, token);
 

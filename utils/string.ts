@@ -1,6 +1,7 @@
 import { fromBech32, fromHex, toBech32, toHex } from '@cosmjs/encoding';
 import { ChainID } from 'configs/chains';
 import { VETH_ADDRESS, ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
+import { ethers } from 'ethers';
 
 export function shorten(val, len = 18) {
   const prior = Math.floor(len * 0.7);
@@ -91,4 +92,32 @@ export function shortenString(val: string, prior = 6, suffix = 4) {
 
 export function isFiat(chain: string) {
   return parseIntString(chain) === ChainID.BANK_ACCOUNT || parseIntString(chain) === ChainID.CREDIT_CARD;
+}
+
+export function checksumAddress(address: string) {
+  return ethers.utils.getAddress(address);
+}
+
+export function randomString(length = 4) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // Loop to generate characters for the specified length
+  for (let i = 0; i < length; i++) {
+    const randomInd = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomInd);
+  }
+  return result;
+}
+
+export function randomNumber(length = 4) {
+  let result = '';
+  const characters = '0123456789';
+
+  // Loop to generate characters for the specified length
+  for (let i = 0; i < length; i++) {
+    const randomInd = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomInd);
+  }
+  return result;
 }

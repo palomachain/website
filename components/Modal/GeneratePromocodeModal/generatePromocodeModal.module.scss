@@ -1,0 +1,144 @@
+@import '/styles/libraries/global';
+
+.confirmModal {
+  width: 509px;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  margin: 0px;
+  padding: 0px !important;
+  position: relative;
+
+  h3,
+  p {
+    margin: 0;
+  }
+  .closeIcon {
+    width: 27px;
+    height: 27px;
+    border-radius: 3.763px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 17px;
+    top: 10px;
+    cursor: pointer;
+    img {
+      width: 13px;
+      height: 13px;
+    }
+  }
+  .backgroundImg {
+    width: 100%;
+  }
+  .confirmBody {
+    margin: 52px 46px;
+    .title {
+      background: linear-gradient(90deg, #ff62c4 0%, #82205d 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      font-family: $Inter-700;
+      font-size: 32px;
+      font-style: normal;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    .text {
+      color: #5a5a5a;
+      font-family: $Inter-500;
+      font-size: 16px;
+      font-style: normal;
+      line-height: normal;
+      text-transform: lowercase;
+      margin-top: 20px;
+    }
+
+    input {
+      border-radius: 8px;
+      border: 1px solid #d8d3d3;
+      background: #fdfdfd;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      margin-top: 20px;
+      color: #a5a4a4;
+      text-align: center;
+      font-family: $Inter-500;
+      font-size: 30px;
+      font-style: normal;
+      line-height: 150%; /* 45px */
+      letter-spacing: -0.9px;
+    }
+
+    .clickAgain {
+      border-radius: 8px;
+      background: #2c2c2c;
+      height: 52px;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      font-family: $Inter-700;
+      font-size: 16px;
+      font-style: normal;
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .promocodeCopy {
+      border-radius: 8px;
+      border: 1px solid #d8d3d3;
+      background: #fdfdfd;
+      height: 65px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3px;
+      margin-top: 20px;
+
+      p {
+        color: #2c2c2c;
+        text-align: center;
+        font-family: $Inter-700;
+        font-size: 30px;
+        font-style: normal;
+        line-height: 150%; /* 45px */
+        letter-spacing: -0.9px;
+        margin: auto;
+      }
+      .copyBtn {
+        border-radius: var(--8, 8px);
+        background: #2c2c2c;
+        height: 58px;
+        width: 106px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        font-family: $Inter-700;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 150%; /* 24px */
+        letter-spacing: -0.32px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.contentClassName {
+  align-items: center !important;
+}

@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { StaticLink } from 'configs/links';
 import { useOutsideAlerter } from 'hooks';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -34,7 +35,7 @@ const LayoutHeader = ({ router }) => {
       <React.Fragment>
         {menu.hasLink && menu.external && (
           <div onClick={() => setShowSubMenu(-1)}>
-            <a href={menu.link} className="header-button" target="_blank">
+            <a href={menu.link === '//' ? StaticLink.Home : menu.link} className="header-button" target="_blank">
               <span>{menu.title}</span>
               {'submenus' in menu && <img src="/assets/arrows/arrow-down-black.png" />}
             </a>
@@ -42,7 +43,7 @@ const LayoutHeader = ({ router }) => {
         )}
         {menu.hasLink && !menu.external && (
           <div onClick={() => setShowSubMenu(-1)}>
-            <Link href={menu.link}>
+            <Link href={menu.link === '//' ? StaticLink.Home : menu.link}>
               <div
                 className={cn('header-button', {
                   active: curLink.includes(menu.link),

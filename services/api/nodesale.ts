@@ -56,6 +56,24 @@ const injectedRtkApi = api.injectEndpoints({
         params: queryArg,
       }),
     }),
+    getPromocodeStatus: build.query<GetNodeSaleApiResponse, GetApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/promocodestatus`,
+        params: queryArg,
+      }),
+    }),
+    getStatus: build.query<GetNodeSaleApiResponse, GetEVMApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/status`,
+        params: queryArg,
+      }),
+    }),
+    getBalances: build.query<GetNodeSaleApiResponse, GetBalances>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/balances`,
+        params: queryArg,
+      }),
+    }),
     postRegister: build.mutation<PostApiResponse, PostRegisterApiArg>({
       query: (queryArg) => ({
         url: `${nodesaleApiUrl}/register`,
@@ -87,6 +105,20 @@ const injectedRtkApi = api.injectEndpoints({
     postPayForToken: build.mutation<PostApiResponse, PostPayForTokenApiArg>({
       query: (queryArg) => ({
         url: `${nodesaleApiUrl}/payfortoken`,
+        method: 'POST',
+        body: queryArg,
+      }),
+    }),
+    postAddAddr: build.mutation<PostApiResponse, PostAddAddrApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/addaddr`,
+        method: 'POST',
+        body: queryArg,
+      }),
+    }),
+    postCreatePromocode: build.mutation<PostApiResponse, PostCreatePromocodeApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/createpromocode`,
         method: 'POST',
         body: queryArg,
       }),
@@ -136,11 +168,28 @@ export type PostPayForTokenApiArg = {
   enhanced: boolean;
   subscription_month: number;
 };
+export type PostAddAddrApiArg = {
+  addr: string;
+  token: string;
+};
+export type PostCreatePromocodeApiArg = {
+  promocode: string;
+  token: string;
+};
 export type GetConfirmationApiArg = {
   token: string;
 };
 export type GetIsUsedPalomaAddressApiArg = {
   paloma: string;
+};
+export type GetApiArg = {
+  token?: string;
+};
+export type GetEVMApiArg = {
+  buyer: string; // EVM address
+};
+export type GetBalances = {
+  addresses: string[];
 };
 
 export const {
@@ -154,9 +203,14 @@ export const {
   useLazyGetIsUsedPalomaAddressQuery,
   useLazyGetLoginConfirmationQuery,
   useLazyGetWalletQuery,
+  useLazyGetPromocodeStatusQuery,
+  useLazyGetStatusQuery,
+  useLazyGetBalancesQuery,
   usePostRegisterMutation,
   usePostLoginMutation,
   usePostActiveWalletMutation,
   usePostCreateBotMutation,
   usePostPayForTokenMutation,
+  usePostAddAddrMutation,
+  usePostCreatePromocodeMutation,
 } = injectedRtkApi;

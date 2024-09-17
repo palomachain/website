@@ -7,6 +7,7 @@ import { allChains, ChainID } from 'configs/chains';
 import {
   DEADLINE,
   PURCHASE_INFO,
+  PURCHASED_WALLET,
   purchaseSupportedNetworks,
   SLIPPAGE_PERCENTAGE,
   USER_ACCESS_TOKEN,
@@ -34,6 +35,7 @@ import {
   useLazyGetPriceTiersQuery,
   useLazyGetTotalPurchasedQuery,
   useLazyGetWalletQuery,
+  usePostAddAddrMutation,
   usePostCreateBotMutation,
   usePostPayForTokenMutation,
 } from 'services/api/nodesale';
@@ -47,10 +49,11 @@ import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
 import mockTool from 'utils/mock';
 import { abbreviateNumberSI, formatNumber } from 'utils/number';
-import { isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
+import { checksumAddress, isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import PurchaseWithFiatButton from './PurchaseButton/PurchaseWithFiatButton';
 import TotalPay from './TotalPay';
+import { delay } from 'utils/date';
 
 const PurchaseFlow = () => {
   const { wallet } = useWallet();
@@ -75,6 +78,7 @@ const PurchaseFlow = () => {
   const [postCreateBot] = usePostCreateBotMutation();
   const [postPayForToken] = usePostPayForTokenMutation();
   const { getTokenBalance } = useToken({ provider });
+  const [postAddAddr] = usePostAddAddrMutation();
 
   const {
     getProcessingFeeAmount,
@@ -583,18 +587,17 @@ const PurchaseFlow = () => {
 
               const createBotResult = await postCreateBot({ token: token?.data });
               if (createBotResult) {
-                // setFiatWallet(createBotResult);
                 if (createBotResult['wallet_address']) {
-                  setFiatWallet(createBotResult['wallet_address']);
                   myFiatWallet = createBotResult['wallet_address'];
                 } else {
+                  await delay(1000); // delay 1s
+
                   const getUserFiatWallet = await getUserWalletForFiat({ token: token.data });
                   if (
                     getUserFiatWallet.isSuccess &&
                     getUserFiatWallet.data &&
                     getUserFiatWallet.data['wallet_address']
                   ) {
-                    setFiatWallet(getUserFiatWallet.data['wallet_address']);
                     myFiatWallet = getUserFiatWallet.data['wallet_address'];
                   }
                 }
@@ -603,6 +606,7 @@ const PurchaseFlow = () => {
                 setGeneratingWallet(false);
                 return;
               }
+              setFiatWallet(myFiatWallet);
               setGeneratingWallet(false);
 
               openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
@@ -648,6 +652,13 @@ const PurchaseFlow = () => {
             callbackWaiting,
             stringToHex(appliedPromoCode),
           );
+          // Store the my wallet address
+          const token = await getStoredData(USER_ACCESS_TOKEN);
+          if (token.data) {
+            await postAddAddr({ addr: checksumAddress(wallet.account), token: token.data });
+          } else {
+            await storeData(PURCHASED_WALLET, checksumAddress(wallet.account));
+          }
         }
       } catch (e) {
         console.log(e);

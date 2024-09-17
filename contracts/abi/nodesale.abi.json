@@ -79,11 +79,7 @@
       { "name": "token_in", "type": "address", "indexed": false },
       { "name": "fund_usd_amount", "type": "uint256", "indexed": false },
       { "name": "fee_usd_amount", "type": "uint256", "indexed": false },
-      {
-        "name": "subscription_usd_amount",
-        "type": "uint256",
-        "indexed": false
-      },
+      { "name": "subscription_usd_amount", "type": "uint256", "indexed": false },
       { "name": "slippage_fee_amount", "type": "uint256", "indexed": false },
       { "name": "node_count", "type": "uint256", "indexed": false },
       { "name": "promo_code", "type": "bytes32", "indexed": false }
@@ -94,16 +90,8 @@
   {
     "name": "ReferralRewardPercentagesChanged",
     "inputs": [
-      {
-        "name": "referral_discount_percentage",
-        "type": "uint256",
-        "indexed": false
-      },
-      {
-        "name": "referral_reward_percentage",
-        "type": "uint256",
-        "indexed": false
-      },
+      { "name": "referral_discount_percentage", "type": "uint256", "indexed": false },
+      { "name": "referral_reward_percentage", "type": "uint256", "indexed": false },
       { "name": "slippage_fee_percentage", "type": "uint256", "indexed": false }
     ],
     "anonymous": false,
@@ -152,6 +140,18 @@
     "type": "event"
   },
   {
+    "name": "PalomaAddressSynced",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "PalomaAddressUpdated",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
     "stateMutability": "nonpayable",
     "type": "function",
     "name": "activate_wallet",
@@ -188,11 +188,19 @@
   {
     "stateMutability": "nonpayable",
     "type": "function",
+    "name": "refund_pending_amount",
+    "inputs": [{ "name": "_to", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
     "name": "node_sale",
     "inputs": [
       { "name": "_to", "type": "address" },
       { "name": "_count", "type": "uint256" },
-      { "name": "_nonce", "type": "uint256" }
+      { "name": "_nonce", "type": "uint256" },
+      { "name": "_paloma", "type": "bytes32" }
     ],
     "outputs": []
   },
@@ -203,8 +211,23 @@
     "inputs": [
       { "name": "_to", "type": "address" },
       { "name": "_count", "type": "uint256" },
-      { "name": "_nonce", "type": "uint256" }
+      { "name": "_nonce", "type": "uint256" },
+      { "name": "_paloma", "type": "bytes32" }
     ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_paloma_history",
+    "inputs": [{ "name": "_to", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "sync_paloma_history",
+    "inputs": [{ "name": "_paloma", "type": "bytes32" }],
     "outputs": []
   },
   {
@@ -237,13 +260,7 @@
     ],
     "outputs": []
   },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "claim",
-    "inputs": [],
-    "outputs": []
-  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "claim", "inputs": [], "outputs": [] },
   {
     "stateMutability": "nonpayable",
     "type": "function",
@@ -258,13 +275,7 @@
     "inputs": [{ "name": "_new_funds_receiver", "type": "address" }],
     "outputs": []
   },
-  {
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "name": "set_paloma",
-    "inputs": [],
-    "outputs": []
-  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "set_paloma", "inputs": [], "outputs": [] },
   {
     "stateMutability": "nonpayable",
     "type": "function",
@@ -440,6 +451,13 @@
   {
     "stateMutability": "view",
     "type": "function",
+    "name": "paloma_history",
+    "inputs": [{ "name": "arg0", "type": "bytes32" }],
+    "outputs": [{ "name": "", "type": "bool" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
     "name": "promo_codes",
     "inputs": [{ "name": "arg0", "type": "bytes32" }],
     "outputs": [
@@ -465,6 +483,23 @@
     "type": "function",
     "name": "claimable",
     "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "pendingRecipient",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "pending",
+    "inputs": [
+      { "name": "arg0", "type": "address" },
+      { "name": "arg1", "type": "address" }
+    ],
     "outputs": [{ "name": "", "type": "uint256" }]
   },
   {

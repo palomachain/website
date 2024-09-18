@@ -13,6 +13,8 @@ import useToken from './useToken';
 import balanceTool from 'utils/balance';
 import { delay } from 'utils/date';
 import { IBonusBalance } from 'interfaces/nodeSale';
+import { purchaseSupportedNetworks } from 'configs/constants';
+import { formatNumber } from 'utils/number';
 
 const useNodeSale = ({ provider, wallet }) => {
   const { tokenApprove } = useToken({ provider });
@@ -316,6 +318,88 @@ const useNodeSale = ({ provider, wallet }) => {
     }
   };
 
+  const claimBonus = async (bonus: IBonusBalance, onError = (res) => {}, onWait = (res) => {}) => {
+    try {
+      if (!provider) return;
+      // If WalletConnect
+      await provider.send('eth_requestAccounts', []);
+      const signer = provider.getSigner();
+
+      // Almost never return exponential notation:
+      BigNumber.config({ EXPONENTIAL_AT: 1e9 });
+
+      onWait({
+        txTitle: 'Waiting for Claiming referral Bonus Confirmation',
+        txText: (
+          <span>
+            Claim{' '}
+            <span style={{ textDecoration: 'underline' }}>
+              {formatNumber(bonus.amount.format, 0, 2)} USDC on {purchaseSupportedNetworks[bonus.chainId.toString()]}{' '}
+              Network
+            </span>
+          </span>
+        ),
+      });
+
+      const factoryAddress = Addresses[bonus.chainId.toString()].node_sale;
+      if (!factoryAddress) return;
+
+      const factoryContract = new ethers.Contract(factoryAddress, nodesaleContractAbi, signer);
+      let depositEstimateGas = await factoryContract.estimateGas.claim();
+      console.log('Estimating gas...', depositEstimateGas.toString());
+
+      let txHash;
+      console.log('Preparing transaction hash...');
+      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
+
+        const { hash } = await factoryContract.claim({
+          gasLimit: depositEstimateGas,
+        });
+        txHash = hash;
+      } else {
+        const { request } = await prepareWriteContract({
+          address: factoryAddress,
+          abi: nodesaleContractAbi,
+          functionName: 'claim',
+          account: wallet.account,
+          chainId: Number(bonus.chainId),
+        });
+        console.log('Preparing deposit function...');
+        const { hash } = await writeContract(request);
+        txHash = hash;
+      }
+      console.log('Deposit hash', txHash);
+
+      onWait({
+        txTitle: 'Processing Transaction...',
+        txText: (
+          <p>
+            Claiming Referral Bonus:{' '}
+            <span style={{ textDecoration: 'underline' }}>{formatNumber(bonus.amount.format, 0, 2)} USDC</span> on{' '}
+            {purchaseSupportedNetworks[bonus.chainId.toString()]} Network
+          </p>
+        ),
+        txHash: '',
+        txProcessing: true,
+      });
+
+      if (txHash) {
+        if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+          await provider.waitForTransaction(txHash);
+        } else {
+          // WalletConnect
+          await waitForTransaction({ hash: txHash });
+        }
+      }
+
+      return Number(bonus.amount.format);
+    } catch (error) {
+      console.error(error);
+      return 0;
+    }
+  };
+
   return {
     getDiscountPercentForPromo,
     getProcessingFeeAmount,
@@ -325,6 +409,7 @@ const useNodeSale = ({ provider, wallet }) => {
     getBonusAmount,
     activateWallet,
     buyNow,
+    claimBonus,
   };
 };
 

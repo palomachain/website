@@ -8,6 +8,8 @@ export const errorMessage = (e: any) => {
     return 'Transaction is rejected by user.';
   } else if (message?.includes('already processing eth')) {
     return 'Already processing your wallet. Please check.';
+  } else if (message?.includes('already used')) {
+    return 'Already activated. Please refresh the website.';
   } else {
     return message;
   }

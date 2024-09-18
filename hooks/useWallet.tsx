@@ -26,7 +26,7 @@ type WalletContextType = {
   disconnectWallet: () => void;
   openConnectionModal: () => void;
   handleConnectMetamask: () => void;
-  requestSwitchNetwork: (chainId: number | string, isMetaMask?: boolean) => Promise<boolean>;
+  requestSwitchNetwork: (chainId: string, isMetaMask?: boolean) => Promise<boolean>;
   requestAddNetwork: (chainId: number | string) => void;
   networkSelect: (defaultChain: number | string, supportChains: object) => Promise<boolean>;
   error: Error | null;

@@ -88,6 +88,8 @@ const BuyMoreBoard = () => {
 
     const promocode = await getPromocodeStatus({ token });
     if (promocode.isSuccess) {
+      setBonusLoading(true);
+
       const info = promocode.data[0];
       setMyAccount({
         email: info['email'],
@@ -102,7 +104,6 @@ const BuyMoreBoard = () => {
 
   useEffect(() => {
     if (!myAccountLoading) {
-      // TODO status === 1
       if (myAccount.promo_code && myAccount.status === 1 && myAccount.wallet_address) {
         setBonusLoading(true);
 
@@ -112,6 +113,8 @@ const BuyMoreBoard = () => {
           setBonusLoading(false);
         };
         getBalance();
+      } else {
+        setBonusLoading(false);
       }
     }
   }, [myAccountLoading, myAccount]);
@@ -127,7 +130,7 @@ const BuyMoreBoard = () => {
       const apiCall = async () => {
         setDataLoading(true);
         // TODO
-        const status = await getStatus({ buyer: checksumAddress(wallet.account) });
+        const status = await getStatus({ buyer: checksumAddress('0x83334ef0c6f6396413c508a7762741e9fd8b20e9') });
         if (status.isSuccess) {
           setMyPurchaseStatus(status.data);
         }
@@ -216,6 +219,7 @@ const BuyMoreBoard = () => {
   const closeCode = async (generated = false) => {
     setOpenGeneratePromocodeModal(false);
     if (generated) {
+      setBonusLoading(true);
       await fetchMyAccount();
     }
   };
@@ -231,9 +235,8 @@ const BuyMoreBoard = () => {
 
   const onClickActive = (index: number) => {
     if (index === 0 || (index > 0 && myPurchaseStatus[index - 1]['status'] >= 2)) {
-
     }
-  }
+  };
 
   return (
     <div>
@@ -339,7 +342,11 @@ const BuyMoreBoard = () => {
                       <td>{shortenString(purchase['buyer'], 6, 6)}</td>
                       <td>{formatNumber(purchase['grain_amount'], 0, 2)}</td>
                       <td className={style.activeButton}>
-                        {+purchase['status'] < 2 ? <button onClick={() => onClickActive(index)}>Active</button> : 'Mining'}
+                        {+purchase['status'] < 2 ? (
+                          <button onClick={() => onClickActive(index)}>Active</button>
+                        ) : (
+                          'Mining'
+                        )}
                       </td>
                     </tr>
                   ))

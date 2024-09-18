@@ -111,6 +111,8 @@ const Activate = () => {
 
   const onClickActivate = async () => {
     if (activating) return;
+    if (!isValidPalomaWallet) return;
+
     try {
       setActivating(true);
 

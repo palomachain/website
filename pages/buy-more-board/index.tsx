@@ -1,29 +1,32 @@
+import BigNumber from 'bignumber.js';
+import classNames from 'classnames';
 import Purchase from 'components/Button/purchase';
+import GeneratePromocodeModal from 'components/Modal/GeneratePromocodeModal';
+import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
+import SuccessClaimModal from 'components/Modal/SuccessModal/SuccessClaimModal';
 import { USER_ACCESS_TOKEN } from 'configs/constants';
-import { StaticLink } from 'configs/links';
+import { getTxHashLink, StaticLink } from 'configs/links';
 import useCookie from 'hooks/useCookie';
+import useNodeSale from 'hooks/useNodeSale';
+import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
+import { IBonusBalance } from 'interfaces/nodeSale';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   useLazyGetBalancesQuery,
   useLazyGetLoginConfirmationQuery,
   useLazyGetPromocodeStatusQuery,
   useLazyGetStatusQuery,
 } from 'services/api/nodesale';
-import { checksumAddress } from 'viem';
-import { hexToStringWithBech, shortenString } from 'utils/string';
-
-import style from './buyMoreBoard.module.scss';
-import classNames from 'classnames';
+import balanceTool from 'utils/balance';
 import { convertTime } from 'utils/date';
 import { formatNumber } from 'utils/number';
-import BigNumber from 'bignumber.js';
-import balanceTool from 'utils/balance';
-import GeneratePromocodeModal from 'components/Modal/GeneratePromocodeModal';
-import useNodeSale from 'hooks/useNodeSale';
-import useProvider from 'hooks/useProvider';
-import { IBonusBalance } from 'interfaces/nodeSale';
+import { hexToStringWithBech, shortenString } from 'utils/string';
+import { checksumAddress } from 'viem';
+
+import style from './buyMoreBoard.module.scss';
 
 // Matched with /status backend api
 const chainID = {
@@ -36,14 +39,14 @@ const chainID = {
 };
 
 const BuyMoreBoard = () => {
-  const { wallet } = useWallet();
+  const { wallet, openConnectionModal, requestSwitchNetwork } = useWallet();
   const provider = useProvider(wallet);
   const { getStoredData } = useCookie();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
   const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
   const [getStatus] = useLazyGetStatusQuery();
   const [getBalances] = useLazyGetBalancesQuery();
-  const { getBonusAmount } = useNodeSale({ wallet, provider });
+  const { getBonusAmount, activateWallet, claimBonus } = useNodeSale({ wallet, provider });
   const router = useRouter();
 
   const [pageLoading, setPageLoading] = useState(true);
@@ -66,6 +69,15 @@ const BuyMoreBoard = () => {
   const [bonusAmount, setBonusAmount] = useState<IBonusBalance[]>();
   const [openGeneratePromocodeModal, setOpenGeneratePromocodeModal] = useState(false);
   const [copyPromocode, setCopyPromocode] = useState(false);
+  const [loadingIndex, setLoadingIndex] = useState<number>(-1);
+
+  const [loadingClaim, setLoadingClaim] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [pendingTxHash, setPendingTxHash] = useState('');
+  const [pendingModalTitle, setPendingModalTitle] = useState('');
+  const [pendingModalText, setPendingModalText] = useState('');
+  const [pendingModalProcess, setPendingModalProcess] = useState(false);
+  const [claimedAmount, setClaimedAmount] = useState<number>();
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -83,6 +95,12 @@ const BuyMoreBoard = () => {
     };
     checkLogin();
   }, []);
+
+  useEffect(() => {
+    if (token && (!wallet || !wallet.account)) {
+      openConnectionModal();
+    }
+  }, [wallet, token]);
 
   const fetchMyAccount = async () => {
     setMyAccountLoading(true);
@@ -103,17 +121,23 @@ const BuyMoreBoard = () => {
     setMyAccountLoading(false);
   };
 
+  const fetchingBonusAmount = async () => {
+    try {
+      setBonusLoading(true);
+
+      const balance = await getBonusAmount(myAccount.wallet_address);
+      setBonusAmount(balance);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setBonusLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (!myAccountLoading) {
       if (myAccount.promo_code && myAccount.status === 1 && myAccount.wallet_address) {
-        setBonusLoading(true);
-
-        const getBalance = async () => {
-          const balance = await getBonusAmount(myAccount.wallet_address);
-          setBonusAmount(balance);
-          setBonusLoading(false);
-        };
-        getBalance();
+        fetchingBonusAmount();
       } else {
         setBonusLoading(false);
       }
@@ -126,17 +150,29 @@ const BuyMoreBoard = () => {
     }
   }, [token]);
 
+  const getMyPurchaseStatus = async () => {
+    setDataLoading(true);
+    const status = await getStatus({ buyer: checksumAddress(wallet.account) });
+    if (status.isSuccess) {
+      const statusData =
+        status && status.data && status.data.length > 0
+          ? [...status.data].sort((a, b) => {
+              const aTime = new Date(a['created_at'].toString()).getTime();
+              const bTime = new Date(b['created_at'].toString()).getTime();
+              return aTime > bTime ? 1 : -1;
+            })
+          : status.data;
+
+      setMyPurchaseStatus(statusData ?? status.data);
+    }
+
+    setDataLoading(false);
+  };
+
   useEffect(() => {
     if (token && wallet && wallet.account) {
       const apiCall = async () => {
-        setDataLoading(true);
-        // TODO
-        const status = await getStatus({ buyer: checksumAddress(wallet.account) });
-        if (status.isSuccess) {
-          setMyPurchaseStatus(status.data);
-        }
-
-        setDataLoading(false);
+        getMyPurchaseStatus();
       };
       apiCall();
     }
@@ -210,13 +246,6 @@ const BuyMoreBoard = () => {
     return new BigNumber(0);
   }, [dataLoading, myPurchaseStatus]);
 
-  useEffect(() => {
-    // if (myAccountLoading)
-  }, [myPurchaseStatus, myAccountLoading]);
-
-  console.log('myPurchaseStatus', myPurchaseStatus);
-  console.log('myAccount', myAccount);
-
   const closeCode = async (generated = false) => {
     setOpenGeneratePromocodeModal(false);
     if (generated) {
@@ -234,8 +263,31 @@ const BuyMoreBoard = () => {
     }
   }, [bonusLoading, bonusAmount]);
 
-  const onClickActive = (index: number) => {
-    if (index === 0 || (index > 0 && myPurchaseStatus[index - 1]['status'] >= 2)) {
+  const isAvailableActive = useCallback(
+    (index: number) => {
+      return myPurchaseStatus[index]['status'] < 2 && (index > 0 ? myPurchaseStatus[index - 1]['status'] >= 2 : true);
+    },
+    [myPurchaseStatus],
+  );
+
+  const onClickActive = async (index: number) => {
+    if (isAvailableActive(index) && loadingIndex < 0) {
+      try {
+        setLoadingIndex(index);
+        const chain_id = chainID[myPurchaseStatus[index]['chain_name']];
+        const result = await requestSwitchNetwork(chain_id.toString());
+        if (result) {
+          const activate = await activateWallet(myPurchaseStatus[index]['paloma_address'], chain_id.toString());
+          if (activate) {
+            toast.success('Your Paloma LightNode Was Successfully Activated!');
+            await getMyPurchaseStatus();
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoadingIndex(-1);
+      }
     }
   };
 
@@ -253,6 +305,75 @@ const BuyMoreBoard = () => {
       return () => clearTimeout(delayDebounceFn);
     }
   }, [copyPromocode]);
+
+  const callbackSuccess = async (amount: number) => {
+    setClaimedAmount(amount);
+    setPendingTxHash('');
+    setSuccessModal(true);
+  };
+
+  const closeSuccessModal = async () => {
+    setSuccessModal(false);
+    setClaimedAmount(0);
+    await fetchingBonusAmount();
+  };
+
+  const callbackWaiting = ({ txHash, txTitle, txText, txProcessing = false }) => {
+    // OnWait handler
+    if (txTitle !== undefined) setPendingModalTitle(txTitle);
+    if (txText !== undefined) setPendingModalText(txText);
+    if (txHash !== undefined) setPendingTxHash(txHash);
+    setPendingModalProcess(txProcessing);
+  };
+
+  const callbackError = (e) => {
+    toast.error(e ? e : 'Something went wrong');
+  };
+
+  const handleClaimBonus = async (bonus: IBonusBalance) => {
+    if (BigNumber(bonus.amount.raw).comparedTo(0) > 0) {
+      try {
+        const result = await requestSwitchNetwork(bonus.chainId.toString());
+        if (result) {
+          const amount = await claimBonus(bonus, callbackError, callbackWaiting);
+          return amount;
+        }
+      } catch (error) {
+        console.error(error);
+        return 0;
+      }
+    }
+  };
+
+  const onClickClaim = async () => {
+    if (totalBonus > 0 && !loadingClaim) {
+      try {
+        setLoadingClaim(true);
+
+        console.log('bonusAmount', bonusAmount);
+        /**
+         * Claim Bonus on all 6 chains
+         * **Messy code due to for sequential execution**
+         */
+        const count = bonusAmount.length;
+        let claimedAmount = 0;
+        if (count > 0) claimedAmount += await handleClaimBonus(bonusAmount[0]);
+        if (count > 1) claimedAmount += await handleClaimBonus(bonusAmount[1]);
+        if (count > 2) claimedAmount += await handleClaimBonus(bonusAmount[2]);
+        if (count > 3) claimedAmount += await handleClaimBonus(bonusAmount[3]);
+        if (count > 4) claimedAmount += await handleClaimBonus(bonusAmount[4]);
+        if (count > 5) claimedAmount += await handleClaimBonus(bonusAmount[5]);
+
+        if (claimedAmount > 0) {
+          callbackSuccess(claimedAmount);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoadingClaim(false);
+      }
+    }
+  };
 
   return (
     <div>
@@ -293,8 +414,18 @@ const BuyMoreBoard = () => {
                       Total Referral Bonus<span>{formatNumber(totalBonus, 0, 2)} USDC</span>
                     </div>
                     <div className={style.bonusBtns}>
-                      <button>
-                        Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
+                      <button onClick={onClickClaim} className={totalBonus > 0 ? style.clickable : style.notClickable}>
+                        {loadingClaim ? (
+                          <img
+                            src="/assets/icons/loading_circle.svg"
+                            height="25px"
+                            style={{ marginTop: 5, marginLeft: 5 }}
+                          />
+                        ) : (
+                          <>
+                            Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
+                          </>
+                        )}
                       </button>
                       <button onClick={() => onClickCopyPromocode(myAccount.promo_code)}>
                         <img src="/assets/icons/copy_graypink.png" alt="copy" />
@@ -330,10 +461,10 @@ const BuyMoreBoard = () => {
               <thead>
                 <tr className={style.tableRow}>
                   <th>
-                    Paloma Address<span>Numer of Nodes</span>
+                    Paloma Address<span>Number of Nodes</span>
                   </th>
                   <th>Date</th>
-                  <th>EVM Adress</th>
+                  <th>EVM Address</th>
                   <th>GRAINs Minted</th>
                   <th>Status</th>
                 </tr>
@@ -352,15 +483,23 @@ const BuyMoreBoard = () => {
                       key={index}
                     >
                       <td>
-                        {shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
+                        {purchase['paloma_address'] &&
+                          shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
                         <span>{formatNumber(purchase['node_count'], 0, 2)} LightNodes</span>
                       </td>
                       <td>{convertTime(purchase['created_at'].toString())}</td>
-                      <td>{shortenString(purchase['buyer'], 6, 6)}</td>
+                      <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
                       <td>{formatNumber(purchase['grain_amount'], 0, 2)}</td>
                       <td className={style.activeButton}>
-                        {+purchase['status'] < 2 ? (
-                          <button onClick={() => onClickActive(index)}>Active</button>
+                        {loadingIndex === index ? (
+                          <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
+                        ) : +purchase['status'] < 2 ? (
+                          <button
+                            className={isAvailableActive(index) ? style.clickable : style.notClickable}
+                            onClick={() => onClickActive(index)}
+                          >
+                            Active
+                          </button>
                         ) : (
                           'Mining'
                         )}
@@ -384,6 +523,16 @@ const BuyMoreBoard = () => {
         </div>
       )}
       {openGeneratePromocodeModal && <GeneratePromocodeModal onClose={(e) => closeCode(e)} token={token} />}
+      <PendingTransactionModal
+        show={loadingClaim}
+        onClose={() => setLoadingClaim(false)}
+        title={pendingModalTitle}
+        text={pendingModalText}
+        txHash={pendingTxHash}
+        isProcessing={pendingModalProcess}
+        blockExplorer={getTxHashLink(wallet.network)}
+      />
+      <SuccessClaimModal show={successModal} onClose={() => closeSuccessModal()} amount={claimedAmount} />
     </div>
   );
 };

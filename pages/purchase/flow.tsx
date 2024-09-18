@@ -491,7 +491,6 @@ const PurchaseFlow = () => {
     },
   );
 
-  // SwapSuccess handler
   const callbackSuccess = async ({ hash }) => {
     setTxLoading(false);
     setPendingTxHash('');

@@ -1,4 +1,3 @@
-import Button from 'components/Button';
 import Purchase from 'components/Button/purchase';
 import WalletSelector from 'components/ButtonSelector/WalletSelector';
 import { useWallet } from 'hooks/useWallet';
@@ -10,7 +9,7 @@ import { useOutsideAlerter } from 'hooks';
 
 const BoardHeader = () => {
   const ref = useRef(null);
-  const { wallet, openConnectionModal, requestSwitchNetwork, disconnectWallet } = useWallet();
+  const { wallet, openConnectionModal, disconnectWallet } = useWallet();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showWalletProfileModal, setShowWalletProfileModal] = useState<boolean>(false);

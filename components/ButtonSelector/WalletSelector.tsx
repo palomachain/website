@@ -38,10 +38,7 @@ const WalletSelector = ({ wallet, network, openExplorer = true, disconnectWallet
             <div className={style.selectOption} onMouseOver={() => setHoveredText(WalletProfiles.CopyAddress)}>
               <img src={enableImageLink('copy', hoveredText === WalletProfiles.CopyAddress)} alt="" />
               <span
-                className={cn(
-                  hoveredText === WalletProfiles.CopyAddress ? style.pink : undefined,
-                  style.selectNetwork,
-                )}
+                className={cn(hoveredText === WalletProfiles.CopyAddress ? style.pink : undefined, style.selectNetwork)}
               >
                 {copied ? WalletProfiles.CopiedAddress : WalletProfiles.CopyAddress}
               </span>

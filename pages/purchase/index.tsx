@@ -4,11 +4,23 @@ import Describe from './describe';
 import PurchaseFlow from './flow';
 
 const Purchase = () => {
-  const { isAlreadyPassedCode } = useCookie();
+  const { confirmPasscode } = useCookie();
   const [loading, setLoading] = useState(true);
 
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const redirect = params.get('redirect');
+  const type = params.get('type');
+  const code = params.get('code');
+
   const checkAlreadyPassedCode = async () => {
-    const date = await isAlreadyPassedCode();
+    let redirectUrl = '';
+    if (redirect) redirectUrl = redirectUrl + `redirect=${redirect}`;
+    if (type) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `type=${type}`;
+    if (code) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `code=${code}`;
+    console.log('redirectUrl', redirectUrl);
+
+    const date = await confirmPasscode(redirectUrl);
     date !== 0 && setLoading(false);
   };
 

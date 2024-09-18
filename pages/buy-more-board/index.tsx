@@ -65,6 +65,7 @@ const BuyMoreBoard = () => {
   const [bonusLoading, setBonusLoading] = useState(false);
   const [bonusAmount, setBonusAmount] = useState<IBonusBalance[]>();
   const [openGeneratePromocodeModal, setOpenGeneratePromocodeModal] = useState(false);
+  const [copyPromocode, setCopyPromocode] = useState(false);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -238,6 +239,21 @@ const BuyMoreBoard = () => {
     }
   };
 
+  const onClickCopyPromocode = (code: string) => {
+    setCopyPromocode(true);
+    navigator.clipboard.writeText(`https://www.palomachain.com/purchase/?code=${code}`);
+  };
+
+  useEffect(() => {
+    if (copyPromocode) {
+      const delayDebounceFn = setTimeout(() => {
+        setCopyPromocode(false);
+      }, 3000);
+
+      return () => clearTimeout(delayDebounceFn);
+    }
+  }, [copyPromocode]);
+
   return (
     <div>
       {pageLoading ? (
@@ -280,8 +296,9 @@ const BuyMoreBoard = () => {
                       <button>
                         Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
                       </button>
-                      <button>
-                        <img src="/assets/icons/copy_graypink.png" alt="copy" /> Copy Code
+                      <button onClick={() => onClickCopyPromocode(myAccount.promo_code)}>
+                        <img src="/assets/icons/copy_graypink.png" alt="copy" />
+                        {copyPromocode ? 'Copied Code!' : 'Copy Code'}
                       </button>
                     </div>
                   </div>

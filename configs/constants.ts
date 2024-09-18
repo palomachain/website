@@ -94,5 +94,5 @@ export {
   USER_ACCESS_TOKEN,
   PURCHASE_INFO,
   PURCHASED_WALLET,
-  WalletProfiles
+  WalletProfiles,
 };

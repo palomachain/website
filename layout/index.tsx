@@ -18,11 +18,7 @@ export default function Layout({ children, router }) {
 
       <main className="layout-container">
         <a id="back-to-top-anchor" href="/" />
-        {windowUrl.toLowerCase().includes(StaticLink.BUYMOREBOARD) ? (
-          <BoardHeader />
-        ) : (
-          <LayoutHeader router={router} />
-        )}
+        {windowUrl.toLowerCase().includes(StaticLink.BUYMOREBOARD) ? <BoardHeader /> : <LayoutHeader router={router} />}
         {React.cloneElement(children, {
           router,
         })}

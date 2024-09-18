@@ -34,7 +34,7 @@ const BoardHeader = () => {
         <Purchase type="pink" text="+ Add a LightNode" />
         {wallet.account ? (
           <div>
-            <button onClick={handleShowWalletProfileModal} className='layout-container__header__wallet'>
+            <button onClick={handleShowWalletProfileModal} className="layout-container__header__wallet">
               <>
                 <span>{shortenString(wallet.account)}</span>
                 <img src="/assets/icons/down.svg" alt="down" />
@@ -45,7 +45,7 @@ const BoardHeader = () => {
             )}
           </div>
         ) : (
-          <button onClick={openConnectionModal} className='layout-container__header__wallet'>
+          <button onClick={openConnectionModal} className="layout-container__header__wallet">
             <span>Connect EVM Wallet</span>
           </button>
         )}

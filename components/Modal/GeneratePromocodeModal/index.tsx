@@ -89,18 +89,18 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
       </div>
       <img className={style.backgroundImg} src="/assets/icons/promocode_bg2.svg" alt="promocode_bg2" />
       {/* {confirmed ? ( */}
-        <div className={style.confirmBody}>
-          <h3 className={style.title}>Your Personal Promo Code</h3>
-          <p className={style.text}>
-            Share your unique 5% off promo code now and receive 10% of every sale made using your code.
-          </p>
-          <div className={style.promocodeCopy}>
-            <p>{promocode}</p>
-            <div className={style.copyBtn} onClick={onClickCopy}>
-              {isCopied ? 'Copied' : 'Copy'}
-            </div>
+      <div className={style.confirmBody}>
+        <h3 className={style.title}>Your Personal Promo Code</h3>
+        <p className={style.text}>
+          Share your unique 5% off promo code now and receive 10% of every sale made using your code.
+        </p>
+        <div className={style.promocodeCopy}>
+          <p>{promocode}</p>
+          <div className={style.copyBtn} onClick={onClickCopy}>
+            {isCopied ? 'Copied' : 'Copy'}
           </div>
         </div>
+      </div>
       {/* ) : (
         <div className={style.confirmBody}>
           <h3 className={style.title}>Don’t Miss Out!</h3>

@@ -63,6 +63,7 @@ const PurchaseFlow = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const type = params.get('type');
+  const code = params.get('code');
 
   const walletNetwork = wallet?.network ? Number(parseIntString(wallet.network)) : 1;
 
@@ -177,6 +178,13 @@ const PurchaseFlow = () => {
       decimals: parseIntString(chain) === ChainID.BSC_MAIN ? 18 : 6,
     };
   };
+
+  useEffect(() => {
+    if (code) {
+      setPromoCode(code);
+      applyPromoCode(code);
+    }
+  }, [code]);
 
   useEffect(() => {
     if (totalPay) {

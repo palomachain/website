@@ -11,6 +11,12 @@ const Passcode = () => {
   const router = useRouter();
   const { invitationCode } = useCookie();
 
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const redirect = params.get('redirect');
+  const type = params.get('type');
+  const promocode = params.get('code');
+
   const [loading, setLoading] = useState(false);
   const [passcodeValue, setPasscodeValue] = useState<(string | number)[]>(['', '', '', '']);
 
@@ -18,7 +24,11 @@ const Passcode = () => {
     if (isAvailableCode) {
       const result = await invitationCode(code);
       if (result.success) {
-        router.push(StaticLink.PURCHASE);
+        let redirectUrl = '';
+        if (redirect) redirectUrl = redirectUrl + `redirect=${redirect}`;
+        if (type) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `type=${type}`;
+        if (promocode) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `code=${promocode}`;
+        router.push(`${StaticLink.PURCHASE}?${redirectUrl}`);
       } else {
         toast.error('Invalid Code');
         setPasscodeValue(['', '', '', '']);

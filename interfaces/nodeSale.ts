@@ -54,5 +54,5 @@ export interface IBonusBalance {
   amount: {
     raw: string;
     format: string;
-  }
+  };
 }

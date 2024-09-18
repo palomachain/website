@@ -56,7 +56,7 @@ const useCookie = () => {
     }
   };
 
-  const isAlreadyPassedCode = async () => {
+  const confirmPasscode = async (redirectUrl: string) => {
     let date = 0;
 
     try {
@@ -73,7 +73,7 @@ const useCookie = () => {
     } catch (error) {
       throw new Error(error);
     } finally {
-      if (date === 0) router.push(StaticLink.PASSCODE);
+      if (date === 0) router.push(`${StaticLink.PASSCODE}?${redirectUrl ?? ''}`);
       return date;
     }
   };
@@ -95,7 +95,7 @@ const useCookie = () => {
     }
   };
 
-  return { invitationCode, storeData, isAlreadyPassedCode, getStoredData };
+  return { invitationCode, storeData, confirmPasscode, getStoredData };
 };
 
 export default useCookie;

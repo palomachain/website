@@ -70,7 +70,7 @@ const WalletSelectModal = ({
             </p>
             <LoadingBtn />
             <section className={style.tryAgainWrapper} onClick={onChooseMetamask}>
-              <img src="/assets/images/Try_again.svg" alt="" />
+              <img src="/assets/icons/try_again.svg" alt="" />
               <span className={style.balance}>Try again</span>
             </section>
           </>

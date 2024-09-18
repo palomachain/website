@@ -68,6 +68,13 @@ const DEFAULT_MAIN_CHAINS = [
   'eip155:42220',
 ];
 
+enum WalletProfiles {
+  CopyAddress = 'Copy address',
+  CopiedAddress = 'Copied address!',
+  OpenExplorer = 'Open in Explorer',
+  Disconnect = 'Disconnect',
+}
+
 const SLIPPAGE_DOMINATOR = 1000;
 const SLIPPAGE_PERCENTAGE = 1; // default slippage is 1%
 const DEADLINE = 5; // 5 MIN
@@ -87,4 +94,5 @@ export {
   USER_ACCESS_TOKEN,
   PURCHASE_INFO,
   PURCHASED_WALLET,
+  WalletProfiles
 };

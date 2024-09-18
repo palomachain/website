@@ -1,0 +1,40 @@
+@import '/styles/libraries/global';
+
+.connectBtn {
+  background: #1f1f22;
+  border: 1px solid #b72882;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  width: 208px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.ButtonSelector {
+  color: #2c2c2c;
+  font-family: $Inter-500;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.32px;
+
+  .red {
+    color: #F64B3C;
+  }
+  .pink {
+    color: #FF62C4;
+  }
+}
+
+.selectOption {
+  display: flex;
+  cursor: pointer;
+  gap: 8px;
+  padding: 13px 0;
+  color: #807e7e;
+}

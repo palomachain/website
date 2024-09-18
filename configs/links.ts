@@ -13,7 +13,7 @@ enum StaticLink {
 }
 
 const enableImageLink = (name: string, enable: boolean = true) => {
-  return `/assets/images/${name}${enable ? '' : '_disabled'}.svg`;
+  return `/assets/icons/${name}${enable ? '_pink' : '_black'}.svg`;
 };
 
 const metamaskChromeExtensionStoreUrl =

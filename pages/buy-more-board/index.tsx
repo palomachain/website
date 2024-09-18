@@ -123,19 +123,19 @@ const BuyMoreBoard = () => {
   }, [token]);
 
   useEffect(() => {
-    // if (token && wallet && wallet.account) {
-    const apiCall = async () => {
-      setDataLoading(true);
-      // TODO
-      const status = await getStatus({ buyer: checksumAddress(wallet.account) });
-      if (status.isSuccess) {
-        setMyPurchaseStatus(status.data);
-      }
+    if (token && wallet && wallet.account) {
+      const apiCall = async () => {
+        setDataLoading(true);
+        // TODO
+        const status = await getStatus({ buyer: checksumAddress('0x2175e091176F43eD55313e4Bc31FE4E94051A6fE') });
+        if (status.isSuccess) {
+          setMyPurchaseStatus(status.data);
+        }
 
-      setDataLoading(false);
-    };
-    apiCall();
-    // }
+        setDataLoading(false);
+      };
+      apiCall();
+    }
   }, [wallet.account, token]);
 
   useEffect(() => {
@@ -166,6 +166,10 @@ const BuyMoreBoard = () => {
         setRewardsLoading(false);
       };
       apiCall();
+    }
+
+    if (myPurchaseStatus && myPurchaseStatus.length === 0) {
+      setRewardsLoading(false);
     }
   }, [myPurchaseStatus, dataLoading]);
 
@@ -225,6 +229,12 @@ const BuyMoreBoard = () => {
     }
   }, [bonusLoading, bonusAmount]);
 
+  const onClickActive = (index: number) => {
+    if (index === 0 || (index > 0 && myPurchaseStatus[index - 1]['status'] >= 2)) {
+      
+    }
+  }
+
   return (
     <div>
       {pageLoading ? (
@@ -268,7 +278,7 @@ const BuyMoreBoard = () => {
                         Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
                       </button>
                       <button>
-                        <img src="/assets/icons/copy_black.png" alt="copy" /> Copy Code
+                        <img src="/assets/icons/copy_graypink.png" alt="copy" /> Copy Code
                       </button>
                     </div>
                   </div>
@@ -329,7 +339,7 @@ const BuyMoreBoard = () => {
                       <td>{shortenString(purchase['buyer'], 6, 6)}</td>
                       <td>{formatNumber(purchase['grain_amount'], 0, 2)}</td>
                       <td className={style.activeButton}>
-                        {+purchase['status'] < 2 ? <button>Active</button> : 'Mining'}
+                        {+purchase['status'] < 2 ? <button onClick={() => onClickActive(index)}>Active</button> : 'Mining'}
                       </td>
                     </tr>
                   ))

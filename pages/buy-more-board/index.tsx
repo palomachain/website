@@ -12,7 +12,7 @@ import {
   useLazyGetStatusQuery,
 } from 'services/api/nodesale';
 import { checksumAddress } from 'viem';
-import { hexToStringWithBech, shortenString } from 'utils/string';
+import { hexToStringWithBech, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
 
 import style from './buyMoreBoard.module.scss';
 import classNames from 'classnames';
@@ -36,14 +36,14 @@ const chainID = {
 };
 
 const BuyMoreBoard = () => {
-  const { wallet } = useWallet();
+  const { wallet, requestSwitchNetwork } = useWallet();
   const provider = useProvider(wallet);
   const { getStoredData } = useCookie();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
   const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
   const [getStatus] = useLazyGetStatusQuery();
   const [getBalances] = useLazyGetBalancesQuery();
-  const { getBonusAmount } = useNodeSale({ wallet, provider });
+  const { getBonusAmount, activateWallet } = useNodeSale({ wallet, provider });
   const router = useRouter();
 
   const [pageLoading, setPageLoading] = useState(true);
@@ -131,7 +131,7 @@ const BuyMoreBoard = () => {
       const apiCall = async () => {
         setDataLoading(true);
         // TODO
-        const status = await getStatus({ buyer: checksumAddress(wallet.account) });
+        const status = await getStatus({ buyer: checksumAddress('0x2175e091176F43eD55313e4Bc31FE4E94051A6fE') });
         if (status.isSuccess) {
           setMyPurchaseStatus(status.data);
         }
@@ -234,8 +234,17 @@ const BuyMoreBoard = () => {
     }
   }, [bonusLoading, bonusAmount]);
 
-  const onClickActive = (index: number) => {
+  const onClickActive = async (index: number) => {
     if (index === 0 || (index > 0 && myPurchaseStatus[index - 1]['status'] >= 2)) {
+      const chain_id = chainID[myPurchaseStatus[index]['chain_name']];
+      const result = await requestSwitchNetwork(chain_id);
+      if (result) {
+        const activate = await activateWallet(myPurchaseStatus[index]['paloma_address'], chain_id.toString());
+        console.log('activate', activate);
+        // if (activate) {
+
+        // }
+      }
     }
   };
 
@@ -330,10 +339,10 @@ const BuyMoreBoard = () => {
               <thead>
                 <tr className={style.tableRow}>
                   <th>
-                    Paloma Address<span>Numer of Nodes</span>
+                    Paloma Address<span>Number of Nodes</span>
                   </th>
                   <th>Date</th>
-                  <th>EVM Adress</th>
+                  <th>EVM Address</th>
                   <th>GRAINs Minted</th>
                   <th>Status</th>
                 </tr>

@@ -44,6 +44,28 @@
         display: none;
       }
     }
+    &__buttons-board {
+      gap: 15px;
+    }
+
+    &__wallet {
+      border-radius: 10px;
+      border: 1px solid #d8d3d3;
+      background: #fff;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px;
+      color: #2c2c2c;
+      font-family: $Inter-600;
+      font-size: 14px;
+      font-style: normal;
+      line-height: 21.045px; /* 150.32% */
+      letter-spacing: -0.014px;
+      height: 50px;
+      cursor: pointer;
+    }
 
     &__hamburger {
       display: none;

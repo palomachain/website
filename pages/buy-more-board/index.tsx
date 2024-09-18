@@ -127,7 +127,7 @@ const BuyMoreBoard = () => {
       const apiCall = async () => {
         setDataLoading(true);
         // TODO
-        const status = await getStatus({ buyer: checksumAddress('0x2175e091176F43eD55313e4Bc31FE4E94051A6fE') });
+        const status = await getStatus({ buyer: checksumAddress(wallet.account) });
         if (status.isSuccess) {
           setMyPurchaseStatus(status.data);
         }
@@ -231,7 +231,7 @@ const BuyMoreBoard = () => {
 
   const onClickActive = (index: number) => {
     if (index === 0 || (index > 0 && myPurchaseStatus[index - 1]['status'] >= 2)) {
-      
+
     }
   }
 

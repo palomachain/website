@@ -132,6 +132,9 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
       provider: null,
       network: null,
     });
+
+    setShowChooseWalletModal(false);
+    setShowConnecting(false);
   }, [wallet.account, wallet.providerName]);
 
   // Subscribe to updates (do this before calling connection in case we load from cookies)

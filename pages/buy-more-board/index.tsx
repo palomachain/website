@@ -21,7 +21,7 @@ import {
   useLazyGetStatusQuery,
 } from 'services/api/nodesale';
 import balanceTool from 'utils/balance';
-import { convertTime } from 'utils/date';
+import { convertTime, delay } from 'utils/date';
 import { formatNumber } from 'utils/number';
 import { hexToStringWithBech, shortenString } from 'utils/string';
 import { checksumAddress } from 'viem';
@@ -97,10 +97,15 @@ const BuyMoreBoard = () => {
   }, []);
 
   useEffect(() => {
-    if (token && (!wallet || !wallet.account)) {
-      openConnectionModal();
+    if (token && !wallet?.account) {
+      const call = async () => {
+        // delay 1 second
+        await delay(1000);
+        openConnectionModal();
+      };
+      call();
     }
-  }, [wallet, token]);
+  }, [token]);
 
   const fetchMyAccount = async () => {
     setMyAccountLoading(true);

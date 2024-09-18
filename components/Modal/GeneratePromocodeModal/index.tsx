@@ -21,7 +21,7 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
 
   const onClickCopy = () => {
     setCopied(true);
-    navigator.clipboard.writeText(promocode);
+    navigator.clipboard.writeText(`https://www.palomachain.com/purchase/?code=${promocode}`);
   };
 
   useEffect(() => {
@@ -34,11 +34,28 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
     }
   }, [isCopied]);
 
-  const generateCode = () => {
+  const generateCode = async () => {
     const stringCode = randomString();
     const numberCode = randomNumber();
-    if (stringCode && stringCode.length === 4 && numberCode && numberCode.length === 4)
-      setPromocode(stringCode + numberCode);
+    if (stringCode && stringCode.length === 4 && numberCode && numberCode.length === 4) {
+      const code = stringCode + numberCode;
+      setPromocode(code);
+      try {
+        const result = await postPromocode({ token, promocode: code });
+        console.log('result', result);
+        if (result.data && !result.error) {
+          // toast.success(result.data.msg ?? 'Promocode has been requested successfully.');
+          setConfirm(true);
+          return;
+        } else {
+          toast.error(result.error['data']['msg'] ?? 'Failed! Please try again.');
+          generateCode();
+        }
+      } catch (error) {
+        toast.error('Failed! Please try again.');
+        generateCode();
+      }
+    }
   };
 
   useEffect(() => {
@@ -67,11 +84,11 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
 
   return (
     <Modal className={style.confirmModal} contentClassName={style.contentClassName} showHeader={false}>
-      <div className={style.closeIcon} onClick={() => onClose(confirmed)}>
+      <div className={style.closeIcon} onClick={() => onClose(true)}>
         <img src="/assets/icons/close-black.png" alt="close-black" />
       </div>
       <img className={style.backgroundImg} src="/assets/icons/promocode_bg2.svg" alt="promocode_bg2" />
-      {confirmed ? (
+      {/* {confirmed ? ( */}
         <div className={style.confirmBody}>
           <h3 className={style.title}>Your Personal Promo Code</h3>
           <p className={style.text}>
@@ -84,7 +101,7 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
             </div>
           </div>
         </div>
-      ) : (
+      {/* ) : (
         <div className={style.confirmBody}>
           <h3 className={style.title}>Don’t Miss Out!</h3>
           <h3 className={style.title}>Get Paid A Referral Bonus</h3>
@@ -96,7 +113,7 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
             Confirm
           </div>
         </div>
-      )}
+      )} */}
     </Modal>
   );
 };

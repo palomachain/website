@@ -1,16 +1,20 @@
 import { useDisconnect } from '@thirdweb-dev/react';
 import { disconnect, switchNetwork } from '@wagmi/core';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
-import { AddNetwork } from 'configs/constants';
+import { AddNetwork, USER_ACCESS_TOKEN } from 'configs/constants';
+import { StaticLink } from 'configs/links';
 import { supportedNetworks } from 'configs/networks';
 import WalletSelectModal from 'containers/wallet/WalletSelectModal';
 import { NetworkIds, Provider, Wallet } from 'interfaces/network';
+import { useRouter } from 'next/router';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useLazyGetPromocodeStatusQuery, useLazyGetStatusQuery, usePostAddAddrMutation } from 'services/api/nodesale';
 import Cookies from 'universal-cookie';
 import { errorMessage } from 'utils/errorMessage';
-import { parseDexString, parseIntString } from 'utils/string';
+import { checksumAddress, parseDexString, parseIntString } from 'utils/string';
 import { useAccount, useNetwork } from 'wagmi';
+import useCookie from './useCookie';
 
 const cookies = new Cookies();
 
@@ -54,6 +58,11 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
 
   const { open } = useWeb3Modal();
   const { chain } = useNetwork();
+  const [getStatus] = useLazyGetStatusQuery();
+  const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
+  const [postAddAddr] = usePostAddAddrMutation();
+  const { getStoredData } = useCookie();
+  const router = useRouter();
 
   const frameDisconnect = useDisconnect();
 
@@ -163,6 +172,35 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     }
   }, [disconnectWallet, ethereum, wallet]);
 
+  // Check and Register wallet address
+  const registerAddress = async (account: string) => {
+    // Check login token
+    const myToken = await getStoredData(USER_ACCESS_TOKEN);
+    let token = '';
+    if (myToken.data) {
+      token = myToken.data;
+    } else {
+      router.push(`${StaticLink.LOGIN}/?redirect=${StaticLink.BUYMOREBOARD}`);
+      return;
+    }
+
+    // Get my promo code to check if my address is registered
+    const promocode = await getPromocodeStatus({ token });
+    if (promocode.isSuccess) {
+      const info = promocode.data[0];
+
+      // Not registered my address
+      if (!info['wallet_address']) {
+        const status = await getStatus({ buyer: checksumAddress(account) });
+        // Has purchased history
+        if (status?.isSuccess && status?.data && status?.data.length > 0) {
+          // Register address
+          await postAddAddr({ addr: checksumAddress(account), token: token });
+        }
+      }
+    }
+  };
+
   const connectMetaMask = async (network = '1') => {
     if (!ethereum) return;
 
@@ -197,6 +235,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
       if (changedNetwork) {
         setWallet(walletObj);
         setShowChooseWalletModal(false);
+
         return true;
       } else {
         return false;
@@ -271,6 +310,9 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
           provider: (window as any).ethereum,
           network: String(chain.id),
         });
+
+      // Register wallet address
+      registerAddress(address);
 
       setShowChooseWalletModal(false);
     }

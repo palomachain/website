@@ -687,7 +687,11 @@ export const PalomaInstructionsSteps: {
           title: <p>Open the Windows PowerShell</p>,
           commands: [
             {
-              name: <p>Copy and Past the command:</p>,
+              name: (
+                <p>
+                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                </p>
+              ),
               command: (
                 <p>
                   docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
@@ -697,6 +701,22 @@ export const PalomaInstructionsSteps: {
               ),
               copyCommand:
                 'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
+            },
+            {
+              name: (
+                <p>
+                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
+                </p>
+              ),
+              command: (
+                <p>
+                  docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
+                  $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store
+                  palomachain/lightnode-client:v1 add-node
+                </p>
+              ),
+              copyCommand:
+                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 add-node',
             },
           ],
         },

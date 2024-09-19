@@ -630,6 +630,15 @@ const PurchaseFlow = () => {
 
   const handleStart = async () => {
     if (step === 1) {
+      if (promoCode.length > 0) {
+        const price = await fetchEstimateNodePrice({ amount: 1, promo_code: stringToHex(promoCode) });
+        if (price && price.data['price'] === 0) {
+          toast.info(
+            'You have entered an invalid Promo Code. Please enter a valid Promo Code or delete the currently entered Code.',
+          );
+          return;
+        }
+      }
       setStep(2);
       window.scrollTo(0, 0);
     } else {

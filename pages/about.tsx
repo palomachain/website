@@ -11,9 +11,9 @@ export default function About({ state, router }) {
           <div className="about-page-text">
             <h1>About</h1>
             <p className="large">
-              Paloma is a fast, permissionless, Cosmos-SDK blockchain that moves messages securely, between any other
-              blockchains. Paloma is designed for developers who wish to manage bi-directional messages between chains
-              in a scalable and secure manner.
+              Paloma is decentralized blockchain computing middleware for web2.0 developers that want to interact with 
+              multiple blockchain states rapidly and securely. Paloma delivers native and reliable blockchain interoperability 
+              focused on web2.0 developers. 
             </p>
             <a href="https://palomachain.github.io/paloma-docs/" className="about-page-button" target="_blank">
               Get Started

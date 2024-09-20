@@ -466,7 +466,7 @@ const BuyMoreBoard = () => {
                     <br />
                     Get Paid A Referral Bonus
                     <button className={style.createPromocode} onClick={onClickCreatePromocode}>
-                      Create Promo Code
+                      {wallet && wallet.account ? 'Create Promo Code' : 'Connect Wallet'}
                     </button>
                   </div>
                 </>

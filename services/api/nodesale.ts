@@ -68,6 +68,12 @@ const injectedRtkApi = api.injectEndpoints({
         params: queryArg,
       }),
     }),
+    getStatusByUser: build.query<GetNodeSaleApiResponse, GetApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/statusbyuser`,
+        params: queryArg,
+      }),
+    }),
     getBalances: build.query<GetNodeSaleApiResponse, GetBalances>({
       query: (queryArg) => ({
         url: `${nodesaleApiUrl}/balances`,
@@ -205,6 +211,7 @@ export const {
   useLazyGetWalletQuery,
   useLazyGetPromocodeStatusQuery,
   useLazyGetStatusQuery,
+  useLazyGetStatusByUserQuery,
   useLazyGetBalancesQuery,
   usePostRegisterMutation,
   usePostLoginMutation,

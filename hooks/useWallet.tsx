@@ -208,6 +208,16 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     if (!ethereum) return;
 
     try {
+      // handle choose wallet after disconnect current wallet
+      await window.ethereum.request({
+        method: 'wallet_revokePermissions',
+        params: [
+          {
+            eth_accounts: {},
+          },
+        ],
+      });
+
       const accounts = await ethereum.request({
         method: 'eth_requestAccounts',
       });

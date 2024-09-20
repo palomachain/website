@@ -67,7 +67,7 @@ const Passcode = () => {
           )}
         </div>
         <p>Already Purchased?</p>
-        <p className={style.activate} onClick={() => router.push(StaticLink.ACTIVATE)}>
+        <p className={style.activate} onClick={() => router.push(StaticLink.BUYMOREBOARD)}>
           Activate your node here
         </p>
       </div>

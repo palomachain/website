@@ -56,3 +56,10 @@ export interface IBonusBalance {
     format: string;
   };
 }
+
+export interface IActivateInfos {
+  buyer?: string;
+  fiat_wallet_address?: string;
+  chain_id: number | string;
+  token: string;
+}

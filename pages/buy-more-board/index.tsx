@@ -10,7 +10,7 @@ import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
-import { IBonusBalance } from 'interfaces/nodeSale';
+import { IActivateInfos, IBonusBalance } from 'interfaces/nodeSale';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -18,13 +18,13 @@ import {
   useLazyGetBalancesQuery,
   useLazyGetLoginConfirmationQuery,
   useLazyGetPromocodeStatusQuery,
-  useLazyGetStatusQuery,
+  useLazyGetStatusByUserQuery,
 } from 'services/api/nodesale';
 import balanceTool from 'utils/balance';
-import { convertTime, delay } from 'utils/date';
+import { convertTime } from 'utils/date';
 import { formatNumber } from 'utils/number';
 import { hexToStringWithBech, shortenString } from 'utils/string';
-import { checksumAddress } from 'viem';
+import Activate from 'containers/activate';
 
 import style from './buyMoreBoard.module.scss';
 
@@ -44,9 +44,9 @@ const BuyMoreBoard = () => {
   const { getStoredData } = useCookie();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
   const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
-  const [getStatus] = useLazyGetStatusQuery();
+  const [getStatusByUser] = useLazyGetStatusByUserQuery();
   const [getBalances] = useLazyGetBalancesQuery();
-  const { getBonusAmount, activateWallet, claimBonus } = useNodeSale({ wallet, provider });
+  const { getBonusAmount, claimBonus } = useNodeSale({ wallet, provider });
   const router = useRouter();
 
   const [pageLoading, setPageLoading] = useState(true);
@@ -79,6 +79,8 @@ const BuyMoreBoard = () => {
   const [pendingModalProcess, setPendingModalProcess] = useState(false);
   const [claimedAmount, setClaimedAmount] = useState<number>();
 
+  const [activating, setActivating] = useState<IActivateInfos>();
+
   useEffect(() => {
     const checkLogin = async () => {
       const myToken = await getStoredData(USER_ACCESS_TOKEN);
@@ -96,16 +98,16 @@ const BuyMoreBoard = () => {
     checkLogin();
   }, []);
 
-  useEffect(() => {
-    if (token && !wallet?.account) {
-      const call = async () => {
-        // delay 1 second
-        await delay(1000);
-        openConnectionModal();
-      };
-      call();
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token && !wallet?.account) {
+  //     const call = async () => {
+  //       // delay 1 second
+  //       await delay(1000);
+  //       openConnectionModal();
+  //     };
+  //     call();
+  //   }
+  // }, [token]);
 
   const fetchMyAccount = async () => {
     setMyAccountLoading(true);
@@ -157,7 +159,7 @@ const BuyMoreBoard = () => {
 
   const getMyPurchaseStatus = async () => {
     setDataLoading(true);
-    const status = await getStatus({ buyer: checksumAddress(wallet.account) });
+    const status = await getStatusByUser({ token });
     if (status.isSuccess) {
       const statusData =
         status && status.data && status.data.length > 0
@@ -175,13 +177,13 @@ const BuyMoreBoard = () => {
   };
 
   useEffect(() => {
-    if (token && wallet && wallet.account) {
+    if (token) {
       const apiCall = async () => {
         getMyPurchaseStatus();
       };
       apiCall();
     }
-  }, [wallet.account, token]);
+  }, [token]);
 
   useEffect(() => {
     if (dataLoading) setRewardsLoading(true);
@@ -279,21 +281,24 @@ const BuyMoreBoard = () => {
     if (isAvailableActive(index) && loadingIndex < 0) {
       try {
         setLoadingIndex(index);
+
         const chain_id = chainID[myPurchaseStatus[index]['chain_name']];
-        const result = await requestSwitchNetwork(chain_id.toString());
-        if (result) {
-          const activate = await activateWallet(myPurchaseStatus[index]['paloma_address'], chain_id.toString());
-          if (activate) {
-            toast.success('Your Paloma LightNode Was Successfully Activated!');
-            await getMyPurchaseStatus();
-          }
-        }
+        setActivating({
+          buyer: myPurchaseStatus[index]['buyer'],
+          fiat_wallet_address: myPurchaseStatus[index]['fiat_wallet_address'],
+          chain_id: chain_id,
+          token: token,
+        });
       } catch (error) {
         console.log(error);
-      } finally {
         setLoadingIndex(-1);
       }
     }
+  };
+
+  const onCloseActive = async () => {
+    setLoadingIndex(-1);
+    await getMyPurchaseStatus();
   };
 
   const onClickCopyPromocode = (code: string) => {
@@ -538,6 +543,7 @@ const BuyMoreBoard = () => {
         blockExplorer={getTxHashLink(wallet.network)}
       />
       <SuccessClaimModal show={successModal} onClose={() => closeSuccessModal()} amount={claimedAmount} />
+      {loadingIndex >= 0 && <Activate purchaseData={activating} onClose={onCloseActive} />}
     </div>
   );
 };

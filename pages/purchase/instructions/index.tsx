@@ -27,7 +27,7 @@ const Instructions = () => {
   const onChangeStep = (step: number) => {
     const nextStep = currentStep + step;
     if (nextStep > PalomaInstructionsSteps[currentTab].length - 1) {
-      router.push(type && type.includes('credit') ? `${StaticLink.ACTIVATE}?type=${type}` : StaticLink.ACTIVATE);
+      router.push(StaticLink.BUYMOREBOARD);
     } else if (nextStep >= 0) {
       setCurrentStep(nextStep);
     }

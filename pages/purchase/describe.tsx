@@ -24,7 +24,7 @@ const Describe = () => {
       </ul>
       <div className="ul">Activate your Node</div>
       <p className="purchase-flow-describe__text">Already purchased your LightNode and need to start minting GRAINs?</p>
-      <button className="purchase-flow-describe__btn flex-row" onClick={() => router.push(StaticLink.ACTIVATE)}>
+      <button className="purchase-flow-describe__btn flex-row" onClick={() => router.push(StaticLink.BUYMOREBOARD)}>
         Activate your Node
       </button>
     </section>

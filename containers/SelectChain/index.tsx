@@ -24,7 +24,7 @@ const SelectChain = ({
   className,
 }: SelectChainProps) => {
   const chainRef = useRef(null);
-  const { wallet, connectMetaMask, requestSwitchNetwork } = useWallet();
+  const { wallet, openConnectionModal, requestSwitchNetwork } = useWallet();
 
   const [showSelectChainModal, setShowSelectChainModal] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ const SelectChain = ({
     if (isFiat(value)) {
       setSelectedChain(value);
     } else if (!wallet || !wallet.network) {
-      await connectMetaMask(value);
+      openConnectionModal();
     } else {
       const result = await requestSwitchNetwork(value);
       if (result) setSelectedChain(value);

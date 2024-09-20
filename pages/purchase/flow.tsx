@@ -630,7 +630,7 @@ const PurchaseFlow = () => {
 
   const handleStart = async () => {
     if (step === 1) {
-      if (promoCode.length > 0) {
+      if (promoCode && promoCode.length > 0) {
         const price = await fetchEstimateNodePrice({ amount: 1, promo_code: stringToHex(promoCode) });
         if (price && price.data['price'] === 0) {
           toast.info(

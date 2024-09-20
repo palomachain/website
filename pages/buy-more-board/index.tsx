@@ -306,6 +306,14 @@ const BuyMoreBoard = () => {
     navigator.clipboard.writeText(`https://www.palomachain.com/purchase/?code=${code}`);
   };
 
+  const onClickCreatePromocode = () => {
+    if (wallet && wallet.account) {
+      setOpenGeneratePromocodeModal(true);
+    } else {
+      openConnectionModal();
+    }
+  };
+
   useEffect(() => {
     if (copyPromocode) {
       const delayDebounceFn = setTimeout(() => {
@@ -457,8 +465,8 @@ const BuyMoreBoard = () => {
                     Don’t Miss Out!
                     <br />
                     Get Paid A Referral Bonus
-                    <button className={style.createPromocode} onClick={() => setOpenGeneratePromocodeModal(true)}>
-                      Create Promo Code
+                    <button className={style.createPromocode} onClick={onClickCreatePromocode}>
+                      {wallet && wallet.account ? 'Create Promo Code' : 'Connect Wallet'}
                     </button>
                   </div>
                 </>
@@ -532,7 +540,13 @@ const BuyMoreBoard = () => {
           </div>
         </div>
       )}
-      {openGeneratePromocodeModal && <GeneratePromocodeModal onClose={(e) => closeCode(e)} token={token} />}
+      {openGeneratePromocodeModal && (
+        <GeneratePromocodeModal
+          onClose={(e) => closeCode(e)}
+          token={token}
+          isAccess={myPurchaseStatus && myPurchaseStatus.length > 0}
+        />
+      )}
       <PendingTransactionModal
         show={loadingClaim}
         onClose={() => setLoadingClaim(false)}

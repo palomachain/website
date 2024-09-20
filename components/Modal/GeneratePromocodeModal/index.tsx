@@ -5,14 +5,18 @@ import { usePostCreatePromocodeMutation } from 'services/api/nodesale';
 import { randomNumber, randomString } from 'utils/string';
 
 import style from './generatePromocodeModal.module.scss';
+import { useRouter } from 'next/router';
+import { StaticLink } from 'configs/links';
 
 interface IGeneratePromocodeModal {
   className?: string;
   onClose: (e: boolean) => void;
   token: string;
+  isAccess: boolean;
 }
 
-const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocodeModal) => {
+const GeneratePromocodeModal = ({ onClose, token, isAccess, className }: IGeneratePromocodeModal) => {
+  const router = useRouter();
   const [postPromocode] = usePostCreatePromocodeMutation();
 
   const [promocode, setPromocode] = useState<string>();
@@ -59,8 +63,8 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
   };
 
   useEffect(() => {
-    if (!promocode) generateCode();
-  }, []);
+    if (!promocode && isAccess) generateCode();
+  }, [isAccess]);
 
   const onClickConfirm = async () => {
     if (promocode) {
@@ -89,18 +93,27 @@ const GeneratePromocodeModal = ({ onClose, token, className }: IGeneratePromocod
       </div>
       <img className={style.backgroundImg} src="/assets/icons/promocode_bg2.svg" alt="promocode_bg2" />
       {/* {confirmed ? ( */}
-      <div className={style.confirmBody}>
-        <h3 className={style.title}>Your Personal Promo Code</h3>
-        <p className={style.text}>
-          Share your unique 5% off promo code now and receive 10% of every sale made using your code.
-        </p>
-        <div className={style.promocodeCopy}>
-          <p>{promocode}</p>
-          <div className={style.copyBtn} onClick={onClickCopy}>
-            {isCopied ? 'Copied' : 'Copy'}
+      {isAccess ? (
+        <div className={style.confirmBody}>
+          <h3 className={style.title}>Your Personal Promo Code</h3>
+          <p className={style.text}>
+            Share your unique 5% off promo code now and receive 10% of every sale made using your code.
+          </p>
+          <div className={style.promocodeCopy}>
+            <p>{promocode}</p>
+            <div className={style.copyBtn} onClick={onClickCopy}>
+              {isCopied ? 'Copied' : 'Copy'}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className={style.confirmBody}>
+          <h2>Unlock your Promo Code by purchasing a LightNode</h2>
+          <div className={style.confirmBtn} onClick={() => router.push(StaticLink.PURCHASE)}>
+            Purchase a LightNode
+          </div>
+        </div>
+      )}
       {/* ) : (
         <div className={style.confirmBody}>
           <h3 className={style.title}>Don’t Miss Out!</h3>

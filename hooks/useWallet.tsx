@@ -354,7 +354,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
         console.log('error', error);
         if (error.code === 4902) {
           await ethereum.request({
-            method: 'wallet_AddNetwork',
+            method: 'wallet_addEthereumChain',
             params: [
               {
                 chainId: hex,
@@ -386,7 +386,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     // TODO: disable custom rpc endpoints to user's wallet
     // const network = supportedNetworks[chainId];
     // await ethereum.request({
-    //   method: 'wallet_AddNetwork',
+    //   method: 'wallet_addEthereumChain',
     //   params: [network],
     // });
   };

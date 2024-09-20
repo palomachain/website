@@ -49,7 +49,7 @@ const Login = () => {
         setLoadingLogin(true);
         const result = await postLogin({
           email,
-          redirect: redirect ? (type ? `${redirect}&type=${type}_login` : redirect) : StaticLink.ACTIVATE,
+          redirect: redirect ? (type ? `${redirect}&type=${type}_login` : redirect) : StaticLink.BUYMOREBOARD,
         });
 
         if (result.error && result.error['status'] === 400 && result.error['data']['msg'].includes('not found')) {

@@ -1,19 +1,17 @@
 import classNames from 'classnames';
 import Button from 'components/Button';
 import Command from 'components/Command';
-import { purchaseSupportedNetworks, USER_ACCESS_TOKEN } from 'configs/constants';
-import { StaticLink } from 'configs/links';
+import Modal from 'components/Modal';
 import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
-import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
-import { useRouter } from 'next/router';
+import { IActivateInfos } from 'interfaces/nodeSale';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useLazyGetIsUsedPalomaAddressQuery, usePostActiveWalletMutation } from 'services/api/nodesale';
 import { ActivateInstructionsSteps, SupportSystems } from 'utils/data';
-import { parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
+import { isSameContract, parseIntString, shortenString, stringToHexWithBech } from 'utils/string';
 
 import style from './activate.module.scss';
 
@@ -23,18 +21,19 @@ const STEPS = {
   ALREADY_USED_PALOMA: 3,
   ACTIVATED: 4,
   TERMINAL: 5,
+  INVALID_WALLET: 6,
 };
 
-const Activate = () => {
-  const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet } = useWallet();
+interface IActivate {
+  purchaseData: IActivateInfos;
+  onClose: () => void;
+  className?: string;
+}
+
+const Activate = ({ purchaseData, onClose, className }: IActivate) => {
+  const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet, requestSwitchNetwork } = useWallet();
   const provider = useProvider(wallet);
 
-  const windowUrl = window.location.search;
-  const params = new URLSearchParams(windowUrl);
-  const type = params.get('type');
-
-  const router = useRouter();
-  const { getStoredData } = useCookie();
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
   const [fetchIsUsedPalomaAddress] = useLazyGetIsUsedPalomaAddressQuery();
   const [postActivateWallet] = usePostActiveWalletMutation();
@@ -59,7 +58,8 @@ const Activate = () => {
   const handleChooseMetamask = async () => {
     if (!loadingMetamask) {
       setLoadingMetamask(true);
-      handleConnectMetamask();
+      await handleConnectMetamask();
+      setLoadingMetamask(false);
     }
   };
 
@@ -89,12 +89,32 @@ const Activate = () => {
   };
 
   useEffect(() => {
-    if (wallet && parseIntString(wallet.network) in purchaseSupportedNetworks) {
-      checkActivate();
-    } else {
-      setSteps(STEPS.CONNECT_WALLET);
+    if (purchaseData) {
+      if (purchaseData.fiat_wallet_address) {
+        checkActivate();
+      } else if (wallet.account) {
+        const call = async () => {
+          const result = await requestSwitchNetwork(purchaseData.chain_id.toString());
+          if (result) {
+            if (isSameContract(wallet.account, purchaseData.buyer)) {
+              checkActivate();
+            } else {
+              setSteps(STEPS.INVALID_WALLET);
+              setLoadingMetamask(false);
+              setLoadingWalletconnect(false);
+            }
+          } else {
+            onClose();
+            setLoadingMetamask(false);
+            setLoadingWalletconnect(false);
+          }
+        };
+        call();
+      } else {
+        setSteps(STEPS.CONNECT_WALLET);
+      }
     }
-  }, [wallet, provider]);
+  }, [wallet, purchaseData]);
 
   const isValidPalomaWallet = useMemo(() => {
     if (palomaAddress && palomaAddress.length === 45) {
@@ -129,23 +149,19 @@ const Activate = () => {
       }
 
       /** Activate paloma address */
-      if (type && type.includes('credit')) {
-        const token = await getStoredData(USER_ACCESS_TOKEN);
-        if (token.data) {
-          const result = await postActivateWallet({ token: token.data, paloma: stringToHexWithBech(palomaAddress) });
-          if (result && result.error) {
-            toast.error('Failed. Please try again later.');
-          } else {
-            setSteps(STEPS.ACTIVATED);
-            setActivatedPalomaAddress(palomaAddress);
-          }
+      if (purchaseData.fiat_wallet_address) {
+        const result = await postActivateWallet({
+          token: purchaseData.token,
+          paloma: stringToHexWithBech(palomaAddress),
+        });
+        if (result && result.error) {
+          toast.error('Failed. Please try again later.');
         } else {
-          toast.error('Expired your token. Please log in again.');
-          router.push(`${StaticLink.LOGIN}?type=activate_wallet`);
-          return;
+          setSteps(STEPS.ACTIVATED);
+          setActivatedPalomaAddress(palomaAddress);
         }
       } else {
-        const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(wallet.network));
+        const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(purchaseData.chain_id.toString()));
         if (activate) {
           setSteps(STEPS.ACTIVATED);
           setActivatedPalomaAddress(palomaAddress);
@@ -164,7 +180,7 @@ const Activate = () => {
   };
 
   return (
-    <section className={style.container}>
+    <Modal className={style.container} onClose={onClose}>
       <div className={classNames(style.walletModal, steps === STEPS.TERMINAL ? style.terminalModal : undefined)}>
         {steps === STEPS.CONNECT_WALLET && (
           <>
@@ -239,6 +255,19 @@ const Activate = () => {
             </button>
           </>
         )}
+        {steps === STEPS.INVALID_WALLET && (
+          <>
+            <img src="/assets/icons/false.svg" alt="false" />
+            <h1>This wallet is not linked to purchased Paloma LightNode</h1>
+            <p>
+              The selected wallet does not contain the purchased nodes. Please ensure that you connect the wallet with
+              which you made the purchase.
+            </p>
+            <button className={style.activateBtn} onClick={() => setSteps(STEPS.CONNECT_WALLET)}>
+              Connect another Wallet
+            </button>
+          </>
+        )}
         {steps === STEPS.ACTIVATED && (
           <>
             <img src="/assets/icons/success.svg" alt="success" />
@@ -297,10 +326,13 @@ const Activate = () => {
                 </div>
               </div>
             ))}
+            <button className={classNames(style.activateBtn, style.closeBtn)} onClick={() => onClose()}>
+              View your LightNodes
+            </button>
           </>
         )}
       </div>
-    </section>
+    </Modal>
   );
 };
 

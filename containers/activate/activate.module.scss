@@ -1,17 +1,18 @@
 @import '/styles/libraries/global';
 
 .container {
-  width: 100%;
-  background: #d8d3d3;
-  padding: 109px 0;
-  position: relative;
+  width: fit-content !important;
+  padding: 0 !important;
+  // background: #d8d3d3;
+  // padding: 109px 0;
+  // position: relative;
 
   p {
     margin: 0;
   }
   .walletModal {
     max-width: 580px;
-    margin: 121px auto;
+    // margin: 121px auto;
     border-radius: 20px;
     background: #f5f5f5;
     text-align: center;
@@ -146,6 +147,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .closeBtn {
+      max-width: 294px;
     }
     .invalid {
       background: #d8d3d3;

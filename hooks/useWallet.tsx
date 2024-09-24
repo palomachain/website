@@ -56,6 +56,8 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
   const ethereum = (window as any).ethereum;
   const { address, isConnected } = useAccount();
 
+  const windowUrl = window.location.pathname;
+
   const { open } = useWeb3Modal();
   const { chain } = useNetwork();
   const [getStatus] = useLazyGetStatusQuery();
@@ -277,7 +279,9 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
         }
 
         // Register wallet address
-        registerAddress(wallet.account);
+        if (windowUrl.toLowerCase().includes(StaticLink.BUYMOREBOARD)) {
+          registerAddress(wallet.account);
+        }
       }
     } catch (e) {
       setError(e);

@@ -191,7 +191,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     // Has purchased history
     if (status?.isSuccess && status?.data && status?.data.length > 0) {
       // Register address
-      // await postAddAddr({ addr: checksumAddress(account), token: token });
+      await postAddAddr({ addr: checksumAddress(account), token: token });
     }
   };
 

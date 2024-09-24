@@ -187,20 +187,11 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
       return;
     }
 
-    // Get my promo code to check if my address is registered
-    const promocode = await getPromocodeStatus({ token });
-    if (promocode.isSuccess) {
-      const info = promocode.data[0];
-
-      // Not registered my address
-      if (!info['wallet_address']) {
-        const status = await getStatus({ buyer: checksumAddress(account) });
-        // Has purchased history
-        if (status?.isSuccess && status?.data && status?.data.length > 0) {
-          // Register address
-          await postAddAddr({ addr: checksumAddress(account), token: token });
-        }
-      }
+    const status = await getStatus({ buyer: checksumAddress(account) });
+    // Has purchased history
+    if (status?.isSuccess && status?.data && status?.data.length > 0) {
+      // Register address
+      // await postAddAddr({ addr: checksumAddress(account), token: token });
     }
   };
 

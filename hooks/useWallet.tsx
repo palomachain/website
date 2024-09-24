@@ -275,6 +275,9 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
             },
           );
         }
+
+        // Register wallet address
+        registerAddress(wallet.account);
       }
     } catch (e) {
       setError(e);
@@ -314,9 +317,6 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
           provider: (window as any).ethereum,
           network: String(chain.id),
         });
-
-      // Register wallet address
-      registerAddress(address);
 
       setShowChooseWalletModal(false);
     }

@@ -224,7 +224,8 @@ const BuyMoreBoard = () => {
     if (dataLoading) return '-';
     if (myPurchaseStatus && myPurchaseStatus.length > 0) {
       let sum = myPurchaseStatus.reduce(function (x, y) {
-        return x + y['node_count'];
+        const nodeCount = y['node_count'] ?? y['estimated_node_count'];
+        return x + (nodeCount ?? 0);
       }, 0);
       return sum;
     }
@@ -235,18 +236,19 @@ const BuyMoreBoard = () => {
     if (dataLoading) return '-';
     if (myPurchaseStatus && myPurchaseStatus.length > 0) {
       let sum = myPurchaseStatus.reduce(function (x, y) {
-        return new BigNumber(x).plus(BigNumber(y['grain_amount']));
+        return new BigNumber(x).plus(BigNumber(y['status'] > 2 ? y['grain_amount'] ?? 0 : 0));
       }, 0);
-      return sum;
+
+      return sum.toString() ?? '0';
     }
-    return new BigNumber(0);
+    return '0';
   }, [dataLoading, myPurchaseStatus]);
 
   const totalGrainUSD = useMemo(() => {
     if (dataLoading) return '-';
     if (myPurchaseStatus && myPurchaseStatus.length > 0) {
       let sum = myPurchaseStatus.reduce(function (x, y) {
-        return x + Number(balanceTool.convertFromWei(y['fund_usd_amount'], 0, 6));
+        return x + Number(balanceTool.convertFromWei(y['status'] > 2 ? y['fund_usd_amount'] : 0, 0, 6));
       }, 0);
       return sum;
     }
@@ -406,7 +408,7 @@ const BuyMoreBoard = () => {
               ) : (
                 <>
                   <p>Your Balance</p>
-                  <h3>{formatNumber(totalGrainBalance.toString(), 0, 2)} GRAIN</h3>
+                  <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 2)} GRAIN</h3>
                   <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 2)}</p>
                 </>
               )}
@@ -503,11 +505,13 @@ const BuyMoreBoard = () => {
                       <td>
                         {purchase['paloma_address'] &&
                           shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
-                        <span>{formatNumber(purchase['node_count'], 0, 2)} LightNodes</span>
+                        <span>
+                          {formatNumber(purchase['node_count'] ?? purchase['estimated_node_count'], 0, 2)} LightNodes
+                        </span>
                       </td>
                       <td>{convertTime(purchase['created_at'].toString())}</td>
                       <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
-                      <td>{formatNumber(purchase['grain_amount'], 0, 2)}</td>
+                      <td>{formatNumber(purchase['grain_amount'] ?? 0, 0, 2)}</td>
                       <td className={style.activeButton}>
                         {loadingIndex === index ? (
                           <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
@@ -516,7 +520,7 @@ const BuyMoreBoard = () => {
                             className={isAvailableActive(index) ? style.clickable : style.notClickable}
                             onClick={() => onClickActive(index)}
                           >
-                            Active
+                            Activate
                           </button>
                         ) : (
                           'Mining'

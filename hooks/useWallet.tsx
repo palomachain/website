@@ -426,10 +426,12 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
         <WalletSelectModal
           onClose={() => setShowChooseWalletModal(false)}
           onChooseMetamask={() => handleConnectMetamask()}
+          // onChooseFrame={() => handleConnectFrame()}
           onChooseWalletConnect={() => connectWalletConnect()}
           showConnecting={showConnecting}
           setShowConnecting={setShowConnecting}
           web3ModalLoading={web3ModalLoading}
+          // frameLoading={frameLoading}
         />
       )}
     </WalletContext.Provider>

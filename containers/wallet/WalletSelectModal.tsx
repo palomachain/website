@@ -11,8 +11,10 @@ import style from 'containers/wallet/WalletSelectModal.module.scss';
 interface WalletSelectModalProps {
   onClose: () => void;
   onChooseMetamask: () => void;
+  // onChooseFrame: () => void;
   onChooseWalletConnect: () => void;
   web3ModalLoading: boolean;
+  // frameLoading: boolean;
   showConnecting: boolean;
   setShowConnecting: any;
 }
@@ -20,8 +22,10 @@ interface WalletSelectModalProps {
 const WalletSelectModal = ({
   onClose,
   onChooseMetamask,
+  // onChooseFrame,
   onChooseWalletConnect,
   web3ModalLoading,
+  // frameLoading,
   showConnecting,
   setShowConnecting,
 }: WalletSelectModalProps) => {
@@ -44,9 +48,7 @@ const WalletSelectModal = ({
         <section className={style.wizardView}>
           {!showConnecting && (
             <>
-              <section className={style.stepWizard}>
-                <p className={style.describeBar}>To Complete Your Purchase, Please Connect Your EVM Wallet.</p>
-              </section>
+              <p className={style.describeBar}>To Complete Your Purchase, Please Connect Your EVM Wallet.</p>
               <p className={style.chooseWallet}>Choose a Wallet</p>
 
               <Button className={style.connectWalletBtn} type="grey" onClick={() => handleChooseMetamask()}>
@@ -69,6 +71,10 @@ const WalletSelectModal = ({
                   </>
                 )}
               </Button>
+              <div className={style.connectWalletBtn}>
+                <img src="/assets/wallets/frame.svg" alt="" />
+                <ConnectWallet className={style.frameWallet} theme="dark" btnTitle="frame" />
+              </div>
               {/* <ConnectWallet btnTitle="Coinbase" /> */}
             </>
           )}

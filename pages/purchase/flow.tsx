@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import CoinbaseButton from 'components/Button/CoinbaseButton';
 import CheckBox from 'components/CheckBox';
 import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
 import SuccessModal from 'components/Modal/SuccessModal';
@@ -47,13 +48,13 @@ import balanceTool from 'utils/balance';
 import { isValidPromoCode } from 'utils/common';
 import { NodeSaleEndDate, TotalNodes } from 'utils/constants';
 import { CustomerSupport } from 'utils/data';
+import { delay } from 'utils/date';
 import mockTool from 'utils/mock';
 import { abbreviateNumberSI, formatNumber } from 'utils/number';
 import { checksumAddress, isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import PurchaseWithFiatButton from './PurchaseButton/PurchaseWithFiatButton';
 import TotalPay from './TotalPay';
-import { delay } from 'utils/date';
 
 const PurchaseFlow = () => {
   const { wallet } = useWallet();
@@ -201,9 +202,11 @@ const PurchaseFlow = () => {
     if (isValidTokenAmount) {
       const delayDebounceFn = setTimeout(async () => {
         await getNodePrice(quantity, appliedPromoCode);
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(delayDebounceFn);
+    } else {
+      setNodePrice(0);
     }
   }, [quantity]);
 
@@ -227,7 +230,13 @@ const PurchaseFlow = () => {
 
   useEffect(() => {
     if (type && type.includes('fiat')) {
-      setSelectedChain(type.includes('credit') ? ChainID.CREDIT_CARD : ChainID.BANK_ACCOUNT);
+      setSelectedChain(
+        type.includes('coinbase')
+          ? ChainID.COINBASE_ONRAMP
+          : type.includes('credit')
+          ? ChainID.CREDIT_CARD
+          : ChainID.BANK_ACCOUNT,
+      );
       setFromToken({ ...usdcToken(ChainID.CREDIT_CARD) }); // set as a Arbitrum USDC token
       setFromTokenExchangeRate(new BigNumber(1)); // USDC rate is 1
 
@@ -536,7 +545,11 @@ const PurchaseFlow = () => {
             // TODO
             router.push(
               `${StaticLink.LOGIN}?redirect=${StaticLink.PURCHASE}&type=fiat_with_${
-                selectedChain === ChainID.CREDIT_CARD ? 'credit_card' : 'bank_account'
+                selectedChain === ChainID.COINBASE_ONRAMP
+                  ? 'coinbase_onramp'
+                  : selectedChain === ChainID.CREDIT_CARD
+                  ? 'credit_card'
+                  : 'bank_account'
               }`,
             );
             return;
@@ -581,12 +594,20 @@ const PurchaseFlow = () => {
                   toast.success('Paloma LightNodes successfully purchased');
                   router.push(
                     `${StaticLink.INSTRUCTIONS}?type=fiat_with_${
-                      selectedChain === ChainID.CREDIT_CARD ? 'credit_card' : 'bank_account'
+                      selectedChain === ChainID.COINBASE_ONRAMP
+                        ? 'coinbase_onramp'
+                        : selectedChain === ChainID.CREDIT_CARD
+                        ? 'credit_card'
+                        : 'bank_account'
                     }`,
                   );
                 }
               } else {
-                openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                if (selectedChain === ChainID.COINBASE_ONRAMP) {
+                  CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                } else {
+                  openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                }
               }
               setFetchingPriceLoading(false);
             } else {
@@ -616,7 +637,11 @@ const PurchaseFlow = () => {
               setFiatWallet(myFiatWallet);
               setGeneratingWallet(false);
 
-              openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              if (selectedChain === ChainID.COINBASE_ONRAMP) {
+                CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              } else {
+                openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              }
             }
           }
         }

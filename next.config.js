@@ -19,5 +19,6 @@ module.exports = {
     PASSCODE: process.env.PASSCODE,
     THIRDWEB_API_KEY: process.env.THIRDWEB_API_KEY,
     TRANSAK_API_KEY: process.env.TRANSAK_API_KEY,
+    COINBASE_API_KEY: process.env.COINBASE_API_KEY,
   },
 };

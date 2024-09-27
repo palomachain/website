@@ -7,6 +7,7 @@ export enum ChainID {
 
   CREDIT_CARD = '0000',
   BANK_ACCOUNT = '0001',
+  COINBASE_ONRAMP = '0002',
   ETHEREUM_MAIN = '1',
   OPTIMISM_MAIN = '10',
   BSC_MAIN = '56',
@@ -36,6 +37,13 @@ export const allChains: { [key: string]: EVMChain } = {
     icon: '/assets/chains/bank account.svg',
     chainName: 'Bank Account',
     chainId: ChainID.BANK_ACCOUNT,
+    rpc: '',
+    blockExplorerUrl: '',
+  },
+  [ChainID.COINBASE_ONRAMP]: {
+    icon: '/assets/chains/coinbase wallet.svg',
+    chainName: 'Coinbase Wallet',
+    chainId: ChainID.COINBASE_ONRAMP,
     rpc: '',
     blockExplorerUrl: '',
   },

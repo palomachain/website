@@ -91,7 +91,11 @@ export function shortenString(val: string, prior = 6, suffix = 4) {
 }
 
 export function isFiat(chain: string) {
-  return parseIntString(chain) === ChainID.BANK_ACCOUNT || parseIntString(chain) === ChainID.CREDIT_CARD;
+  return (
+    parseIntString(chain) === ChainID.BANK_ACCOUNT ||
+    parseIntString(chain) === ChainID.CREDIT_CARD ||
+    parseIntString(chain) === ChainID.COINBASE_ONRAMP
+  );
 }
 
 export function checksumAddress(address: string) {

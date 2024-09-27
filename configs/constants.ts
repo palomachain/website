@@ -12,11 +12,13 @@ const envParam = {
   PASSCODE: process.env.PASSCODE || '',
   thirdWebApiKey: process.env.THIRDWEB_API_KEY || '',
   transakApiKey: process.env.TRANSAK_API_KEY || '',
+  coinbaseApiKey: process.env.COINBASE_API_KEY || '',
 };
 
 const purchaseSupportedNetworks = {
   '0000': 'Credit Card',
   '0001': 'Bank Account',
+  '0002': 'Coinbase Wallet',
   '1': 'Ethereum',
   '10': 'Optimism',
   '56': 'BNB',

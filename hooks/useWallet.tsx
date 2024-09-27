@@ -1,4 +1,12 @@
-import { useDisconnect } from '@thirdweb-dev/react';
+import { Ethereum } from '@thirdweb-dev/chains';
+import {
+  useAddress,
+  useChainId,
+  useConnectionStatus,
+  useDisconnect,
+  useFrameWallet,
+  useSwitchChain,
+} from '@thirdweb-dev/react';
 import { disconnect, switchNetwork } from '@wagmi/core';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { AddNetwork, USER_ACCESS_TOKEN } from 'configs/constants';
@@ -12,7 +20,7 @@ import { toast } from 'react-toastify';
 import { useLazyGetPromocodeStatusQuery, useLazyGetStatusQuery, usePostAddAddrMutation } from 'services/api/nodesale';
 import Cookies from 'universal-cookie';
 import { errorMessage } from 'utils/errorMessage';
-import { checksumAddress, parseDexString, parseIntString } from 'utils/string';
+import { checksumAddress, parseDexString, parseIntString, parseOxString } from 'utils/string';
 import { useAccount, useNetwork } from 'wagmi';
 import useCookie from './useCookie';
 
@@ -60,15 +68,26 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
 
   const { open } = useWeb3Modal();
   const { chain } = useNetwork();
+
+  const frameAddress = useAddress();
+  const frameStatus = useConnectionStatus();
+  const frameChainId = useChainId();
+  const frameSwitchChain = useSwitchChain();
+  const frameDisconnect = useDisconnect();
+  const connectWithFrameWallet = useFrameWallet();
+
+  const [web3ModalLoading, setWeb3ModalLoading] = useState(false);
+  const [frameLoading, setFrameLoading] = useState(false);
+
+  useEffect(() => {
+    frameStatus && setFrameLoading(frameStatus === 'connecting');
+  }, [frameStatus]);
+
   const [getStatus] = useLazyGetStatusQuery();
   const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
   const [postAddAddr] = usePostAddAddrMutation();
   const { getStoredData } = useCookie();
   const router = useRouter();
-
-  const frameDisconnect = useDisconnect();
-
-  const [web3ModalLoading, setWeb3ModalLoading] = useState(false);
 
   const availableProviders = {
     metamask: ethereum?.isMetaMask,
@@ -293,6 +312,14 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     await connectMetaMask(network);
   };
 
+  const handleConnectFrame = async () => {
+    try {
+      await connectWithFrameWallet({ chainId: Ethereum.chainId });
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
   const connectWalletConnect = async () => {
     await disconnect();
     setWeb3ModalLoading(true);
@@ -301,6 +328,32 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
 
     setWeb3ModalLoading(false);
   };
+  // connect frame wallet
+  useEffect(() => {
+    if (frameAddress && frameChainId && frameStatus === 'connected') {
+      cookies.set(
+        'current_wallet',
+        {
+          frameAddress,
+          providerName: 'frame',
+          network: String(frameChainId),
+        },
+        {
+          expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+          path: '/',
+        },
+      );
+
+      setWallet({
+        account: parseOxString(frameAddress),
+        providerName: 'frame',
+        provider: (window as any).ethereum,
+        network: String(frameChainId),
+      });
+
+      setShowChooseWalletModal(false);
+    }
+  }, [frameAddress, frameChainId, frameStatus]);
 
   useEffect(() => {
     if (address && isConnected && chain) {
@@ -367,6 +420,16 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
           if (String(network.id) === chainId) {
             setWallet({ ...wallet, network: chainId });
           }
+        }
+      } catch (error) {
+        console.log('error', error);
+        return false;
+      }
+    } else if (wallet.providerName === 'frame') {
+      try {
+        if (chainId !== wallet.network) {
+          const data = await frameSwitchChain(Number(parseIntString(chainId)));
+          console.log('data', data);
         }
       } catch (error) {
         console.log('error', error);

@@ -161,7 +161,10 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
           setActivatedPalomaAddress(palomaAddress);
         }
       } else {
-        const activate = await activateWallet(stringToHexWithBech(palomaAddress), parseIntString(purchaseData.chain_id.toString()));
+        const activate = await activateWallet(
+          stringToHexWithBech(palomaAddress),
+          parseIntString(purchaseData.chain_id.toString()),
+        );
         if (activate) {
           setSteps(STEPS.ACTIVATED);
           setActivatedPalomaAddress(palomaAddress);

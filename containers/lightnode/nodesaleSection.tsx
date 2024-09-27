@@ -1,11 +1,11 @@
 import Purchase from 'components/Button/purchase';
 import React, { useState } from 'react';
 import Countdown from 'react-countdown';
-import { NodeSaleStartDate } from 'utils/constants';
+import { NodeSaleEndDate } from 'utils/constants';
 import { SupportChains } from 'utils/data';
 
 const nodesaleSection = () => {
-  const [remainStartDate, setRemainStartDate] = useState(NodeSaleStartDate);
+  const [remainStartDate, setRemainStartDate] = useState(NodeSaleEndDate);
 
   const CompleteTime = () => <span>-- Started --</span>;
   // Table style
@@ -53,7 +53,7 @@ const nodesaleSection = () => {
       <div className="nodesale-start flex-col">
         <div className="nodesale-bg" />
         <div className="flex-col gap-16">
-          <h2>NODE SALE STARTS IN</h2>
+          <h2>NODE SALE WILL END</h2>
           <Countdown date={remainStartDate} renderer={rendererTime} />
         </div>
         <div className="flex-col gap-36">

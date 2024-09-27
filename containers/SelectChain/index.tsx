@@ -53,7 +53,13 @@ const SelectChain = ({
       };
     });
 
-    list.sort((a, b) => (a.id.toString() === ChainID.BANK_ACCOUNT || a.id.toString() === ChainID.CREDIT_CARD ? -1 : 0));
+    list.sort((a, b) =>
+      a.id.toString() === ChainID.BANK_ACCOUNT ||
+      a.id.toString() === ChainID.CREDIT_CARD ||
+      a.id.toString() === ChainID.COINBASE_ONRAMP
+        ? -1
+        : 0,
+    );
 
     return list;
   };

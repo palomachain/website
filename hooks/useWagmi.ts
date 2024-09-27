@@ -5,7 +5,14 @@ const useWagmi = () => {
   const chains = [mainnet, polygon, bsc, gnosis, arbitrum, optimism];
   const projectId = process.env.WALLETCONNECT_PROJECT_ID;
 
-  const wagmiConfig = defaultWagmiConfig({ chains, projectId });
+  const wagmiConfig = defaultWagmiConfig({
+    chains,
+    projectId,
+    enableCoinbase: false,
+    enableEIP6963: false,
+    enableEmail: false,
+    enableInjected: false,
+  });
 
   createWeb3Modal({
     wagmiConfig,

@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Arbitrum, Base, Binance, Ethereum, Optimism, Polygon } from '@thirdweb-dev/chains';
-import { ThirdwebProvider, frameWallet } from '@thirdweb-dev/react';
+import { ThirdwebProvider, coinbaseWallet } from '@thirdweb-dev/react';
 import { envParam } from 'configs/constants';
 import useWagmi from 'hooks/useWagmi';
 import { WalletProvider } from 'hooks/useWallet';
@@ -47,7 +47,7 @@ const App = ({ Component, router, pageProps }: AppProps) => {
         <Client>
           <Provider store={store}>
             <ThirdwebProvider
-              supportedWallets={[frameWallet()]}
+              supportedWallets={[coinbaseWallet()]}
               supportedChains={[Ethereum, Polygon, Binance, Arbitrum, Optimism, Base]}
               activeChain={Ethereum}
               clientId={envParam.thirdWebApiKey}

@@ -1,3 +1,4 @@
+import { ConnectWallet } from '@thirdweb-dev/react';
 import cn from 'classnames';
 import Button from 'components/Button';
 import LoadingBtn from 'components/Button/Loading';
@@ -68,6 +69,7 @@ const WalletSelectModal = ({
                   </>
                 )}
               </Button>
+              {/* <ConnectWallet btnTitle="Coinbase" /> */}
             </>
           )}
           {showConnecting && (

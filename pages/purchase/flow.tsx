@@ -637,7 +637,11 @@ const PurchaseFlow = () => {
               setFiatWallet(myFiatWallet);
               setGeneratingWallet(false);
 
-              openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              if (selectedChain === ChainID.COINBASE_ONRAMP) {
+                CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              } else {
+                openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+              }
             }
           }
         }

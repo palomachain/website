@@ -77,11 +77,6 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
   const connectWithFrameWallet = useFrameWallet();
 
   const [web3ModalLoading, setWeb3ModalLoading] = useState(false);
-  const [frameLoading, setFrameLoading] = useState(false);
-
-  useEffect(() => {
-    frameStatus && setFrameLoading(frameStatus === 'connecting');
-  }, [frameStatus]);
 
   const [getStatus] = useLazyGetStatusQuery();
   const [getPromocodeStatus] = useLazyGetPromocodeStatusQuery();
@@ -219,6 +214,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
   const connectMetaMask = async (network = '1') => {
     if (!ethereum) return;
 
+    // For Firefox browser
     try {
       // handle choose wallet after disconnect current wallet
       await window.ethereum.request({
@@ -229,7 +225,11 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
           },
         ],
       });
+    } catch (error) {
+      console.error(error);
+    }
 
+    try {
       const accounts = await ethereum.request({
         method: 'eth_requestAccounts',
       });
@@ -308,7 +308,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
   }, [wallet]);
 
   const handleConnectMetamask = async () => {
-    const network = await ethereum.request({ method: 'net_version' });
+    const network = await window.ethereum.request({ method: 'net_version' });
     await connectMetaMask(network);
   };
 
@@ -389,7 +389,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
     if (wallet.providerName === 'metamask' || isMetaMask) {
       const hex = parseDexString(chainId);
       try {
-        await ethereum.request({
+        await window.ethereum.request({
           method: 'wallet_switchEthereumChain',
           params: [
             {
@@ -401,7 +401,7 @@ export const WalletProvider = ({ children }: { children: JSX.Element }): JSX.Ele
         // This error code indicates that the chain has not been added to MetaMask
         console.log('error', error);
         if (error.code === 4902) {
-          await ethereum.request({
+          await window.ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [
               {

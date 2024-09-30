@@ -323,7 +323,7 @@ const PurchaseFlow = () => {
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
-        setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
+        amount > 0 && setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
         if (isPromocodeCheck) {
           setApplyPromoCode(promo_code);
           toast.success('Congratulations! Your Promo Code has been verified.');

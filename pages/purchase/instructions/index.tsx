@@ -67,6 +67,7 @@ const Instructions = () => {
                     command={item.command}
                     copyCommand={item.copyCommand}
                     instruction={item.instruction}
+                    isTitle={item.isTitle}
                   />
                 ))}
               </div>

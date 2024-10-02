@@ -10,6 +10,7 @@ interface ICommandWrapper {
   copyCommand?: string;
   instruction?: string | JSX.Element;
   isCopyAvailable?: boolean;
+  isTitle?: boolean;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ const Command = ({
   copyCommand,
   instruction,
   isCopyAvailable = true,
+  isTitle = true,
   className,
 }: ICommandWrapper) => {
   const [isCopied, setCopied] = useState(false);
@@ -40,10 +42,12 @@ const Command = ({
   }, [isCopied]);
 
   return (
-    <section className={style.container}>
-      <div className={style.head}>
-        <p>{step}.</p> <p>{title}</p>
-      </div>
+    <section className={classNames(style.container, isTitle ? undefined : style.fullContainer)}>
+      {isTitle && (
+        <div className={style.head}>
+          <p>{step}.</p> <p>{title}</p>
+        </div>
+      )}
       {command && (
         <div className={style.shCommand}>
           <div className={style.command}>{command}</div>

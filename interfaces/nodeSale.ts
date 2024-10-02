@@ -32,6 +32,7 @@ export interface ISteps {
     command: string | JSX.Element;
     copyCommand: string;
     instruction?: string | JSX.Element;
+    isTitle?: boolean;
   }[];
   img?: JSX.Element;
 }

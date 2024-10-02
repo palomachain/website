@@ -1,4 +1,5 @@
 import { IAlertInfo, IInstructionsNodeSteps } from 'interfaces/nodeSale';
+import React from 'react';
 
 export const SupportChains = ['ethereum', 'binance', 'arbitrum', 'base', 'optimism', 'b', 'polygon', 'gnosis'];
 
@@ -452,6 +453,7 @@ export const SupportSystems = {
   Mac: 'MacOS',
   Windows: 'Windows',
   Linux: 'Linux',
+  VPS: 'VPS',
 };
 
 export const PalomaInstructionsSteps: {
@@ -1043,6 +1045,172 @@ export const PalomaInstructionsSteps: {
       ],
     },
   ],
+  [SupportSystems.VPS]: [
+    {
+      head: 'Virtual Private Server LightNode',
+      subItems: [
+        {
+          title: 'Docker Installation Instructions',
+          describe: 'Open the Linux command line and follow the steps below to install Docker.',
+          steps: [
+            {
+              title: (
+                <p>
+                  <b>Update and get Certificates.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: (
+                    <p>
+                      sudo apt-get update
+                      <br />
+                      sudo apt-get install ca-certificates curl
+                    </p>
+                  ),
+                  copyCommand: 'sudo apt-get update \n sudo apt-get install ca-certificates curl',
+                  isTitle: false,
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Install docker Key Rings.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: (
+                    <p>
+                      sudo install -m 0755 -d /etc/apt/keyrings <br />
+                      sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc{' '}
+                      <br />
+                      sudo chmod a+r /etc/apt/keyrings/docker.asc
+                    </p>
+                  ),
+                  copyCommand:
+                    'sudo install -m 0755 -d /etc/apt/keyrings \n sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \n sudo chmod a+r /etc/apt/keyrings/docker.asc',
+                  isTitle: false,
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Install Ubuntu Docker Key Rings.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: (
+                    <p>
+                      echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc]
+                      https://download.docker.com/linux/ubuntu \ $(. /etc/os-release && echo "$VERSION_CODENAME")
+                      stable" | \ <br />
+                      sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+                    </p>
+                  ),
+                  copyCommand:
+                    'echo \\ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \\ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \\ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null',
+                  isTitle: false,
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Update packages and install docker.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: (
+                    <p>
+                      sudo apt-get update
+                      <br />
+                      sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin
+                      docker-compose-plugin
+                    </p>
+                  ),
+                  copyCommand:
+                    'sudo apt-get update \n sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin',
+                  isTitle: false,
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Verify if Docker runs.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: <p>sudo docker run hello-world</p>,
+                  copyCommand: 'sudo docker run hello-world',
+                  isTitle: false,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      head: 'Virtual Private Server LightNode',
+      subItems: [
+        {
+          title: 'Install Paloma LightNode',
+          describe:
+            'Once Docker is successfully installed, open the Linux command line and follow the steps below to install Paloma Lightnode.',
+          steps: [
+            {
+              title: (
+                <p>
+                  <b>Prepare your download directory.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: <p>mkdir -p ~/Downloads</p>,
+                  copyCommand: 'mkdir -p ~/Downloads',
+                  isTitle: false,
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Download the Setup Script for your Linux hardware.</b>
+                </p>
+              ),
+              externalBtns: [
+                {
+                  text: 'Download Setup',
+                  link: 'https://download.palomachain.com/lightnode/setup.sh',
+                },
+              ],
+            },
+            {
+              title: (
+                <p>
+                  <b>Run Paloma LightNode v1 setup.</b> Copy and Past the command:
+                </p>
+              ),
+              commands: [
+                {
+                  command: <p>bash $HOME/Downloads/setup.sh</p>,
+                  copyCommand: 'bash $HOME/Downloads/setup.sh',
+                  isTitle: false,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export const ActivateInstructionsSteps: {
@@ -1066,6 +1234,15 @@ export const ActivateInstructionsSteps: {
         },
       ],
     },
+    {
+      title: <p>Automatically claim rewards and redelegate stakes for all your nodes every hour.</p>,
+      commands: [
+        {
+          command: <p>sh $HOME/Downloads/setup.sh automate</p>,
+          copyCommand: 'sh $HOME/Downloads/setup.sh automate',
+        },
+      ],
+    },
   ],
   [SupportSystems.Windows]: [
     {
@@ -1084,6 +1261,22 @@ export const ActivateInstructionsSteps: {
         },
       ],
     },
+    {
+      title: <p>Automatically claim rewards and redelegate stakes for all your nodes every hour.</p>,
+      commands: [
+        {
+          command: (
+            <p>
+              docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
+              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v1
+              automate
+            </p>
+          ),
+          copyCommand:
+            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 automate',
+        },
+      ],
+    },
   ],
   [SupportSystems.Linux]: [
     {
@@ -1092,6 +1285,35 @@ export const ActivateInstructionsSteps: {
         {
           command: <p>sudo sh $HOME/Downloads/setup.sh activate</p>,
           copyCommand: 'sudo sh $HOME/Downloads/setup.sh activate',
+        },
+      ],
+    },
+    {
+      title: <p>Automatically claim rewards and redelegate stakes for all your nodes every hour.</p>,
+      commands: [
+        {
+          command: <p>sudo sh $HOME/Downloads/setup.sh automate</p>,
+          copyCommand: 'sudo sh $HOME/Downloads/setup.sh automate',
+        },
+      ],
+    },
+  ],
+  [SupportSystems.VPS]: [
+    {
+      title: <p>After activating your LightNode, open the Terminal application.</p>,
+      commands: [
+        {
+          command: <p>bash $HOME/Downloads/setup.sh activate</p>,
+          copyCommand: 'bash $HOME/Downloads/setup.sh activate',
+        },
+      ],
+    },
+    {
+      title: <p>Automatically claim rewards and redelegate stakes for all your nodes every hour.</p>,
+      commands: [
+        {
+          command: <p>bash $HOME/Downloads/setup.sh automate</p>,
+          copyCommand: 'bash $HOME/Downloads/setup.sh automate',
         },
       ],
     },

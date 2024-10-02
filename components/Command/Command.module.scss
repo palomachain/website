@@ -68,3 +68,12 @@
     }
   }
 }
+
+.fullContainer {
+  margin-left: -35px !important;
+
+  .shCommand {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

@@ -195,7 +195,7 @@ export type GetEVMApiArg = {
   buyer: string; // EVM address
 };
 export type GetBalances = {
-  addresses: string[];
+  addresses: string;
 };
 
 export const {

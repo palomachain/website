@@ -6,13 +6,14 @@ import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
 import SuccessClaimModal from 'components/Modal/SuccessModal/SuccessClaimModal';
 import { USER_ACCESS_TOKEN } from 'configs/constants';
 import { getTxHashLink, StaticLink } from 'configs/links';
+import Activate from 'containers/activate';
 import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import { useWallet } from 'hooks/useWallet';
 import { IActivateInfos, IBonusBalance } from 'interfaces/nodeSale';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   useLazyGetBalancesQuery,
@@ -24,7 +25,6 @@ import balanceTool from 'utils/balance';
 import { convertTime } from 'utils/date';
 import { formatNumber } from 'utils/number';
 import { hexToStringWithBech, shortenString } from 'utils/string';
-import Activate from 'containers/activate';
 
 import style from './buyMoreBoard.module.scss';
 
@@ -201,7 +201,7 @@ const BuyMoreBoard = () => {
 
       const apiCall = async () => {
         if (palomaAddresses.length > 0) {
-          const api = await getBalances({ addresses: palomaAddresses });
+          const api = await getBalances({ addresses: palomaAddresses.toString() });
           if (api.isSuccess) {
             setTotalRewards({
               rewards: balanceTool.convertFromWei(api.data['total'], 2, 6),

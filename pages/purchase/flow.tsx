@@ -569,7 +569,7 @@ const PurchaseFlow = () => {
 
             let myFiatWallet = fiatWallet;
 
-            if (myFiatWallet) {
+            if (myFiatWallet && myFiatWallet.length > 0) {
               setFetchingPriceLoading(true);
 
               const tokenBalance = await getTokenBalance(myFiatWallet, Addresses[ChainID.ARBITRUM_MAIN].usdc);
@@ -609,19 +609,18 @@ const PurchaseFlow = () => {
                   openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
                 }
               }
-              setFetchingPriceLoading(false);
             } else {
               setGeneratingWallet(true);
 
               const createBotResult = await postCreateBot({ token: token?.data });
               if (createBotResult) {
-                if (createBotResult['wallet_address']) {
-                  myFiatWallet = createBotResult['wallet_address'];
-                } else {
-                  await delay(1000); // delay 1s
+                // Waiting for updating the event
+                while (!myFiatWallet || myFiatWallet.length === 0) {
+                  await delay(3000); // delay 3s
 
-                  const getUserFiatWallet = await getUserWalletForFiat({ token: token.data });
+                  const getUserFiatWallet = await getUserWalletForFiat({ token: token?.data });
                   if (
+                    getUserFiatWallet &&
                     getUserFiatWallet.isSuccess &&
                     getUserFiatWallet.data &&
                     getUserFiatWallet.data['wallet_address']
@@ -629,24 +628,27 @@ const PurchaseFlow = () => {
                     myFiatWallet = getUserFiatWallet.data['wallet_address'];
                   }
                 }
+
+                if (myFiatWallet && myFiatWallet.length > 0) {
+                  setFiatWallet(myFiatWallet);
+
+                  if (selectedChain === ChainID.COINBASE_ONRAMP) {
+                    CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                  } else {
+                    openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                  }
+                } else {
+                  toast.error('Failed create a bot. Please try again later.');
+                }
               } else {
                 toast.error('Failed create a bot. Please try again later.');
-                setGeneratingWallet(false);
-                return;
-              }
-              setFiatWallet(myFiatWallet);
-              setGeneratingWallet(false);
-
-              if (selectedChain === ChainID.COINBASE_ONRAMP) {
-                CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
-              } else {
-                openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
               }
             }
           }
         }
       } catch (e) {
         console.log(e);
+      } finally {
         setGeneratingWallet(false);
         setFetchingPriceLoading(false);
       }

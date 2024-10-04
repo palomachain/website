@@ -698,11 +698,11 @@ export const PalomaInstructionsSteps: {
                 <p>
                   docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
                   $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store
-                  palomachain/lightnode-client:v1 setup-node
+                  palomachain/lightnode-client:v2 setup-node
                 </p>
               ),
               copyCommand:
-                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 setup-node',
+                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v2 setup-node',
             },
             {
               name: (
@@ -714,11 +714,11 @@ export const PalomaInstructionsSteps: {
                 <p>
                   docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
                   $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store
-                  palomachain/lightnode-client:v1 add-node
+                  palomachain/lightnode-client:v2 add-node
                 </p>
               ),
               copyCommand:
-                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 add-node',
+                'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v2 add-node',
             },
           ],
         },
@@ -1252,12 +1252,12 @@ export const ActivateInstructionsSteps: {
           command: (
             <p>
               docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
-              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v1
+              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v2
               activate
             </p>
           ),
           copyCommand:
-            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 activate',
+            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v2 activate',
         },
       ],
     },
@@ -1268,12 +1268,12 @@ export const ActivateInstructionsSteps: {
           command: (
             <p>
               docker run --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.gnupg:/root/.gnupg -v
-              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v1
+              $env:USERPROFILE\paloma-lightnode\.password-store:/root/.password-store palomachain/lightnode-client:v2
               automate
             </p>
           ),
           copyCommand:
-            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v1 automate',
+            'docker run --pull=always -ti  -v $env:USERPROFILE\\paloma-lightnode\\.gnupg:/root/.gnupg -v $env:USERPROFILE\\paloma-lightnode\\.password-store:/root/.password-store palomachain/lightnode-client:v2 automate',
         },
       ],
     },

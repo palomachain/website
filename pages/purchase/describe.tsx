@@ -9,17 +9,22 @@ const Describe = () => {
       <img src="/assets/logo/paloma-logotype.svg" alt="paloma-logo" width={63} />
       <h3>Paloma LightNode</h3>
       <p>
-        The Paloma LightNode Client will act as a GRAINs miner. Grains will be vested on each LightNode Client address.
+        The Paloma LightNode Client will act as a GRAINs miner. Grains will be minted on each LightNode Client address.
       </p>
-      <div className="ul">LightNode includes:</div>
+      <div className="ul">LightNode v2 includes:</div>
       <ul>
-        <li>Two-Year Software License with full Volume support.</li>
-        <li>Automatic delegation to active validators to maximize low-stake validators.</li>
+        <li>Two-Year software license with full Volume support.</li>
+        <li>Ledger hardware wallet integration and support.</li>
+        <li>Automatic GRAIN delegation to active validators to minimize stake power differentials.</li>
         <li>Automatic re-delegation from inactive validators to active validators.</li>
-        <li>GRAIN rewards claimed and delegated to validators every 24-hours.</li>
-        <li>Package: Packaged binary as Docker for fast installation.</li>
+        <li>Manual re-delegation to preferred validators.</li>
+        <li>GRAIN mining rewards automatically claimed and delegated to validators every hour.</li>
+        <li>Unbonding Support to unlock GRAINs across multiple validators.</li>
+        <li>Governance support for Paloma proposal voting.</li>
+        <li>Packaged binary as Docker for fast installation.</li>
         <li>Community RPC provided by NodeGuru.</li>
-        <li>Linear per block vesting.</li>
+        <li>Linear per block mining.</li>
+        <li>Easy Node Management.</li>
         <li>Easy User-Interface for all levels.</li>
       </ul>
       <div className="ul">Activate your Node</div>

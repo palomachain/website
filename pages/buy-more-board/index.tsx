@@ -419,7 +419,7 @@ const BuyMoreBoard = () => {
               ) : (
                 <>
                   <p>Total Rewards</p>
-                  <h3>{formatNumber(totalRewards.rewards, 0, 2)} GRAIN</h3>
+                  <h3>{formatNumber(totalRewards.rewards, 0, 0)} GRAIN</h3>
                   <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 2)}</p>
                 </>
               )}

@@ -78,6 +78,7 @@ const BuyMoreBoard = () => {
   const [pendingModalText, setPendingModalText] = useState('');
   const [pendingModalProcess, setPendingModalProcess] = useState(false);
   const [claimedAmount, setClaimedAmount] = useState<number>();
+  const [currentRoundPrice, setCurrentRoundPrice] = useState<number>();
 
   const [activating, setActivating] = useState<IActivateInfos>();
 
@@ -207,6 +208,7 @@ const BuyMoreBoard = () => {
               rewards: balanceTool.convertFromWei(api.data['total'], 2, 6),
               usd: balanceTool.convertFromWei(api.data['usd_total'], 2, 6),
             });
+            setCurrentRoundPrice(Number(api.data['current_round_price']) ?? 0);
           }
         }
 
@@ -246,14 +248,11 @@ const BuyMoreBoard = () => {
 
   const totalGrainUSD = useMemo(() => {
     if (dataLoading) return '-';
-    if (myPurchaseStatus && myPurchaseStatus.length > 0) {
-      let sum = myPurchaseStatus.reduce(function (x, y) {
-        return x + Number(balanceTool.convertFromWei(y['status'] > 2 ? y['fund_usd_amount'] : 0, 0, 6));
-      }, 0);
-      return sum;
+    if (totalNodes > 0) {
+      return currentRoundPrice * Number(totalNodes);
     }
-    return new BigNumber(0);
-  }, [dataLoading, myPurchaseStatus]);
+    return 0;
+  }, [dataLoading, totalNodes, currentRoundPrice]);
 
   const closeCode = async (generated = false) => {
     setOpenGeneratePromocodeModal(false);
@@ -403,7 +402,7 @@ const BuyMoreBoard = () => {
         <div className={style.buyMoreBoard}>
           <div className={style.myBalances}>
             <div className={style.balanceCard}>
-              {dataLoading ? (
+              {dataLoading || rewardsLoading ? (
                 <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
               ) : (
                 <>

@@ -20,7 +20,7 @@ const SuccessModal = ({ show, isStepWizard = false, steps, activeStep, onClose }
   const router = useRouter();
 
   const onClick = () => {
-    router.push(StaticLink.REGISTER);
+    router.push(StaticLink.INSTRUCTIONS);
   };
 
   return (
@@ -32,7 +32,7 @@ const SuccessModal = ({ show, isStepWizard = false, steps, activeStep, onClose }
         before downloading the Paloma LightNode Client.
       </p>
       <div onClick={onClick} className={style.gotoBtn}>
-        Continue to Registration
+        Continue
       </div>
     </Modal>
   );

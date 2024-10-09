@@ -407,8 +407,8 @@ const BuyMoreBoard = () => {
               ) : (
                 <>
                   <p>Your Balance</p>
-                  <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 2)} GRAIN</h3>
-                  <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 2)}</p>
+                  <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 0)} GRAIN</h3>
+                  <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 0)}</p>
                 </>
               )}
             </div>
@@ -419,7 +419,7 @@ const BuyMoreBoard = () => {
                 <>
                   <p>Total Rewards</p>
                   <h3>{formatNumber(totalRewards.rewards, 0, 0)} GRAIN</h3>
-                  <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 2)}</p>
+                  <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 0)}</p>
                 </>
               )}
             </div>

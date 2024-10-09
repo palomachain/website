@@ -247,7 +247,7 @@ const BuyMoreBoard = () => {
   }, [dataLoading, myPurchaseStatus]);
 
   const totalGrainUSD = useMemo(() => {
-    if (dataLoading) return '-';
+    if (dataLoading) return 0;
     if (totalNodes > 0) {
       return currentRoundPrice * Number(totalNodes);
     }

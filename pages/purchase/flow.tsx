@@ -155,7 +155,7 @@ const PurchaseFlow = () => {
   }, [nodePrice, slippageFeePc, txSlippageFeePc]);
 
   const slippageFeeForUSDC = useMemo(() => {
-    return (nodePrice * slippageFeePc) / 100;
+    return Math.ceil(nodePrice * slippageFeePc * 100) / (100 * 100);
   }, [nodePrice, slippageFeePc, txSlippageFeePc]);
 
   const totalPay = useMemo(() => {

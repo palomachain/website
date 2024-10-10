@@ -1103,14 +1103,14 @@ export const PalomaInstructionsSteps: {
                 {
                   command: (
                     <p>
-                      echo \ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc]
+                      echo \<br /> "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc]
                       https://download.docker.com/linux/ubuntu \ $(. /etc/os-release && echo "$VERSION_CODENAME")
                       stable" | \ <br />
                       sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
                     </p>
                   ),
                   copyCommand:
-                    'echo \\ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \\ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \\ \n sudo tee /etc/apt/sources.list.d/docker.list > /dev/null',
+                    'echo \\\n"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \\$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \\sudo tee /etc/apt/sources.list.d/docker.list > /dev/null',
                   isTitle: false,
                 },
               ],

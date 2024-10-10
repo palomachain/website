@@ -9,7 +9,7 @@ const Describe = () => {
       <img src="/assets/logo/paloma-logotype.svg" alt="paloma-logo" width={63} />
       <h3>Get Your Paloma LightNode Today and Before Prices Increase!</h3>
       <p>Secure your Light Node, become a Paloma network active participant, and be rewarded.
-        <br><br>
+        <br></br>
         Paloma is a new blockchain for pigeons, enabling fast blockchain interoperability and fast Web2.0 API integration into the Web3 ecosystems of chains.
       </p>
       <div className="ul">LightNode v2 includes:</div>

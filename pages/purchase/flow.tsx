@@ -26,7 +26,7 @@ import { useWallet } from 'hooks/useWallet';
 import { IPriceTier } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Countdown from 'react-countdown';
 import ReactSlider from 'react-slider';
 import { toast } from 'react-toastify';
@@ -60,6 +60,7 @@ const PurchaseFlow = () => {
   const { wallet } = useWallet();
   const provider = useProvider(wallet);
   const router = useRouter();
+  const inputRef = useRef(null);
 
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
@@ -98,7 +99,6 @@ const PurchaseFlow = () => {
   });
 
   const [endDate, setEndDate] = useState(NodeSaleEndDate); // Set the End date of node sale
-  const [totalPurchased, setTotalPurchased] = useState(0); // Set Saled Nodes Count
   const [priceTiers, setPriceTiers] = useState<IPriceTier[]>();
   const [promoCode, setPromoCode] = useState<string>();
   const [appliedPromoCode, setApplyPromoCode] = useState<string>();
@@ -181,6 +181,12 @@ const PurchaseFlow = () => {
   };
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [priceTiers]);
+
+  useEffect(() => {
     if (code) {
       setPromoCode(code);
       applyPromoCode(code);
@@ -250,6 +256,7 @@ const PurchaseFlow = () => {
         } else {
           setStep(2);
           setPriceTiers(purchaseInfo?.data?.price_tiers);
+          setSupport(purchaseInfo?.data?.support);
           purchaseInfo?.data?.promoCode && setApplyPromoCode(purchaseInfo?.data?.promoCode);
         }
       };
@@ -400,7 +407,7 @@ const PurchaseFlow = () => {
   };
 
   const isValidTokenAmount = useMemo(() => {
-    return quantity > 0 && quantity <= TotalNodes - totalPurchased;
+    return quantity > 0 && quantity <= TotalNodes;
   }, [quantity]);
 
   useEffect(() => {
@@ -535,8 +542,7 @@ const PurchaseFlow = () => {
             const purchaseInfos = {
               node_count: quantity,
               node_price: nodePrice,
-              isSupport: CustomerSupport[selectedSupport].price > 0,
-              supportMonth: CustomerSupport[selectedSupport].month,
+              support: selectedSupport,
               amount_in: expectTokenAmount,
               price_tiers: priceTiers,
               promoCode: appliedPromoCode,
@@ -766,10 +772,10 @@ const PurchaseFlow = () => {
                           <input
                             type="number"
                             className="quantity_value"
-                            value={tier.inputAmount}
+                            value={tier.inputAmount < 1 ? '' : tier.inputAmount}
                             onChange={(e) => setInputAmount(index, Number(e.target.value))}
                             min={0}
-                            // max={tier.quantity - tier.purchased}
+                            ref={inputRef}
                           />
                           <button
                             className={`increase ${
@@ -914,10 +920,7 @@ const PurchaseFlow = () => {
               title="Slippage Fees"
               step={step}
               price={
-                isSameContract(
-                  fromToken.address,
-                  Addresses[isFiat(selectedChain) ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
-                )
+                isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
                   ? slippageFeeForUSDC
                   : slippageFee
               }
@@ -928,10 +931,7 @@ const PurchaseFlow = () => {
               title="Total"
               step={step}
               price={
-                isSameContract(
-                  fromToken.address,
-                  Addresses[isFiat(selectedChain) ? ChainID.ARBITRUM_MAIN : selectedChainId]?.usdc,
-                )
+                isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
                   ? totalPayForUSDC
                   : totalPay
               }

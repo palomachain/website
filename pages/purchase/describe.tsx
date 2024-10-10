@@ -7,12 +7,15 @@ const Describe = () => {
   return (
     <section className="purchase-flow-describe">
       <img src="/assets/logo/paloma-logotype.svg" alt="paloma-logo" width={63} />
-      <h3>Paloma LightNode</h3>
-      <p>
-        The Paloma LightNode Client will act as a GRAINs miner. Grains will be minted on each LightNode Client address.
+      <h3>Get Your Paloma LightNode Today and Before Prices Increase!</h3>
+      <p>Secure your Light Node, become a Paloma network active participant, and be rewarded.
+        <br></br>
+        Paloma is a new blockchain for pigeons, enabling fast blockchain interoperability and fast Web2.0 API integration into the Web3 ecosystems of chains.
       </p>
       <div className="ul">LightNode v2 includes:</div>
       <ul>
+        <li>Personal Discount Code: Receive a 10% commission in USDC and a 5% discount for every sale made with your discount code.</li>
+        <li>50,000 GRAIN Rewards: Mine GRAIN tokens and stake mining rewards.</li>
         <li>Two-Year software license with full Volume support.</li>
         <li>Ledger hardware wallet integration and support.</li>
         <li>Automatic GRAIN delegation to active validators to minimize stake power differentials.</li>

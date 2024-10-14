@@ -16,7 +16,10 @@ interface TotalPayProps {
 
 const TotalPay = ({ title, step, price, exchangeRate, fromToken, expectTokenAmount = 0, className }: TotalPayProps) => {
   const tokenAmount = parseFloat(
-    balanceTool.toFixed(BigNumber(price).dividedBy(exchangeRate).decimalPlaces(4, BigNumber.ROUND_CEIL).toString(), 4),
+    balanceTool.toFixed(
+      BigNumber(Math.abs(price)).dividedBy(exchangeRate).decimalPlaces(4, BigNumber.ROUND_CEIL).toString(),
+      4,
+    ),
   );
 
   return (
@@ -26,6 +29,7 @@ const TotalPay = ({ title, step, price, exchangeRate, fromToken, expectTokenAmou
         <p className="pay-value">{formatNumber(price, 0, 2)} USD</p>
       ) : fromToken && fromToken.address !== '' && exchangeRate && exchangeRate.comparedTo(0) > 0 ? (
         <p className="pay-value">
+          {price < 0 && '-'}
           {formatNumber(tokenAmount > expectTokenAmount ? tokenAmount : expectTokenAmount, 0, 4)} {fromToken.symbol} (
           {formatNumber(price, 0, 2)} USD)
         </p>

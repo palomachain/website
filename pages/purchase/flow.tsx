@@ -331,7 +331,7 @@ const PurchaseFlow = () => {
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
         amount > 0 && setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
-        if (isPromocodeCheck) {
+        if (isPromocodeCheck && promo_code && promo_code.length > 0) {
           setApplyPromoCode(promo_code);
           toast.success('Congratulations! Your Promo Code has been verified.');
         }
@@ -498,6 +498,16 @@ const PurchaseFlow = () => {
     return agreeTerms && agreeTermsOfUse && agreeAck;
   }, [agreeTerms, agreeTermsOfUse, agreeAck]);
 
+  const discountPrice = useMemo(() => {
+    if (appliedPromoCode && appliedPromoCode.length > 0 && discountPercent > 0 && priceTiers && priceTiers.length > 0) {
+      return priceTiers.reduce(
+        (acc, curr) => acc + (Number(curr.price) * Number(curr.inputAmount) * discountPercent) / 100 / 10 ** 6,
+        0,
+      );
+    }
+    return 0;
+  }, [discountPercent, priceTiers, appliedPromoCode]);
+
   const { listedTokens } = useGetUniswapTokenListQuery(
     {},
     {
@@ -663,7 +673,7 @@ const PurchaseFlow = () => {
 
   const handleStart = async () => {
     if (step === 1) {
-      if (promoCode && promoCode.length > 0) {
+      if (promoCode !== appliedPromoCode) {
         const price = await fetchEstimateNodePrice({ amount: 1, promo_code: stringToHex(promoCode) });
         if (price && price.data['price'] === 0) {
           toast.info(
@@ -888,13 +898,7 @@ const PurchaseFlow = () => {
                       key={index}
                       title={`${tier.inputAmount}x LightNode Slot ${tier.slot}`}
                       step={step}
-                      price={
-                        ((appliedPromoCode
-                          ? (Number(tier.price) * (100 - discountPercent)) / 100
-                          : Number(tier.price)) *
-                          tier.inputAmount) /
-                        10 ** 6
-                      }
+                      price={(Number(tier.price) * Number(tier.inputAmount)) / 10 ** 6}
                       exchangeRate={fromTokenExchangeRate}
                       fromToken={fromToken}
                     />
@@ -927,6 +931,15 @@ const PurchaseFlow = () => {
               exchangeRate={fromTokenExchangeRate}
               fromToken={fromToken}
             />
+            {discountPrice > 0 && appliedPromoCode && (
+              <TotalPay
+                title={`Promo Code ${appliedPromoCode}`}
+                step={step}
+                price={0 - discountPrice}
+                exchangeRate={fromTokenExchangeRate}
+                fromToken={fromToken}
+              />
+            )}
             <TotalPay
               title="Total"
               step={step}

@@ -18,7 +18,6 @@ const Purchase = () => {
     if (redirect) redirectUrl = redirectUrl + `redirect=${redirect}`;
     if (type) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `type=${type}`;
     if (code) redirectUrl = redirectUrl.concat(redirectUrl.length > 0 ? '&' : '') + `code=${code}`;
-    console.log('redirectUrl', redirectUrl);
 
     const date = await confirmPasscode(redirectUrl);
     date !== 0 && setLoading(false);

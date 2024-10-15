@@ -81,6 +81,7 @@ const BuyMoreBoard = () => {
   const [currentRoundPrice, setCurrentRoundPrice] = useState<number>();
 
   const [activating, setActivating] = useState<IActivateInfos>();
+  const [copiedIndex, setCopyIndex] = useState<number>(-1);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -160,6 +161,8 @@ const BuyMoreBoard = () => {
 
   const getMyPurchaseStatus = async () => {
     setDataLoading(true);
+    setRewardsLoading(true);
+
     const status = await getStatusByUser({ token });
     if (status.isSuccess) {
       const statusData =
@@ -171,9 +174,44 @@ const BuyMoreBoard = () => {
             })
           : status.data;
 
-      setMyPurchaseStatus(statusData ?? status.data);
+      let purchaseData = statusData ?? status.data;
+      let palomaAddresses = [];
+
+      if (purchaseData && purchaseData.length > 0) {
+        purchaseData.map((purchase) => {
+          const address = hexToStringWithBech(purchase['paloma_address']);
+          const isAlreadyExist = palomaAddresses.find((pAddress) => pAddress === address);
+          if (!isAlreadyExist) {
+            palomaAddresses.push(address);
+          }
+        });
+
+        if (palomaAddresses.length > 0) {
+          const api = await getBalances({ addresses: palomaAddresses.toString() });
+          if (api.isSuccess) {
+            setTotalRewards({
+              rewards: balanceTool.convertFromWei(api.data['total'], 2, 6),
+              usd: balanceTool.convertFromWei(api.data['usd_total'], 2, 6),
+            });
+            setCurrentRoundPrice(Number(api.data['current_round_price']) ?? 0);
+
+            const balanceData = api.data['data'];
+            purchaseData.map((purchase, index) => {
+              const data = balanceData.find(
+                (balance) => hexToStringWithBech(purchase['paloma_address']) === balance['address'],
+              );
+              if (data) {
+                purchaseData[index] = { ...purchaseData[index], balance: data['balance'], reward: data['reward'] };
+              }
+            });
+          }
+        }
+      }
+
+      purchaseData && setMyPurchaseStatus([...purchaseData]);
     }
 
+    setRewardsLoading(false);
     setDataLoading(false);
   };
 
@@ -186,41 +224,7 @@ const BuyMoreBoard = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (dataLoading) setRewardsLoading(true);
-
-    let palomaAddresses = [];
-
-    if (!dataLoading && myPurchaseStatus && myPurchaseStatus.length > 0) {
-      myPurchaseStatus.map((purchase) => {
-        const address = hexToStringWithBech(purchase['paloma_address']);
-        const isAlreadyExist = palomaAddresses.find((pAddress) => pAddress === address);
-        if (!isAlreadyExist) {
-          palomaAddresses.push(address);
-        }
-      });
-
-      const apiCall = async () => {
-        if (palomaAddresses.length > 0) {
-          const api = await getBalances({ addresses: palomaAddresses.toString() });
-          if (api.isSuccess) {
-            setTotalRewards({
-              rewards: balanceTool.convertFromWei(api.data['total'], 2, 6),
-              usd: balanceTool.convertFromWei(api.data['usd_total'], 2, 6),
-            });
-            setCurrentRoundPrice(Number(api.data['current_round_price']) ?? 0);
-          }
-        }
-
-        setRewardsLoading(false);
-      };
-      apiCall();
-    }
-
-    if (myPurchaseStatus && myPurchaseStatus.length === 0) {
-      setRewardsLoading(false);
-    }
-  }, [myPurchaseStatus, dataLoading]);
+  useEffect(() => {}, [myPurchaseStatus, dataLoading]);
 
   const totalNodes = useMemo(() => {
     if (dataLoading) return '-';
@@ -364,12 +368,17 @@ const BuyMoreBoard = () => {
     }
   };
 
+  const handleCopyPalomaAddress = async (address: string, key: number) => {
+    setCopyIndex(key);
+    navigator.clipboard.writeText(address);
+    setTimeout(() => setCopyIndex(-1), 3000); // Reset after 3 seconds
+  };
+
   const onClickClaim = async () => {
     if (totalBonus > 0 && !loadingClaim) {
       try {
         setLoadingClaim(true);
 
-        console.log('bonusAmount', bonusAmount);
         /**
          * Claim Bonus on all 6 chains
          * **Messy code due to for sequential execution**
@@ -502,8 +511,20 @@ const BuyMoreBoard = () => {
                       key={index}
                     >
                       <td>
-                        {purchase['paloma_address'] &&
-                          shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
+                        {copiedIndex === index && (
+                          <div className={style.copiedPalomaAddress}>Paloma address copied</div>
+                        )}
+
+                        {purchase['paloma_address'] && (
+                          <p
+                            className={style.palomaAddress}
+                            onClick={() =>
+                              handleCopyPalomaAddress(hexToStringWithBech(purchase['paloma_address']), index)
+                            }
+                          >
+                            {shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
+                          </p>
+                        )}
                         <span>
                           {formatNumber(purchase['node_count'] ?? purchase['estimated_node_count'], 0, 2)} LightNodes
                         </span>
@@ -521,8 +542,12 @@ const BuyMoreBoard = () => {
                           >
                             Activate
                           </button>
-                        ) : (
+                        ) : +purchase['status'] === 2 ? (
+                          'Pending'
+                        ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
                           'Mining'
+                        ) : (
+                          'Activate in terminal'
                         )}
                       </td>
                     </tr>

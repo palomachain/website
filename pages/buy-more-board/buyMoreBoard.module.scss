@@ -261,12 +261,31 @@
           font-weight: 500;
           line-height: 21.045px; /* 175.373% */
           letter-spacing: -0.012px;
+          position: relative;
+
+          p {
+            margin: 0;
+          }
+        }
+        .palomaAddress {
+          cursor: pointer;
+          width: fit-content;
+        }
+        .copiedPalomaAddress {
+          position: absolute;
+          padding: 4px 8px;
+          background: #2c2c2c;
+          border-radius: 4px;
+          top: -8px;
+          color: #fff;
+          left: -20px;
+          opacity: 0.8;
         }
         .activeButton {
           background: #ffe6f6;
           background-blend-mode: multiply;
           height: 34px;
-          width: 94px;
+          width: 120px;
           display: flex;
           align-items: center;
           justify-content: center;

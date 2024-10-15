@@ -1,7 +1,7 @@
-import type { GetListedSwapTokensApiResponse } from 'services/api/tokens';
-import { IToken } from 'interfaces/swap';
 import { ChainID } from 'configs/chains';
 import { VETH_ADDRESS } from 'contracts/addresses';
+import { IToken } from 'interfaces/swap';
+import type { GetListedSwapTokensApiResponse } from 'services/api/tokens';
 
 const selectListedSwapTokensByChainId = (
   data: GetListedSwapTokensApiResponse | undefined,
@@ -23,7 +23,12 @@ const selectListedSwapTokensByChainId = (
 
   const additionalToken = [];
   if (addNativeToken) {
-    if (chainId === ChainID.ETHEREUM_MAIN || chainId === ChainID.ARBITRUM_MAIN || chainId === ChainID.OPTIMISM_MAIN) {
+    if (
+      chainId === ChainID.ETHEREUM_MAIN ||
+      chainId === ChainID.ARBITRUM_MAIN ||
+      chainId === ChainID.OPTIMISM_MAIN ||
+      chainId === ChainID.BASE_MAIN
+    ) {
       additionalToken.push({
         address: VETH_ADDRESS,
         symbol: 'ETH',

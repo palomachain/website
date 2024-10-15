@@ -1,8 +1,8 @@
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react';
-import { arbitrum, bsc, gnosis, mainnet, optimism, polygon } from 'wagmi/chains';
+import { arbitrum, base, bsc, gnosis, mainnet, optimism, polygon } from 'wagmi/chains';
 
 const useWagmi = () => {
-  const chains = [mainnet, polygon, bsc, gnosis, arbitrum, optimism];
+  const chains = [arbitrum, base, bsc, gnosis, mainnet, optimism, polygon];
   const projectId = process.env.WALLETCONNECT_PROJECT_ID;
 
   const wagmiConfig = defaultWagmiConfig({

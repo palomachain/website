@@ -1,5 +1,5 @@
-export type EthNetwork = 'mainnet' | 'optimism' | 'bsc' | 'polygon' | 'arbitrum';
-export type NetworkIds = '1' | '10' | '56' | '137' | '42161' | null;
+export type EthNetwork = 'mainnet' | 'optimism' | 'bsc' | 'polygon' | 'arbitrum' | 'base';
+export type NetworkIds = '1' | '10' | '56' | '137' | '8453' | '42161' | null;
 export type Provider = 'metamask' | 'walletconnect' | 'frame';
 export interface Wallet {
   account: `0x${string}` | null;

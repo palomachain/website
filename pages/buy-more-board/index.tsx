@@ -1,3 +1,4 @@
+import { ConnectWallet } from '@thirdweb-dev/react';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import Purchase from 'components/Button/purchase';
@@ -475,9 +476,17 @@ const BuyMoreBoard = () => {
                     Don’t Miss Out!
                     <br />
                     Get Paid A Referral Bonus
-                    <button className={style.createPromocode} onClick={onClickCreatePromocode}>
-                      {wallet && wallet.account ? 'Create Promo Code' : 'Connect Wallet'}
-                    </button>
+                    {wallet && wallet.account ? (
+                      <button className={style.createPromocode} onClick={onClickCreatePromocode}>
+                        Create Promo Code
+                      </button>
+                    ) : (
+                      <ConnectWallet
+                        className={style.createPromocode}
+                        btnTitle="Connect Wallet"
+                        showThirdwebBranding={false}
+                      />
+                    )}
                   </div>
                 </>
               )}

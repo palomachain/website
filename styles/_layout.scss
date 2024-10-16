@@ -49,17 +49,17 @@
     }
 
     &__wallet {
-      border-radius: 10px;
-      border: 1px solid #d8d3d3;
-      background: #fff;
+      border-radius: 10px !important;
+      border: 1px solid #d8d3d3 !important;
+      background: #fff !important;
       display: flex;
       text-align: center;
       align-items: center;
       gap: 10px;
-      padding: 0 24px;
-      color: #2c2c2c;
-      font-family: $Inter-600;
-      font-size: 14px;
+      padding: 0 24px !important;
+      color: #2c2c2c !important;
+      font-family: $Inter-600 !important;
+      font-size: 14px !important;
       font-style: normal;
       line-height: 21.045px; /* 150.32% */
       letter-spacing: -0.014px;

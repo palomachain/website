@@ -20,7 +20,7 @@ export enum ChainRPC {
   ETHEREUM_MAIN = 'https://serene-divine-crater.quiknode.pro/',
   OPTIMISM_MAIN = 'https://mainnet.optimism.io/',
   BSC_MAIN = 'https://magical-virulent-star.bsc.quiknode.pro/3a2d527fd1a932d0ce5f3b87c4d9cfab670cb9ba/',
-  POLYGON_MAIN = 'https://polygon.rpc.blxrbdn.com/',
+  POLYGON_MAIN = 'https://attentive-long-wish.matic.quiknode.pro/c0451a8083b075b8c1eeb3c9d6b7ecabeb9583ac/',
   BASE_MAIN = 'https://mainnet.base.org/',
   ARBITRUM_MAIN = 'https://arb1.arbitrum.io/rpc',
 }

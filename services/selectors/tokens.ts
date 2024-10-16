@@ -51,9 +51,9 @@ const selectListedSwapTokensByChainId = (
     if (chainId === ChainID.POLYGON_MAIN) {
       additionalToken.push({
         address: VETH_ADDRESS,
-        symbol: 'MATIC',
-        displayName: 'MATIC',
-        icon: '/assets/tokens/polygon.svg',
+        symbol: 'POL',
+        displayName: 'POL',
+        icon: '/assets/tokens/polygon.png',
         decimals: 18,
       });
     }

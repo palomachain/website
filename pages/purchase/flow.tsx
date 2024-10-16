@@ -479,9 +479,11 @@ const PurchaseFlow = () => {
               setSwapPath(swapPathForV3);
             } else {
               toast.error(errorText);
+              return;
             }
           } else {
             toast.error(errorText);
+            return;
           }
         }
       } catch (error) {
@@ -492,7 +494,7 @@ const PurchaseFlow = () => {
     };
 
     selectedChain && !isFiat(selectedChain) && changeAmount();
-  }, [provider, fromToken, expectedAmount, isValidTokenAmount]);
+  }, [provider, fromToken, expectedAmount]);
 
   const isAllAgree = useMemo(() => {
     return agreeTerms && agreeTermsOfUse && agreeAck;

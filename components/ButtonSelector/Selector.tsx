@@ -1,5 +1,8 @@
-import React from 'react';
+import { ConnectWallet } from '@thirdweb-dev/react';
 import cn from 'classnames';
+import { useWallet } from 'hooks/useWallet';
+import React from 'react';
+import { isFiat } from 'utils/string';
 
 import style from 'components/ButtonSelector/Selector.module.scss';
 
@@ -12,6 +15,8 @@ interface ButtonProps {
 }
 
 const Selector = ({ selectableList, showSelectModal, handleSelect, selected, className }: ButtonProps) => {
+  const { wallet } = useWallet();
+
   return (
     showSelectModal &&
     selectableList &&
@@ -25,7 +30,11 @@ const Selector = ({ selectableList, showSelectModal, handleSelect, selected, cla
               onClick={() => handleSelect(list['id'])}
             >
               {list && list['icon'] && <img src={list['icon']} width={25} height={25} alt="" />}
-              <span>{list['name']}</span>
+              {(wallet && wallet.network) || isFiat(list['id']) ? (
+                <span>{list['name']}</span>
+              ) : (
+                <ConnectWallet className={style.thirdwebConnect} btnTitle={list['name']} showThirdwebBranding={false} />
+              )}
             </div>
           ))}
         </div>

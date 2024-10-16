@@ -1,3 +1,4 @@
+import { ConnectWallet } from '@thirdweb-dev/react';
 import classNames from 'classnames';
 import Button from 'components/Button';
 import Command from 'components/Command';
@@ -193,8 +194,10 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
               complete activation, connect your EVM wallet used to purchase your LightNodes.
             </p>
             <div className={style.walletBtns}>
-              <p className={style.chooseWallet}>Choose a Wallet</p>
-              <Button className={style.connectWalletBtn} type="grey" onClick={() => handleChooseMetamask()}>
+              <p className={style.chooseWallet}>
+                {wallet && wallet.network ? 'Switch the Network' : 'Choose a Wallet'}
+              </p>
+              {/* <Button className={style.connectWalletBtn} type="grey" onClick={() => handleChooseMetamask()}>
                 {loadingMetamask ? (
                   <img src="/assets/icons/loading_circle.svg" height="33px" style={{ marginTop: 5, marginLeft: 6 }} />
                 ) : (
@@ -207,7 +210,20 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
                 ) : (
                   <img src="/assets/wallets/walletconnect.svg" alt="" />
                 )}
-              </Button>
+              </Button> */}
+              {wallet && wallet.network ? (
+                <img
+                  src="/assets/icons/loading_circle.svg"
+                  height="33px"
+                  style={{ marginTop: 5, marginLeft: 6, width: '100%' }}
+                />
+              ) : (
+                <ConnectWallet
+                  className={style.connectWalletBtn}
+                  btnTitle="Connect EVM Wallet"
+                  showThirdwebBranding={false}
+                />
+              )}
             </div>
           </>
         )}

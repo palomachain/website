@@ -12,6 +12,7 @@ const useWagmi = () => {
     enableEIP6963: false,
     enableEmail: false,
     enableInjected: false,
+    enableWalletConnect: true,
   });
 
   createWeb3Modal({

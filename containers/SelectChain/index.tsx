@@ -3,7 +3,7 @@ import Selector from 'components/ButtonSelector/Selector';
 import { allChains, ChainID } from 'configs/chains';
 import useOutsideAlerter from 'hooks/useOutsideAlerter';
 import { useWallet } from 'hooks/useWallet';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isFiat } from 'utils/string';
 
 import style from './SelectChain.module.scss';
@@ -27,22 +27,33 @@ const SelectChain = ({
   const { wallet, openConnectionModal, requestSwitchNetwork } = useWallet();
 
   const [showSelectChainModal, setShowSelectChainModal] = useState<boolean>(false);
+  const [clickedChain, setClickedChain] = useState<string>();
 
   useOutsideAlerter(chainRef, () => {
     setShowSelectChainModal(false);
   });
 
+  const changeNetwork = async (value: string) => {
+    const result = await requestSwitchNetwork(value);
+    if (result) setSelectedChain(value);
+  };
+
   const handleSelectChain = async (value: string) => {
     if (isFiat(value)) {
       setSelectedChain(value);
-    } else if (!wallet || !wallet.network) {
-      openConnectionModal();
+    } else if (wallet && wallet.network) {
+      await changeNetwork(value);
     } else {
-      const result = await requestSwitchNetwork(value);
-      if (result) setSelectedChain(value);
+      setClickedChain(value);
     }
     setShowSelectChainModal(false);
   };
+
+  useEffect(() => {
+    if (wallet && wallet.network && clickedChain) {
+      changeNetwork(clickedChain);
+    }
+  }, [wallet, clickedChain]);
 
   const selectableChainList = () => {
     let list = Object.keys(supportChains).map((chain) => {

@@ -8,7 +8,7 @@ const useWagmi = () => {
   const wagmiConfig = defaultWagmiConfig({
     chains,
     projectId,
-    enableCoinbase: false,
+    enableCoinbase: true,
     enableEIP6963: false,
     enableEmail: false,
     enableInjected: false,

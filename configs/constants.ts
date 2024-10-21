@@ -1,3 +1,5 @@
+import { ChainRPC } from './chains';
+
 const envParam = {
   palomaNestServiceAPIBaseUrl: process.env.PALOMA_NEST_SERVICE_API_BASE_URL || '',
   onramperApiKey: process.env.ONRAMPER_API_KEY || '',
@@ -31,31 +33,31 @@ const AddNetwork = {
   '10': {
     chainName: 'OP Mainnet',
     nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: ['https://mainnet.optimism.io/'],
+    rpcUrls: [ChainRPC.OPTIMISM_MAIN],
     blockExplorerUrls: ['https://optimistic.etherscan.io'],
   },
   '56': {
     chainName: 'BNB Mainnet',
     nativeCurrency: { decimals: 18, symbol: 'BNB' },
-    rpcUrls: ['https://bsc-dataseed.binance.org/'],
+    rpcUrls: [ChainRPC.BSC_MAIN],
     blockExplorerUrls: ['https://bscscan.com'],
   },
   '137': {
     chainName: 'Polygon Mainnet',
     nativeCurrency: { decimals: 18, symbol: 'MATIC' },
-    rpcUrls: ['https://polygon-rpc.com/'],
+    rpcUrls: [ChainRPC.POLYGON_MAIN],
     blockExplorerUrls: ['https://polygonscan.com'],
   },
   '8453': {
     chainName: 'Base',
     nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: ['https://mainnet.base.org/'],
+    rpcUrls: [ChainRPC.BASE_MAIN],
     blockExplorerUrls: ['https://basescan.org/'],
   },
   '42161': {
     chainName: 'Arbitrum One',
     nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    rpcUrls: [ChainRPC.ARBITRUM_MAIN],
     blockExplorerUrls: ['https://arbiscan.io/'],
   },
 };
@@ -89,12 +91,12 @@ export {
   AddNetwork,
   DEADLINE,
   DEFAULT_MAIN_CHAINS,
+  envParam,
+  PURCHASE_INFO,
+  PURCHASED_WALLET,
   purchaseSupportedNetworks,
   SLIPPAGE_DOMINATOR,
   SLIPPAGE_PERCENTAGE,
-  envParam,
   USER_ACCESS_TOKEN,
-  PURCHASE_INFO,
-  PURCHASED_WALLET,
   WalletProfiles,
 };

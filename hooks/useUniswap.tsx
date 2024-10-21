@@ -3,6 +3,7 @@ import { Currency, CurrencyAmount, NativeCurrency, Percent, Token, TradeType } f
 import {
   AlphaRouter,
   AlphaRouterConfig,
+  AlphaRouterParams,
   SwapOptionsSwapRouter02,
   SwapRoute,
   SwapType,
@@ -56,7 +57,7 @@ const useUniswap = ({ provider, wallet }) => {
     );
 
     const router = new AlphaRouter({
-      chainId: Number(chainId),
+      chainId: Number(chainId) as AlphaRouterParams['chainId'],
       provider,
     });
 

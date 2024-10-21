@@ -1,10 +1,10 @@
-import { ChainID } from 'configs/chains';
+import { ChainID, ChainRPC } from 'configs/chains';
 
 import { bloxRouteCustomProtectNetworks } from 'configs/bloxRoute';
 
 const arbitrum = {
   chainId: '0xa4b1',
-  rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+  rpcUrls: [ChainRPC.ARBITRUM_MAIN],
   chainName: 'Arbitrum',
   nativeCurrency: {
     name: 'ETH',
@@ -16,7 +16,7 @@ const arbitrum = {
 
 const optimism = {
   chainId: '0xa',
-  rpcUrls: ['https://mainnet.optimism.io/'],
+  rpcUrls: [ChainRPC.OPTIMISM_MAIN],
   chainName: 'Optimism',
   nativeCurrency: {
     name: 'ETH',
@@ -28,7 +28,7 @@ const optimism = {
 
 const base = {
   chainId: '0x2105',
-  rpcUrls: ['https://mainnet.base.org/'],
+  rpcUrls: [ChainRPC.BASE_MAIN],
   chainName: 'Base',
   nativeCurrency: {
     name: 'ETH',

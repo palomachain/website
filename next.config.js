@@ -1,5 +1,23 @@
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 module.exports = {
   trailingSlash: true,
+  reactStrictMode: true,
+  future: {
+    webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
+    // Looks like backward compatibility approach.
+  },
+  webpack: (config, { dev }) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback, // if you miss it, all the other options in fallback, specified
+      // by next.js will be dropped. Doesn't make much sense, but how it is
+      fs: false, // the solution
+    };
+    // The condition is to have the plugin on build time, not to perturb live refresh
+    // !dev && config.plugins.push(new BundleAnalyzerPlugin());
+
+    return config;
+  },
   env: {
     STORYBLOK_ACCESS_TOKEN: process.env.STORYBLOK_ACCESS_TOKEN,
     BASE_URL: process.env.BASE_URL,

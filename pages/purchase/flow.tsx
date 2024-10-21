@@ -479,22 +479,20 @@ const PurchaseFlow = () => {
               setSwapPath(swapPathForV3);
             } else {
               toast.error(errorText);
-              return;
             }
           } else {
             toast.error(errorText);
-            return;
           }
         }
       } catch (error) {
         toast.error(errorText);
+      } finally {
+        setFetchingPriceLoading(false);
       }
-
-      setFetchingPriceLoading(false);
     };
 
     selectedChain && !isFiat(selectedChain) && changeAmount();
-  }, [provider, fromToken, expectedAmount]);
+  }, [wallet, fromToken]);
 
   const isAllAgree = useMemo(() => {
     return agreeTerms && agreeTermsOfUse && agreeAck;

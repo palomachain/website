@@ -22,7 +22,7 @@ export enum ChainRPC {
   BSC_MAIN = 'https://magical-virulent-star.bsc.quiknode.pro/3a2d527fd1a932d0ce5f3b87c4d9cfab670cb9ba/',
   POLYGON_MAIN = 'https://attentive-long-wish.matic.quiknode.pro/c0451a8083b075b8c1eeb3c9d6b7ecabeb9583ac/',
   BASE_MAIN = 'https://mainnet.base.org/',
-  ARBITRUM_MAIN = 'https://arb1.arbitrum.io/rpc',
+  ARBITRUM_MAIN = 'https://necessary-green-silence.arbitrum-mainnet.quiknode.pro/17b0421095485a691d7ff378e2243c5b0a8792df/',
 }
 
 export const allChains: { [key: string]: EVMChain } = {

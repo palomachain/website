@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import mixpanel from 'mixpanel-browser';
+import Script from 'next/script';
 
 mixpanel.init(process.env.MIXPANEL_API_KEY);
 
@@ -30,6 +31,9 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap" rel="stylesheet" />
           <link href="https://necolas.github.io/normalize.css/latest/normalize.css" rel="stylesheet" type="text/css" />
           <link rel="icon" href="/favicon.ico" />
+          <Script strategy="beforeInteractive" id="test">
+            {`globalThis.Browser = { T: () => {} };`}
+          </Script>
           <script
             dangerouslySetInnerHTML={{
               __html: `

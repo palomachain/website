@@ -41,11 +41,11 @@ const nodesaleSection = () => {
     <section className="nodesale-section">
       <div className="nodesale-describe">
         <h3>JOIN THE FLOCK</h3>
-        <h1>PALOMA LIGHT NODES</h1>
+        <h1>PALOMA AI LIGHT NODES</h1>
         <p>
-          Introducing a new way to work and a participate in a global community: The Paloma Flock. Paloma is a new
-          blockchain network that is secured by community of global pigeons that deliver transaction messages to any
-          blockchain.
+          Introducing a new way to mine digital tokens, create cross-chain applications, and use the blockchain to access new AI applications. 
+          Paloma is a new blockchain and AI applications network that is secured by community of global pigeons that deliver messages 
+          to any blockchain and store your AI context for use with any LLM of your choice.
         </p>
         <Purchase />
       </div>

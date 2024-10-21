@@ -42,6 +42,7 @@ const SelectChain = ({
     if (isFiat(value)) {
       setSelectedChain(value);
     } else if (wallet && wallet.network) {
+      setClickedChain('');
       await changeNetwork(value);
     } else {
       setClickedChain(value);
@@ -50,7 +51,7 @@ const SelectChain = ({
   };
 
   useEffect(() => {
-    if (wallet && wallet.network && clickedChain) {
+    if (wallet && wallet.network && clickedChain && clickedChain.length > 0) {
       changeNetwork(clickedChain);
     }
   }, [wallet, clickedChain]);

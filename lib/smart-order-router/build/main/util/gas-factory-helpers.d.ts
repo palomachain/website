@@ -1,0 +1,33 @@
+import { BigNumber } from '@ethersproject/bignumber';
+import { BaseProvider } from '@ethersproject/providers';
+import { ChainId, Token } from '@uniswap/sdk-core';
+import { Pair } from '@uniswap/v2-sdk';
+import { Pool } from '@uniswap/v3-sdk';
+import { IV2PoolProvider, IV4PoolProvider } from '../providers';
+import { IPortionProvider } from '../providers/portion-provider';
+import { ProviderConfig } from '../providers/provider';
+import { ArbitrumGasData } from '../providers/v3/gas-data-provider';
+import { IV3PoolProvider } from '../providers/v3/pool-provider';
+import { GasModelProviderConfig, RouteWithValidQuote, SwapOptions, SwapRoute } from '../routers';
+import { CurrencyAmount } from '../util';
+export declare function getV2NativePool(token: Token, poolProvider: IV2PoolProvider, providerConfig?: GasModelProviderConfig): Promise<Pair | null>;
+export declare function getHighestLiquidityV3NativePool(token: Token, poolProvider: IV3PoolProvider, providerConfig?: GasModelProviderConfig): Promise<Pool | null>;
+export declare function getHighestLiquidityV3USDPool(chainId: ChainId, poolProvider: IV3PoolProvider, providerConfig?: GasModelProviderConfig): Promise<Pool>;
+export declare function getGasCostInNativeCurrency(nativeCurrency: Token, gasCostInWei: BigNumber): import("@uniswap/sdk-core").CurrencyAmount<Token>;
+export declare function getArbitrumBytes(data: string): BigNumber;
+export declare function calculateArbitrumToL1FeeFromCalldata(calldata: string, gasData: ArbitrumGasData, chainId: ChainId): [BigNumber, BigNumber, BigNumber];
+export declare function calculateOptimismToL1FeeFromCalldata(calldata: string, chainId: ChainId, provider: BaseProvider): Promise<[BigNumber, BigNumber]>;
+export declare function getL2ToL1GasUsed(data: string, chainId: ChainId): BigNumber;
+export declare function calculateGasUsed(chainId: ChainId, route: SwapRoute, simulatedGasUsed: BigNumber, v2PoolProvider: IV2PoolProvider, v3PoolProvider: IV3PoolProvider, provider: BaseProvider, providerConfig?: GasModelProviderConfig): Promise<{
+    estimatedGasUsedUSD: CurrencyAmount;
+    estimatedGasUsedQuoteToken: CurrencyAmount;
+    estimatedGasUsedGasToken?: CurrencyAmount;
+    quoteGasAdjusted: CurrencyAmount;
+}>;
+export declare function initSwapRouteFromExisting(swapRoute: SwapRoute, v2PoolProvider: IV2PoolProvider, v3PoolProvider: IV3PoolProvider, v4PoolProvider: IV4PoolProvider, portionProvider: IPortionProvider, quoteGasAdjusted: CurrencyAmount, estimatedGasUsed: BigNumber, estimatedGasUsedQuoteToken: CurrencyAmount, estimatedGasUsedUSD: CurrencyAmount, swapOptions: SwapOptions, estimatedGasUsedGasToken?: CurrencyAmount, providerConfig?: ProviderConfig): SwapRoute;
+export declare const calculateL1GasFeesHelper: (route: RouteWithValidQuote[], chainId: ChainId, usdPool: Pair | Pool, quoteToken: Token, nativePool: Pair | Pool | null, provider: BaseProvider, l2GasData?: ArbitrumGasData, providerConfig?: GasModelProviderConfig) => Promise<{
+    gasUsedL1: BigNumber;
+    gasUsedL1OnL2: BigNumber;
+    gasCostL1USD: CurrencyAmount;
+    gasCostL1QuoteToken: CurrencyAmount;
+}>;

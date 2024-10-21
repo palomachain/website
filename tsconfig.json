@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "lib/apollo": ["lib/apollo/index.ts"]
+      "lib/apollo": ["lib/apollo/index.ts"],
+      "@uniswap/smart-order-router": ["lib/smart-order-router"] // Fix the uniswap library issue until this PR is merged: https://github.com/Uniswap/smart-order-router/pull/663/
     },
     "incremental": true
   },

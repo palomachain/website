@@ -30,7 +30,7 @@ const whatisPalomaSection = () => (
     <div className="describe-card">
       <div>
         <h2 className="h-white">
-          the problem:<br></br>We All Need<br></br>Our Own Custom AIs
+          the problem:<br></br>We All Need<br></br>Our Own Custom AI
         </h2>
         <span className="p-white-50 mt-20">
           Custom AIs are essential for individuals who want AI models fine-tuned to their personal context. 

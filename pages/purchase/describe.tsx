@@ -8,7 +8,7 @@ const Describe = () => {
     <section className="purchase-flow-describe">
       <img src="/assets/logo/paloma-logotype.svg" alt="paloma-logo" width={63} />
       <h3>
-        Get Your Paloma LightNode Today
+        Get Your Paloma AI LightNode Today
         <br />
         Before Prices Increase!
       </h3>
@@ -17,18 +17,20 @@ const Describe = () => {
         <br />
         <br />
         Paloma is a new blockchain for pigeons, enabling fast blockchain interoperability and fast Web2.0 API
-        integration into the Web3 ecosystems of chains.
+        integration to power autonomous artificial intelligence and custom LLM models.
       </p>
-      <div className="ul">LightNode v2 includes:</div>
+      <div className="ul">Paloma AI LightNode includes:</div>
       <ul>
         <li>
           <b>Personal Discount Code:</b> Receive a 10% commission in USDC and a 5% discount for every sale made with
           your discount code.
         </li>
         <li>
-          <b>50,000 GRAIN Rewards:</b> Mine GRAIN tokens and stake mining rewards.
+          <b>50,000 GRAIN Rewards:</b> Mine GRAIN tokens and stake your mining rewards.
         </li>
-        <li>Two-Year software license with full Volume support.</li>
+        <li>Two-Year software license with standard Volume support.</li>
+        <li>Tailored(ai) Custom Twitter Bot with AI generated tweets</li>
+        <li>Local Storage of AI context window data and model training data</li>
         <li>Ledger hardware wallet integration and support.</li>
         <li>Automatic GRAIN delegation to active validators to minimize stake power differentials.</li>
         <li>Automatic re-delegation from inactive validators to active validators.</li>
@@ -42,10 +44,10 @@ const Describe = () => {
         <li>Easy Node Management.</li>
         <li>Easy User-Interface for all levels.</li>
       </ul>
-      <div className="ul">Activate your Node</div>
+      <div className="ul">Activate your LightNode</div>
       <p className="purchase-flow-describe__text">Already purchased your LightNode and need to start minting GRAINs?</p>
       <button className="purchase-flow-describe__btn flex-row" onClick={() => router.push(StaticLink.BUYMOREBOARD)}>
-        Activate your Node
+        Activate your LightNode
       </button>
     </section>
   );

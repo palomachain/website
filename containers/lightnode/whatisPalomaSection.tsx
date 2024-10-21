@@ -7,13 +7,22 @@ const whatisPalomaSection = () => (
       <div className="what-is-paloma">
         <h1>WHAT IS PALOMA?</h1>
         <p>
-          Paloma is decentralized blockchain computing middleware for web2.0 developers that want to interact with
-          multiple blockchain states rapidly and securely. Paloma delivers native and reliable blockchain
-          interoperability focused on web2.0 developers. These developers want familiar interfaces that include APIs,
-          SDKs, that deliver responsiveness and speed, without sacrificing security and capabilities. Paloma is a
-          blockchain network of computers and validators optimized to deliver these features with the highest throughput
-          and at the lowest possible cost and latency.
+          Paloma AI is an artificial intelligence upgrade to the Paloma blockchain. 
+          Paloma AI unlocks the future of personalized AI, empowering users with their custom AI models, 
+          fine-tuned to their unique preferences and needs. Through Paloma's decentralized network, 
+          your personal context data is stored securely on Paloma’s LightNodes to power your AI applications. 
+          Paloma LightNodes consists of the Paloma client software, Paloma AI API functionality and local data storage. 
+          The Paloma LightNode now enables you to have a custom AI with your private data stored locally, 
+          on your computer, trained by the content on your computer or via your cloud accounts.
+		      <br />
+		      <br />
+ 		      Imagine having an AI that truly knows you—capable of speaking in your voice, 
+ 		      responding to real-time events, executing agents to complete actions in the real world, 
+ 		      all powered by your own data. Paloma AI allows you to deploy AI agents and 
+ 		      AI applications that work for you. Paloma gives you the power to harness advanced 
+ 		      AI features without compromising control over your identity or security.
         </p>
+
         <Purchase className="mt-40" />
       </div>
       <img src="/assets/home/pigeons-fly-2.png" />
@@ -21,16 +30,24 @@ const whatisPalomaSection = () => (
     <div className="describe-card">
       <div>
         <h2 className="h-white">
-          the problem:<br></br>Blockchain interoperability<br></br>for Web2.0 Developers
+          the problem:<br></br>We All Need<br></br>Our Own Custom AIs
         </h2>
         <span className="p-white-50 mt-20">
-          Blockchain interoperability is a substantial challenge for web3.0 developers who now have multiple L1, L2, L3
-          blockchain states to program. For web2.0 developers, this is an even greater challenge and limits the ability
-          for web2.0 developers to take advantage of blockchain technologies and the communities that hold liquidity on
-          these chains. Web2.0 developers need familiar tooling that makes it easy to interact with multiple blockchain
-          states simultaneously as well as with familiar tools that abstract away cryptography, distributed computing,
-          and distributed storage complexity.
-        </span>
+          Custom AIs are essential for individuals who want AI models fine-tuned to their personal context. 
+          This contextual data includes information unique to you, such as your voice, preferences, and habits. 
+          To be truly effective, these AIs need real-time access to this data.
+		      <br />
+		      <br />
+		      However, this raises critical challenges. Storing your personal context data requires global accessibility, 
+		      privacy guarantees, and control over your identity. While availability is important, 
+		      ensuring that your most intimate data remains secure and private is even more crucial.
+		      <br />
+		      <br />
+		      The best AI services are those tailored to users’ preferences and needs. AI applications can achieve this, 
+		      only if they have the necessary data. Unfortunately, no blockchain currently offers the infrastructure needed 
+		      to make custom AIs accessible and privacy-protected. Existing blockchains aren’t designed to handle the 
+		      personal context data required for AI-powered Web3 applications.
+		    </span>
         <Purchase className="purchase-button-white mt-40" />
       </div>
       <img src="/assets/home/pigeon-question-mark.svg" alt="pigeon-question-mark" className="img1" />
@@ -40,23 +57,24 @@ const whatisPalomaSection = () => (
         <img src="/assets/home/diagram-111.png" alt="pigeon-question-mark" />
       </div>
       <div>
-        <h2>Paloma</h2>
+        <h2>Paloma: Solving the AI and Blockchain Integration Challenge</h2>
         <span className="mt-20">
-          To solve this problem, Paloma delivers Blockchain Computing Middleware for Web2.0 developers to build Web2.0
-          applications that can interact with any Web3.0 blockchain protocol.
-          <br />
-          <br />
-          Paloma is a protocol where validators and lightnodes perform vital roles for developers. They secure the
-          computing layer that interacts with target blockchains. They also manage message communications between Web
-          2.0 applications and Web3.0 protocols.
-          <br />
-          <br />
-          Paloma validators also manage storage of off-chain data that Web2.0 applications need to interact with Web3.0
-          smart contracts. Paloma simplifies the management of Web3.0 smart contracts across multiple chains by
-          abstracting away complex deployment and communications issues across different chains.
-          <br />
-          Paloma provides security that developers expect to ensure that their applications are able to function
-          reliably.
+          Paloma tackles the challenge of securely integrating AI with blockchain through its innovative LightNode technology. 
+          Paloma AI LightNodes are Paloma clients that do not process state, but store off-chain context data that can be 
+          utilized by localized applications alongside on-chain LLM API endpoints. 
+          Paloma LightNodes aim to enable access to AI models supplied by Paloma’s API layer, 
+          but with data services stored locally on the node.
+		      <br />
+		      <br />
+          With Paloma AI, developers can deploy AI-powered Web2.0 and Web3.0 applications that 
+          leverage personal user context while ensuring privacy. This approach enables custom AIs 
+          to execute blockchain transactions or generate outputs that can be used both on-chain and off-chain. 
+          AI agents, which are conditional LLM flows and functions which are stored on Paloma. 
+          This allows Paloma smart contracts to host prompts that can be read by LLMs and then execute transactions 
+          on any other target smart-contract.
+		      <br />
+		      <br />
+          Paloma validators enhance security by managing on-chain transactions for AIs interacting with target blockchains.
         </span>
         <Purchase className="mt-40" />
       </div>
@@ -65,15 +83,20 @@ const whatisPalomaSection = () => (
       <div>
         <h2 className="h-white">the validator and light-node active set</h2>
         <span className="p-white-50 mt-20">
-          Paloma validators, also known as pigeons, validate and secure blockchain state. Paloma LightNodes manage
+          Paloma validators, also known as pigeons, validate and secure blockchain state. Paloma AI LightNodes manage
           delegation of stake across all validators to ensure blockchain interopability across all Paloma target chains.
           Validators on Paloma must all support each target chain voted into governance, ensuring that there is
           infrastructure to deliver computing middleware services on all target blockchains. Web2.0 developers have an
           expectation of performance that Paloma has abstracted away as a concern.
           <br />
           <br />
+          Paloma AI LightNodes locally store context window data. When a LightNode user wishes to use their Paloma 
+          LightNode CustomAI application, the LightNodes access Paloma's API infrastructure to access decentralized LLM APIs 
+          provisioned on the Paloma network. 
+          <br />
+          <br />
           If Paloma validators and Lightnodes do not meet interoperability and security performance requirements, they
-          are either jailed or their stake unbonded. This aims to allow Paloma to become a trusted and reliable
+          are either jailed or their stake un-bonded. This aims to allow Paloma to become a trusted and reliable
           developer platform for Web2.0 developers that demand performance guarantees.
         </span>
         <Purchase className="purchase-button-white mt-40" />
@@ -95,26 +118,26 @@ const whatisPalomaSection = () => (
           blockchain computing middleware
         </h2>
         <span className="mt-20">
-          Paloma aims to provide the fastest middleware that allows Web2.0 developers to deploy secure and successful
-          web3 applications against the entire public blockchain ecosystem. Paloma focuses on three main areas:
+          Paloma provides Blockchain AI Integration and cross-chain message automation that focuses on three main areas:
           <br />
           <br />
-          Automated Interoperability: Allowing any Web2.0 developer to deliver end-to-end software applications that
+          Fast, Automated Interoperability: Allowing any Web2.0 developer to deliver end-to-end software applications that
           work seamlessly against any target chain and between target chains with native automation response to state
           transitions.
           <br />
           <br />
-          Off-chain Data: Paloma Pigeons and LightNodes manage Web2.0 API endpoints that communicate off-chain data, but
-          still require onchain consensus.
+          Native AI & API Integrations: Paloma natively supports automated bots and AI responses to external data 
+          and events, enabling developers to create end-to-end AI applications that operate across chains without 
+          external intermediaries.
           <br />
           <br />
-          Gas Oracle: Pigeons will price in the gas price risks, so developers will have dependable message delivery
-          costs analysis for any target chain and any message size.
+          Proof of Stake Mining: Paloma AI LightNodes mine GRAIN to maintain Paloma's cross-chain messaging network integrity.
+          Lightnodes maintain even stake delegation work to ensure validator power consistency and security.
         </span>
         <div className="btns">
           <button className="purchase-button purchase-button-pink mt-40 row-10">
             <img src="/assets/icons/download.png" alt="download-icon" />
-            Download White Paper
+            Download AI Light Paper
           </button>
           <Purchase className="mt-40" />
         </div>

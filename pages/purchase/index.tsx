@@ -32,7 +32,7 @@ const Purchase = () => {
   ) : (
     <div className="page-container light-node-sale">
       <div className=" purchase-flow-page">
-        <Describe />
+        {/* <Describe /> */}
         <PurchaseFlow />
       </div>
     </div>

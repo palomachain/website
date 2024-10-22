@@ -79,7 +79,7 @@ const SelectChain = ({
   return (
     <section className={classNames(style.container, className)} ref={chainRef}>
       <div>
-        <p className={style.mb16}>{title}</p>
+        <p className={style.mb10}>{title}</p>
         <div
           className={classNames(style.profitInput, 'flex-row justify-between')}
           onClick={() => setShowSelectChainModal(!showSelectChainModal)}

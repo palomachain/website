@@ -734,7 +734,7 @@ const PurchaseFlow = () => {
     <div className="purchase-flow">
       <div className="purchase-sale-end">
         <Countdown date={endDate} renderer={rendererTime} />
-        <h2>Implied FDV is only ${abbreviateNumberSI(priceTiers.length > 0 ? priceTiers[0].fdv : 0, 2, 2)}</h2>
+        <h2>Implied FDV is only ${abbreviateNumberSI(priceTiers && priceTiers.length > 0 ? priceTiers[0].fdv : 0, 2, 2)}</h2>
       </div>
       <div className="purchase-flow-body">
         {step === 1 ? (

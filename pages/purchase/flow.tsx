@@ -300,6 +300,7 @@ const PurchaseFlow = () => {
       const priceTiersCnt = await fetchPriceTiers({});
       if (priceTiersCnt.isSuccess) {
         let tempPriceTiers: IPriceTier[] = [];
+        let isFirstElement = true;
         priceTiersCnt?.data.map((tier, index) => {
           if (tier.quantity > purchasedCount) {
             tempPriceTiers.push({
@@ -308,10 +309,11 @@ const PurchaseFlow = () => {
               fdv: tier.fdv,
               purchased: purchasedCount,
               slot: index + 1,
-              inputAmount: 0,
+              inputAmount: isFirstElement ? 1 : 0,
             });
 
             purchasedCount = 0;
+            isFirstElement = false;
           } else {
             purchasedCount -= tier.quantity;
           }
@@ -732,7 +734,7 @@ const PurchaseFlow = () => {
     <div className="purchase-flow">
       <div className="purchase-sale-end">
         <Countdown date={endDate} renderer={rendererTime} />
-        <h2>Implied FDV is only $16MM</h2>
+        <h2>Implied FDV is only ${abbreviateNumberSI(priceTiers[0].fdv, 2, 2)}</h2>
       </div>
       <div className="purchase-flow-body">
         {step === 1 ? (

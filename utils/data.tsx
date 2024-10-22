@@ -977,6 +977,7 @@ export const PalomaInstructionsSteps: {
                   ),
                   copyCommand:
                     'sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin',
+                  isTitle: false,
                 },
               ],
             },
@@ -991,6 +992,7 @@ export const PalomaInstructionsSteps: {
                 {
                   command: <p>$ sudo docker run hello-world</p>,
                   copyCommand: 'sudo docker run hello-world',
+                  isTitle: false,
                   instruction: (
                     <p>
                       This command downloads a test image and runs it in a container. When the container runs, it prints
@@ -1211,6 +1213,239 @@ export const PalomaInstructionsSteps: {
   ],
 };
 
+export const UpgradeMigrationGuide: {
+  [x: string]: IInstructionsNodeSteps[];
+} = {
+  [SupportSystems.Mac]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Mac hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: 'https://download.palomachain.com/lightnode/setup.sh ',
+            },
+          ],
+        },
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: <p>sh $HOME/Downloads/setup.sh import-key</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh import-ledger</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh show-keys</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh node-recover all</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Linux]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Linux hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: 'https://download.palomachain.com/lightnode/setup.sh ',
+            },
+          ],
+        },
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: <p>sh $HOME/Downloads/setup.sh import-key</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh import-ledger</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh show-keys</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh node-recover all</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Windows]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: (
+                <p>
+                  docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
+                  palomachain/lightnode-client:v2 import-key
+                </p>
+              ),
+              copyCommand:
+                'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: (
+                <p>
+                  docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
+                  palomachain/lightnode-client:v2 import-ledger
+                </p>
+              ),
+              copyCommand:
+                'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: (
+                <p>
+                  docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
+                  palomachain/lightnode-client:v2 show-keys
+                </p>
+              ),
+              copyCommand:
+                'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: (
+                <p>
+                  docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
+                  palomachain/lightnode-client:v2 node-recover all
+                </p>
+              ),
+              copyCommand:
+                'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const ActivateInstructionsSteps: {
   [x: string]: {
     title?: string | JSX.Element;
@@ -1249,12 +1484,12 @@ export const ActivateInstructionsSteps: {
         {
           command: (
             <p>
-              docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.paloma:/root/.paloma
+              docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
               palomachain/lightnode-client:v2 activate
             </p>
           ),
           copyCommand:
-            'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode\\.paloma:/root/.paloma palomachain/lightnode-client:v2 activate',
+            'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 activate',
         },
       ],
     },
@@ -1264,12 +1499,12 @@ export const ActivateInstructionsSteps: {
         {
           command: (
             <p>
-              docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode\.paloma:/root/.paloma
+              docker run --rm --pull=always -ti -v $env:USERPROFILE\paloma-lightnode:/root/lightnode
               palomachain/lightnode-client:v2 automate
             </p>
           ),
           copyCommand:
-            'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode\\.paloma:/root/.paloma palomachain/lightnode-client:v2 automate',
+            'docker run --rm --pull=always -ti -v $env:USERPROFILE\\paloma-lightnode:/root/lightnode palomachain/lightnode-client:v2 automate',
         },
       ],
     },

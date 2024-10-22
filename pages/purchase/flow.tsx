@@ -356,12 +356,14 @@ const PurchaseFlow = () => {
     } else {
       // Render a countdown
       return (
-        <>
-          <span>Sale ends in</span>
+        <div className="flex-row">
           <p>
-            {days} days {hours} hrs {minutes} min
+            Sale ends in{' '}
+            <span>
+              {days}d : {hours}h : {minutes}m
+            </span>
           </p>
-        </>
+        </div>
       );
     }
   };
@@ -730,318 +732,328 @@ const PurchaseFlow = () => {
     <div className="purchase-flow">
       <div className="purchase-sale-end">
         <Countdown date={endDate} renderer={rendererTime} />
+        <h2>Implied FDV is only $16MM</h2>
       </div>
-      {step === 1 ? (
-        <>
-          <div className="purchase-subscription">
-            <h3>Paloma LightNode Subscription Sale</h3>
-          </div>
-          {priceTiers && priceTiers.length > 0 ? (
-            priceTiers.map(
-              (tier, index) =>
-                (index > 0
-                  ? priceTiers[index - 1].quantity <=
-                    priceTiers[index - 1].purchased + priceTiers[index - 1].inputAmount
-                  : true) && (
-                  <div key={index}>
-                    <div className="purchase-subscription">
-                      <p>Slot {tier.slot} Remaining Nodes</p>
-                      <ReactSlider
-                        className="horizontal-slider"
-                        thumbClassName="example-thumb"
-                        trackClassName="example-track"
-                        min={0}
-                        max={tier.quantity}
-                        value={tier.quantity - tier.purchased}
-                        disabled
-                      />
-                      <p>
-                        {tier.quantity - tier.purchased}/{tier.quantity}
-                      </p>
-                    </div>
-                    <div className="purchase-sale-set" style={{ marginTop: '15px' }}>
-                      <div className="purchase-sale-set__price purchase-sale-set__flex">
-                        <p>
-                          Price per Node <span>(Slot {tier.slot})</span>
-                        </p>
-                        <div className="purchase-sale-set__price__value flex-row">
-                          <h2>{Number(tier.price) / 10 ** 6} USD</h2>
-                          <p>Implied FDV ${abbreviateNumberSI(tier.fdv, 2, 2)}</p>
+      <div className="purchase-flow-body">
+        {step === 1 ? (
+          <>
+            <div className="purchase-subscription">
+              <h3>Paloma AI LightNode Sale</h3>
+            </div>
+            {priceTiers && priceTiers.length > 0 ? (
+              priceTiers.map(
+                (tier, index) =>
+                  (index > 0
+                    ? priceTiers[index - 1].quantity <=
+                      priceTiers[index - 1].purchased + priceTiers[index - 1].inputAmount
+                    : true) && (
+                    <div key={index}>
+                      <div className="purchase-subscription">
+                        <div className="flex-row justify-between w-full">
+                          <span>Slot {tier.slot} Remaining Nodes</span>
+                          <p>{tier.quantity - tier.purchased}</p>
+                        </div>
+                        <ReactSlider
+                          className="horizontal-slider"
+                          thumbClassName="example-thumb"
+                          trackClassName="example-track"
+                          min={0}
+                          max={tier.quantity}
+                          value={tier.quantity - tier.purchased}
+                          disabled
+                        />
+                        {/* <p>
+                          {tier.quantity - tier.purchased}/{tier.quantity}
+                        </p> */}
+                      </div>
+                      <div className="purchase-sale-set" style={{ marginTop: '15px' }}>
+                        <div className="purchase-sale-set__price purchase-sale-set__flex">
+                          <p>
+                            Price per Node <span>(Slot {tier.slot})</span>
+                          </p>
+                          <div className="purchase-sale-set__price__value flex-row">
+                            <h2>{Number(tier.price) / 10 ** 6} USD</h2>
+                            <p>Implied FDV ${abbreviateNumberSI(tier.fdv, 2, 2)}</p>
+                          </div>
+                        </div>
+                        <div className="purchase-sale-set__quantity purchase-sale-set__flex">
+                          <p>Node Quantity</p>
+                          <div className="purchase-sale-set__quantity__value">
+                            <button
+                              className={`increase ${tier.inputAmount <= 0 ? 'not-allowed' : 'pointer'}`}
+                              onClick={() => handleInputAmount(index)}
+                              disabled={tier.inputAmount <= 0}
+                            >
+                              -
+                            </button>
+                            <input
+                              type="number"
+                              className="quantity_value"
+                              value={tier.inputAmount < 1 ? '' : tier.inputAmount}
+                              onChange={(e) => setInputAmount(index, Number(e.target.value))}
+                              min={0}
+                              ref={inputRef}
+                            />
+                            <button
+                              className={`increase ${
+                                tier.quantity <= tier.purchased + tier.inputAmount ? 'not-allowed' : 'pointer'
+                              }`}
+                              onClick={() => handleInputAmount(index, true)}
+                              disabled={tier.quantity <= tier.purchased + tier.inputAmount}
+                            >
+                              +
+                            </button>
+                          </div>
                         </div>
                       </div>
-                      <div className="purchase-sale-set__quantity purchase-sale-set__flex">
-                        <p>Node Quantity</p>
-                        <div className="purchase-sale-set__quantity__value">
-                          <button
-                            className={`increase ${tier.inputAmount <= 0 ? 'not-allowed' : 'pointer'}`}
-                            onClick={() => handleInputAmount(index)}
-                            disabled={tier.inputAmount <= 0}
-                          >
-                            -
-                          </button>
-                          <input
-                            type="number"
-                            className="quantity_value"
-                            value={tier.inputAmount < 1 ? '' : tier.inputAmount}
-                            onChange={(e) => setInputAmount(index, Number(e.target.value))}
-                            min={0}
-                            ref={inputRef}
-                          />
-                          <button
-                            className={`increase ${
-                              tier.quantity <= tier.purchased + tier.inputAmount ? 'not-allowed' : 'pointer'
-                            }`}
-                            onClick={() => handleInputAmount(index, true)}
-                            disabled={tier.quantity <= tier.purchased + tier.inputAmount}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                ),
-            )
-          ) : (
-            <img src="/assets/icons/loading_circle.svg" width={24} alt="loading" style={{ margin: 'auto' }} />
-          )}
+                  ),
+              )
+            ) : (
+              <img src="/assets/icons/loading_circle.svg" width={24} alt="loading" style={{ margin: 'auto' }} />
+            )}
 
-          <div className="purchase-sale-set purchase-sale-promo">
-            <div className="purchase-sale-set__price purchase-sale-set__flex">
-              <p>
-                Add Promo Code <span>(Optional)</span>
-              </p>
-              <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
-                <input value={promoCode} onChange={(e) => inputPromoCode(e.target.value)} className="purchase-promo" />
-                <div className="purchase-promo-apply pointer" onClick={() => applyPromoCode(promoCode)}>
-                  Apply
+            <div className="purchase-sale-set purchase-sale-promo">
+              <div className="purchase-sale-set__price purchase-sale-set__flex">
+                <p>
+                  Add Promo Code <span>(Optional)</span>
+                </p>
+                <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
+                  <input
+                    value={promoCode}
+                    onChange={(e) => inputPromoCode(e.target.value)}
+                    className="purchase-promo"
+                  />
+                  <div className="purchase-promo-apply pointer" onClick={() => applyPromoCode(promoCode)}>
+                    Apply
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="purchase-sale-set purchase-sale-promo">
-            <div className="purchase-sale-set__price purchase-sale-set__flex">
-              <p>Customer Support</p>
-              <div className="purchase-sale-pay">
-                {CustomerSupport.map((support, index) => (
-                  <div key={index}>
-                    <div className="purchase-sale-pay__supports">
-                      <CheckBox
-                        label={support.label}
-                        checked={index === selectedSupport}
-                        onChange={() => setSupport(index)}
-                      />
-                      {support.price > 0 ? (
-                        <p>
-                          ${subscriptionFee} USD
-                          <br />
-                          <span>per month</span>
-                        </p>
-                      ) : (
-                        <p>Free</p>
-                      )}
+            {/* <div className="purchase-sale-set purchase-sale-promo">
+              <div className="purchase-sale-set__price purchase-sale-set__flex">
+                <p>Customer Support</p>
+                <div className="purchase-sale-pay">
+                  {CustomerSupport.map((support, index) => (
+                    <div key={index}>
+                      <div className="purchase-sale-pay__supports">
+                        <CheckBox
+                          label={support.label}
+                          checked={index === selectedSupport}
+                          onChange={() => setSupport(index)}
+                        />
+                        {support.price > 0 ? (
+                          <p>
+                            ${subscriptionFee} USD
+                            <br />
+                            <span>per month</span>
+                          </p>
+                        ) : (
+                          <p>Free</p>
+                        )}
+                      </div>
+                      <div className="purchase-sale-pay__supports-effects">
+                        {support.effects.map((effect, key) => (
+                          <CheckBox disabled label={effect} key={key} />
+                        ))}
+                        {support.price > 0 && (
+                          <span className="purchase-sale-pay__supports-effects__sub">
+                            * Requires a 24-month subscription. Total cost: $
+                            {formatNumber(support.price > 0 ? subscriptionFee * support.month : 0, 0, 0)}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="purchase-sale-pay__supports-effects">
-                      {support.effects.map((effect, key) => (
-                        <CheckBox disabled label={effect} key={key} />
-                      ))}
-                      {support.price > 0 && (
-                        <span className="purchase-sale-pay__supports-effects__sub">
-                          * Requires a 24-month subscription. Total cost: $
-                          {formatNumber(support.price > 0 ? subscriptionFee * support.month : 0, 0, 0)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
+            </div> */}
+          </>
+        ) : (
+          <>
+            <div className="purchase-sale-set__back" onClick={() => setStep(1)}>
+              <img src="/assets/icons/back.svg" alt="back" />
+              <p>Paloma AI LightNode Sale</p>
+            </div>
+            <div className="purchase-sale-set__select">
+              <SelectChain
+                selectedChain={selectedChain}
+                supportChains={purchaseSupportedNetworks}
+                setSelectedChain={setSelectedChain}
+                title="Select Chain/Credit Cards"
+              />
+              {selectedChain && !isFiat(selectedChain) && (
+                <TokenSelector
+                  label="Purchasing Token"
+                  supportedNetworks={purchaseSupportedNetworks}
+                  token={fromToken}
+                  listedTokens={listedTokens}
+                  onSelectToken={(token) => setFromToken({ ...token })}
+                  isDisable={isFiat(selectedChain)}
+                  canAddFund
+                />
+              )}
+            </div>
+          </>
+        )}
+        <div className="purchase-sale-set purchase-sale-promo">
+          <div className="purchase-sale-set__price purchase-sale-set__flex">
+            <p>You Pay</p>
+            <div className="purchase-sale-pay">
+              {priceTiers &&
+                priceTiers.length > 0 &&
+                priceTiers.map(
+                  (tier, index) =>
+                    tier.inputAmount > 0 && (
+                      <TotalPay
+                        key={index}
+                        title={`${tier.inputAmount}x LightNode Slot ${tier.slot}`}
+                        step={step}
+                        price={(Number(tier.price) * Number(tier.inputAmount)) / 10 ** 6}
+                        exchangeRate={fromTokenExchangeRate}
+                        fromToken={fromToken}
+                      />
+                    ),
+                )}
+              <TotalPay
+                title="Purchase Processing Fee"
+                step={step}
+                price={processingFee}
+                exchangeRate={fromTokenExchangeRate}
+                fromToken={fromToken}
+              />
+              {totalSupportPrice > 0 && (
+                <TotalPay
+                  title="Enhanced Customer Support"
+                  step={step}
+                  price={totalSupportPrice}
+                  exchangeRate={fromTokenExchangeRate}
+                  fromToken={fromToken}
+                />
+              )}
+              <TotalPay
+                title="Slippage Fees"
+                step={step}
+                price={
+                  isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
+                    ? slippageFeeForUSDC
+                    : slippageFee
+                }
+                exchangeRate={fromTokenExchangeRate}
+                fromToken={fromToken}
+              />
+              {discountPrice > 0 && appliedPromoCode && (
+                <TotalPay
+                  title={`Promo Code ${appliedPromoCode}`}
+                  step={step}
+                  price={0 - discountPrice}
+                  exchangeRate={fromTokenExchangeRate}
+                  fromToken={fromToken}
+                />
+              )}
+              <TotalPay
+                title="Total"
+                step={step}
+                price={
+                  isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
+                    ? totalPayForUSDC
+                    : totalPay
+                }
+                exchangeRate={fromTokenExchangeRate}
+                fromToken={fromToken}
+                expectTokenAmount={Number(quoteAmount.format)}
+              />
             </div>
           </div>
-        </>
-      ) : (
-        <>
-          <div className="purchase-sale-set__back" onClick={() => setStep(1)}>
-            <img src="/assets/icons/back.svg" alt="back" />
-            <p>Paloma LightNode Subscription Sale</p>
-          </div>
-          <div className="purchase-sale-set__select">
-            <SelectChain
-              selectedChain={selectedChain}
-              supportChains={purchaseSupportedNetworks}
-              setSelectedChain={setSelectedChain}
-              title="Select Chain/Credit Cards"
-            />
-            {selectedChain && !isFiat(selectedChain) && (
-              <TokenSelector
-                label="Purchasing Token"
-                supportedNetworks={purchaseSupportedNetworks}
-                token={fromToken}
-                listedTokens={listedTokens}
-                onSelectToken={(token) => setFromToken({ ...token })}
-                isDisable={isFiat(selectedChain)}
-                canAddFund
-              />
-            )}
-          </div>
-        </>
-      )}
-      <div className="purchase-sale-set purchase-sale-promo">
-        <div className="purchase-sale-set__price purchase-sale-set__flex">
-          <p>You Pay</p>
-          <div className="purchase-sale-pay">
-            {priceTiers &&
-              priceTiers.length > 0 &&
-              priceTiers.map(
-                (tier, index) =>
-                  tier.inputAmount > 0 && (
-                    <TotalPay
-                      key={index}
-                      title={`${tier.inputAmount}x LightNode Slot ${tier.slot}`}
-                      step={step}
-                      price={(Number(tier.price) * Number(tier.inputAmount)) / 10 ** 6}
-                      exchangeRate={fromTokenExchangeRate}
-                      fromToken={fromToken}
-                    />
-                  ),
-              )}
-            <TotalPay
-              title="Purchase Processing Fee"
-              step={step}
-              price={processingFee}
-              exchangeRate={fromTokenExchangeRate}
-              fromToken={fromToken}
-            />
-            {totalSupportPrice > 0 && (
-              <TotalPay
-                title="Enhanced Customer Support"
-                step={step}
-                price={totalSupportPrice}
-                exchangeRate={fromTokenExchangeRate}
-                fromToken={fromToken}
-              />
-            )}
-            <TotalPay
-              title="Slippage Fees"
-              step={step}
-              price={
-                isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
-                  ? slippageFeeForUSDC
-                  : slippageFee
-              }
-              exchangeRate={fromTokenExchangeRate}
-              fromToken={fromToken}
-            />
-            {discountPrice > 0 && appliedPromoCode && (
-              <TotalPay
-                title={`Promo Code ${appliedPromoCode}`}
-                step={step}
-                price={0 - discountPrice}
-                exchangeRate={fromTokenExchangeRate}
-                fromToken={fromToken}
-              />
-            )}
-            <TotalPay
-              title="Total"
-              step={step}
-              price={
-                isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
-                  ? totalPayForUSDC
-                  : totalPay
-              }
-              exchangeRate={fromTokenExchangeRate}
-              fromToken={fromToken}
-              expectTokenAmount={Number(quoteAmount.format)}
-            />
-          </div>
         </div>
-      </div>
-      {step === 1 ? (
-        <>
-          <CheckBox
-            label={
-              <>
-                I agree with the{' '}
-                <a href="/lightnode_sales_terms_and_conditions" target="_blank">
-                  Paloma LightNode Sale Terms and Conditions.
-                </a>
-              </>
-            }
-            checked={agreeTerms}
-            onChange={() => setAgreeTerms(!agreeTerms)}
-          />
-          <CheckBox
-            label={
-              <>
-                I agree with the{' '}
-                <a href="/lightnode_sales_terms_of_use" target="_blank">
-                  Paloma LightNode Sale Terms of Use.
-                </a>
-              </>
-            }
-            checked={agreeTermsOfUse}
-            onChange={() => setAgreeTermsOfUse(!agreeTermsOfUse)}
-          />
-          <CheckBox
-            label={
-              <>
-                I agree with the{' '}
-                <a href="/privacy" target="_blank">
-                  Paloma LightNode Privacy Policy.
-                </a>
-              </>
-            }
-            checked={agreePolicy}
-            onChange={() => setAgreePolicy(!agreePolicy)}
-          />
-          <CheckBox
-            label="I acknowledge that all sales are final and non-refundable."
-            checked={agreeAck}
-            onChange={() => setAgreeAck(!agreeAck)}
-          />
-        </>
-      ) : (
-        <p>All purchases include a {slippageFeePc + txSlippageFeePc}% slippage fee for swaps.</p>
-      )}
+        {step === 1 ? (
+          <>
+            <CheckBox
+              label={
+                <>
+                  I agree with the{' '}
+                  <a href="/lightnode_sales_terms_and_conditions" target="_blank">
+                    Paloma LightNode Sale Terms and Conditions.
+                  </a>
+                </>
+              }
+              checked={agreeTerms}
+              onChange={() => setAgreeTerms(!agreeTerms)}
+            />
+            <CheckBox
+              label={
+                <>
+                  I agree with the{' '}
+                  <a href="/lightnode_sales_terms_of_use" target="_blank">
+                    Paloma LightNode Sale Terms of Use.
+                  </a>
+                </>
+              }
+              checked={agreeTermsOfUse}
+              onChange={() => setAgreeTermsOfUse(!agreeTermsOfUse)}
+            />
+            <CheckBox
+              label={
+                <>
+                  I agree with the{' '}
+                  <a href="/privacy" target="_blank">
+                    Paloma LightNode Privacy Policy.
+                  </a>
+                </>
+              }
+              checked={agreePolicy}
+              onChange={() => setAgreePolicy(!agreePolicy)}
+            />
+            <CheckBox
+              label="I acknowledge that all sales are final and non-refundable."
+              checked={agreeAck}
+              onChange={() => setAgreeAck(!agreeAck)}
+            />
+          </>
+        ) : (
+          <p>All purchases include a {slippageFeePc + txSlippageFeePc}% slippage fee for swaps.</p>
+        )}
 
-      {isFiat(selectedChain) ? (
-        <PurchaseWithFiatButton
-          onClickStart={() => handleStartWithFiat()}
-          isLoggedIn={isLoggedIn}
-          support={selectedSupport}
-          promoCode={promoCode}
-          step={step}
-          fromToken={fromToken}
-          fromTokenExchangeRate={fromTokenExchangeRate}
-          fiatWallet={fiatWallet}
-          selectedChain={selectedChain}
-          priceTiers={priceTiers}
-          generatingWallet={generatingWallet}
-          fetchingBuyNow={fetchingPriceLoading}
-          buttonText="Buy Now"
-        />
-      ) : (
-        <PurchaseButton
-          chainId={wallet ? parseIntString(wallet.network) : null}
-          full
-          onClickStart={() => handleStart()}
-          isValidTokenAmount={isValidTokenAmount}
-          isTxLoading={isTxLoading}
-          isFetchingPriceLoading={fetchingPriceLoading}
-          isAllAgree={isAllAgree}
-          support={selectedSupport}
-          promoCode={promoCode}
-          step={step}
-          fromToken={fromToken}
-          fromTokenExchangeRate={fromTokenExchangeRate}
-          totalSupportPrice={totalSupportPrice}
-          expectedAmount={expectedAmount} // token amount
-          quoteAmount={quoteAmount} // token amount
-          swapPath={swapPath}
-          priceTiers={priceTiers}
-          selectedChain={selectedChain}
-          buttonText="Buy Now"
-        />
-      )}
+        {isFiat(selectedChain) ? (
+          <PurchaseWithFiatButton
+            onClickStart={() => handleStartWithFiat()}
+            isLoggedIn={isLoggedIn}
+            support={selectedSupport}
+            promoCode={promoCode}
+            step={step}
+            fromToken={fromToken}
+            fromTokenExchangeRate={fromTokenExchangeRate}
+            fiatWallet={fiatWallet}
+            selectedChain={selectedChain}
+            priceTiers={priceTiers}
+            generatingWallet={generatingWallet}
+            fetchingBuyNow={fetchingPriceLoading}
+            buttonText="Buy Now"
+          />
+        ) : (
+          <PurchaseButton
+            chainId={wallet ? parseIntString(wallet.network) : null}
+            full
+            onClickStart={() => handleStart()}
+            isValidTokenAmount={isValidTokenAmount}
+            isTxLoading={isTxLoading}
+            isFetchingPriceLoading={fetchingPriceLoading}
+            isAllAgree={isAllAgree}
+            support={selectedSupport}
+            promoCode={promoCode}
+            step={step}
+            fromToken={fromToken}
+            fromTokenExchangeRate={fromTokenExchangeRate}
+            totalSupportPrice={totalSupportPrice}
+            expectedAmount={expectedAmount} // token amount
+            quoteAmount={quoteAmount} // token amount
+            swapPath={swapPath}
+            priceTiers={priceTiers}
+            selectedChain={selectedChain}
+            buttonText="Buy Now"
+          />
+        )}
+      </div>
       <PendingTransactionModal
         show={isTxLoading}
         onClose={() => setTxLoading(false)}

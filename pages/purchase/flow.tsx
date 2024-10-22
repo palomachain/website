@@ -734,7 +734,9 @@ const PurchaseFlow = () => {
     <div className="purchase-flow">
       <div className="purchase-sale-end">
         <Countdown date={endDate} renderer={rendererTime} />
-        <h2>Implied FDV is only ${abbreviateNumberSI(priceTiers && priceTiers.length > 0 ? priceTiers[0].fdv : 0, 2, 2)}</h2>
+        <h2>
+          Implied FDV is only ${abbreviateNumberSI(priceTiers && priceTiers.length > 0 ? priceTiers[0].fdv : 0, 0, 0)}
+        </h2>
       </div>
       <div className="purchase-flow-body">
         {step === 1 ? (
@@ -775,7 +777,7 @@ const PurchaseFlow = () => {
                           </p>
                           <div className="purchase-sale-set__price__value flex-row">
                             <h2>{Number(tier.price) / 10 ** 6} USD</h2>
-                            <p>Implied FDV ${abbreviateNumberSI(tier.fdv, 2, 2)}</p>
+                            <p>Implied FDV ${abbreviateNumberSI(tier.fdv, 0, 0)}</p>
                           </div>
                         </div>
                         <div className="purchase-sale-set__quantity purchase-sale-set__flex">

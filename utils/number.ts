@@ -14,8 +14,7 @@ const abbreviateNumberFactory =
     const scale = 10 ** (tier * 3);
 
     // scale the number
-    const scaled = number / scale;
-
+    const scaled = Math.floor(number / scale);
     // format number and add suffix
     return (
       scaled.toLocaleString(undefined, {

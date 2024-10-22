@@ -29,8 +29,8 @@ export interface ISteps {
   };
   commands?: {
     name?: string | JSX.Element;
-    command: string | JSX.Element;
-    copyCommand: string;
+    command?: string | JSX.Element;
+    copyCommand?: string;
     instruction?: string | JSX.Element;
     isTitle?: boolean;
   }[];

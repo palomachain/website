@@ -1211,6 +1211,224 @@ export const PalomaInstructionsSteps: {
   ],
 };
 
+export const UpgradeMigrationGuide: {
+  [x: string]: IInstructionsNodeSteps[];
+} = {
+  [SupportSystems.Mac]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Mac hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: '',
+            },
+          ],
+        },
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: <p>sh $HOME/Downloads/setup.sh import-key</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh import-ledger</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh show-keys</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh node-recover all</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Linux]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Linux hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: '',
+            },
+          ],
+        },
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: <p>sh $HOME/Downloads/setup.sh import-key</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh import-ledger</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh show-keys</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh node-recover all</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  [SupportSystems.Windows]: [
+    {
+      head: 'Upgrade v1 to v2',
+      steps: [
+        {
+          title: <p>Download the Setup Script for your Mac hardware</p>,
+          externalBtns: [
+            {
+              text: 'Download Setup',
+              link: 'https://desktop.docker.com/mac/main/arm64/Docker.dmg?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-mac-arm64',
+            },
+          ],
+        },
+        {
+          title: <p>Import all Keys from v1</p>,
+          commands: [
+            {
+              name: (
+                <p>
+                  For <b>each key</b> run the command:
+                </p>
+              ),
+              command: <p>sh $HOME/Downloads/setup.sh import-key</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-key',
+            },
+            {
+              name: 'Input the key Mnemonic',
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> If you have ledger keys, import them using the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh import-ledger</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh import-ledger',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: (
+            <p>
+              <b>(Optional)</b> Verify that all keys are included with the command:
+            </p>
+          ),
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh show-keys</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh show-keys',
+              isTitle: false,
+            },
+          ],
+        },
+        {
+          title: <p>Recover your node with</p>,
+          commands: [
+            {
+              command: <p>sh $HOME/Downloads/setup.sh node-recover all</p>,
+              copyCommand: 'sh $HOME/Downloads/setup.sh node-recover all',
+              isTitle: false,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const ActivateInstructionsSteps: {
   [x: string]: {
     title?: string | JSX.Element;

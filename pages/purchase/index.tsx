@@ -2,10 +2,14 @@ import useCookie from 'hooks/useCookie';
 import { useEffect, useState } from 'react';
 import Describe from './describe';
 import PurchaseFlow from './flow';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { StaticLink } from 'configs/links';
 
 const Purchase = () => {
   const { confirmPasscode } = useCookie();
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
@@ -24,7 +28,10 @@ const Purchase = () => {
   };
 
   useEffect(() => {
-    checkAlreadyPassedCode();
+    // TODO: disable purchase page until updating new contracts
+    // checkAlreadyPassedCode();
+    toast.info('Coming soon.', { toastId: 'disable-purchase-page' });
+    router.push(StaticLink.Home);
   }, []);
 
   return loading ? (

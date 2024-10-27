@@ -18,3 +18,7 @@
   gap: 10px;
   cursor: pointer;
 }
+
+.disablePurchase {
+  cursor: not-allowed !important;
+}

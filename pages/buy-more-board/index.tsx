@@ -284,6 +284,10 @@ const BuyMoreBoard = () => {
   );
 
   const onClickActive = async (index: number) => {
+    // TODO: disable activate until updating new contracts
+    toast.info('We are updating the Activate logic. Please wait.');
+    return;
+
     if (isAvailableActive(index) && loadingIndex < 0) {
       try {
         setLoadingIndex(index);

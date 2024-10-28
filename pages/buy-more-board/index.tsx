@@ -284,10 +284,6 @@ const BuyMoreBoard = () => {
   );
 
   const onClickActive = async (index: number) => {
-    // TODO: disable activate until updating new contracts
-    toast.info('We are updating the Activate logic. Please wait.');
-    return;
-
     if (isAvailableActive(index) && loadingIndex < 0) {
       try {
         setLoadingIndex(index);
@@ -316,6 +312,7 @@ const BuyMoreBoard = () => {
     navigator.clipboard.writeText(`https://www.palomachain.com/purchase/?code=${code}`);
   };
 
+  // TODO: remove it
   const onClickCreatePromocode = () => {
     if (wallet && wallet.account) {
       setOpenGeneratePromocodeModal(true);
@@ -481,9 +478,11 @@ const BuyMoreBoard = () => {
                     <br />
                     Get Paid A Referral Bonus
                     {wallet && wallet.account ? (
-                      <button className={style.createPromocode} onClick={onClickCreatePromocode}>
-                        Create Promo Code
-                      </button>
+                      // NOTE: disable create promo code
+                      // <button className={style.createPromocode} onClick={onClickCreatePromocode}>
+                      //   Create Promo Code
+                      // </button>
+                      <></>
                     ) : (
                       <ConnectWallet
                         className={style.createPromocode}

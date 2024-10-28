@@ -20,14 +20,12 @@ const Purchase = ({ type, className, text = 'Purchase your LightNode', disable =
       className={classNames(
         className,
         'purchase-button',
-        style.disablePurchase, // TODO: disable purchase page until updating new contracts
         {
           [style[type]]: true,
         },
       )}
       onClick={() => router.push(StaticLink.PURCHASE)}
-      disabled // TODO: disable purchase page until updating new contracts
-      // disabled={disable}
+      disabled={disable}
     >
       {text}
     </button>

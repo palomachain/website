@@ -61,7 +61,10 @@
     "name": "PromoCodeCreated",
     "inputs": [
       { "name": "promo_code", "type": "bytes32", "indexed": false },
-      { "name": "recipient", "type": "address", "indexed": false }
+      { "name": "recipient", "type": "address", "indexed": false },
+      { "name": "parent_promo_code", "type": "bytes32", "indexed": false },
+      { "name": "referral_discount_percentage", "type": "uint256", "indexed": false },
+      { "name": "referral_reward_percentage", "type": "uint256", "indexed": false }
     ],
     "anonymous": false,
     "type": "event"
@@ -88,11 +91,22 @@
     "type": "event"
   },
   {
-    "name": "ReferralRewardPercentagesChanged",
+    "name": "SlippageFeePercentageChanged",
+    "inputs": [{ "name": "slippage_fee_percentage", "type": "uint256", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "ParentFeePercentageChanged",
+    "inputs": [{ "name": "parent_fee_percentage", "type": "uint256", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "DefaultDiscountRewardPercentageChanged",
     "inputs": [
-      { "name": "referral_discount_percentage", "type": "uint256", "indexed": false },
-      { "name": "referral_reward_percentage", "type": "uint256", "indexed": false },
-      { "name": "slippage_fee_percentage", "type": "uint256", "indexed": false }
+      { "name": "default_discount_percentage", "type": "uint256", "indexed": false },
+      { "name": "default_reward_percentage", "type": "uint256", "indexed": false }
     ],
     "anonymous": false,
     "type": "event"
@@ -152,10 +166,32 @@
     "type": "event"
   },
   {
+    "name": "GrainAmountUpdated",
+    "inputs": [{ "name": "new_amount", "type": "uint256", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
     "stateMutability": "nonpayable",
     "type": "function",
     "name": "activate_wallet",
-    "inputs": [{ "name": "_paloma", "type": "bytes32" }],
+    "inputs": [
+      { "name": "_paloma", "type": "bytes32" },
+      { "name": "_purchased_in_v1", "type": "bool" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "create_promo_code_by_chain",
+    "inputs": [
+      { "name": "_promo_code", "type": "bytes32" },
+      { "name": "_recipient", "type": "address" },
+      { "name": "_parent_promo_code", "type": "bytes32" },
+      { "name": "_referral_discount_percentage", "type": "uint256" },
+      { "name": "_referral_reward_percentage", "type": "uint256" }
+    ],
     "outputs": []
   },
   {
@@ -164,8 +200,18 @@
     "name": "create_promo_code",
     "inputs": [
       { "name": "_promo_code", "type": "bytes32" },
-      { "name": "_recipient", "type": "address" }
+      { "name": "_recipient", "type": "address" },
+      { "name": "_parent_promo_code", "type": "bytes32" },
+      { "name": "_referral_discount_percentage", "type": "uint256" },
+      { "name": "_referral_reward_percentage", "type": "uint256" }
     ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "remove_promo_code_by_chain",
+    "inputs": [{ "name": "_promo_code", "type": "bytes32" }],
     "outputs": []
   },
   {
@@ -240,7 +286,8 @@
       { "name": "_promo_code", "type": "bytes32" },
       { "name": "_path", "type": "bytes" },
       { "name": "_enhanced", "type": "bool" },
-      { "name": "_subscription_month", "type": "uint256" }
+      { "name": "_subscription_month", "type": "uint256" },
+      { "name": "_own_promo_code", "type": "bytes32" }
     ],
     "outputs": []
   },
@@ -256,7 +303,8 @@
       { "name": "_promo_code", "type": "bytes32" },
       { "name": "_path", "type": "bytes" },
       { "name": "_enhanced", "type": "bool" },
-      { "name": "_subscription_month", "type": "uint256" }
+      { "name": "_subscription_month", "type": "uint256" },
+      { "name": "_own_promo_code", "type": "bytes32" }
     ],
     "outputs": []
   },
@@ -289,12 +337,25 @@
   {
     "stateMutability": "nonpayable",
     "type": "function",
-    "name": "set_referral_percentages",
+    "name": "set_slippage_fee_percentage",
+    "inputs": [{ "name": "_new_slippage_fee_percentage", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "set_discount_reward_percentage",
     "inputs": [
-      { "name": "_new_referral_discount_percentage", "type": "uint256" },
-      { "name": "_new_referral_reward_percentage", "type": "uint256" },
-      { "name": "_new_slippage_fee_percentage", "type": "uint256" }
+      { "name": "_new_default_discount_percentage", "type": "uint256" },
+      { "name": "_new_default_reward_percentage", "type": "uint256" }
     ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "set_parent_fee_percentage",
+    "inputs": [{ "name": "_new_parent_fee_percentage", "type": "uint256" }],
     "outputs": []
   },
   {
@@ -305,6 +366,13 @@
       { "name": "_new_start_timestamp", "type": "uint256" },
       { "name": "_new_end_timestamp", "type": "uint256" }
     ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_grain_amount",
+    "inputs": [{ "name": "_new_amount", "type": "uint256" }],
     "outputs": []
   },
   {
@@ -342,6 +410,20 @@
     "name": "WETH9",
     "inputs": [],
     "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "V1_CONTRACT",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "grains_per_node",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
   },
   {
     "stateMutability": "view",
@@ -416,14 +498,21 @@
   {
     "stateMutability": "view",
     "type": "function",
-    "name": "referral_discount_percentage",
+    "name": "parent_fee_percentage",
     "inputs": [],
     "outputs": [{ "name": "", "type": "uint256" }]
   },
   {
     "stateMutability": "view",
     "type": "function",
-    "name": "referral_reward_percentage",
+    "name": "default_discount_percentage",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "uint256" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "default_reward_percentage",
     "inputs": [],
     "outputs": [{ "name": "", "type": "uint256" }]
   },
@@ -466,7 +555,10 @@
         "type": "tuple",
         "components": [
           { "name": "recipient", "type": "address" },
-          { "name": "active", "type": "bool" }
+          { "name": "active", "type": "bool" },
+          { "name": "parent_promo_code", "type": "bytes32" },
+          { "name": "referral_discount_percentage", "type": "uint256" },
+          { "name": "referral_reward_percentage", "type": "uint256" }
         ]
       }
     ]
@@ -488,7 +580,21 @@
   {
     "stateMutability": "view",
     "type": "function",
-    "name": "pendingRecipient",
+    "name": "pending_recipient",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "pending_parent1_recipient",
+    "inputs": [{ "name": "arg0", "type": "address" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "pending_parent2_recipient",
     "inputs": [{ "name": "arg0", "type": "address" }],
     "outputs": [{ "name": "", "type": "address" }]
   },
@@ -516,9 +622,12 @@
       { "name": "_end_timestamp", "type": "uint256" },
       { "name": "_processing_fee", "type": "uint256" },
       { "name": "_subscription_fee", "type": "uint256" },
-      { "name": "_referral_discount_percentage", "type": "uint256" },
-      { "name": "_referral_reward_percentage", "type": "uint256" },
-      { "name": "_slippage_fee_percentage", "type": "uint256" }
+      { "name": "_slippage_fee_percentage", "type": "uint256" },
+      { "name": "_parent_fee_percentage", "type": "uint256" },
+      { "name": "_default_discount_percentage", "type": "uint256" },
+      { "name": "_default_reward_percentage", "type": "uint256" },
+      { "name": "_grains_per_node", "type": "uint256" },
+      { "name": "_v1_contract", "type": "address" }
     ],
     "outputs": []
   }

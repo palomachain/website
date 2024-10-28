@@ -1,6 +1,6 @@
 import { api } from 'services';
 
-const nodesaleApiUrl = 'https://nodesale.palomachain.com/api/v1';
+const nodesaleApiUrl = 'https://nodesale.palomachain.com/api/v2';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -59,6 +59,12 @@ const injectedRtkApi = api.injectEndpoints({
     getPromocodeStatus: build.query<GetNodeSaleApiResponse, GetApiArg>({
       query: (queryArg) => ({
         url: `${nodesaleApiUrl}/promocodestatus`,
+        params: queryArg,
+      }),
+    }),
+    getPromocodeStatusByWallet: build.query<GetNodeSaleApiResponse, GetEVMApiArg>({
+      query: (queryArg) => ({
+        url: `${nodesaleApiUrl}/promocodestatusbywallet`,
         params: queryArg,
       }),
     }),
@@ -210,6 +216,7 @@ export const {
   useLazyGetLoginConfirmationQuery,
   useLazyGetWalletQuery,
   useLazyGetPromocodeStatusQuery,
+  useLazyGetPromocodeStatusByWalletQuery,
   useLazyGetStatusQuery,
   useLazyGetStatusByUserQuery,
   useLazyGetBalancesQuery,

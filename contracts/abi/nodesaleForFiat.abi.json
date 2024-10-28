@@ -1,0 +1,159 @@
+[
+  {
+    "name": "BotCreated",
+    "inputs": [
+      { "name": "user_id", "type": "uint256", "indexed": false },
+      { "name": "bot", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "SetPaloma",
+    "inputs": [{ "name": "paloma", "type": "bytes32", "indexed": false }],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateBlueprint",
+    "inputs": [
+      { "name": "old_blueprint", "type": "address", "indexed": false },
+      { "name": "new_blueprint", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateCompass",
+    "inputs": [
+      { "name": "old_compass", "type": "address", "indexed": false },
+      { "name": "new_compass", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "name": "UpdateNodeSale",
+    "inputs": [
+      { "name": "old_nodesale", "type": "address", "indexed": false },
+      { "name": "new_nodesale", "type": "address", "indexed": false }
+    ],
+    "anonymous": false,
+    "type": "event"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_blueprint",
+    "inputs": [{ "name": "_new_blueprint", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_compass",
+    "inputs": [{ "name": "_new_compass", "type": "address" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "update_nodesale",
+    "inputs": [{ "name": "_new_nodesale", "type": "address" }],
+    "outputs": []
+  },
+  { "stateMutability": "nonpayable", "type": "function", "name": "set_paloma", "inputs": [], "outputs": [] },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "create_bot",
+    "inputs": [{ "name": "_user_id", "type": "uint256" }],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "pay_for_token",
+    "inputs": [
+      { "name": "_user_id", "type": "uint256" },
+      { "name": "_token_in", "type": "address" },
+      { "name": "_estimated_amount_in", "type": "uint256" },
+      { "name": "_estimated_node_count", "type": "uint256" },
+      { "name": "_total_cost", "type": "uint256" },
+      { "name": "_promo_code", "type": "bytes32" },
+      { "name": "_path", "type": "bytes" },
+      { "name": "_enhanced", "type": "bool" },
+      { "name": "_subscription_month", "type": "uint256" },
+      { "name": "_own_promo_code", "type": "bytes32" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "activate_wallet",
+    "inputs": [
+      { "name": "_user_id", "type": "uint256" },
+      { "name": "_paloma", "type": "bytes32" },
+      { "name": "_purchased_in_v1", "type": "bool" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "name": "refund",
+    "inputs": [
+      { "name": "_user_id", "type": "uint256" },
+      { "name": "_recipient", "type": "address" },
+      { "name": "_token", "type": "address" },
+      { "name": "_amount", "type": "uint256" }
+    ],
+    "outputs": []
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "blueprint",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "compass",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "paloma",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "bytes32" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "bot_info",
+    "inputs": [{ "name": "arg0", "type": "uint256" }],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "name": "nodesale",
+    "inputs": [],
+    "outputs": [{ "name": "", "type": "address" }]
+  },
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      { "name": "_blueprint", "type": "address" },
+      { "name": "_compass", "type": "address" },
+      { "name": "_nodesale", "type": "address" }
+    ],
+    "outputs": []
+  }
+]

@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import CoinbaseButton from 'components/Button/CoinbaseButton';
 import CheckBox from 'components/CheckBox';
+import { generatePromocode } from 'components/GeneratePromocode';
 import PendingTransactionModal from 'components/Modal/PendingTransactionModal';
 import SuccessModal from 'components/Modal/SuccessModal';
 import openTransak from 'components/Transak';
@@ -34,6 +35,7 @@ import {
   useLazyGetEstimateNodePriceQuery,
   useLazyGetLoginConfirmationQuery,
   useLazyGetPriceTiersQuery,
+  useLazyGetPromocodeStatusByWalletQuery,
   useLazyGetTotalPurchasedQuery,
   useLazyGetWalletQuery,
   usePostAddAddrMutation,
@@ -77,19 +79,14 @@ const PurchaseFlow = () => {
   const [fetchEstimateNodePrice] = useLazyGetEstimateNodePriceQuery();
   const [fetchPriceTiers] = useLazyGetPriceTiersQuery();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
+  const [getPromocodeStatusByWallet] = useLazyGetPromocodeStatusByWalletQuery();
   const [getUserWalletForFiat] = useLazyGetWalletQuery();
   const [postCreateBot] = usePostCreateBotMutation();
   const [postPayForToken] = usePostPayForTokenMutation();
   const { getTokenBalance } = useToken({ provider });
   const [postAddAddr] = usePostAddAddrMutation();
 
-  const {
-    getProcessingFeeAmount,
-    getSubscriptionFeeAmount,
-    getSlippageFeePercent,
-    buyNow,
-    getDiscountPercentForPromo,
-  } = useNodeSale({
+  const { getProcessingFeeAmount, getSubscriptionFeeAmount, getSlippageFeePercent, buyNow } = useNodeSale({
     provider,
     wallet,
   });
@@ -100,7 +97,7 @@ const PurchaseFlow = () => {
 
   const [endDate, setEndDate] = useState(NodeSaleEndDate); // Set the End date of node sale
   const [priceTiers, setPriceTiers] = useState<IPriceTier[]>();
-  const [promoCode, setPromoCode] = useState<string>();
+  const [promoCode, setPromoCode] = useState<string>('');
   const [appliedPromoCode, setApplyPromoCode] = useState<string>();
   const [selectedSupport, setSupport] = useState<number>(CustomerSupport.length - 1);
   const [agreeTerms, setAgreeTerms] = useState<boolean>(false);
@@ -129,10 +126,10 @@ const PurchaseFlow = () => {
   const [fiatWallet, setFiatWallet] = useState<string>();
 
   const [nodePrice, setNodePrice] = useState<number>(0);
+  const [originalNodePrice, setOriginalNodePrice] = useState<number>(0);
   const [processingFee, setProcessingFee] = useState<number>(5); // $5
   const [subscriptionFee, setSubscriptionFee] = useState<number>(50); // 50$
   const [slippageFeePc, setSlippageFeePc] = useState<number>(1); // default 1%
-  const [discountPercent, setDiscountPercent] = useState<number>(5); // default 5%
   const txSlippageFeePc = 0.3; // 0.3%
 
   const { selectedChainId, targetChain } = useMemo(() => {
@@ -160,11 +157,11 @@ const PurchaseFlow = () => {
 
   const totalPay = useMemo(() => {
     return nodePrice + processingFee + totalSupportPrice + slippageFee;
-  }, [nodePrice, totalSupportPrice, processingFee]);
+  }, [nodePrice, totalSupportPrice, processingFee, slippageFee]);
 
   const totalPayForUSDC = useMemo(() => {
     return nodePrice + processingFee + totalSupportPrice + slippageFeeForUSDC;
-  }, [nodePrice, totalSupportPrice, processingFee]);
+  }, [nodePrice, totalSupportPrice, processingFee, slippageFeeForUSDC]);
 
   const quantity = useMemo(() => {
     return priceTiers && priceTiers.length > 0 ? priceTiers.reduce((acc, curr) => acc + curr.inputAmount, 0) : 0;
@@ -285,9 +282,6 @@ const PurchaseFlow = () => {
 
       const slippage_fee_percent = await getSlippageFeePercent();
       setSlippageFeePc(slippage_fee_percent);
-
-      const discount_percent = await getDiscountPercentForPromo();
-      setDiscountPercent(discount_percent);
     };
 
     delayDebounceFn();
@@ -296,7 +290,7 @@ const PurchaseFlow = () => {
   useEffect(() => {
     const delayDebounceFn = async () => {
       const totalPurchasedCount = await fetchTotalPurchased({});
-      let purchasedCount = Number(totalPurchasedCount?.data?.paid_node_cnt) ?? 0;
+      let purchasedCount = (Number(totalPurchasedCount?.data?.paid_node_cnt) ?? 0) + 22585; // NOTE: 22585 is purchased node count in v1
       const priceTiersCnt = await fetchPriceTiers({});
       if (priceTiersCnt.isSuccess) {
         let tempPriceTiers: IPriceTier[] = [];
@@ -332,7 +326,10 @@ const PurchaseFlow = () => {
 
     if (price.isSuccess) {
       if (Number(price.data['price']) !== 0) {
-        amount > 0 && setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
+        if (amount > 0) {
+          setNodePrice(Number(BigNumber(price.data['price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
+          setOriginalNodePrice(Number(BigNumber(price.data['original_price']).dividedBy(1000000))); // Fixed decimals is 6 in Backend
+        }
         if (isPromocodeCheck && promo_code && promo_code.length > 0) {
           setApplyPromoCode(promo_code);
           toast.success('Congratulations! Your Promo Code has been verified.');
@@ -502,16 +499,6 @@ const PurchaseFlow = () => {
     return agreeTerms && agreeTermsOfUse && agreeAck;
   }, [agreeTerms, agreeTermsOfUse, agreeAck]);
 
-  const discountPrice = useMemo(() => {
-    if (appliedPromoCode && appliedPromoCode.length > 0 && discountPercent > 0 && priceTiers && priceTiers.length > 0) {
-      return priceTiers.reduce(
-        (acc, curr) => acc + (Number(curr.price) * Number(curr.inputAmount) * discountPercent) / 100 / 10 ** 6,
-        0,
-      );
-    }
-    return 0;
-  }, [discountPercent, priceTiers, appliedPromoCode]);
-
   const { listedTokens } = useGetUniswapTokenListQuery(
     {},
     {
@@ -538,6 +525,17 @@ const PurchaseFlow = () => {
   const callbackError = (e) => {
     toast.error(e ? e : 'Something went wrong');
     setTxLoading(false);
+  };
+
+  const promocodeStatusByWallet = async () => {
+    const result = await getPromocodeStatusByWallet({ buyer: wallet.account });
+    if (result.isSuccess) {
+      if (result.data && result.data.length > 0) {
+        return result.data[0];
+      } else {
+        return generatePromocode();
+      }
+    }
   };
 
   const handleStartWithFiat = async () => {
@@ -595,6 +593,7 @@ const PurchaseFlow = () => {
               const tokenBalance = await getTokenBalance(myFiatWallet, Addresses[ChainID.ARBITRUM_MAIN].usdc);
 
               if (Number(tokenBalance) >= Number(purchaseInfo.data.amount_in.format)) {
+                const generatedMyPromocode = await promocodeStatusByWallet();
                 const data = {
                   token: token.data,
                   token_in: Addresses[ChainID.ARBITRUM_MAIN].usdc,
@@ -605,6 +604,7 @@ const PurchaseFlow = () => {
                   path: '0x00',
                   enhanced: purchaseInfo.data.isSupport,
                   subscription_month: purchaseInfo.data.supportMonth,
+                  own_promo_code: generatedMyPromocode,
                 };
 
                 const result = await postPayForToken(data);
@@ -702,6 +702,8 @@ const PurchaseFlow = () => {
             format: tokenAmount,
           };
 
+          const generatedMyPromocode = await promocodeStatusByWallet();
+
           await buyNow(
             fromToken,
             quantity,
@@ -710,6 +712,7 @@ const PurchaseFlow = () => {
             CustomerSupport[selectedSupport].price > 0,
             CustomerSupport[selectedSupport].month,
             swapPath,
+            stringToHex(generatedMyPromocode),
             callbackSuccess,
             callbackError,
             callbackWaiting,
@@ -735,7 +738,8 @@ const PurchaseFlow = () => {
       <div className="purchase-sale-end">
         <Countdown date={endDate} renderer={rendererTime} />
         <h2>
-          Implied FDV is only ${abbreviateNumberSI(priceTiers && priceTiers.length > 0 ? priceTiers[0].fdv : 0, 0, 0)}
+          Current Node Price is only $
+          {formatNumber(priceTiers && priceTiers.length > 0 ? Number(priceTiers[0].price) / 10 ** 6 : 0, 0, 2)}
         </h2>
       </div>
       <div className="purchase-flow-body">
@@ -824,6 +828,7 @@ const PurchaseFlow = () => {
                 </p>
                 <div className="purchase-sale-set__price__value purchase-sale-promo__input flex-row">
                   <input
+                    type="string"
                     value={promoCode}
                     onChange={(e) => inputPromoCode(e.target.value)}
                     className="purchase-promo"
@@ -946,11 +951,11 @@ const PurchaseFlow = () => {
                 exchangeRate={fromTokenExchangeRate}
                 fromToken={fromToken}
               />
-              {discountPrice > 0 && appliedPromoCode && (
+              {originalNodePrice > nodePrice && appliedPromoCode && (
                 <TotalPay
                   title={`Promo Code ${appliedPromoCode}`}
                   step={step}
-                  price={0 - discountPrice}
+                  price={nodePrice - originalNodePrice}
                   exchangeRate={fromTokenExchangeRate}
                   fromToken={fromToken}
                 />

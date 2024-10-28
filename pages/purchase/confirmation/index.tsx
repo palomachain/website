@@ -41,7 +41,7 @@ const Confirmation = () => {
           // Store user access token to cookie
           await storeData(USER_ACCESS_TOKEN, token);
 
-          toast.success('Successfully confirmed your Email.');
+          toast.success('Successfully confirmed your Email.', { toastId: 'confirmed-email-alert' });
           router.push(redirect ? (type ? `${redirect}?type=${type}` : redirect) : StaticLink.INSTRUCTIONS);
         } else {
           toast.error('Invalid token.');

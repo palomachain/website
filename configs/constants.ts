@@ -11,6 +11,7 @@ const envParam = {
   nodeSale_arb: process.env.NODESALE_CONTRACT_ARB || '',
   nodeSale_op: process.env.NODESALE_CONTRACT_OP || '',
   nodeSale_polygon: process.env.NODESALE_CONTRACT_POLYGON || '',
+  nodeSale_fiat: process.env.NODESALE_CONTRACT_FIAT || '',
   PASSCODE: process.env.PASSCODE || '',
   thirdWebApiKey: process.env.THIRDWEB_API_KEY || '',
   transakApiKey: process.env.TRANSAK_API_KEY || '',

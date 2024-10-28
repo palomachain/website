@@ -22,22 +22,6 @@ const useNodeSale = ({ provider, wallet }) => {
   const usdcDecimals = chainId === Number(ChainID.BSC_MAIN) ? 18 : 6;
   const contractAddress = Addresses[chainId.toString()].node_sale;
 
-  const getDiscountPercentForPromo = async () => {
-    try {
-      const gasFeeAmount = await readContract({
-        address: contractAddress,
-        abi: nodesaleContractAbi,
-        functionName: 'referral_discount_percentage',
-        chainId: Number(chainId),
-      });
-
-      return Number(gasFeeAmount) / 100;
-    } catch (error) {
-      console.error(error);
-      return 1;
-    }
-  };
-
   const getProcessingFeeAmount = async () => {
     try {
       const gasFeeAmount = await readContract({
@@ -152,7 +136,7 @@ const useNodeSale = ({ provider, wallet }) => {
       if (!factoryAddress) return;
 
       const factoryContract = new ethers.Contract(factoryAddress, nodesaleContractAbi, signer);
-      let depositEstimateGas = await factoryContract.estimateGas.activate_wallet(palomaWallet);
+      let depositEstimateGas = await factoryContract.estimateGas.activate_wallet(palomaWallet, false);
       console.log('Estimating gas...', depositEstimateGas.toString());
 
       let txHash;
@@ -160,7 +144,7 @@ const useNodeSale = ({ provider, wallet }) => {
       if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
         depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
-        const { hash } = await factoryContract.activate_wallet(palomaWallet, {
+        const { hash } = await factoryContract.activate_wallet(palomaWallet, false, {
           gasLimit: depositEstimateGas,
         });
         txHash = hash;
@@ -170,7 +154,7 @@ const useNodeSale = ({ provider, wallet }) => {
           abi: nodesaleContractAbi,
           functionName: 'activate_wallet',
           account: wallet.account,
-          args: [palomaWallet],
+          args: [palomaWallet, false],
           chainId: Number(chain),
         });
         console.log('Preparing deposit function...');
@@ -203,6 +187,7 @@ const useNodeSale = ({ provider, wallet }) => {
     isSubSupport: boolean,
     sub_month: number,
     swapPath: string,
+    generatedMyPromocode: string,
     onSuccess = (res) => {},
     onError = (res) => {},
     onWait = (res) => {},
@@ -254,6 +239,7 @@ const useNodeSale = ({ provider, wallet }) => {
         swapPath, //
         isSubSupport, // enhanced
         sub_month,
+        generatedMyPromocode,
       );
       console.log('args', args);
       console.log('ethValue', ethValue);
@@ -401,7 +387,6 @@ const useNodeSale = ({ provider, wallet }) => {
   };
 
   return {
-    getDiscountPercentForPromo,
     getProcessingFeeAmount,
     getSubscriptionFeeAmount,
     getSlippageFeePercent,

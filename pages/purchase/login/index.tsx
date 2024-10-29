@@ -72,7 +72,7 @@ const Login = () => {
           New?{' '}
           <span
             className={style.register}
-            onClick={() => router.push(`${StaticLink.REGISTER}?redirect=${redirect}&type=${type}_register`)}
+            onClick={() => router.push(`${StaticLink.REGISTER}?redirect=${redirect}&type=${type}`)}
           >
             Create an Account
           </span>

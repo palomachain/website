@@ -68,20 +68,32 @@ const RegisterFlow = () => {
 
   return (
     <div className={style.container}>
-      <div className={style.back} onClick={() => router.push(StaticLink.PURCHASE)}>
+      {/* <div className={style.back} onClick={() => router.push(StaticLink.PURCHASE)}>
         <img src="/assets/icons/back.svg" alt="back" /> Registration for LightNode Software Support.
+      </div> */}
+      <div className={style.walletModal}>
+        <h1 className={style.title}>Register</h1>
+        <p>
+          Already have an account?{' '}
+          <span
+            className={style.signin}
+            onClick={() => router.push(`${StaticLink.LOGIN}?redirect=${redirect}&type=${type}`)}
+          >
+            Sign in with your email
+          </span>
+        </p>
+        <h3>Full Name</h3>
+        <input value={fullname} placeholder="Full Name" onChange={(e) => setFullname(e.target.value)} />
+        <h3>Email</h3>
+        <input value={email} placeholder="name@contact.com" onChange={(e) => setEmail(e.target.value)} />
+        <button disabled={!isValid} onClick={handleRegister} className={isValid ? undefined : style.disableBtn}>
+          {loading ? (
+            <img src="/assets/icons/loading_circle.svg" width={24} alt="loading" style={{ margin: 'auto' }} />
+          ) : (
+            returnRegisterText
+          )}
+        </button>
       </div>
-      <h3>Full Name</h3>
-      <input value={fullname} placeholder="Full Name" onChange={(e) => setFullname(e.target.value)} />
-      <h3>Email</h3>
-      <input value={email} placeholder="name@contact.com" onChange={(e) => setEmail(e.target.value)} />
-      <button disabled={!isValid} onClick={handleRegister} className={isValid ? undefined : style.disableBtn}>
-        {loading ? (
-          <img src="/assets/icons/loading_circle.svg" width={24} alt="loading" style={{ margin: 'auto' }} />
-        ) : (
-          returnRegisterText
-        )}
-      </button>
       {confirm && <ConfirmationModal email={email} setConfirm={setConfirm} />}
     </div>
   );

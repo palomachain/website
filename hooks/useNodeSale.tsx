@@ -251,7 +251,7 @@ const useNodeSale = ({ provider, wallet }) => {
       console.log('Estimating gas...', depositEstimateGas.toString());
 
       console.log('Preparing transaction hash...');
-      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+      // if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
         depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
         const { hash } = await factoryContract[buyNowFunctionName](...args, {
@@ -259,20 +259,20 @@ const useNodeSale = ({ provider, wallet }) => {
           gasLimit: depositEstimateGas,
         });
         txHash = hash;
-      } else {
-        const { request } = await prepareWriteContract({
-          address: contractAddress,
-          abi: nodesaleContractAbi,
-          functionName: buyNowFunctionName,
-          account: wallet.account,
-          args: args,
-          value: ethValue,
-          chainId: Number(chainId),
-        });
-        console.log('Preparing deposit function...');
-        const { hash } = await writeContract(request);
-        txHash = hash;
-      }
+      // } else {
+      //   const { request } = await prepareWriteContract({
+      //     address: contractAddress,
+      //     abi: nodesaleContractAbi,
+      //     functionName: buyNowFunctionName,
+      //     account: wallet.account,
+      //     args: args,
+      //     value: ethValue,
+      //     chainId: Number(chainId),
+      //   });
+      //   console.log('Preparing deposit function...');
+      //   const { hash } = await writeContract(request);
+      //   txHash = hash;
+      // }
       console.log('Deposit hash', txHash);
 
       onWait({
@@ -336,25 +336,25 @@ const useNodeSale = ({ provider, wallet }) => {
 
       let txHash;
       console.log('Preparing transaction hash...');
-      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+      // if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
         depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
         const { hash } = await factoryContract.claim({
           gasLimit: depositEstimateGas,
         });
         txHash = hash;
-      } else {
-        const { request } = await prepareWriteContract({
-          address: factoryAddress,
-          abi: nodesaleContractAbi,
-          functionName: 'claim',
-          account: wallet.account,
-          chainId: Number(bonus.chainId),
-        });
-        console.log('Preparing deposit function...');
-        const { hash } = await writeContract(request);
-        txHash = hash;
-      }
+      // } else {
+      //   const { request } = await prepareWriteContract({
+      //     address: factoryAddress,
+      //     abi: nodesaleContractAbi,
+      //     functionName: 'claim',
+      //     account: wallet.account,
+      //     chainId: Number(bonus.chainId),
+      //   });
+      //   console.log('Preparing deposit function...');
+      //   const { hash } = await writeContract(request);
+      //   txHash = hash;
+      // }
       console.log('Deposit hash', txHash);
 
       onWait({

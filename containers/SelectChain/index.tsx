@@ -24,7 +24,7 @@ const SelectChain = ({
   className,
 }: SelectChainProps) => {
   const chainRef = useRef(null);
-  const { wallet, openConnectionModal, requestSwitchNetwork } = useWallet();
+  const { wallet, requestSwitchNetwork } = useWallet();
 
   const [showSelectChainModal, setShowSelectChainModal] = useState<boolean>(false);
   const [clickedChain, setClickedChain] = useState<string>();

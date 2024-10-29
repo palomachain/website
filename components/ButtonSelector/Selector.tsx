@@ -16,7 +16,6 @@ interface ButtonProps {
 
 const Selector = ({ selectableList, showSelectModal, handleSelect, selected, className }: ButtonProps) => {
   const { wallet } = useWallet();
-console.log('wallet', wallet);
 
   return (
     showSelectModal &&

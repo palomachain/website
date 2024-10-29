@@ -294,6 +294,7 @@ const BuyMoreBoard = () => {
           fiat_wallet_address: myPurchaseStatus[index]['fiat_wallet_address'],
           chain_id: chain_id,
           token: token,
+          contract_ver: myPurchaseStatus[index]['contract_ver'],
         });
       } catch (error) {
         console.log(error);

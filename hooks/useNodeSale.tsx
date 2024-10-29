@@ -122,7 +122,7 @@ const useNodeSale = ({ provider, wallet }) => {
     }
   };
 
-  const activateWallet = async (palomaWallet, chain) => {
+  const activateWallet = async (palomaWallet, chain, isV1: boolean = false) => {
     try {
       if (!provider) return;
       // If WalletConnect
@@ -136,7 +136,7 @@ const useNodeSale = ({ provider, wallet }) => {
       if (!factoryAddress) return;
 
       const factoryContract = new ethers.Contract(factoryAddress, nodesaleContractAbi, signer);
-      let depositEstimateGas = await factoryContract.estimateGas.activate_wallet(palomaWallet, false);
+      let depositEstimateGas = await factoryContract.estimateGas.activate_wallet(palomaWallet, isV1);
       console.log('Estimating gas...', depositEstimateGas.toString());
 
       let txHash;
@@ -144,7 +144,7 @@ const useNodeSale = ({ provider, wallet }) => {
       if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
         depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
-        const { hash } = await factoryContract.activate_wallet(palomaWallet, false, {
+        const { hash } = await factoryContract.activate_wallet(palomaWallet, isV1, {
           gasLimit: depositEstimateGas,
         });
         txHash = hash;
@@ -154,7 +154,7 @@ const useNodeSale = ({ provider, wallet }) => {
           abi: nodesaleContractAbi,
           functionName: 'activate_wallet',
           account: wallet.account,
-          args: [palomaWallet, false],
+          args: [palomaWallet, isV1],
           chainId: Number(chain),
         });
         console.log('Preparing deposit function...');

@@ -165,6 +165,7 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
         const activate = await activateWallet(
           stringToHexWithBech(palomaAddress),
           parseIntString(purchaseData.chain_id.toString()),
+          purchaseData.contract_ver === 1, // If contract version is 1, true, else false
         );
         if (activate) {
           setSteps(STEPS.ACTIVATED);

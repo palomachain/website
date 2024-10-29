@@ -63,4 +63,5 @@ export interface IActivateInfos {
   fiat_wallet_address?: string;
   chain_id: number | string;
   token: string;
+  contract_ver: number; // 1 and 2
 }

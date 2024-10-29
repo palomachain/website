@@ -253,11 +253,19 @@ const BuyMoreBoard = () => {
 
   const totalGrainUSD = useMemo(() => {
     if (dataLoading) return 0;
-    if (totalNodes > 0) {
-      return currentRoundPrice * Number(totalNodes);
+
+    if (myPurchaseStatus && myPurchaseStatus.length > 0) {
+      const nodesCount = myPurchaseStatus.reduce(function (x, y) {
+        const multi = y['contract_ver'] === 1 ? 10 : 1; // If version is 1, multi 10
+        const nodeCount = y['node_count'] ?? y['estimated_node_count'];
+        return x + (nodeCount ?? 0) * multi;
+      }, 0);
+      if (nodesCount > 0) {
+        return currentRoundPrice * Number(nodesCount);
+      }
     }
     return 0;
-  }, [dataLoading, totalNodes, currentRoundPrice]);
+  }, [dataLoading, myPurchaseStatus, currentRoundPrice]);
 
   const closeCode = async (generated = false) => {
     setOpenGeneratePromocodeModal(false);

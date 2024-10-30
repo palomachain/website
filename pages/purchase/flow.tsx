@@ -531,9 +531,9 @@ const PurchaseFlow = () => {
     const result = await getPromocodeStatusByWallet({ wallet_address: wallet.account });
     if (result.isSuccess) {
       if (result.data && result.data.length > 0) {
-        return result.data[0]['promo_code'];
+        return result.data[0]['promo_code']; // hex value
       } else {
-        return generatePromocode();
+        return stringToHex(generatePromocode()); // convert string to hex
       }
     }
   };

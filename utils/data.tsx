@@ -959,7 +959,7 @@ export const PalomaInstructionsSteps: {
                 text: (
                   <p>
                     If you use an Ubuntu derivative distro, such as Linux Mint, you may need to use{' '}
-                    <span>UBUNTO_CODENAME</span> instead of <span>VERSION_NAME</span>.
+                    <span>UBUNTU_CODENAME</span> instead of <span>VERSION_NAME</span>.
                   </p>
                 ),
               },

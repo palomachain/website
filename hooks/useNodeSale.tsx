@@ -1,20 +1,20 @@
+import { ThirdwebSDK } from '@thirdweb-dev/react';
 import { prepareWriteContract, readContract, waitForTransaction, writeContract } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
 import { ChainID } from 'configs/chains';
+import { purchaseSupportedNetworks } from 'configs/constants';
 import nodesaleContractAbi from 'contracts/abi/nodesale.abi.json';
 import { Addresses, VETH_ADDRESS, ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 import { GAS_MULTIPLIER } from 'contracts/constants';
 import { ethers } from 'ethers';
+import { IBonusBalance } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React from 'react';
+import balanceTool from 'utils/balance';
 import { errorMessage } from 'utils/errorMessage';
+import { formatNumber } from 'utils/number';
 import { parseIntString } from 'utils/string';
 import useToken from './useToken';
-import balanceTool from 'utils/balance';
-import { delay } from 'utils/date';
-import { IBonusBalance } from 'interfaces/nodeSale';
-import { purchaseSupportedNetworks } from 'configs/constants';
-import { formatNumber } from 'utils/number';
 
 const useNodeSale = ({ provider, wallet }) => {
   const { tokenApprove } = useToken({ provider });
@@ -91,17 +91,41 @@ const useNodeSale = ({ provider, wallet }) => {
     try {
       let amount: IBonusBalance[] = [];
 
+      // For V1
+      const v1ContractAddresses = {
+        '1': '0x8050371F14Bb6E2395E936611615BE41237faF02',
+        '10': '0x496C48d24a33B1Fd45782537eBd42157Bf265703',
+        '56': '0x2f78AfAdD7E58052c4a8789dc01A1eD49848cc0C',
+        '137': '0x496C48d24a33B1Fd45782537eBd42157Bf265703',
+        '8453': '0x2f78AfAdD7E58052c4a8789dc01A1eD49848cc0C',
+        '42161': '0x249cE7e8c5A0f7300f9c45Af70c644b39dABa4dB',
+      };
       await Promise.all(
-        // TODO: Not Base chain
-        [1, 10, 56, 137, 42161].map(async (chain) => {
+        [1, 10, 56, 137, 8453, 42161].map(async (chain) => {
+          const nodesaleAddress = v1ContractAddresses[chain];
+          const sdk = new ThirdwebSDK(chain);
+          const contract = await sdk.getContract(nodesaleAddress, nodesaleContractAbi);
+          const balance = await contract.call('claimable', [address]);
+
+          if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
+            amount.push({
+              chainId: chain,
+              amount: {
+                raw: balance.toString(),
+                format: balanceTool.convertFromWei(balance.toString(), 4, chain === 56 ? 18 : 6),
+              },
+            });
+          }
+        }),
+      );
+
+      // For V2
+      await Promise.all(
+        [1, 10, 56, 137, 8453, 42161].map(async (chain) => {
           const nodesaleAddress = Addresses[chain].node_sale;
-          const balance = await readContract({
-            address: nodesaleAddress,
-            abi: nodesaleContractAbi,
-            functionName: 'claimable',
-            chainId: chain,
-            args: [address],
-          });
+          const sdk = new ThirdwebSDK(chain);
+          const contract = await sdk.getContract(nodesaleAddress, nodesaleContractAbi);
+          const balance = await contract.call('claimable', [address]);
 
           if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
             amount.push({
@@ -141,26 +165,26 @@ const useNodeSale = ({ provider, wallet }) => {
 
       let txHash;
       console.log('Preparing transaction hash...');
-      if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
-        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
+      // if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
+      depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
-        const { hash } = await factoryContract.activate_wallet(palomaWallet, isV1, {
-          gasLimit: depositEstimateGas,
-        });
-        txHash = hash;
-      } else {
-        const { request } = await prepareWriteContract({
-          address: factoryAddress,
-          abi: nodesaleContractAbi,
-          functionName: 'activate_wallet',
-          account: wallet.account,
-          args: [palomaWallet, isV1],
-          chainId: Number(chain),
-        });
-        console.log('Preparing deposit function...');
-        const { hash } = await writeContract(request);
-        txHash = hash;
-      }
+      const { hash } = await factoryContract.activate_wallet(palomaWallet, isV1, {
+        gasLimit: depositEstimateGas,
+      });
+      txHash = hash;
+      // } else {
+      //   const { request } = await prepareWriteContract({
+      //     address: factoryAddress,
+      //     abi: nodesaleContractAbi,
+      //     functionName: 'activate_wallet',
+      //     account: wallet.account,
+      //     args: [palomaWallet, isV1],
+      //     chainId: Number(chain),
+      //   });
+      //   console.log('Preparing deposit function...');
+      //   const { hash } = await writeContract(request);
+      //   txHash = hash;
+      // }
       console.log('Deposit hash', txHash);
 
       if (txHash) {
@@ -252,13 +276,13 @@ const useNodeSale = ({ provider, wallet }) => {
 
       console.log('Preparing transaction hash...');
       // if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
-        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
+      depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
-        const { hash } = await factoryContract[buyNowFunctionName](...args, {
-          value: ethValue,
-          gasLimit: depositEstimateGas,
-        });
-        txHash = hash;
+      const { hash } = await factoryContract[buyNowFunctionName](...args, {
+        value: ethValue,
+        gasLimit: depositEstimateGas,
+      });
+      txHash = hash;
       // } else {
       //   const { request } = await prepareWriteContract({
       //     address: contractAddress,
@@ -337,12 +361,12 @@ const useNodeSale = ({ provider, wallet }) => {
       let txHash;
       console.log('Preparing transaction hash...');
       // if (wallet.providerName === 'metamask' || wallet.providerName === 'frame') {
-        depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
+      depositEstimateGas = depositEstimateGas.add(depositEstimateGas.div(GAS_MULTIPLIER));
 
-        const { hash } = await factoryContract.claim({
-          gasLimit: depositEstimateGas,
-        });
-        txHash = hash;
+      const { hash } = await factoryContract.claim({
+        gasLimit: depositEstimateGas,
+      });
+      txHash = hash;
       // } else {
       //   const { request } = await prepareWriteContract({
       //     address: factoryAddress,

@@ -405,6 +405,12 @@ const BuyMoreBoard = () => {
         if (count > 3) claimedAmount += await handleClaimBonus(bonusAmount[3]);
         if (count > 4) claimedAmount += await handleClaimBonus(bonusAmount[4]);
         if (count > 5) claimedAmount += await handleClaimBonus(bonusAmount[5]);
+        if (count > 6) claimedAmount += await handleClaimBonus(bonusAmount[6]);
+        if (count > 7) claimedAmount += await handleClaimBonus(bonusAmount[7]);
+        if (count > 8) claimedAmount += await handleClaimBonus(bonusAmount[8]);
+        if (count > 9) claimedAmount += await handleClaimBonus(bonusAmount[9]);
+        if (count > 10) claimedAmount += await handleClaimBonus(bonusAmount[10]);
+        if (count > 11) claimedAmount += await handleClaimBonus(bonusAmount[11]);
 
         if (claimedAmount > 0) {
           callbackSuccess(claimedAmount);
@@ -413,6 +419,7 @@ const BuyMoreBoard = () => {
         console.error(error);
       } finally {
         setLoadingClaim(false);
+        await fetchingBonusAmount();
       }
     }
   };

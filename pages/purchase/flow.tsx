@@ -528,7 +528,7 @@ const PurchaseFlow = () => {
   };
 
   const promocodeStatusByWallet = async () => {
-    const result = await getPromocodeStatusByWallet({ buyer: wallet.account });
+    const result = await getPromocodeStatusByWallet({ wallet_address: wallet.account });
     if (result.isSuccess) {
       if (result.data && result.data.length > 0) {
         return result.data[0];

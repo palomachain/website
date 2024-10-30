@@ -56,6 +56,23 @@ export function stringToHex(val: string) {
   return hex;
 }
 
+export function hexToString(val: string) {
+  if (!val) return '';
+
+  var hex = '';
+  hex = val.replace(/^0x/, '');
+  let i = 0;
+  while (i < hex.length && hex[i] === '0' && hex[i + 1] === '0') {
+    i += 2;
+  }
+  hex = hex.substr(i);
+  let str = '';
+  for (let j = 0; j < hex.length; j += 2) {
+    str += String.fromCharCode(parseInt(hex.substr(j, 2), 16));
+  }
+  return str;
+}
+
 export function stringToHexWithBech(val: string) {
   if (!val) return '';
 

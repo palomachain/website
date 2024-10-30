@@ -53,7 +53,7 @@ import { CustomerSupport } from 'utils/data';
 import { delay } from 'utils/date';
 import mockTool from 'utils/mock';
 import { abbreviateNumberSI, formatNumber } from 'utils/number';
-import { checksumAddress, isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
+import { checksumAddress, hexToString, isFiat, isSameContract, parseIntString, stringToHex } from 'utils/string';
 import PurchaseButton from './PurchaseButton';
 import PurchaseWithFiatButton from './PurchaseButton/PurchaseWithFiatButton';
 import TotalPay from './TotalPay';
@@ -531,7 +531,7 @@ const PurchaseFlow = () => {
     const result = await getPromocodeStatusByWallet({ wallet_address: wallet.account });
     if (result.isSuccess) {
       if (result.data && result.data.length > 0) {
-        return result.data[0];
+        return result.data[0]['promo_code'];
       } else {
         return generatePromocode();
       }
@@ -604,7 +604,7 @@ const PurchaseFlow = () => {
                   path: '0x00',
                   enhanced: purchaseInfo.data.isSupport,
                   subscription_month: purchaseInfo.data.supportMonth,
-                  own_promo_code: generatedMyPromocode,
+                  own_promo_code: hexToString(generatedMyPromocode),
                 };
 
                 const result = await postPayForToken(data);
@@ -712,7 +712,7 @@ const PurchaseFlow = () => {
             CustomerSupport[selectedSupport].price > 0,
             CustomerSupport[selectedSupport].month,
             swapPath,
-            stringToHex(generatedMyPromocode),
+            generatedMyPromocode,
             callbackSuccess,
             callbackError,
             callbackWaiting,

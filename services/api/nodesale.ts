@@ -62,7 +62,7 @@ const injectedRtkApi = api.injectEndpoints({
         params: queryArg,
       }),
     }),
-    getPromocodeStatusByWallet: build.query<GetNodeSaleApiResponse, GetEVMApiArg>({
+    getPromocodeStatusByWallet: build.query<GetNodeSaleApiResponse, GetPromocodeApiArg>({
       query: (queryArg) => ({
         url: `${nodesaleApiUrl}/promocodestatusbywallet`,
         params: queryArg,
@@ -199,6 +199,9 @@ export type GetApiArg = {
 };
 export type GetEVMApiArg = {
   buyer: string; // EVM address
+};
+export type GetPromocodeApiArg = {
+  wallet_address: string; // EVM address
 };
 export type GetBalances = {
   addresses: string;

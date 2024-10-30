@@ -9,15 +9,15 @@ export const LATEST_BLOG_SHOW_CNT = 3;
 
 export const PAGE_LANDING = 'landing-page';
 
-export const TotalNodes = 20000;
-export const NodeSlot1 = 1000;
-export const ChangeR = 0.9596080047;
-export const StartingPrice = 50;
-export const EndingPrice = 15000;
+export const TotalNodes = 97414;
+export const NodeSlot1 = 6000;
+export const ChangeR = 0.9596113741;
+export const StartingPrice = 30;
+export const EndingPrice = 1000;
 export const Exponent = 2;
 export const NSlots = 40;
-export const GrainsPerNode = 50000;
-export const TotalGrains = 6120000000;
+export const GrainsPerNode = 5000;
+export const TotalGrains = 6500000000;
 export const Inflation = 7; // 7%
 export const CommunityFee = 2; // 2%
 export const ValidatorFee = 5; // 5%

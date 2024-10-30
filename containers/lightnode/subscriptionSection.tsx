@@ -73,19 +73,22 @@ const subscriptionSection = () => {
         </thead>
         <tbody>
           {nodeSaleData &&
-            [...Array(NSlots)].map((e, index) => (
-              <tr
-                className={`subscription-table-row ${index % 2 > 0 ? 'subscription-table-row2' : undefined} `}
-                key={index}
-              >
-                <td>{index + 1}</td>
-                <td>{formatNumber(nodeSaleData[index].totalNodeSale, 0, 0)}</td>
-                <td>${nodeSaleData[index].nodePrice}</td>
-                <td>${formatNumber(nodeSaleData[index].fdv, 0, 0)}</td>
-                <td>{formatNumber(nodeSaleData[index].grainsSold, 0, 0)}</td>
-                <td>{formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%</td>
-              </tr>
-            ))}
+            [...Array(NSlots)].map(
+              (e, index) =>
+                index > 3 && (
+                  <tr
+                    className={`subscription-table-row ${index % 2 > 0 ? 'subscription-table-row2' : undefined} `}
+                    key={index}
+                  >
+                    <td>{index + 1}</td>
+                    <td>{formatNumber(nodeSaleData[index].totalNodeSale, 0, 0)}</td>
+                    <td>${nodeSaleData[index].nodePrice}</td>
+                    <td>${formatNumber(nodeSaleData[index].fdv, 0, 0)}</td>
+                    <td>{formatNumber(nodeSaleData[index].grainsSold, 0, 0)}</td>
+                    <td>{formatNumber(nodeSaleData[index].networkPercent, 1, 1)}%</td>
+                  </tr>
+                ),
+            )}
         </tbody>
       </table>
     </section>

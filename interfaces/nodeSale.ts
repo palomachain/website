@@ -51,6 +51,7 @@ export interface IInstructionsNodeSteps {
 }
 
 export interface IBonusBalance {
+  contractAddress: string;
   chainId: number | string;
   amount: {
     raw: string;

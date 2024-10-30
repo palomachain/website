@@ -109,6 +109,7 @@ const useNodeSale = ({ provider, wallet }) => {
 
           if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
             amount.push({
+              contractAddress: nodesaleAddress,
               chainId: chain,
               amount: {
                 raw: balance.toString(),
@@ -129,6 +130,7 @@ const useNodeSale = ({ provider, wallet }) => {
 
           if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
             amount.push({
+              contractAddress: nodesaleAddress,
               chainId: chain,
               amount: {
                 raw: balance.toString(),
@@ -351,7 +353,7 @@ const useNodeSale = ({ provider, wallet }) => {
         ),
       });
 
-      const factoryAddress = Addresses[bonus.chainId.toString()].node_sale;
+      const factoryAddress = bonus.contractAddress;
       if (!factoryAddress) return;
 
       const factoryContract = new ethers.Contract(factoryAddress, nodesaleContractAbi, signer);

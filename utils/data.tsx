@@ -558,7 +558,7 @@ export const PalomaInstructionsSteps: {
     //       title: <p>Open the Terminal Application in Macintosh Utilities</p>,
     //       commands: [
     //         {
-    //           name: <p>Copy and Past the command:</p>,
+    //           name: <p>Copy and Paste the command:</p>,
     //           command: (
     //             <p>
     //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
@@ -575,7 +575,7 @@ export const PalomaInstructionsSteps: {
     //       title: <p>After activating the node, you can keep it running in the background</p>,
     //       commands: [
     //         {
-    //           name: <p>Copy and Past the command:</p>,
+    //           name: <p>Copy and Paste the command:</p>,
     //           command: (
     //             <p>
     //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
@@ -724,7 +724,7 @@ export const PalomaInstructionsSteps: {
         //   title: <p>After registering the node, you can keep it running in the background</p>,
         //   commands: [
         //     {
-        //       name: <p>Copy and Past the command:</p>,
+        //       name: <p>Copy and Paste the command:</p>,
         //       command: (
         //         <p>
         //           docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v

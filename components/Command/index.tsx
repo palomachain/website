@@ -16,7 +16,7 @@ interface ICommandWrapper {
 
 const Command = ({
   step = 'a',
-  title = 'Copy and Past the command:',
+  title = 'Copy and Paste the command:',
   command,
   copyCommand,
   instruction,

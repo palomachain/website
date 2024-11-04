@@ -1,9 +1,9 @@
+import { StaticLink } from 'configs/links';
 import Head from 'next/head';
 import React from 'react';
+import BoardHeader from './boardHeader';
 import Footer from './footer';
 import LayoutHeader from './header';
-import { StaticLink } from 'configs/links';
-import BoardHeader from './boardHeader';
 
 export default function Layout({ children, router }) {
   const windowUrl = window.location.pathname;
@@ -22,7 +22,7 @@ export default function Layout({ children, router }) {
         {React.cloneElement(children, {
           router,
         })}
-        <Footer />
+        {!windowUrl.toLowerCase().includes(StaticLink.BUYMOREBOARD) && <Footer />}
       </main>
     </>
   );

@@ -1550,3 +1550,24 @@ export const ActivateInstructionsSteps: {
     },
   ],
 };
+
+export const BoardNavData = {
+  [1]: {
+    bg: '/assets/board/tailored.png',
+    title: 'Tailored Twitter AI:',
+    describe:
+      'Tailored AI for Twitter gives you the power to create tweets that sound just like the people you admire and use content from people you admire. Get more Likes and Retweets for Free. Who do you want to sound like today?',
+    buttonText: 'Launch App',
+    buttonLink: 'https://www.tailoredai.me/',
+    isExtenial: true,
+  },
+  [2]: {
+    bg: '/assets/board/palomabot.png',
+    title: 'Paloma Bots: decentralized Crypto Trading Bots',
+    describe:
+      'Create a decentralized blockchain trading bot that will enter and exit your positions automatically on any blockchain and any decentralized exchange (DEX). All bots are run on the Paloma Blockchain. Security provided by the Paloma validator set.',
+    buttonText: 'Launch App',
+    buttonLink: 'https://palomabot.ai',
+    isExtenial: true,
+  },
+};

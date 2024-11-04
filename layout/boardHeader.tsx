@@ -6,7 +6,7 @@ import { useWallet } from 'hooks/useWallet';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import { shortenString } from 'utils/string';
-import MobileMenu from './menu/MobileMenu';
+import BoardMobileMenu from './menu/BoardMobileMenu';
 
 const BoardHeader = () => {
   const ref = useRef(null);
@@ -61,7 +61,7 @@ const BoardHeader = () => {
       </div>
 
       {mobileMenuOpen && (
-        <MobileMenu
+        <BoardMobileMenu
           onClose={() => {
             setMobileMenuOpen(false);
           }}

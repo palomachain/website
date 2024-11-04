@@ -260,4 +260,33 @@ const footerMenu = [
   },
 ];
 
-export { navMenu, footerMenu };
+const boardNavMenu = [
+  {
+    title: 'LightNodeBoard',
+    url: 'lightnode-board',
+    icon: '/assets/menu/board.svg',
+    isNew: false,
+    hasLink: false,
+    isExternal: false,
+  },
+  {
+    title: 'Twitter AI Bots',
+    url: 'twitter-ai-bots',
+    icon: '/assets/menu/twitter-ai.svg',
+    isNew: true,
+    hasLink: true,
+    link: 'https://www.tailoredai.me/',
+    isExternal: true,
+  },
+  {
+    title: 'Paloma Bots',
+    url: 'paloma-bots',
+    icon: '/assets/menu/palomabot.svg',
+    isNew: true,
+    hasLink: true,
+    link: 'https://palomabot.ai',
+    isExternal: true,
+  },
+];
+
+export { navMenu, footerMenu, boardNavMenu };

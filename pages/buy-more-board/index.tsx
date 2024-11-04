@@ -244,20 +244,36 @@ const BuyMoreBoard = () => {
   }, [dataLoading, myPurchaseStatus]);
 
   const totalGrainBalance = useMemo(() => {
-    if (dataLoading) return '-';
+    if (dataLoading) return 0;
+
+    let sum = 0;
+    // Total Rewards
+    if (totalRewards && totalRewards.rewards && Number(totalRewards.rewards) > 0) {
+      sum += Number(totalRewards.rewards);
+    }
+
+    // Total Balance
     if (myPurchaseStatus && myPurchaseStatus.length > 0) {
-      let sum = myPurchaseStatus.reduce(function (x, y) {
+      let sumPurchasedBalance = myPurchaseStatus.reduce(function (x, y) {
         return new BigNumber(x).plus(BigNumber(y['status'] > 2 ? y['grain_amount'] ?? 0 : 0));
       }, 0);
 
-      return sum.toString() ?? '0';
+      sum += Number(sumPurchasedBalance);
     }
-    return '0';
-  }, [dataLoading, myPurchaseStatus]);
+
+    return sum;
+  }, [dataLoading, myPurchaseStatus, totalRewards]);
 
   const totalGrainUSD = useMemo(() => {
     if (dataLoading) return 0;
 
+    let sum = 0;
+    // Total Rewards
+    if (totalRewards && totalRewards.usd && Number(totalRewards.usd) > 0) {
+      sum += Number(totalRewards.usd);
+    }
+
+    // Total Balance
     if (myPurchaseStatus && myPurchaseStatus.length > 0) {
       const nodesCount = myPurchaseStatus.reduce(function (x, y) {
         if (y['status'] >= 3 && y['balance'] && y['balance'] > 0) {
@@ -268,11 +284,12 @@ const BuyMoreBoard = () => {
         return x;
       }, 0);
       if (nodesCount > 0) {
-        return currentRoundPrice * Number(nodesCount);
+        sum += currentRoundPrice * Number(nodesCount);
       }
     }
-    return 0;
-  }, [dataLoading, myPurchaseStatus, currentRoundPrice]);
+
+    return sum;
+  }, [dataLoading, myPurchaseStatus, currentRoundPrice, totalRewards]);
 
   const closeCode = async (generated = false) => {
     setOpenGeneratePromocodeModal(false);
@@ -437,25 +454,16 @@ const BuyMoreBoard = () => {
           <NavBar selectedBarIndex={navbar} onChangeBar={setNavbar} />
           <div className={style.buyMoreBoard}>
             <div className={style.myBalances}>
-              <div className={style.balanceCard}>
+              <div className={classNames(style.balanceCard, 'light-node-sale')}>
                 {dataLoading || rewardsLoading ? (
                   <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
                 ) : (
                   <>
                     <p>Your Balance</p>
-                    <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 0)} GRAIN</h3>
-                    <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 0)}</p>
-                  </>
-                )}
-              </div>
-              <div className={style.balanceCard}>
-                {dataLoading || rewardsLoading ? (
-                  <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
-                ) : (
-                  <>
-                    <p>Total Rewards</p>
-                    <h3>{formatNumber(totalRewards.rewards, 0, 0)} GRAIN</h3>
-                    <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 0)}</p>
+                    <div className="flex-row gap-4">
+                      <h3>{formatNumber(totalGrainBalance ?? 0, 0, 0)} GRAIN</h3>
+                      <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 0)}</p>
+                    </div>
                   </>
                 )}
               </div>
@@ -573,7 +581,7 @@ const BuyMoreBoard = () => {
                         <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
                         <td>{formatNumber(purchase['grain_amount'] ?? 0, 0, 2)}</td>
                         <td className={style.activeButton}>
-                          {loadingIndex === index ? (
+                          {/* {loadingIndex === index ? (
                             <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
                           ) : +purchase['status'] < 2 ? (
                             <button
@@ -584,11 +592,14 @@ const BuyMoreBoard = () => {
                             </button>
                           ) : +purchase['status'] === 2 ? (
                             'Pending'
-                          ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
-                            'Mining'
-                          ) : (
+                          ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? ( */}
+                          <>
+                            <img src="/assets/icons/play.svg" alt="play" className={style.miningIcon} />
+                            Mining
+                          </>
+                          {/* ) : (
                             'Activate in terminal'
-                          )}
+                          )} */}
                         </td>
                       </tr>
                     ))

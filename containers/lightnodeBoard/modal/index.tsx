@@ -20,7 +20,7 @@ const BoardModal = ({ navbar, onClose }: SuccessModalProps) => {
             <div className={classNames(style.actionBtn, style.close)} onClick={(e) => onClose()}>
               <img src="/assets/icons/close-black.png" alt="" width={13} height={13} />
             </div>
-            <img src={BoardNavData[navbar].bg} />
+            <img src={BoardNavData[navbar].bg} width={509} />
           </section>
           <div className={style.contentContainer}>
             <h3>{BoardNavData[navbar].title}</h3>

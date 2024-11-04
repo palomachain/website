@@ -23,8 +23,8 @@
 
   .myBalances {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 33px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     @media screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
@@ -35,7 +35,7 @@
     }
     .balanceCard {
       height: 160px;
-      border-radius: 20px;
+      border-radius: 17.257px;
       border: 1px solid #d8d3d3;
       background: #fff;
       display: flex;
@@ -44,15 +44,15 @@
       justify-content: center;
       padding-top: 31px;
       padding-bottom: 26px;
-      gap: 10px;
+      gap: 11px;
 
       p {
         font-family: $Inter-400;
         color: #6a6969;
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
-        line-height: 21.045px; /* 150.32% */
-        letter-spacing: -0.014px;
+        line-height: 18.158px; /* 113.488% */
+        letter-spacing: -0.016px;
       }
       .usdValue {
         color: #2c2c2c;
@@ -61,9 +61,10 @@
       h3 {
         font-family: $Inter-700;
         color: #2c2c2c;
-        font-size: 34px;
+        font-size: 32px;
         font-style: normal;
-        letter-spacing: -0.034px;
+        line-height: 18.158px; /* 56.744% */
+        letter-spacing: -0.032px;
         text-align: center;
         @media screen and (max-width: 768px) {
           font-size: 24px;
@@ -73,9 +74,9 @@
 
     .bonusCard {
       height: 160px;
-      border-radius: 20px;
-      border: 1px solid #ffd5ef;
-      background: #ffe7f6;
+      border-radius: 17.257px;
+      border: 1px solid #d8d3d3;
+      background: #fff;
       padding-left: 7px;
       padding-right: 18px;
       display: flex;
@@ -143,12 +144,12 @@
           gap: 10px;
 
           span {
-            color: #cf3293;
+            color: #2c2c2c;
             font-family: $Inter-700;
-            font-size: 34px;
+            font-size: 28px;
             font-style: normal;
-            line-height: 21.045px; /* 61.896% */
-            letter-spacing: -0.034px;
+            line-height: 18.158px; /* 64.85% */
+            letter-spacing: -0.028px;
           }
         }
         .bonusBtns {
@@ -215,7 +216,7 @@
     border: 0.5px solid #d8d3d3;
     background: #fff;
     width: 100%;
-    margin-top: 28px;
+    margin-top: 20px;
     padding: 32px 24px;
     display: flex;
     flex-direction: column;
@@ -304,20 +305,27 @@
           opacity: 0.8;
         }
         .activeButton {
-          background: #ffe6f6;
-          background-blend-mode: multiply;
+          border-radius: 6px;
+          border: 0.8px solid #d8d3d3;
           height: 34px;
           width: 120px;
           display: flex;
+          flex-direction: row;
           align-items: center;
           justify-content: center;
-          color: #ff62c4;
+          gap: 5px;
+          color: #2c2c2c;
           font-family: $Inter-500;
-          font-size: 12px;
+          font-size: 10.685px;
           font-style: normal;
           line-height: 21.045px; /* 175.373% */
           letter-spacing: -0.012px;
 
+          .miningIcon {
+            margin: 0;
+            width: 6px !important;
+            height: 8px !important;
+          }
           button {
             border: none;
             outline: none;

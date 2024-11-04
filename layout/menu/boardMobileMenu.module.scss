@@ -1,0 +1,42 @@
+@import '/styles/libraries/global';
+
+.navbar {
+  width: 100%;
+  margin-top: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .selected {
+    border-radius: 4px;
+    background: #faf9f9;
+  }
+  .bar {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 0 14px;
+    align-items: center;
+    cursor: pointer;
+    height: 52px;
+
+    p {
+      color: #2c2c2c;
+      font-family: $Inter-500;
+      font-size: 13px;
+      font-style: normal;
+      line-height: normal;
+    }
+
+    span {
+      border-radius: 4px;
+      background: #ffddf2;
+      padding: 1px 3px;
+      color: #cf3293;
+      font-family: $Inter-600;
+      font-size: 13px;
+      font-style: normal;
+      line-height: normal;
+    }
+  }
+}

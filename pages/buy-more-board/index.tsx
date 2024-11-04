@@ -8,6 +8,8 @@ import SuccessClaimModal from 'components/Modal/SuccessModal/SuccessClaimModal';
 import { USER_ACCESS_TOKEN } from 'configs/constants';
 import { getTxHashLink, StaticLink } from 'configs/links';
 import Activate from 'containers/activate';
+import BoardModal from 'containers/lightnodeBoard/modal';
+import NavBar from 'containers/lightnodeBoard/navBar';
 import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
@@ -83,6 +85,8 @@ const BuyMoreBoard = () => {
 
   const [activating, setActivating] = useState<IActivateInfos>();
   const [copiedIndex, setCopyIndex] = useState<number>(-1);
+
+  const [navbar, setNavbar] = useState(0);
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -429,173 +433,180 @@ const BuyMoreBoard = () => {
       {pageLoading ? (
         <img src="/assets/icons/confirm-email.svg" alt="confirm-email" className={style.loadingImg} />
       ) : (
-        <div className={style.buyMoreBoard}>
-          <div className={style.myBalances}>
-            <div className={style.balanceCard}>
-              {dataLoading || rewardsLoading ? (
-                <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
-              ) : (
-                <>
-                  <p>Your Balance</p>
-                  <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 0)} GRAIN</h3>
-                  <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 0)}</p>
-                </>
-              )}
-            </div>
-            <div className={style.balanceCard}>
-              {dataLoading || rewardsLoading ? (
-                <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
-              ) : (
-                <>
-                  <p>Total Rewards</p>
-                  <h3>{formatNumber(totalRewards.rewards, 0, 0)} GRAIN</h3>
-                  <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 0)}</p>
-                </>
-              )}
-            </div>
-            <div className={classNames(dataLoading || bonusLoading ? style.balanceCard : style.bonusCard)}>
-              {dataLoading || bonusLoading ? (
-                <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
-              ) : myAccount.promo_code ? (
-                myAccount.status === 1 ? (
-                  <div className={style.bonusBalanceCard}>
-                    <div className={style.referralBonus}>
-                      Total Referral Bonus<span>{formatNumber(totalBonus, 0, 2)} USDC</span>
-                    </div>
-                    <div className={style.bonusBtns}>
-                      <button onClick={onClickClaim} className={totalBonus > 0 ? style.clickable : style.notClickable}>
-                        {loadingClaim ? (
-                          <img
-                            src="/assets/icons/loading_circle.svg"
-                            height="25px"
-                            style={{ marginTop: 5, marginLeft: 5 }}
-                          />
-                        ) : (
-                          <>
-                            Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
-                          </>
-                        )}
-                      </button>
-                      <button onClick={() => onClickCopyPromocode(myAccount.promo_code)}>
-                        <img src="/assets/icons/copy_graypink.png" alt="copy" />
-                        {copyPromocode ? 'Copied Code!' : 'Copy Code'}
-                      </button>
-                    </div>
-                  </div>
+        <div className={style.boardPage}>
+          <NavBar selectedBarIndex={navbar} onChangeBar={setNavbar} />
+          <div className={style.buyMoreBoard}>
+            <div className={style.myBalances}>
+              <div className={style.balanceCard}>
+                {dataLoading || rewardsLoading ? (
+                  <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
                 ) : (
-                  <div className={style.bonusPendingCard}>
-                    <p>Your Referral Promo Code Status</p>
-                    <h3>Pending....</h3>
-                    <p className={style.bonusFooter}>Your request will be processed in a few minutes.</p>
-                  </div>
-                )
-              ) : (
-                <>
-                  <img className={style.bonusBg1} src="/assets/icons/promocode_bg1.png" alt="promocode_bg1" />
-                  <div className={style.bonusText}>
-                    Don’t Miss Out!
-                    <br />
-                    Get Paid A Referral Bonus
-                    {wallet && wallet.account ? (
-                      // NOTE: disable create promo code
-                      // <button className={style.createPromocode} onClick={onClickCreatePromocode}>
-                      //   Create Promo Code
-                      // </button>
-                      <></>
-                    ) : (
-                      <ConnectWallet
-                        className={style.createPromocode}
-                        btnTitle="Connect Wallet"
-                        showThirdwebBranding={false}
-                      />
-                    )}
-                  </div>
-                </>
-              )}
+                  <>
+                    <p>Your Balance</p>
+                    <h3>{formatNumber(totalGrainBalance.toString() ?? 0, 0, 0)} GRAIN</h3>
+                    <p className={style.usdValue}>${formatNumber(totalGrainUSD, 0, 0)}</p>
+                  </>
+                )}
+              </div>
+              <div className={style.balanceCard}>
+                {dataLoading || rewardsLoading ? (
+                  <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
+                ) : (
+                  <>
+                    <p>Total Rewards</p>
+                    <h3>{formatNumber(totalRewards.rewards, 0, 0)} GRAIN</h3>
+                    <p className={style.usdValue}>${formatNumber(totalRewards.usd, 0, 0)}</p>
+                  </>
+                )}
+              </div>
+              <div className={classNames(dataLoading || bonusLoading ? style.balanceCard : style.bonusCard)}>
+                {dataLoading || bonusLoading ? (
+                  <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
+                ) : myAccount.promo_code ? (
+                  myAccount.status === 1 ? (
+                    <div className={style.bonusBalanceCard}>
+                      <div className={style.referralBonus}>
+                        Total Referral Bonus<span>{formatNumber(totalBonus, 0, 2)} USDC</span>
+                      </div>
+                      <div className={style.bonusBtns}>
+                        <button
+                          onClick={onClickClaim}
+                          className={totalBonus > 0 ? style.clickable : style.notClickable}
+                        >
+                          {loadingClaim ? (
+                            <img
+                              src="/assets/icons/loading_circle.svg"
+                              height="25px"
+                              style={{ marginTop: 5, marginLeft: 5 }}
+                            />
+                          ) : (
+                            <>
+                              Claim Bonus <img src="/assets/icons/arrow.svg" alt="arrow" />
+                            </>
+                          )}
+                        </button>
+                        <button onClick={() => onClickCopyPromocode(myAccount.promo_code)}>
+                          <img src="/assets/icons/copy_graypink.png" alt="copy" />
+                          {copyPromocode ? 'Copied Code!' : 'Copy Code'}
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={style.bonusPendingCard}>
+                      <p>Your Referral Promo Code Status</p>
+                      <h3>Pending....</h3>
+                      <p className={style.bonusFooter}>Your request will be processed in a few minutes.</p>
+                    </div>
+                  )
+                ) : (
+                  <>
+                    <img className={style.bonusBg1} src="/assets/icons/promocode_bg1.png" alt="promocode_bg1" />
+                    <div className={style.bonusText}>
+                      Don’t Miss Out!
+                      <br />
+                      Get Paid A Referral Bonus
+                      {wallet && wallet.account ? (
+                        // NOTE: disable create promo code
+                        // <button className={style.createPromocode} onClick={onClickCreatePromocode}>
+                        //   Create Promo Code
+                        // </button>
+                        <></>
+                      ) : (
+                        <ConnectWallet
+                          className={style.createPromocode}
+                          btnTitle="Connect Wallet"
+                          showThirdwebBranding={false}
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div className={style.myHistoryTable}>
-            <div className={style.tableHeader}>Your Paloma LightNodes</div>
-            <table className={style.tableBody}>
-              <thead>
-                <tr className={style.tableRow}>
-                  <th>
-                    Paloma Address<span>Number of Nodes</span>
-                  </th>
-                  <th>Date</th>
-                  <th>EVM Address</th>
-                  <th>GRAINs Minted</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {dataLoading ? (
-                  <tr>
-                    <td>
-                      <img src="/assets/icons/loading_circle.svg" height="42px" />
-                    </td>
+            <div className={style.myHistoryTable}>
+              <div className={style.tableHeader}>Your Paloma LightNodes</div>
+              <table className={style.tableBody}>
+                <thead>
+                  <tr className={style.tableRow}>
+                    <th>
+                      Paloma Address<span>Number of Nodes</span>
+                    </th>
+                    <th>Date</th>
+                    <th>EVM Address</th>
+                    <th>GRAINs Minted</th>
+                    <th>Status</th>
                   </tr>
-                ) : myPurchaseStatus && myPurchaseStatus.length > 0 ? (
-                  myPurchaseStatus.map((purchase, index) => (
-                    <tr
-                      className={classNames(style.tableTBody, index % 2 === 0 ? undefined : style.grayTableTBody)}
-                      key={index}
-                    >
+                </thead>
+                <tbody>
+                  {dataLoading ? (
+                    <tr>
                       <td>
-                        {copiedIndex === index && (
-                          <div className={style.copiedPalomaAddress}>Paloma address copied</div>
-                        )}
-
-                        {purchase['paloma_address'] && (
-                          <p
-                            className={style.palomaAddress}
-                            onClick={() =>
-                              handleCopyPalomaAddress(hexToStringWithBech(purchase['paloma_address']), index)
-                            }
-                          >
-                            {shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
-                          </p>
-                        )}
-                        <span>
-                          {formatNumber(purchase['node_count'] ?? purchase['estimated_node_count'], 0, 2)} LightNodes
-                        </span>
-                      </td>
-                      <td>{convertTime(purchase['created_at'].toString())}</td>
-                      <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
-                      <td>{formatNumber(purchase['grain_amount'] ?? 0, 0, 2)}</td>
-                      <td className={style.activeButton}>
-                        {loadingIndex === index ? (
-                          <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
-                        ) : +purchase['status'] < 2 ? (
-                          <button
-                            className={isAvailableActive(index) ? style.clickable : style.notClickable}
-                            onClick={() => onClickActive(index)}
-                          >
-                            Activate
-                          </button>
-                        ) : +purchase['status'] === 2 ? (
-                          'Pending'
-                        ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
-                          'Mining'
-                        ) : (
-                          'Activate in terminal'
-                        )}
+                        <img src="/assets/icons/loading_circle.svg" height="42px" />
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td>
-                      <p className={style.noActiveText}>The wallet currently does not have any active LightNodes.</p>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            <div className={style.tableFooter}>
-              <p>Total: {totalNodes} LightNodes</p>
-              <Purchase type="pink" text="+ Add a LightNode" />
+                  ) : myPurchaseStatus && myPurchaseStatus.length > 0 ? (
+                    myPurchaseStatus.map((purchase, index) => (
+                      <tr
+                        className={classNames(style.tableTBody, index % 2 === 0 ? undefined : style.grayTableTBody)}
+                        key={index}
+                      >
+                        <td>
+                          {copiedIndex === index && (
+                            <div className={style.copiedPalomaAddress}>Paloma address copied</div>
+                          )}
+
+                          {purchase['paloma_address'] && (
+                            <p
+                              className={style.palomaAddress}
+                              onClick={() =>
+                                handleCopyPalomaAddress(hexToStringWithBech(purchase['paloma_address']), index)
+                              }
+                            >
+                              {shortenString(hexToStringWithBech(purchase['paloma_address']), 9)}
+                            </p>
+                          )}
+                          <span>
+                            {formatNumber(purchase['node_count'] ?? purchase['estimated_node_count'], 0, 2)} LightNodes
+                          </span>
+                        </td>
+                        <td>{convertTime(purchase['created_at'].toString())}</td>
+                        <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
+                        <td>{formatNumber(purchase['grain_amount'] ?? 0, 0, 2)}</td>
+                        <td className={style.activeButton}>
+                          {loadingIndex === index ? (
+                            <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
+                          ) : +purchase['status'] < 2 ? (
+                            <button
+                              className={isAvailableActive(index) ? style.clickable : style.notClickable}
+                              onClick={() => onClickActive(index)}
+                            >
+                              Activate
+                            </button>
+                          ) : +purchase['status'] === 2 ? (
+                            'Pending'
+                          ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
+                            'Mining'
+                          ) : (
+                            'Activate in terminal'
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td>
+                        <p className={style.noActiveText}>The wallet currently does not have any active LightNodes.</p>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              <div className={style.tableFooter}>
+                <p>Total: {totalNodes} LightNodes</p>
+                <Purchase type="pink" text="+ Add a LightNode" />
+              </div>
             </div>
+            {navbar !== 0 && <BoardModal navbar={navbar} onClose={() => setNavbar(0)} />}
           </div>
         </div>
       )}

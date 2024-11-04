@@ -7,9 +7,16 @@
   height: 100px;
 }
 
+.boardPage {
+  display: flex;
+  flex-direction: row;
+}
 .buyMoreBoard {
-  margin: 146px 0;
-  padding: 0 76px;
+  margin: 133px 0;
+  padding-left: 27px;
+  padding-right: 35px;
+  width: 100%;
+  position: sticky;
   @media screen and (max-width: 768px) {
     padding: 0 16px;
   }

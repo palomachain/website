@@ -581,7 +581,7 @@ const BuyMoreBoard = () => {
                         <td>{purchase['buyer'] && shortenString(purchase['buyer'], 6, 6)}</td>
                         <td>{formatNumber(purchase['grain_amount'] ?? 0, 0, 2)}</td>
                         <td className={style.activeButton}>
-                          {/* {loadingIndex === index ? (
+                          {loadingIndex === index ? (
                             <img src="/assets/icons/loading_circle.svg" height="25px" style={{ marginTop: 5 }} />
                           ) : +purchase['status'] < 2 ? (
                             <button
@@ -592,14 +592,14 @@ const BuyMoreBoard = () => {
                             </button>
                           ) : +purchase['status'] === 2 ? (
                             'Pending'
-                          ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? ( */}
+                          ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
                           <>
                             <img src="/assets/icons/play.svg" alt="play" className={style.miningIcon} />
                             Mining
                           </>
-                          {/* ) : (
+                          ) : (
                             'Activate in terminal'
-                          )} */}
+                          )}
                         </td>
                       </tr>
                     ))

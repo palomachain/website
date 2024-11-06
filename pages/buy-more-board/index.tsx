@@ -508,7 +508,7 @@ const BuyMoreBoard = () => {
                   )
                 ) : (
                   <>
-                    <img className={style.bonusBg1} src="/assets/icons/promocode_bg1.png" alt="promocode_bg1" />
+                    <img className={style.bonusBg1} src="/assets/icons/promocode_bg1.svg" alt="promocode_bg1" />
                     <div className={style.bonusText}>
                       Don’t Miss Out!
                       <br />

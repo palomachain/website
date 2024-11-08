@@ -602,8 +602,8 @@ const PurchaseFlow = () => {
                   total_cost: (purchaseInfo.data.node_price * 10 ** 6).toString(),
                   promocode: purchaseInfo.data.promoCode ?? ZERO_ADDRESS_PALOMA,
                   path: '0x00',
-                  enhanced: purchaseInfo.data.isSupport,
-                  subscription_month: purchaseInfo.data.supportMonth,
+                  enhanced: purchaseInfo.data.isSupport ?? false,
+                  subscription_month: purchaseInfo.data.supportMonth ?? 0,
                   own_promo_code: generatedMyPromocode,
                 };
 

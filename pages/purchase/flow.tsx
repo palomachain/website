@@ -604,7 +604,7 @@ const PurchaseFlow = () => {
                   path: '0x00',
                   enhanced: purchaseInfo.data.isSupport,
                   subscription_month: purchaseInfo.data.supportMonth,
-                  own_promo_code: hexToString(generatedMyPromocode),
+                  own_promo_code: generatedMyPromocode,
                 };
 
                 const result = await postPayForToken(data);

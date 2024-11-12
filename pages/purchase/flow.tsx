@@ -550,12 +550,17 @@ const PurchaseFlow = () => {
               raw: balanceTool.convertToWei(totalPayForUSDC, 6), // Arbitrum USDC decimals is 6
               format: totalPayForUSDC.toString(),
             };
+            const exchangeTokenAmount = {
+              raw: balanceTool.convertToWei(totalPay, 6),
+              format: totalPay.toString(),
+            };
 
             const purchaseInfos = {
               node_count: quantity,
               node_price: nodePrice,
               support: selectedSupport,
               amount_in: expectTokenAmount,
+              amount_in_exchange: exchangeTokenAmount,
               price_tiers: priceTiers,
               promoCode: appliedPromoCode,
             };
@@ -611,6 +616,7 @@ const PurchaseFlow = () => {
                 if (result && result.error) {
                   toast.error('Failed. Please try again later.');
                 } else {
+                  await delay(1000); // delay 1s
                   toast.success('Paloma LightNodes successfully purchased');
                   router.push(
                     `${StaticLink.INSTRUCTIONS}?type=fiat_with_${
@@ -624,9 +630,9 @@ const PurchaseFlow = () => {
                 }
               } else {
                 if (selectedChain === ChainID.COINBASE_ONRAMP) {
-                  CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                  CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in_exchange.format));
                 } else {
-                  openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                  openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in_exchange.format));
                 }
               }
             } else {
@@ -653,9 +659,9 @@ const PurchaseFlow = () => {
                   setFiatWallet(myFiatWallet);
 
                   if (selectedChain === ChainID.COINBASE_ONRAMP) {
-                    CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                    CoinbaseButton(myFiatWallet, Number(purchaseInfo.data.amount_in_exchange.format));
                   } else {
-                    openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in.format));
+                    openTransak(myFiatWallet, Number(purchaseInfo.data.amount_in_exchange.format));
                   }
                 } else {
                   toast.error('Failed create a bot. Please try again later.');
@@ -963,11 +969,7 @@ const PurchaseFlow = () => {
               <TotalPay
                 title="Total"
                 step={step}
-                price={
-                  isFiat(selectedChain) || isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc)
-                    ? totalPayForUSDC
-                    : totalPay
-                }
+                price={isSameContract(fromToken.address, Addresses[selectedChainId]?.usdc) ? totalPayForUSDC : totalPay}
                 exchangeRate={fromTokenExchangeRate}
                 fromToken={fromToken}
                 expectTokenAmount={Number(quoteAmount.format)}

@@ -17,7 +17,7 @@ const ecosystemSection = () => (
     </div>
     <div className="ecosystem-item">
       <div className="ecosystem-item-value">
-        +45K
+        +39K
         <img src="/assets/newHome/pigeon.svg" />
       </div>
       <p className="uppercase">PIGEONS ON OUR COMMUNITY</p>

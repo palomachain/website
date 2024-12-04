@@ -12,6 +12,7 @@ interface StartButtonProps {
   link: string;
   isExternal?: boolean;
   disable?: boolean;
+  onClick?: () => void;
 }
 
 const StartButton = ({
@@ -21,10 +22,14 @@ const StartButton = ({
   link,
   isExternal = false,
   disable = false,
+  onClick,
 }: StartButtonProps) => {
   const router = useRouter();
 
   const handleAction = (link: string) => {
+    if (onClick) {
+      return onClick();
+    }
     if (link.length > 0) {
       return router.push(link);
     } else {

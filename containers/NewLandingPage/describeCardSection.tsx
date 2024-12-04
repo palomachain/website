@@ -2,7 +2,7 @@ import StartButton from 'components/Button/StartButton';
 import { DescribeCardsData } from 'utils/data';
 
 const describeCardSection = () => (
-  <section className="describe-card-section">
+  <section className="describe-card-section" id="paloma-ai-lightnodes">
     {DescribeCardsData.map((data, index) => (
       <div key={index} className="describe-card">
         <div className="describe-card-head">

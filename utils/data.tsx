@@ -1575,9 +1575,9 @@ export const BoardNavData = {
 
 export const DescribeCardsData = [
   {
-    title: 'Paloma AI LighNodes',
+    title: 'Paloma AI LightNodes',
     describe:
-      'The Paloma LightNode is a blockchain program that secures the Paloma network by delegating stake to top cross-chain validators. Participants, called pigeons, earn GRAIN rewards as their clients work continuously to ensure network security.',
+      'The Paloma AI LightNode is a lightweight Paloam client that both secures the Paloma network by delegating stake to top cross-chain validators as well as stores your AI context windows. Paloma AI LightNodes, called pigeons, earn increasing GRAIN rewards as more tokens and AI agents are launched on Paloma across multiple blockchains.',
     buttonText: 'Purchase your LightNode',
     buttonLink: StaticLink.PURCHASE,
     isExternal: false,
@@ -1602,9 +1602,9 @@ export const DescribeCardsData = [
     bgIcon: '/assets/newHome/Tailored.svg',
   },
   {
-    title: 'Automation Bots',
+    title: 'Trading Bots',
     describe:
-      'Launch your own Talent token with GRAINs using Paloma automation Paloma’s Got Talent: Anyone can launch a token with Paloma to showcase their Talent. Paloma will promote your talent so you can build with the flock and monetize your skills. Join us.',
+      "Use your AI to execute multiple trades across multiple chains with Paloma's trading bots. Bots can be triggered via AI APIs on Paloma's Cosmos SDK chain to control your liquidity wherever it may be. Trading bots include DCA, TWAPs, Euro Offramps, stable yield, as well as leverage bots. Partners include Curve, Aave, GMX, Gnosis, Monerium, Solana, LayerZero, and Wormhole.",
     buttonText: 'Launch App',
     buttonLink: 'https://www.palomabot.ai/',
     isExternal: true,

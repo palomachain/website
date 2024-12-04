@@ -1,3 +1,3 @@
-import Home from 'containers/lightnode';
+import Home from 'containers/NewLandingPage';
 
 export default Home;

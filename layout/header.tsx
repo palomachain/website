@@ -3,7 +3,7 @@ import { StaticLink } from 'configs/links';
 import { useOutsideAlerter } from 'hooks';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { PALOMABOT_WEBSITE_LINK } from 'utils/constants';
+import { COMMUNITY_LINK, PALOMABOT_WEBSITE_LINK } from 'utils/constants';
 import { navMenu } from './menu/menu';
 import MobileMenu from './menu/MobileMenu';
 
@@ -123,8 +123,8 @@ const LayoutHeader = ({ router }) => {
             )}
           </React.Fragment>
         ))}
-        <a href={PALOMABOT_WEBSITE_LINK} className="header-button community" target="_blank">
-          <span>Create a Bot</span>
+        <a href={COMMUNITY_LINK} className="header-button community" target="_blank">
+          <span>Join the Community</span>
         </a>
       </div>
 

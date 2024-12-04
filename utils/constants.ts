@@ -4,6 +4,7 @@ export const GITHUB_LINK = 'https://github.com/palomachain';
 export const DISCORD_LINK = 'https://discord.gg/tNqkNHvVNc';
 
 export const PALOMABOT_WEBSITE_LINK = 'https://palomabot.ai';
+export const COMMUNITY_LINK = 'https://discord.gg/tbzNsehE4u';
 
 export const LATEST_BLOG_SHOW_CNT = 3;
 

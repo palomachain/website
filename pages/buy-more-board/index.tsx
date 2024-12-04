@@ -593,10 +593,10 @@ const BuyMoreBoard = () => {
                           ) : +purchase['status'] === 2 ? (
                             'Pending'
                           ) : +purchase['status'] === 3 && +purchase['balance'] && +purchase['balance'] > 0 ? (
-                          <>
-                            <img src="/assets/icons/play.svg" alt="play" className={style.miningIcon} />
-                            Mining
-                          </>
+                            <>
+                              <img src="/assets/icons/play.svg" alt="play" className={style.miningIcon} />
+                              Mining
+                            </>
                           ) : (
                             'Activate in terminal'
                           )}

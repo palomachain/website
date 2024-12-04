@@ -1,3 +1,4 @@
+import { StaticLink } from 'configs/links';
 import { IAlertInfo, IInstructionsNodeSteps } from 'interfaces/nodeSale';
 import React from 'react';
 
@@ -361,22 +362,22 @@ export const NodeSaleLinks = {
     {
       title: "Paloma's Twitter",
       link: 'https://x.com/paloma_chain',
-      icon: '/assets/social/twitter.svg',
+      icon: '/assets/social/twitter-black.svg',
     },
     {
       title: "Paloma's Discord",
       link: 'https://discord.gg/YbjCJvXBuu',
-      icon: '/assets/social/discord.svg',
+      icon: '/assets/social/discord-black.svg',
     },
     {
       title: "Paloma's Official Telegram",
       link: 'https://t.me/palomachain',
-      icon: '/assets/social/telegram.svg',
+      icon: '/assets/social/telegram-black.svg',
     },
     {
       title: "Paloma's Youtube Channel",
       link: 'https://www.youtube.com/channel/UC_ssI5Y8KGZOaaZmqQB44xQ',
-      icon: '/assets/social/youtube.svg',
+      icon: '/assets/social/youtube-black.svg',
     },
   ],
   'Paloma Decentralized Apps': [
@@ -1571,3 +1572,93 @@ export const BoardNavData = {
     isExtenial: true,
   },
 };
+
+export const DescribeCardsData = [
+  {
+    title: 'Paloma AI LightNodes',
+    describe:
+      'The Paloma AI LightNode is a lightweight Paloam client that both secures the Paloma network by delegating stake to top cross-chain validators as well as stores your AI context windows. Paloma AI LightNodes, called pigeons, earn increasing GRAIN rewards as more tokens and AI agents are launched on Paloma across multiple blockchains.',
+    buttonText: 'Purchase your LightNode',
+    buttonLink: StaticLink.PURCHASE,
+    isExternal: false,
+    bgIcon: '/assets/newHome/LightNode.svg',
+  },
+  {
+    title: 'AI Talent Tokens',
+    describe:
+      "Launch your own AI agent and Talent Token with your personality and your talent with Paloma's Got Talent. Launch at no cost. The Paloma flock will promote your talent so you can build and monetize your AI's skills. Join us.",
+    buttonText: 'Create Your Talent Token',
+    buttonLink: '',
+    isExternal: false,
+    bgIcon: '/assets/newHome/Talent.svg',
+  },
+  {
+    title: 'AI Agents',
+    describe:
+      'Tailored AI for Twitter gives you the power to create tweets that sound just like the people you admire and use content from people you admire. Get more Likes and Retweets for Free. Who do you want to sound like today?',
+    buttonText: 'Launch App',
+    buttonLink: 'https://www.tailoredai.me/',
+    isExternal: true,
+    bgIcon: '/assets/newHome/Tailored.svg',
+  },
+  {
+    title: 'Trading Bots',
+    describe:
+      "Use your AI to execute multiple trades across multiple chains with Paloma's trading bots. Bots can be triggered via AI APIs on Paloma's Cosmos SDK chain to control your liquidity wherever it may be. Trading bots include DCA, TWAPs, Euro Offramps, stable yield, as well as leverage bots. Partners include Curve, Aave, GMX, Gnosis, Monerium, Solana, LayerZero, and Wormhole.",
+    buttonText: 'Launch App',
+    buttonLink: 'https://www.palomabot.ai/',
+    isExternal: true,
+    bgIcon: '/assets/newHome/Bots.svg',
+  },
+];
+
+export const UseCasesData = [
+  {
+    type: 'Cross Chain NFTs',
+    title: 'Mint an Egg On Ethereum From The Cosmos',
+    describe: 'Mint one of our 100 limited Edition Developer Eggs NFTs by sending a message on Ethereum.',
+    buttonText: 'View Docs',
+    buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
+    isExternal: true,
+    bgIcon: '/assets/newHome/developer-mint.svg',
+  },
+  {
+    type: 'uniswap v3 position',
+    title: 'Build a Limit Order Bot ',
+    describe:
+      'We deliver a GAME-CHANGER bLOCKCHAIN FOR DEVELOPERS. our protocol was built from developers to developers. Easy to use, easy to love. Get startet now!',
+    buttonText: 'View Docs',
+    buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
+    isExternal: true,
+    bgIcon: '/assets/newHome/developer-mint.svg',
+  },
+];
+
+export const MessageBuildData = [
+  {
+    title: 'Send Your Message',
+    describe:
+      'Send your Ethereum message payload with a simple command line entry on Paloma. Pay for gas in Grains or ETH on the command line. Let fly!',
+    buttonText: 'Learn More',
+    buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
+    isExternal: true,
+    bgIcon: '/assets/newHome/message1.svg',
+  },
+  {
+    title: 'Confirm Message State',
+    describe:
+      'Write and deploy a Cosmwasm contract on Paloma to confirm the message state and release a new message with gas fees.',
+    buttonText: 'Learn More',
+    buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
+    isExternal: true,
+    bgIcon: '/assets/newHome/message2.svg',
+  },
+  {
+    title: 'Send Another Message',
+    describe: 'Use Paloma to determine when to fire the next message to the pigeons. Pay gas in GRAINS or ETH.',
+    buttonText: 'Learn More',
+    buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
+    isExternal: true,
+    bgIcon: '/assets/newHome/message3.svg',
+  },
+];

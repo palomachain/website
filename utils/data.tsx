@@ -533,7 +533,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                  <b>First time LightNode Buyers:</b> Copy and paste the command:
                 </p>
               ),
               command: <p>sh $HOME/Downloads/setup.sh</p>,
@@ -542,7 +542,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
+                  <b>For repeat LightNode Buyers Only:</b> Copy and paste the command:
                 </p>
               ),
               command: <p>sh $HOME/Downloads/setup.sh add-node</p>,
@@ -559,7 +559,7 @@ export const PalomaInstructionsSteps: {
     //       title: <p>Open the Terminal Application in Macintosh Utilities</p>,
     //       commands: [
     //         {
-    //           name: <p>Copy and Past the command:</p>,
+    //           name: <p>Copy and paste the command:</p>,
     //           command: (
     //             <p>
     //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
@@ -576,7 +576,7 @@ export const PalomaInstructionsSteps: {
     //       title: <p>After activating the node, you can keep it running in the background</p>,
     //       commands: [
     //         {
-    //           name: <p>Copy and Past the command:</p>,
+    //           name: <p>Copy and paste the command:</p>,
     //           command: (
     //             <p>
     //               docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
@@ -692,7 +692,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                  <b>First time LightNode Buyers:</b> Copy and paste the command:
                 </p>
               ),
               command: (
@@ -707,7 +707,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
+                  <b>For repeat LightNode Buyers Only:</b> Copy and paste the command:
                 </p>
               ),
               command: (
@@ -725,7 +725,7 @@ export const PalomaInstructionsSteps: {
         //   title: <p>After registering the node, you can keep it running in the background</p>,
         //   commands: [
         //     {
-        //       name: <p>Copy and Past the command:</p>,
+        //       name: <p>Copy and paste the command:</p>,
         //       command: (
         //         <p>
         //           docker run --pull=always -ti -v ./password-store/.gnupg:/root/.gnupg -v
@@ -1026,7 +1026,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>First time LightNode Buyers:</b> Copy and Past the command:
+                  <b>First time LightNode Buyers:</b> Copy and paste the command:
                 </p>
               ),
               command: <p>sudo sh $HOME/Downloads/setup.sh</p>,
@@ -1035,7 +1035,7 @@ export const PalomaInstructionsSteps: {
             {
               name: (
                 <p>
-                  <b>For repeat LightNode Buyers Only:</b> Copy and Past the command:
+                  <b>For repeat LightNode Buyers Only:</b> Copy and paste the command:
                 </p>
               ),
               command: <p>sudo sh $HOME/Downloads/setup.sh add-node</p>,
@@ -1057,7 +1057,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Update and get Certificates.</b> Copy and Past the command:
+                  <b>Update and get Certificates.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1077,7 +1077,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Install docker Key Rings.</b> Copy and Past the command:
+                  <b>Install docker Key Rings.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1099,7 +1099,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Install Ubuntu Docker Key Rings.</b> Copy and Past the command:
+                  <b>Install Ubuntu Docker Key Rings.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1121,7 +1121,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Update packages and install docker.</b> Copy and Past the command:
+                  <b>Update packages and install docker.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1143,7 +1143,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Verify if Docker runs.</b> Copy and Past the command:
+                  <b>Verify if Docker runs.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1169,7 +1169,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Prepare your download directory.</b> Copy and Past the command:
+                  <b>Prepare your download directory.</b> Copy and paste the command:
                 </p>
               ),
               commands: [
@@ -1196,7 +1196,7 @@ export const PalomaInstructionsSteps: {
             {
               title: (
                 <p>
-                  <b>Run Paloma LightNode v1 setup.</b> Copy and Past the command:
+                  <b>Run Paloma LightNode v1 setup.</b> Copy and paste the command:
                 </p>
               ),
               commands: [

@@ -29,13 +29,9 @@ body * {
 }
 
 .page-container {
-  padding: 109px 0px 30px;
+  padding: 120px 0px 30px;
   width: 100vw;
   max-width: 100%;
-
-  @media screen and (max-width: 768px) {
-    padding: 120px 0px 30px;
-  }
 }
 
 a {

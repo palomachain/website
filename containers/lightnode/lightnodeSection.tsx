@@ -5,9 +5,8 @@ const nodesaleSection = () => (
       <span>AI LIGHT NODE</span>
     </h1>
     <p>
-      	  To launch Paloma’s blockchain network into its new AI phase, 
-          Paloma announces the Paloma AI Light Node Sale with new Paloma AI 
-          applications and context storage.
+      To launch Paloma’s blockchain network into its new AI phase, Paloma announces the Paloma AI Light Node Sale with
+      new Paloma AI applications and context storage.
     </p>
   </section>
 );

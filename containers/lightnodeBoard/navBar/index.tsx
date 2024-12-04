@@ -15,7 +15,10 @@ export default function NavBar({ selectedBarIndex, onChangeBar }) {
         {boardNavMenu.map((navbar, index) => (
           <div
             key={index}
-            className={classNames(style.bar, boardNavMenu[selectedBarIndex].title === navbar.title ? style.selected : undefined)}
+            className={classNames(
+              style.bar,
+              boardNavMenu[selectedBarIndex].title === navbar.title ? style.selected : undefined,
+            )}
             onClick={() => onChangeBar(index)}
           >
             <img src={navbar.icon} alt={`${navbar.title}-${index}`} />

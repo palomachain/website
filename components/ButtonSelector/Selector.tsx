@@ -30,10 +30,15 @@ const Selector = ({ selectableList, showSelectModal, handleSelect, selected, cla
               onClick={() => handleSelect(list['id'])}
             >
               {list && list['icon'] && <img src={list['icon']} width={25} height={25} alt="" />}
-              {((wallet && wallet.network) || isFiat(list['id'])) ? (
+              {(wallet && wallet.network) || isFiat(list['id']) ? (
                 <span>{list['name']}</span>
               ) : (
-                <ConnectWallet className={style.thirdwebConnect} btnTitle={list['name']} showThirdwebBranding={false} modalTitle="Connect"/>
+                <ConnectWallet
+                  className={style.thirdwebConnect}
+                  btnTitle={list['name']}
+                  showThirdwebBranding={false}
+                  modalTitle="Connect"
+                />
               )}
             </div>
           ))}

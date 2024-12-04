@@ -17,13 +17,9 @@ const Purchase = ({ type, className, text = 'Purchase your LightNode', disable =
 
   return (
     <button
-      className={classNames(
-        className,
-        'purchase-button',
-        {
-          [style[type]]: true,
-        },
-      )}
+      className={classNames(className, 'purchase-button', {
+        [style[type]]: true,
+      })}
       onClick={() => router.push(StaticLink.PURCHASE)}
       disabled={disable}
     >

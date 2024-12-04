@@ -1,0 +1,308 @@
+.newLanding-container {
+  h1 {
+    color: #2c2c2c;
+    font-family: $RockStar-400;
+    font-size: 40px;
+    @media screen and (max-width: 768px) {
+      font-size: 30px;
+    }
+  }
+  h2 {
+    color: #2c2c2c;
+    font-family: $RockStar-400;
+    font-size: 30px;
+    @media screen and (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+  h3 {
+    font-family: $RockStar-400;
+    font-size: 20px;
+  }
+  p {
+    color: #2c2c2c;
+    font-family: $RockStar-400;
+    font-size: 16px;
+  }
+}
+
+.start-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f1d1e5 0%, #eae5e5 100%);
+
+  .start-main {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 705px;
+    padding: 120px 0;
+    z-index: 15;
+    @media screen and (max-width: 768px) {
+      padding: 16px;
+    }
+  }
+  .start-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  .start-bg1 {
+    width: 644px;
+    height: 100%;
+    background-image: url('/assets/newHome/hero1.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+  }
+  .start-bg2 {
+    width: 644px;
+    height: 100%;
+    background-image: url('/assets/newHome/hero2.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+  }
+  @media screen and (max-width: 768px) {
+    .start-bg1,
+    .start-bg2 {
+      display: none;
+    }
+  }
+}
+
+.new-ecosystem-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 172px;
+  @media screen and (max-width: 768px) {
+    margin-top: 100px;
+  }
+  .ecosystem-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .ecosystem-item-value {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      color: #2c2c2c;
+      font-family: $RockStar-400;
+      font-size: 80px;
+      font-style: normal;
+      line-height: normal;
+      @media screen and (max-width: 768px) {
+        font-size: 60px;
+      }
+    }
+  }
+}
+
+.describe-card-section {
+  background: linear-gradient(180deg, #eae5e5 0%, #f1d1e5 47.89%, #eae5e5 101.99%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+  padding: 160px 70px;
+  position: relative;
+  @media screen and (max-width: 768px) {
+    padding: 113px 8px;
+  }
+
+  .describe-card {
+    position: relative;
+    border-radius: 25px;
+    border: 1px solid #2c2c2c;
+    background: #f5f1f1;
+    box-shadow: 16px 12px 0px 0px #2c2c2c;
+    padding: 74px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 453px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      height: fit-content;
+      padding: 53px 30px;
+      gap: 43px;
+
+      .describe-card-bg {
+        width: 100%;
+      }
+    }
+  }
+  .describe-card-head {
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-align: start;
+  }
+}
+
+.usecase-card-section {
+  margin: 104px 0;
+  text-align: center;
+  h1 {
+    margin-top: 33px;
+  }
+  .usecase-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 290px;
+    margin-top: 146px;
+    position: relative;
+    width: 100%;
+    padding: 0 70px;
+    @media screen and (max-width: 768px) {
+      padding: 0 8px;
+      gap: 160px;
+    }
+
+    .usecase-card {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 60px;
+      }
+    }
+    .usecase-card-head {
+      display: flex;
+      flex-direction: column;
+      gap: 17.33px;
+      text-align: start;
+      max-width: 442px;
+      @media screen and (max-width: 768px) {
+        padding: 0 30px;
+      }
+    }
+  }
+}
+
+.build-card-section {
+  margin: 104px 0;
+  text-align: center;
+  h1 {
+    margin-top: 33px;
+  }
+  .build-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 90px;
+    margin-top: 146px;
+    position: relative;
+    width: 100%;
+    padding: 0 70px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .build-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 23.8px;
+      max-width: 442px;
+    }
+  }
+}
+
+.new-node-sale-links-section {
+  padding: 106px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin-top: 31px;
+    margin-bottom: 78px !important;
+    text-align: center;
+  }
+  .node-sale-links {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 484px;
+    position: relative;
+
+    h3 {
+      font-size: 20px;
+      font-family: $RockStar-400;
+    }
+    .node-sale-links-items {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      .node-sale-item {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        gap: 12px;
+        .node-sale-item-icon {
+          min-width: 54px;
+          min-height: 54px;
+          max-width: 54px;
+          min-height: 54px;
+          border-radius: 8px;
+          border: 1px solid #2c2c2c;
+          box-shadow: 4px 4px 0px 0px #2c2c2c;
+          background: #f6f2f2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      .node-sale-links-item {
+        height: 54px;
+        border-radius: 8px;
+        border: 1px solid #2c2c2c;
+        box-shadow: 4px 4px 0px 0px #2c2c2c;
+        background: #f6f2f2;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 0 22px;
+        width: 100%;
+        cursor: pointer;
+        a {
+          color: #2c2c2c;
+          font-size: 16px;
+          font-family: $RockStar-400;
+        }
+      }
+      .node-sale-links-item-pink {
+        background: #f1d1e5 !important;
+      }
+    }
+  }
+}

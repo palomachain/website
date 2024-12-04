@@ -43,9 +43,10 @@ const nodesaleSection = () => {
         <h3>JOIN THE FLOCK</h3>
         <h1>PALOMA AI LIGHT NODES</h1>
         <p>
-          Introducing a new way to mine digital tokens, create cross-chain applications, and use the blockchain to access new AI applications. 
-          Paloma is a new blockchain and AI applications network that is secured by community of global pigeons that deliver messages 
-          to any blockchain and store your AI context for use with any LLM of your choice.
+          Introducing a new way to mine digital tokens, create cross-chain applications, and use the blockchain to
+          access new AI applications. Paloma is a new blockchain and AI applications network that is secured by
+          community of global pigeons that deliver messages to any blockchain and store your AI context for use with any
+          LLM of your choice.
         </p>
         <Purchase />
       </div>

@@ -10,6 +10,7 @@ enum StaticLink {
   LOGIN = '/purchase/login',
   PASSCODE = '/passcode',
   BUYMOREBOARD = '/buy-more-board',
+  LIGHTNODE = '/lightnode',
 }
 
 const enableImageLink = (name: string, enable: boolean = true) => {

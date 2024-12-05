@@ -1,9 +1,9 @@
-import StartSection from './startSection';
-import EcosystemSection from './ecosystemSection';
-import DescribeCardSection from './describeCardSection';
-import UseCaseSection from './useCaseSection';
 import BuildSection from './buildSection';
+import DescribeCardSection from './describeCardSection';
+import EcosystemSection from './ecosystemSection';
 import NodeSaleLinksSection from './nodeSaleLinksSection';
+import StartSection from './startSection';
+import UseCaseSection from './useCaseSection';
 
 const newLandingPage = () => (
   <div className="page-container light-node-sale newLanding-container">

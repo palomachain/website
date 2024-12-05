@@ -1579,7 +1579,7 @@ export const DescribeCardsData = [
     describe:
       'The Paloma AI LightNode is a lightweight Paloam client that both secures the Paloma network by delegating stake to top cross-chain validators as well as stores your AI context windows. Paloma AI LightNodes, called pigeons, earn increasing GRAIN rewards as more tokens and AI agents are launched on Paloma across multiple blockchains.',
     buttonText: 'Purchase your LightNode',
-    buttonLink: StaticLink.PURCHASE,
+    buttonLink: StaticLink.LIGHTNODE,
     isExternal: false,
     bgIcon: '/assets/newHome/LightNode.svg',
   },

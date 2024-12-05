@@ -1,14 +1,3 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Lightnode from 'containers/lightnode';
 
-const LightNode = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.push('/');
-  });
-
-  return <></>;
-};
-
-export default LightNode;
+export default Lightnode;

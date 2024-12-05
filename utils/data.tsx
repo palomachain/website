@@ -1626,7 +1626,7 @@ export const UseCasesData = [
     type: 'uniswap v3 position',
     title: 'Build a Limit Order Bot ',
     describe:
-      'We deliver a GAME-CHANGER bLOCKCHAIN FOR DEVELOPERS. our protocol was built from developers to developers. Easy to use, easy to love. Get startet now!',
+      'We deliver a game-changer blockchain for developers. Our protocol was built from developers to developers. Easy to use, easy to love. Get startet now!',
     buttonText: 'View Docs',
     buttonLink: 'https://docs.palomachain.com/guide/develop/quick-start/quick-start.html',
     isExternal: true,

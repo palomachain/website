@@ -23,6 +23,7 @@
     color: #2c2c2c;
     font-family: $RockStar-400;
     font-size: 16px;
+    line-height: normal;
   }
 }
 
@@ -93,6 +94,7 @@
   justify-content: center;
   text-align: center;
   gap: 172px;
+  margin-top: 64px;
   @media screen and (max-width: 768px) {
     margin-top: 100px;
   }
@@ -228,6 +230,11 @@
       align-items: center;
       gap: 23.8px;
       max-width: 442px;
+      .build-card-bg {
+        height: 150px;
+        display: flex;
+        align-items: flex-end;
+      }
     }
   }
 }

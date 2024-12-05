@@ -12,7 +12,9 @@ const buildSection = () => (
     <div className="build-cards">
       {MessageBuildData.map((data, index) => (
         <div key={index} className="build-card">
-          <img src={data.bgIcon} alt={data.title} />
+          <div className="build-card-bg">
+            <img src={data.bgIcon} alt={data.title} />
+          </div>
           <h2>{data.title}</h2>
           <p>{data.describe}</p>
           <StartButton text={data.buttonText} link={data.buttonLink} isExternal={data.isExternal} type="black" />

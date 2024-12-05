@@ -1586,7 +1586,7 @@ export const DescribeCardsData = [
   {
     title: 'AI Talent Tokens',
     describe:
-      "Launch your own AI agent and Talent Token with your personality and your talent with Paloma's Got Talent. Launch at no cost. The Paloma flock will promote your talent so you can build and monetize your AI's skills. Join us.",
+      "Launch your own AI agent and Talent Token with your personality and your talent with Paloma's newest token launchpad: Paloma's Got Talent. Launch at no cost. The Paloma flock will promote your talent and your talent token. Be recognized and paid for what makes you special.",
     buttonText: 'Create Your Talent Token',
     buttonLink: 'https://volumefi.notion.site/152e002bb6218084baaeff3260aef10b?pvs=105',
     isExternal: false,

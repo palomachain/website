@@ -27,7 +27,7 @@ export const PigeonGasFee = 10; // 10%
 export const Increment = (EndingPrice - StartingPrice) / (NSlots - 1) ** Exponent;
 
 export const NodeSaleStartDate = 1726668000 * 1000; // 2:00 PM, September 18, 2024 Coordinated Universal Time (UTC)
-export const NodeSaleEndDate = 1738285200 * 1000; // 1:00 AM, Jan 31, 2025 Coordinated Universal Time (UTC)
+export const NodeSaleEndDate = 1740959999 * 1000; // 0:00 AM, March 2, 2025 Coordinated Universal Time (UTC)
 
 export const PaymentStatus = [
   0, // purchased

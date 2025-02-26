@@ -23,7 +23,6 @@ import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
 import useToken from 'hooks/useToken';
 import useUniswap from 'hooks/useUniswap';
-import { useWallet } from 'hooks/useWallet';
 import { IPriceTier } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import { useRouter } from 'next/router';
@@ -57,9 +56,10 @@ import { checksumAddress, hexToString, isFiat, isSameContract, parseIntString, s
 import PurchaseButton from './PurchaseButton';
 import PurchaseWithFiatButton from './PurchaseButton/PurchaseWithFiatButton';
 import TotalPay from './TotalPay';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 
 const PurchaseFlow = () => {
-  const { wallet } = useWallet();
+  const { wallet } = useWeb3Onboard();
   const provider = useProvider(wallet);
   const router = useRouter();
   const inputRef = useRef(null);

@@ -1,12 +1,10 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import classNames from 'classnames';
-import Button from 'components/Button';
 import Command from 'components/Command';
 import Modal from 'components/Modal';
 import { ZERO_ADDRESS_PALOMA } from 'contracts/addresses';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
-import { useWallet } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import { IActivateInfos } from 'interfaces/nodeSale';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -32,7 +30,7 @@ interface IActivate {
 }
 
 const Activate = ({ purchaseData, onClose, className }: IActivate) => {
-  const { connectWalletConnect, handleConnectMetamask, disconnectWallet, wallet, requestSwitchNetwork } = useWallet();
+  const { connectWallet, disconnectWallet, wallet, requestSwitchNetwork } = useWeb3Onboard();
   const provider = useProvider(wallet);
 
   const { getActivate, activateWallet } = useNodeSale({ provider, wallet });
@@ -42,9 +40,6 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
   const [steps, setSteps] = useState(STEPS.CONNECT_WALLET);
   const [activatedPalomaAddress, setActivatedPalomaAddress] = useState<string>();
 
-  const [loadingMetamask, setLoadingMetamask] = useState(false);
-  const [loadingWalletconnect, setLoadingWalletconnect] = useState(false);
-
   const [palomaAddress, setPalomaAddress] = useState<string>();
   const [activating, setActivating] = useState(false);
 
@@ -53,22 +48,6 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
   const onChangeTab = (tab: string) => {
     if (tab !== currentTab) {
       setCurrentTab(tab);
-    }
-  };
-
-  const handleChooseMetamask = async () => {
-    if (!loadingMetamask) {
-      setLoadingMetamask(true);
-      await handleConnectMetamask();
-      setLoadingMetamask(false);
-    }
-  };
-
-  const handleChooseWalletConnect = async () => {
-    if (!loadingWalletconnect) {
-      setLoadingWalletconnect(true);
-      await connectWalletConnect();
-      setLoadingWalletconnect(false);
     }
   };
 
@@ -85,8 +64,6 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
     // }
 
     setSteps(STEPS.ACTIVATE_PALOMA);
-    setLoadingMetamask(false);
-    setLoadingWalletconnect(false);
   };
 
   useEffect(() => {
@@ -101,13 +78,9 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
               checkActivate();
             } else {
               setSteps(STEPS.INVALID_WALLET);
-              setLoadingMetamask(false);
-              setLoadingWalletconnect(false);
             }
           } else {
             onClose();
-            setLoadingMetamask(false);
-            setLoadingWalletconnect(false);
           }
         };
         call();
@@ -198,20 +171,6 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
               <p className={style.chooseWallet}>
                 {wallet && wallet.network ? 'Switch the Network' : 'Choose a Wallet'}
               </p>
-              {/* <Button className={style.connectWalletBtn} type="grey" onClick={() => handleChooseMetamask()}>
-                {loadingMetamask ? (
-                  <img src="/assets/icons/loading_circle.svg" height="33px" style={{ marginTop: 5, marginLeft: 6 }} />
-                ) : (
-                  <img src="/assets/wallets/metamask.svg" alt="" />
-                )}
-              </Button>
-              <Button className={style.connectWalletBtn} type="grey" onClick={() => handleChooseWalletConnect()}>
-                {loadingWalletconnect ? (
-                  <img src="/assets/icons/loading_circle.svg" height="33px" style={{ marginTop: 5, marginLeft: 6 }} />
-                ) : (
-                  <img src="/assets/wallets/walletconnect.svg" alt="" />
-                )}
-              </Button> */}
               {wallet && wallet.network ? (
                 <img
                   src="/assets/icons/loading_circle.svg"
@@ -219,11 +178,9 @@ const Activate = ({ purchaseData, onClose, className }: IActivate) => {
                   style={{ marginTop: 5, marginLeft: 6, width: '100%' }}
                 />
               ) : (
-                <ConnectWallet
-                  className={style.connectWalletBtn}
-                  btnTitle="Connect EVM Wallet"
-                  showThirdwebBranding={false}
-                />
+                <button className={style.connectWalletBtn} onClick={() => connectWallet()}>
+                  Connect EVM Wallet
+                </button>
               )}
             </div>
           </>

@@ -2,7 +2,6 @@ import BigNumber from 'bignumber.js';
 import cn from 'classnames';
 import Button from 'components/Button';
 import { ChainID, NO_CHAIN_SELECTED } from 'configs/chains';
-import { useWallet } from 'hooks/useWallet';
 import { IPriceTier } from 'interfaces/nodeSale';
 import { IBalance, IToken } from 'interfaces/swap';
 import React, { useMemo } from 'react';
@@ -55,8 +54,6 @@ const PurchaseButton = ({
   onClickStart,
   buttonText = 'Buy Now',
 }: PurchaseButtonProps) => {
-  // const { openConnectionModal } = useWallet();
-
   const buttonStatus = useMemo(() => {
     // if (!chainId) {
     //   return {

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import Selector from 'components/ButtonSelector/Selector';
 import { allChains, ChainID } from 'configs/chains';
 import useOutsideAlerter from 'hooks/useOutsideAlerter';
-import { useWallet } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import { useEffect, useRef, useState } from 'react';
 import { isFiat } from 'utils/string';
 
@@ -24,7 +24,7 @@ const SelectChain = ({
   className,
 }: SelectChainProps) => {
   const chainRef = useRef(null);
-  const { wallet, requestSwitchNetwork } = useWallet();
+  const { requestSwitchNetwork, wallet } = useWeb3Onboard();
 
   const [showSelectChainModal, setShowSelectChainModal] = useState<boolean>(false);
   const [clickedChain, setClickedChain] = useState<string>();

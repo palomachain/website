@@ -1,4 +1,3 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import Purchase from 'components/Button/purchase';
@@ -13,7 +12,7 @@ import NavBar from 'containers/lightnodeBoard/navBar';
 import useCookie from 'hooks/useCookie';
 import useNodeSale from 'hooks/useNodeSale';
 import useProvider from 'hooks/useProvider';
-import { useWallet } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import { IActivateInfos, IBonusBalance } from 'interfaces/nodeSale';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -42,7 +41,7 @@ const chainID = {
 };
 
 const BuyMoreBoard = () => {
-  const { wallet, openConnectionModal, requestSwitchNetwork } = useWallet();
+  const { connectWallet, wallet, requestSwitchNetwork } = useWeb3Onboard();
   const provider = useProvider(wallet);
   const { getStoredData } = useCookie();
   const [getLoginConfirmation] = useLazyGetLoginConfirmationQuery();
@@ -104,17 +103,6 @@ const BuyMoreBoard = () => {
     };
     checkLogin();
   }, []);
-
-  // useEffect(() => {
-  //   if (token && !wallet?.account) {
-  //     const call = async () => {
-  //       // delay 1 second
-  //       await delay(1000);
-  //       openConnectionModal();
-  //     };
-  //     call();
-  //   }
-  // }, [token]);
 
   const fetchMyAccount = async () => {
     setMyAccountLoading(true);
@@ -345,15 +333,6 @@ const BuyMoreBoard = () => {
     navigator.clipboard.writeText(`https://www.palomachain.com/purchase/?code=${code}`);
   };
 
-  // TODO: remove it
-  const onClickCreatePromocode = () => {
-    if (wallet && wallet.account) {
-      setOpenGeneratePromocodeModal(true);
-    } else {
-      openConnectionModal();
-    }
-  };
-
   useEffect(() => {
     if (copyPromocode) {
       const delayDebounceFn = setTimeout(() => {
@@ -520,11 +499,9 @@ const BuyMoreBoard = () => {
                         // </button>
                         <></>
                       ) : (
-                        <ConnectWallet
-                          className={style.createPromocode}
-                          btnTitle="Connect Wallet"
-                          showThirdwebBranding={false}
-                        />
+                        <button className={style.createPromocode} onClick={() => connectWallet()}>
+                          Connect Wallet
+                        </button>
                       )}
                     </div>
                   </>

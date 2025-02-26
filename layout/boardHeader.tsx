@@ -1,8 +1,7 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import Purchase from 'components/Button/purchase';
 import WalletSelector from 'components/ButtonSelector/WalletSelector';
 import { useOutsideAlerter } from 'hooks';
-import { useWallet } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import { shortenString } from 'utils/string';
@@ -10,7 +9,7 @@ import BoardMobileMenu from './menu/BoardMobileMenu';
 
 const BoardHeader = () => {
   const ref = useRef(null);
-  const { wallet, openConnectionModal, disconnectWallet } = useWallet();
+  const { connectWallet, wallet, disconnectWallet } = useWeb3Onboard();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showWalletProfileModal, setShowWalletProfileModal] = useState<boolean>(false);
@@ -45,14 +44,9 @@ const BoardHeader = () => {
             )}
           </div>
         ) : (
-          // <button onClick={openConnectionModal} className="layout-container__header__wallet">
-          //   <span>Connect EVM Wallet</span>
-          // </button>
-          <ConnectWallet
-            className="layout-container__header__wallet"
-            btnTitle="Connect EVM Wallet"
-            showThirdwebBranding={false}
-          />
+          <button className="layout-container__header__wallet" onClick={() => connectWallet()}>
+            Connect EVM Wallet
+          </button>
         )}
       </div>
 

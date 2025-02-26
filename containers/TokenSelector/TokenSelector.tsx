@@ -2,7 +2,6 @@ import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import OnramperModal from 'components/Modal/OmramperModal';
 import TokenSelectModal from 'components/Modal/TokenSelectModal';
-import { useWallet } from 'hooks/useWallet';
 import { IBalance, IToken } from 'interfaces/swap';
 import { useState } from 'react';
 import SelectDropDown from '../SelectDropDown';
@@ -39,15 +38,8 @@ const TokenSelector = ({
   isDisable = false,
   className,
 }: TokenSelectorProps) => {
-  const { networkSelect } = useWallet();
-
   const [showTokenSelectModal, setShowTokenSelectModal] = useState(false);
   const [showOnramperModal, setShowOnramperModal] = useState(false);
-
-  const handleShowTokenSelectModal = async () => {
-    const connectedChain = await networkSelect(1, supportedNetworks);
-    if (connectedChain) setShowTokenSelectModal(true);
-  };
 
   const handleSelectToken = (token: IToken) => {
     setShowTokenSelectModal(false);
@@ -71,7 +63,7 @@ const TokenSelector = ({
             inputClassName={style.dropdownInputClass}
           />
         ) : (
-          <div className={style.token} onClick={() => !isDisable && handleShowTokenSelectModal()}>
+          <div className={style.token} onClick={() => !isDisable && setShowTokenSelectModal(true)}>
             <div className="flex-row gap-8">
               {token.icon !== '' && <img src={token.icon} width={25} height={25} />}
               {token.symbol === '' ? 'Select Token' : <p className="bold">{token.symbol}</p>}

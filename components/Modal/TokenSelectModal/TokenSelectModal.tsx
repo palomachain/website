@@ -3,13 +3,13 @@ import SearchInput from 'components/SearchInput';
 import TokenView from 'components/TokenView';
 import { Addresses, VETH_ADDRESS } from 'contracts/addresses';
 import useMoralis from 'hooks/useMoralis';
-import { useWallet } from 'hooks/useWallet';
 import { IToken } from 'interfaces/swap';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLazyGetTokenPricesQuery } from 'services/api/price';
 import { selectCurrentUsdPrice } from 'services/selectors/price';
 import balanceTool from 'utils/balance';
 import { isSameContract, parseDexString, parseIntString } from 'utils/string';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 
 import style from './TokenSelectModal.module.scss';
 
@@ -33,7 +33,7 @@ const TokenSelectModal = ({
   if (!show) return null;
 
   const { getNativeBalance, getMyTokens } = useMoralis();
-  const { wallet } = useWallet();
+  const { wallet } = useWeb3Onboard();
   const [fetchTokenPrice] = useLazyGetTokenPricesQuery();
 
   const [search, setSearch] = useState('');

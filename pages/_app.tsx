@@ -1,16 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Arbitrum, Base, Binance, Ethereum, Optimism, Polygon } from '@thirdweb-dev/chains';
-import {
-  ThirdwebProvider,
-  coinbaseWallet,
-  frameWallet,
-  metamaskWallet,
-  rabbyWallet,
-  walletConnect,
-} from '@thirdweb-dev/react';
 import { envParam } from 'configs/constants';
 import useWagmi from 'hooks/useWagmi';
-import { WalletProvider } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import Layout from 'layout';
 import mixpanel from 'mixpanel-browser';
 import Moralis from 'moralis';
@@ -31,6 +22,25 @@ Moralis.start({
 });
 
 mixpanel.init(process.env.MIXPANEL_API_KEY);
+
+const Web3OnboardProvider = ({ children }) => {
+  const { onboard, initOnboard } = useWeb3Onboard();
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!onboard) {
+      initOnboard();
+    }
+    setIsInitialized(true);
+  }, []);
+
+  if (!isInitialized) {
+    return <></>;
+  }
+
+  return children;
+};
+
 const App = ({ Component, router, pageProps }: AppProps) => {
   const { wagmiConfig } = useWagmi();
 
@@ -53,20 +63,13 @@ const App = ({ Component, router, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <Client>
           <Provider store={store}>
-            <ThirdwebProvider
-              supportedWallets={[metamaskWallet(), coinbaseWallet(), walletConnect(), frameWallet(), rabbyWallet()]}
-              supportedChains={[Ethereum, Polygon, Binance, Arbitrum, Optimism, Base]}
-              activeChain={Ethereum}
-              clientId={envParam.thirdWebApiKey}
-            >
-              <WagmiConfig config={wagmiConfig}>
-                <WalletProvider>
-                  <Layout router={router}>
-                    <Component {...pageProps} />
-                  </Layout>
-                </WalletProvider>
-              </WagmiConfig>
-            </ThirdwebProvider>
+            <WagmiConfig config={wagmiConfig}>
+              <Web3OnboardProvider>
+                <Layout router={router}>
+                  <Component {...pageProps} />
+                </Layout>
+              </Web3OnboardProvider>
+            </WagmiConfig>
             <ToastContainer autoClose={5000} pauseOnFocusLoss={false} position={'top-right'} />
           </Provider>
         </Client>

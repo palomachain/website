@@ -1,4 +1,3 @@
-import { ThirdwebSDK } from '@thirdweb-dev/react';
 import { prepareWriteContract, readContract, waitForTransaction, writeContract } from '@wagmi/core';
 import BigNumber from 'bignumber.js';
 import { ChainID } from 'configs/chains';
@@ -13,7 +12,7 @@ import React from 'react';
 import balanceTool from 'utils/balance';
 import { errorMessage } from 'utils/errorMessage';
 import { formatNumber } from 'utils/number';
-import { parseIntString } from 'utils/string';
+import { parseIntString, parseOxString } from 'utils/string';
 import useToken from './useToken';
 
 const useNodeSale = ({ provider, wallet }) => {
@@ -87,6 +86,23 @@ const useNodeSale = ({ provider, wallet }) => {
     }
   };
 
+  const getClaimableAmount = async (chainId: number, address: string, params = []) => {
+    try {
+      const balance = await readContract({
+        address: parseOxString(address),
+        abi: nodesaleContractAbi,
+        functionName: 'claimable',
+        chainId,
+        args: params,
+      });
+
+      return balance.toString();
+    } catch (error) {
+      console.error(error);
+      return '0';
+    }
+  };
+
   const getBonusAmount = async (address: string) => {
     try {
       let amount: IBonusBalance[] = [];
@@ -103,17 +119,15 @@ const useNodeSale = ({ provider, wallet }) => {
       await Promise.all(
         [1, 10, 56, 137, 8453, 42161].map(async (chain) => {
           const nodesaleAddress = v1ContractAddresses[chain];
-          const sdk = new ThirdwebSDK(chain);
-          const contract = await sdk.getContract(nodesaleAddress, nodesaleContractAbi);
-          const balance = await contract.call('claimable', [address]);
+          const balance = await getClaimableAmount(chain, nodesaleAddress, [address]);
 
-          if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
+          if (balance && BigNumber(balance).comparedTo(0) > 0) {
             amount.push({
               contractAddress: nodesaleAddress,
               chainId: chain,
               amount: {
-                raw: balance.toString(),
-                format: balanceTool.convertFromWei(balance.toString(), 4, chain === 56 ? 18 : 6),
+                raw: balance,
+                format: balanceTool.convertFromWei(balance, 4, chain === 56 ? 18 : 6),
               },
             });
           }
@@ -124,17 +138,15 @@ const useNodeSale = ({ provider, wallet }) => {
       await Promise.all(
         [1, 10, 56, 137, 8453, 42161].map(async (chain) => {
           const nodesaleAddress = Addresses[chain].node_sale;
-          const sdk = new ThirdwebSDK(chain);
-          const contract = await sdk.getContract(nodesaleAddress, nodesaleContractAbi);
-          const balance = await contract.call('claimable', [address]);
+          const balance = await getClaimableAmount(chain, nodesaleAddress, [address]);
 
-          if (balance && BigNumber(balance.toString()).comparedTo(0) > 0) {
+          if (balance && BigNumber(balance).comparedTo(0) > 0) {
             amount.push({
               contractAddress: nodesaleAddress,
               chainId: chain,
               amount: {
-                raw: balance.toString(),
-                format: balanceTool.convertFromWei(balance.toString(), 4, chain === 56 ? 18 : 6),
+                raw: balance,
+                format: balanceTool.convertFromWei(balance, 4, chain === 56 ? 18 : 6),
               },
             });
           }

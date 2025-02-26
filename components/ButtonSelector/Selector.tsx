@@ -1,6 +1,5 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import cn from 'classnames';
-import { useWallet } from 'hooks/useWallet';
+import { useWeb3Onboard } from 'hooks/useWeb3Onboard';
 import React from 'react';
 import { isFiat } from 'utils/string';
 
@@ -15,7 +14,7 @@ interface ButtonProps {
 }
 
 const Selector = ({ selectableList, showSelectModal, handleSelect, selected, className }: ButtonProps) => {
-  const { wallet } = useWallet();
+  const { wallet, connectWallet } = useWeb3Onboard();
 
   return (
     showSelectModal &&
@@ -33,12 +32,9 @@ const Selector = ({ selectableList, showSelectModal, handleSelect, selected, cla
               {(wallet && wallet.network) || isFiat(list['id']) ? (
                 <span>{list['name']}</span>
               ) : (
-                <ConnectWallet
-                  className={style.thirdwebConnect}
-                  btnTitle={list['name']}
-                  showThirdwebBranding={false}
-                  modalTitle="Connect"
-                />
+                <button className={style.walletConnect} onClick={() => connectWallet()}>
+                  {list['name']}
+                </button>
               )}
             </div>
           ))}

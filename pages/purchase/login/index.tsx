@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import ConfirmationModal from 'components/Modal/ConfirmationModal';
 import { StaticLink } from 'configs/links';
-import { useWallet } from 'hooks/useWallet';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { usePostLoginMutation } from 'services/api/nodesale';
@@ -10,7 +9,6 @@ import { isValidEmail } from 'utils/common';
 import style from './login.module.scss';
 
 const Login = () => {
-  const { connectMetaMask, connectWalletConnect, wallet } = useWallet();
   const router = useRouter();
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
@@ -19,29 +17,10 @@ const Login = () => {
 
   const [postLogin] = usePostLoginMutation();
 
-  const [loadingMetamask, setLoadingMetamask] = useState(false);
-  const [loadingWalletconnect, setLoadingWalletconnect] = useState(false);
-
   const [email, setEmail] = useState<string>('');
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [notRegistered, setNotRegistered] = useState(false);
   const [confirm, setConfirm] = useState(false);
-
-  const handleChooseMetamask = async () => {
-    if (!loadingMetamask) {
-      setLoadingMetamask(true);
-      const isConnectedWallet = await connectMetaMask();
-      !isConnectedWallet && setLoadingMetamask(false);
-    }
-  };
-
-  const handleChooseWalletConnect = async () => {
-    if (!loadingWalletconnect) {
-      setLoadingWalletconnect(true);
-      await connectWalletConnect();
-      setLoadingWalletconnect(false);
-    }
-  };
 
   const onClickLogin = async () => {
     if (!loadingLogin && isValidEmail(email)) {

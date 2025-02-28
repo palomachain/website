@@ -37,5 +37,6 @@ module.exports = {
     PASSCODE: process.env.PASSCODE,
     TRANSAK_API_KEY: process.env.TRANSAK_API_KEY,
     COINBASE_API_KEY: process.env.COINBASE_API_KEY,
+    IS_NODESALE_DISABLE: process.env.IS_NODESALE_DISABLE,
   },
 };

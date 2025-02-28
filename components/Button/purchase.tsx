@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import style from 'components/Button/Purchase.module.scss';
+import { toast } from 'react-toastify';
+import { envParam } from 'configs/constants';
 
 interface PurchaseButtonProps {
   type?: 'pink';
@@ -15,12 +17,20 @@ interface PurchaseButtonProps {
 const Purchase = ({ type, className, text = 'Purchase your LightNode', disable = false }: PurchaseButtonProps) => {
   const router = useRouter();
 
+  const handlePurchase = () => {
+    if (envParam.isNodesaleDisable) {
+      return toast.info('Coming Soon!', { toastId: 'redirect-homepage' });
+    } else {
+      return router.push(StaticLink.PURCHASE);
+    }
+  };
+
   return (
     <button
       className={classNames(className, 'purchase-button', {
         [style[type]]: true,
       })}
-      onClick={() => router.push(StaticLink.PURCHASE)}
+      onClick={() => handlePurchase()}
       disabled={disable}
     >
       {text}

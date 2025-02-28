@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import Describe from './describe';
 import PurchaseFlow from './flow';
 import { useRouter } from 'next/router';
+import { StaticLink } from 'configs/links';
+import { toast } from 'react-toastify';
+import { envParam } from 'configs/constants';
 
 const Purchase = () => {
   const { confirmPasscode } = useCookie();
@@ -26,7 +29,12 @@ const Purchase = () => {
   };
 
   useEffect(() => {
-    checkAlreadyPassedCode();
+    if (envParam.isNodesaleDisable) {
+      toast.info('Coming Soon!', { toastId: 'redirect-homepage' });
+      router.push(StaticLink.Home);
+    } else {
+      checkAlreadyPassedCode();
+    }
   }, []);
 
   return loading ? (

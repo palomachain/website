@@ -15,6 +15,7 @@ const envParam = {
   PASSCODE: process.env.PASSCODE || '',
   transakApiKey: process.env.TRANSAK_API_KEY || '',
   coinbaseApiKey: process.env.COINBASE_API_KEY || '',
+  isNodesaleDisable: process.env.IS_NODESALE_DISABLE || false,
 };
 
 const purchaseSupportedNetworks = {

@@ -1,5 +1,5 @@
 import { envParam } from 'configs/constants';
-import { supportedNetworks } from './networks';
+import { allEVMChains } from './chains';
 
 enum StaticLink {
   Home = '/',
@@ -29,9 +29,9 @@ enum ExternalLink {
 }
 
 const getTxHashLink = (chainId: string | number) => {
-  const chain = supportedNetworks[chainId];
+  const chain = allEVMChains[chainId];
   if (chain) {
-    const blockExplorerUrl = chain.blockExplorerUrls[0];
+    const blockExplorerUrl = chain.blockExplorerUrl[0];
     return (txHash) => `${blockExplorerUrl}tx/${txHash}`;
   }
   return (txHash) => `${ExternalLink.Etherscan}tx/${txHash}`;

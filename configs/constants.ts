@@ -1,5 +1,3 @@
-import { ChainRPC } from './chains';
-
 const envParam = {
   palomaNestServiceAPIBaseUrl: process.env.PALOMA_NEST_SERVICE_API_BASE_URL || '',
   onramperApiKey: process.env.ONRAMPER_API_KEY || '',
@@ -30,39 +28,6 @@ const purchaseSupportedNetworks = {
   '42161': 'Arbitrum',
 };
 
-const AddNetwork = {
-  '10': {
-    chainName: 'OP Mainnet',
-    nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: [ChainRPC.OPTIMISM_MAIN],
-    blockExplorerUrls: ['https://optimistic.etherscan.io'],
-  },
-  '56': {
-    chainName: 'BNB Mainnet',
-    nativeCurrency: { decimals: 18, symbol: 'BNB' },
-    rpcUrls: [ChainRPC.BSC_MAIN],
-    blockExplorerUrls: ['https://bscscan.com'],
-  },
-  '137': {
-    chainName: 'Polygon Mainnet',
-    nativeCurrency: { decimals: 18, symbol: 'MATIC' },
-    rpcUrls: [ChainRPC.POLYGON_MAIN],
-    blockExplorerUrls: ['https://polygonscan.com'],
-  },
-  '8453': {
-    chainName: 'Base',
-    nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: [ChainRPC.BASE_MAIN],
-    blockExplorerUrls: ['https://basescan.org/'],
-  },
-  '42161': {
-    chainName: 'Arbitrum One',
-    nativeCurrency: { decimals: 18, symbol: 'ETH' },
-    rpcUrls: [ChainRPC.ARBITRUM_MAIN],
-    blockExplorerUrls: ['https://arbiscan.io/'],
-  },
-};
-
 const DEFAULT_MAIN_CHAINS = [
   // mainnets
   'eip155:1',
@@ -89,7 +54,6 @@ const PURCHASE_INFO = 'my_purchase_info';
 const PURCHASED_WALLET = 'my_recent_token_purchased_wallet';
 
 export {
-  AddNetwork,
   DEADLINE,
   DEFAULT_MAIN_CHAINS,
   envParam,

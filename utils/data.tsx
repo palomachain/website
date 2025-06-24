@@ -381,6 +381,10 @@ export const NodeSaleLinks = {
     },
   ],
   'Paloma Decentralized Apps': [
+     {
+      title: 'PalomaDex',
+      link: 'https://www.palomadex.com',
+    },
     {
       title: 'PalomaBot',
       link: 'https://palomabot.ai',

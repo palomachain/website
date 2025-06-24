@@ -152,8 +152,13 @@
       gap: 43px;
 
       .describe-card-bg {
-        width: 100%;
+        min-height: 160px !important;
       }
+    }
+    .describe-card-bg {
+      width: 100%;
+      max-width: 579px;
+      min-height: 300px;
     }
   }
   .describe-card-head {

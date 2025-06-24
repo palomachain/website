@@ -381,6 +381,10 @@ export const NodeSaleLinks = {
     },
   ],
   'Paloma Decentralized Apps': [
+     {
+      title: 'PalomaDex',
+      link: 'https://www.palomadex.com',
+    },
     {
       title: 'PalomaBot',
       link: 'https://palomabot.ai',
@@ -1574,6 +1578,15 @@ export const BoardNavData = {
 };
 
 export const DescribeCardsData = [
+  {
+    title: 'PalomaDex',
+    describe:
+      'PalomaDex is a decentralized exchange (DEX) built on the Paloma blockchain connecting native assets from all supported target chains monitored by the Paloma flock of validators. Users can swap, provide liquidity, and earn fees on PalomaDex from any public blockchain and with their own native tokens. No need to bridge or wrap tokens. Real World assets also are available to trade on PalomaDex, including stocks, commodities, currencies, and complex token portfolios.',
+    buttonText: 'Trade Cross-Chain Tokens Today',
+    buttonLink: 'https://www.palomadex.com',
+    isExternal: true,
+    bgIcon: '/assets/newHome/palomadex.png',
+  },
   {
     title: 'Paloma AI LightNodes',
     describe:
